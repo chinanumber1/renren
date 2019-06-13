@@ -1,0 +1,48 @@
+@import "../../../../../__wuBaseWxss__/5.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.top {
+    background: #FAFAFA;
+    padding: 20rpx 0;
+    color: #313131;
+    border-bottom: 2rpx solid #D9D9D9;
+    position: relative;
+}
+
+.title {
+    padding-top: 20rpx;
+}
+
+.input_box {
+    padding: 0 20rpx;
+    background: #fff;
+}
+
+.right {
+    float: right;
+    color: #FF7272;
+}
+
+.btn {
+    margin: 20rpx;
+    background: #02CCBA;
+    color: #fff;
+}
+
+.back {
+    color: #242424;
+    position: absolute;
+    left: 20rpx;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right_arr {
+    transform: rotateY(180deg);
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}

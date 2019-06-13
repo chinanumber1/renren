@@ -1,0 +1,58 @@
+<view>
+    <view class="top_one mb20">
+        <view class="top_t fs28 df">
+            <view bindtap="change_info" class="img">
+                <image src="{{shangjia.s_thumb}}"></image>
+            </view>
+            <view class="t_right ">
+                <view class="nickname fs30 fw df">
+                    <text class="line_one" style="max-width:52%;display:inline-block;margin-right:20rpx;">{{shangjia.s_name}}</text>
+                    <text class="fs22" style="color:#999" wx:if="{{shangjia.pingtai=='0'}}">商家剩余时间：<text class="color:#000">{{shangjia.day}}</text>天 </text>
+                </view>
+                <view class="df">
+                    <view class="df fs22" style="margin-right:10rpx;">
+                        <text style="color:#999999">余额：</text> ￥{{shangjia.s_money}} <view bindtap="tixian" class="tx_btn" data-typs="sj">提现</view>
+                    </view>
+                    <view class="df fs22">
+                        <text style="color:#999999">接单数：</text>{{shangjia.jiedan}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list list_new">
+        <view class="list_1 mb20">
+            <view class="l_i_title fs28 border_bot_2">常用功能</view>
+            <view class="list_box df">
+                <navigator url="{{item.url}}" wx:for="{{s_always}}" wx:key="always">
+                    <view class="item">
+                        <view class="left">
+                            <image class="icon" src="{{item.icon}}"></image>
+                        </view>
+                        <view class="right">
+              {{item.name}}
+            </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <view class="list_1">
+            <view class="l_i_title fs28 border_bot_2">所有功能</view>
+            <view class="list_box df">
+                <navigator url="{{item.url}}" wx:for="{{s_mess}}" wx:key="always">
+                    <view class="item">
+                        <view class="left">
+                            <image class="icon2" src="{{item.icon}}"></image>
+                        </view>
+                        <view class="right">
+              {{item.name}}
+            </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <navigator class="goback" hoverClass="none" openType="navigateBack" url="/hyb_o2o/mine/mine">返回个人中心</navigator>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>
+<footer footerindex="3"></footer>

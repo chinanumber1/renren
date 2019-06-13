@@ -1,0 +1,21 @@
+<view>
+    <form bindsubmit="formSubmit">
+        <view class="top tc">
+            <view class="fs28">申请提现</view>
+            <view bindtap="goback" class="back fs24 df">
+                <image class="right_arr" src="/pages/resource/images/right.png"></image>返回 </view>
+        </view>
+        <view class="input_box">
+            <view class="title fs28">提现金额（元）</view>
+            <view class="df border_bot_2" style="padding:30rpx 0">
+                <text class="fw 30">￥</text>
+                <view>
+                    <input name="price" placeholder="0.00" type="digit" value="{{money}}"></input>
+                </view>
+            </view>
+            <view class="p20 fs28">手续费 0 <text bindtap="withdrawal_all" class="right">全部提现</text>
+            </view>
+        </view>
+        <button class="btn fs28" formType="submit">提现</button>
+    </form>
+</view>

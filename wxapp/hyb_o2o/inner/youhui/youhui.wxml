@@ -1,0 +1,27 @@
+<view class="list">
+    <view bindlongpress="del" class="yhj_cont mb20" data-id="{{item.id}}" wx:if="{{list.length!=0}}" wx:for="{{list}}" wx:key="item">
+        <view class="j_left">
+            <view class="j_l_top df">
+                <view class="tc" style="flex-shrink:0;width:200rpx;">
+                    <view>
+                        <text class="fs22">￥</text>
+                        <text class="fs50 fw">{{item.yhq_money}}</text>
+                    </view>
+                    <view class="fs24">{{item.yhq_yaoqiu}}</view>
+                </view>
+                <view class="" style="padding:20rpx;">
+                    <view class="fw fs34">{{item.yhq_name}}</view>
+                    <view class="fs26">{{item.yhq_shuoming}}</view>
+                </view>
+            </view>
+            <view class="j_l_bot df jsb" style="padding:20rpx;">
+                <view>有效期 {{item.yhq_starttime}} 到 {{item.yhq_endtime}}</view>
+                <view class="label">未使用</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{yhj_list.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>

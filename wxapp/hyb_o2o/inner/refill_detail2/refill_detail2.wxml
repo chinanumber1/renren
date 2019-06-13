@@ -1,0 +1,65 @@
+<view class="title fs28">订单详情</view>
+<view class="item fs28 border_bot_2">
+    <text>商品名称</text>
+    <text class="right color_gray fs26">{{order.o_goodsname}}</text>
+</view>
+<view class="item fs28 border_bot_2">
+    <text>订单编号</text>
+    <text class="right color_gray fs26">{{order.ordersn}}</text>
+</view>
+<view class="item fs28 border_bot_2">
+    <text>商家名称</text>
+    <text class="right color_gray fs26">平台自营</text>
+</view>
+<view class="item fs28 border_bot_2 mb20">
+    <text>商品单价</text>
+    <text class="right fs30 color_blue">￥{{order.o_monney}}元</text>
+</view>
+<view class="item fs28 border_bot_2 mb2">
+    <text>商品数量</text>
+    <text class="right fs30">×{{order.o_num}}</text>
+</view>
+<view class="item fs28 border_bot_2 mb20" wx:if="{{order.o_goodsguige!=''}}">
+    <text>商品规格</text>
+    <text class="right fs30">{{order.o_goodsguige}}</text>
+</view>
+<view class="item fs28 border_bot_2 mb20">
+    <text>快递费</text>
+    <text class="right fs30">×{{order.o_kuaidi}}</text>
+</view>
+<view class="item fs28 border_bot_2">
+    <text>商品价格</text>
+    <text class="right fs30 color_blue">￥{{order.o_count_money}}元</text>
+</view>
+<view class="item fs28 border_bot_2 mb20">
+    <text>还需支付</text>
+    <text class="right fs30 color_blue">￥{{order.o_count_money}}元</text>
+</view>
+<view class="title fs28">选择支付方式</view>
+<form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+    <input hidden="true" name="ymoney" type="text" value="{{order.user_money}}"></input>
+    <input hidden="true" name="count_money" type="text" value="{{order.o_count_money}}"></input>
+    <input hidden="true" name="o_id" type="text" value="{{order.o_id}}"></input>
+    <button class="df border_bot_2 bottom" formType="submit" style="text-align:left;line-height:1em;">
+        <view class="icon">
+            <image src="../../resource/images/money2.png"></image>
+        </view>
+        <view class="fs28">
+            <view class="">余额</view>
+            <view class="color_gray fs246">￥{{order.user_money}}</view>
+        </view>
+    </button>
+</form>
+<form bindreset="formReset" bindsubmit="formSubmits" reportSubmit="true">
+    <input hidden="true" name="count_money" type="text" value="{{order.o_count_money}}"></input>
+    <input hidden="true" name="o_id" type="text" value="{{order.o_id}}"></input>
+    <button class="df border_bot_2 bottom" formType="submit" style="text-align:left;line-height:1em;">
+        <view class="icon">
+            <image src="../../resource/images/wechat_icon.png"></image>
+        </view>
+        <view class="fs28">
+            <view class="">微信支付</view>
+            <view class="color_gray fs246">微信支付,安全快捷</view>
+        </view>
+    </button>
+</form>

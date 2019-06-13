@@ -1,0 +1,124 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+        padding: 8px;
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li {if $op == 'display'} class="active" {/if}><a href="{php echo $this->createWebUrl('questions',array('op'=>'display'))}">问题列表</a></li>
+    <li {if $op == 'post'} class="active" {/if}><a href="{php echo $this->createWebUrl('questions',array('op'=>'post'))}">添加问题</a></li>
+</ul>
+{if $op =="display"}
+<div class="panel panel-default" style="margin-top: 20px;">
+    <div class="panel-heading"></div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+                <table class="yg5_tabel col-md-12">
+                    <tr class="yg5_tr2">
+                        <td style="width:100px">排序</td>
+                        <td>常见问题</td>
+                        <td>解决方案</td>
+                        <td>操作</td>
+                    </tr>
+                    {loop $products $item}
+                    <tr class="yg5_tr2">
+                        <td>
+                            {$item['id']}
+                        </td>
+                        <td>
+                            {$item['question']}
+                        </td>
+                        <td>
+                            {$item['answer']}
+                        </td>
+                        <td>
+                            <a href="{php echo $this->createWeburl('questions', array('id' => $item['id'], 'op' => 'post'))}"  class="storespan btn btn-xs">
+                                <span class="fa fa-pencil"></span>
+                                <span class="bianji">编辑
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                            <a href="{php echo $this->createWeburl('questions', array('id' => $item['id'], 'op' => 'delete'))}" class="storespan btn btn-xs">
+                                <span class="fa fa-trash-o"></span>
+                                <span class="bianji">删除
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    {/loop}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{/if}
+{if $op == "post"}
+<div class="main">
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加问题</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >常见问题</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="question" value="{$items['question']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">常见问题</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >解决方式</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  name="answer">{$items['answer']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">解决方式</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+</div>
+{/if}
+<script type="text/javascript">
+    $(function(){
+        $("#frame-14").show();
+        $("#yframe-14").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

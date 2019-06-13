@@ -1,0 +1,108 @@
+<view class="top df">
+    <view bindtap="switch_top" class="t_item fs30 {{current==index?'sel':''}}" data-index="{{index}}" wx:for="{{top_list}}" wx:key="item">{{item}}</view>
+</view>
+<view class="list" wx:if="{{current==0}}">
+    <view class="yhj_cont mb20" wx:if="{{yhj_list.length!=0}}" wx:for="{{yhj_list}}" wx:key="item">
+        <view class="j_left border_bot_2">
+            <view class="j_l_top df">
+                <view class="tc" style="margin:20rpx;flex-shrink:0;">
+                    <view>
+                        <text class="fs22">￥</text>
+                        <text class="fs50 fw">{{item.y_money}}</text>
+                    </view>
+                    <view class="fs24">{{item.y_yaoqiu}}</view>
+                </view>
+                <view class="" style="padding:20rpx;">
+                    <view class="fw fs34">{{item.y_name}}</view>
+                    <view class="fs26">{{item.y_shuoming}}</view>
+                </view>
+            </view>
+            <view class="j_l_bot tc">有效期 {{item.y_starttime}} 到 {{item.y_endtime}}</view>
+        </view>
+        <view class="j_bot df" style="padding:20rpx 0;">
+            <view bindtap="edi" class="fs28 mb10 df jcc wd50" data-id="{{item.y_id}}" style="border-left:2rpx solid #eee">
+                <view class="df">
+                    <image class="icon" src="/hyb_o2o/resource/images/edi.png"></image>修改优惠卷</view>
+            </view>
+            <view bindtap="del" class="fs28 df jcc wd50" data-id="{{item.y_id}}">
+                <view class="df">
+                    <image class="icon" src="/hyb_o2o/resource/images/del_y.png"></image>删除</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{yhj_list.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==1}}">
+    <view class="item border_bot_2 fs30 p20 df jsb" style="width:100%;" wx:if="{{mj_list.length!=0}}" wx:for="{{mj_list}}" wx:key="item">
+        <view>
+            <text class="number">活动{{index+1<10?'0'+index+1:index+1}}</text>: 满{{item.m_money}}元减{{item.j_money}}元 </view>
+        <view bindtap="del" class="del fs24" data-id="{{item.m_id}}">删除</view>
+    </view>
+    <view class="no_more" wx:if="{{mj_list.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="modal" wx:if="{{mj||yhj}}"></view>
+<view class="mj_box" wx:if="{{mj}}">
+    <form bindsubmit="submit_mj">
+        <view class="fs28" style="width:100%">
+            <view class="tr">
+                <image bindtap="close" class="close_img" src="/hyb_o2o/resource/images/close.png"></image>
+            </view>
+            <input class="input fs28" name="man" placeholder="消费金额（元）" type="number"></input>
+            <input class="input fs28" name="jian" placeholder="满减金额（元）" type="number"></input>
+        </view>
+        <input hidden="true" name="openid" value="{{openid}}"></input>
+        <button class="btn fs28" formType="submit">添加</button>
+    </form>
+</view>
+<view class="yhj_box" wx:if="{{yhj}}">
+    <form bindsubmit="submit_yhj">
+        <view class="box_i fs30">
+            <view class="tr">
+                <image class="yhj_img" src="/hyb_o2o/resource/images/yhj.png"></image>
+                <image bindtap="close" class="close_img" src="/hyb_o2o/resource/images/close.png"></image>
+            </view>
+            <view class="left">
+                <input class="input fs28" name="y_name" placeholder="优惠卷名称" value="{{youhuiquanxq.y_name}}"></input>
+            </view>
+            <view class="left">
+                <input class="input fs28" name="y_money" placeholder="优惠卷金额" type="digit" value="{{youhuiquanxq.y_money}}"></input>
+            </view>
+            <view class="left">
+                <input class="input fs28" name="y_shuoming" placeholder="优惠卷说明" value="{{youhuiquanxq.y_shuoming}}"></input>
+            </view>
+            <view class="left">
+                <picker bindchange="bindfangwei" range="{{shiyong}}" value="{{index_s}}">
+                    <view class="picker">
+                        <input disabled class="input fs28" name="y_shiyong" placeholder="选择优惠卷适用范围" type="text" value="{{shiyong[index_s]}}"></input>
+                    </view>
+                </picker>
+            </view>
+            <view class="left">
+                <picker bindchange="bindDateChange1" mode="date">
+                    <view class="picker">
+                        <input disabled class="input fs28" name="y_starttime" placeholder="选择开始日期" value="{{date_s}}"></input>
+                    </view>
+                </picker>
+            </view>
+            <view class="left">
+                <picker bindchange="bindDateChange2" mode="date">
+                    <view class="picker">
+                        <input disabled class="input fs28" name="y_endtime" placeholder="选择结束日期" value="{{date_e}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <input hidden="true" name="openid" value="{{openid}}"></input>
+        <input hidden="true" name="y_id" value="{{y_id}}"></input>
+        <button class="btn fs28" formType="submit">确定并保存</button>
+    </form>
+</view>
+<view class="add">
+    <button bindtap="add_mess" class=" fs28" data-current="{{current}}">添加</button>
+</view>

@@ -1,0 +1,363 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcsslist.css">
+<style type="text/css">
+     
+    .yg5_key>div{float: left;line-height: 34px;}
+    .store_td1{height: 45px;width: 50px;}
+    .store_list_img{width: 40px;height: 40px;}
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;}
+    .yg5_tr2>td{padding: 10px;border: 1px solid #e5e5e5;text-align: center;}
+    .yg5_tr1>td{
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+        font-weight: bold;
+        text-align: center;
+    }
+    .ygcopy1>a>span,.ygcopy>a,.ygcopy>button,.td_type>span{margin-bottom: 10px;}
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .yghover2{position: absolute;bottom: -20px;left: -50%;z-index: 2;color: #333;display: none;}
+    .yghover{position: relative;}
+    .yghover:hover .yghover2{display: block;}
+    .yglabel{background-color: #44abf7;display: inline-block;padding: 1px 10px;color: white;border-radius: 2px;font-size: 12px;}
+    .yglabelgray{background-color: #d1dade;display: inline-block;padding: 1px 10px;color: white;border-radius: 2px;font-size: 12px;}
+</style>
+<script type="text/javascript">
+require(['jquery', 'district'], function ($, d) {
+  $(function () {
+    
+    d.render({
+      province: $('#p')[0],
+      city: $('#c')[0],
+      district: $('#d')[0]
+    }, {
+      province: "{$item['address'][0]}",
+      city: "{$item['address'][1]}",
+      district: "{$item['address'][2]}"
+    }, {
+      withTitle: true
+    });
+  });
+});
+    $(function(){
+        $("#frame-0").show();
+        $("#yframe-0").addClass("wyactive");
+    })
+</script>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>       
+        <li class="active"><a href="{php echo $this->createWebUrl('store')}">门店设置</a></li>
+        <li style="color: red; font-size: 24px;">自营</li>
+</ul>
+<div class="main">
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">门店信息设置</h3>
+        </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px;">门店名称</label>
+                <div class="form-controls col-sm-5">
+                     <input type="text" name="name" value="{$item['name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店logo</label>
+                <div class="form-controls col-sm-5">
+                      {php echo tpl_form_field_image('thumb', $item['thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店logo</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店宣传图</label>
+                <div class="form-controls col-sm-5">
+                     {php echo tpl_form_field_multi_image('thumbs', $item['thumbs'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">（建议尺寸658x351）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店简介内容</label>
+                <div class="form-controls col-sm-5">
+                    <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  name="content" >{$item['content']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店简介内容</div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label" style="margin-right: 30px">门店地址</label>
+                <div class="row">
+                    <div class="col-sm-2">
+                      <select id="p" class="form-control " name="province" value="{$item['address'][0]}">
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                      <select id="c" class="form-control" name="city" value="{$item['address'][1]}">
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                      <select id="d" class="form-control" name="district" value="{$item['address'][2]}">
+                      </select>
+                    </div>
+                  </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店详细地址</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" name="xaddress"  value="{$item['xaddress']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店详细地址</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店地址经纬度 <span style="color: #c00">误填反</span></label>
+                <div class="form-controls col-sm-2">
+                    <input type="text" name="latitude"  value="{$item['latitude']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="form-controls col-sm-1 help-block" style="padding-left: 15px">纬度:30.88888</div>
+                <div class="form-controls col-sm-2">
+                    <input type="text" name="longitude"  value="{$item['longitude']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="form-controls col-sm-4 help-block" style="padding-left: 15px">经度:120.6666 
+                    <a href="http://lbs.qq.com/tool/getpoint/" target="_blank" style="color:#428BCA; margin-left: 34px"> 经纬度查询</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店负责人</label>
+                <div class="form-controls col-sm-5">
+                     <input type="text" name="fuzeren" value="{$item['fuzeren']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店负责人</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店联系电话</label>
+                <div class="form-controls col-sm-5">
+                     <input type="text" name="telphone"  value="{$item['telphone']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店联系电话</div>
+            </div>
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 control-label" style="margin-right:45px">商家保障</label>
+                <div class="form-controls col-sm-5 choosebz">
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="未服务随时退" type="checkbox" {if in_array('未服务随时退',$item['baozhang'])} checked  {/if}> 未服务随时退
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="标准服务" type="checkbox" {if in_array('标准服务',$item['baozhang'])} checked  {/if}> 标准服务
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="无额外收费"  type="checkbox" {if in_array('无额外收费',$item['baozhang'])} checked  {/if}> 无额外收费
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="安全保障"  type="checkbox" {if in_array('安全保障',$item['baozhang'])} checked  {/if}>安全保障
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="迟到赔" type="checkbox" {if in_array('迟到赔',$item['baozhang'])} checked  {/if}> 迟到赔
+                    </label>
+                    
+                    
+                    <p></p>
+
+                    <div class="help-block">* 备注：可以多选，保障越多，认可度越高</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block seebz" style="color: #428BCA">查看保障详情</div>
+                <style type="text/css">
+                    .bzbox{width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.5);display: none;z-index: 10;}
+                    .bzbox .bz_inner{width: 30%;background: #fff;padding: 30px;position: relative;left: 50%;top: 50%;transform: translate(-40%,-50%);-webkit-translate:translate(-40%,-50%);-ms-translate:translate(-40%,-50%);-moz-translate:translate(-40%,-50%);}
+                    .seebz{cursor: pointer;}
+                    .bz{margin-bottom: 10px;}
+                    .bz_title{font-size: 15px;font-weight: bold;margin-bottom: 5px;}
+                    .bz_con{font-size: 12px;color: #666;text-indent: 2em;}
+                </style>
+                <div class="bzbox">
+                    <div class="bz_inner">
+                        <div class="bz">
+                            <div class="bz_title">未服务随时退</div>
+                            <p class="bz_con">商家未接单，商家接单未开始服务前，均支持全额退款。用户可以通过在线或致电客服进行取消完成退款操作。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">标准服务</div>
+                            <p class="bz_con">商家承诺按服务内容提供相应服务，如未提供相应服务，可联系客服进行协商处理。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">无额外收费</div>
+                            <p class="bz_con">商家承诺，客户预约时一次性支付全部费用，不再收取任何费用。如有用户投诉，平台或商家将核实解决</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">安全保障</div>
+                            <p class="bz_con">当服务过程中用户产生人身、财产损失、可通过致电商家或平台进行理赔操作。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">迟到赔</div>
+                            <p class="bz_con">商家迟到超过15分钟上门服务的，经核实可获得30元代金券。</p>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(".seebz").click(function(){
+                        $(".bzbox").fadeIn();
+                    })
+                    $(".bzbox").click(function(){
+                        $(".bzbox").fadeOut();
+                    })
+                </script>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" style="margin-right:45px">营业时间(开始时间)</label>
+                <div class="form-controls col-sm-5">   
+                    <script type="text/javascript">
+                        require(["clockpicker"], function($){
+                            $(function(){
+                                $(".clockpicker").clockpicker({
+                                    autoclose: true
+                                });
+                            });
+                        });
+                    </script>
+                    <div class="input-group clockpicker">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input name="time" value="{$item['yingyetime'][0]}" class="form-control" type="text">
+                    </div> 
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" style="margin-right:45px">营业时间(结束时间)</label>
+                <div class="form-controls col-sm-5">   
+                    <script type="text/javascript">
+                        require(["clockpicker"], function($){
+                            $(function(){
+                                $(".clockpicker").clockpicker({
+                                    autoclose: true
+                                });
+                            });
+                        });
+                    </script>
+                    <div class="input-group clockpicker">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input name="time2" value="{$item['yingyetime'][1]}" class="form-control" type="text">
+                    </div> 
+                </div>
+            </div>
+            <!-- <div class="form-group" >
+                <label for="" class="control-label col-sm-2" style="color: red">*openid</label>
+                <div class="form-controls col-sm-5" style="margin-left: 45px;">
+                    <select name="openid" id="openid" class="form-control">
+                        <option value="">--请选择--</option>
+                        {loop $openid $items}
+                        <option value="{$items['openid']}" {if $items['openid']==$item['openid']}selected{/if} >{$items['u_name']}</option>
+                        {/loop}
+                    </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">openid</div>
+            </div> -->
+            <div class="form-group">
+                <label for="inputEmail3" class="control-label col-sm-2" style="color: red">绑定管理员</label>
+                <div class="form-controls col-sm-5" style="margin-left: 45px;">
+                    <div class="col-sm-12" style="padding: 0px;">
+                        <select class="col-sm-6" name="openid" id="username2">
+                            <option value="">--请选择--</option>
+                            {loop $openid $items}
+                            <option value="{$items['openid']}" {if $items['openid']==$item['openid']}selected{/if} >{$items['u_name']}</option>
+                            {/loop}
+                        </select>
+                        <span class="btn btn-sm storeblue" data-toggle="modal" data-target="#myModal2" style="margin-left: 30px;">搜索管理员</span>
+                        <div class="col-sm-9">
+                            <div class="help-block">
+                                * 用于商户手机端微信登录
+                            </div>
+                        </div>
+                    </div>                    
+                </div> 
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h5 class="modal-title" id="myModalLabel" style="font-size: 16px;">提示</h5>
+                            </div>
+                            <div class="modal-body ygsearch" style="font-size: 20px;padding: 15px 30px;">
+                                <input type="text" id="ygsinput2" placeholder="请输入微信昵称">
+                                <span class="btn btn-sm storeblue ygbtn2">搜索</span>
+                                <div class="searchname2" style="margin-top: 8px;"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px; color: red;">*门店服务范围</label>
+                <div class="form-controls col-sm-5"  style="float: left;" >
+                    <input type="radio" name="fwfw"  value="1" {if $item['fwfw'] == '1'} checked{/if} />全国范围
+                    <input type="radio" name="fwfw"  value="0" {if $item['fwfw'] == '0'} checked{/if} />所在地
+                </div>
+            </div> -->
+    <div class="form-group">
+        <div class="col-sm-12" style="margin-left: 200px;">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" style="height:auto" name="submit" value="提交" />
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-0").show();
+        $("#yframe-0").addClass("wyactive");
+        $(".ygbtn2").on("click",function(){
+            var ygsinput2 = $("#ygsinput2").val();
+            console.log(ygsinput2)
+            if(ygsinput2.length==''){
+              $(".searchname2").html('');
+            }else{
+              $(".searchname2").html('')  
+              var keywords = $("#ygsinput2").val()
+              $.ajax({
+                  type:"post",
+                  url:"{$_W['siteroot']}web/index.php?&c=site&a=entry&do=store&op=SelectUser&m=hyb_o2o",
+                  dataType:"text",
+                  data:{keywords:keywords},
+                  success:function(data){                    
+                      var data = eval('(' + data + ')')
+                      console.log(data);
+                      console.log(data.length);
+                      $(".searchname2").show();
+                      for(var i=0;i<data.length;i++){
+                        $(".searchname2").append('<div class="shnbox2" data-dismiss="modal" openid="'+data[i].openid+'"><a href="javascript:void(0);"><p>'+data[i].u_name+'</p></a></div>')
+                      }
+                  }
+              }) 
+            }
+        })
+       $(".searchname2").on("click",".shnbox2",function(){
+            var thid = $(this).attr("openid");
+            var txt = $(this).children().children().html();
+            $("#username2 option").each(function () {
+                var val = $(this).val();
+                if(val == thid){
+                    $("#username2 option").removeAttr("selected");
+                    $('#username2 option[value='+thid+']').attr("selected",'selected');
+                    return false; 
+                }else{
+                    var options = "<option value="+thid+" selected>"+ txt +"</option>";
+                    $("#username2").append(options);
+                    return false; 
+                }
+                          
+            })
+        });
+    })
+</script>
+{template "common/footer"}

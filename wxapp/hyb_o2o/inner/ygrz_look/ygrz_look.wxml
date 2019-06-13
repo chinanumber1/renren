@@ -1,0 +1,59 @@
+<view class="list">
+    <view class="item border_bot_2">
+        <view class="title">选择所属商家</view>
+        <view class="input fs28">
+            <input disabled name="merchant" type="text" value="{{info.s_name}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2">
+        <view class="title">姓名</view>
+        <view class="input fs28">
+            <input disabled name="name" type="text" value="{{info.y_name}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2">
+        <view class="title">性别</view>
+        <view class="input fs28">
+            <input value="{{info.y_sex}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2">
+        <view class="title">年龄</view>
+        <view class="input fs28">
+            <input disabled name="age" type="number" value="{{info.y_age}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2">
+        <view class="title">技能</view>
+        <view class="input df line_one fs28" style="width:100%;">
+            <text wx:for="{{info.y_jineng}}">{{item}}</text>
+        </view>
+    </view>
+    <view class="item border_bot_2">
+        <view class="title">接单服务地区</view>
+        <view class="input fs28">
+            <text wx:for="{{info.y_fwqy}}">{{item}}</text>
+        </view>
+    </view>
+    <view class="item border_bot_2">
+        <view class="title">接单公里数</view>
+        <view class="input fs28">
+            <input disabled name="distance" type="text" value="{{info.y_jdnum}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2 p20  fs28">
+        <view class="title">联系电话</view>
+        <view class="input">
+            <input disabled maxlength="11" name="telphone" type="number" value="{{info.y_telphone}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2 p20  fs28">
+        <view class="title">上传身份证</view>
+        <view class="input df">
+            <view class="df">
+                <image bindtap="preview" class="uploadImg" data-current="{{index}}" data-list="{{imglist}}" mode="aspectFit" src="{{item}}" wx:for="{{imglist}}"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<button bindtap="back" class="submit" size="mini">返回</button>

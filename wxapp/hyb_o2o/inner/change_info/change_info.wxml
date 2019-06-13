@@ -1,0 +1,51 @@
+<form bindsubmit="formSubmit">
+    <view class="item border_bot_2 fs28 df">
+        <text>头像</text>
+        <view class="img">
+            <image class="" src="{{userInfo.u_thumb}}"></image>
+        </view>
+        <input hidden="true" name="u_thumb" value="{{userInfo.u_thumb}}"></input>
+    </view>
+    <view class="item border_bot_2 fs28 df">
+        <text>昵称</text>
+        <view>{{userInfo.u_name}}</view>
+        <input hidden="true" name="u_name" value="{{userInfo.u_name}}"></input>
+    </view>
+    <view class="item border_bot_2 fs28 df">
+        <text>姓名</text>
+        <view>
+            <input class="tr" name="u_username" placeholder="请输入姓名" type="text" value="{{userInfo.u_username}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2 fs28 df">
+        <text>手机号</text>
+        <view>
+            <input bindblur="check_tel" class="tr" maxlength="11" name="u_phone" placeholder="请输入手机号" type="number" value="{{userInfo.u_phone}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2 fs28 df">
+        <text>性别</text>
+        <view>
+            <picker bindchange="bindPickerChange" range="{{array}}" value="{{gender_index}}">
+                <view class="picker">
+                    <input class="tr" disabled="disabled" name="u_sex" placeholder="请选择性别" type="number" value="{{array[gender_index]}}"></input>
+                </view>
+            </picker>
+        </view>
+    </view>
+    <view class="item border_bot_2 fs28 df">
+        <text>年龄</text>
+        <view>
+            <input class="tr" name="u_age" placeholder="" type="number" value="{{userInfo.u_age}}"></input>
+        </view>
+    </view>
+    <view class="item border_bot_2 fs28 df">
+        <text>会员等级</text>
+        <view>
+            <input class="tr" disabled="true" name="level" value="{{userInfo.u_type}}"></input>
+        </view>
+    </view>
+    <button class="submit fs28" formType="submit">保存</button>
+</form>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

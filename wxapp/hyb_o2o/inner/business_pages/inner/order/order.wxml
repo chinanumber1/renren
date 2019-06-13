@@ -1,0 +1,52 @@
+<view class="top tc">
+    <view class="fs28">佣金订单</view>
+    <view bindtap="goback" class="back fs24 df">
+        <image class="right_arr" src="/pages/resource/images/right.png"></image>返回 </view>
+</view>
+<view class="title df fs28 mb20">
+    <view bindtap="switch_tab" class="title_item {{current==index?'sel':''}}" data-index="{{index}}" wx:for="{{['所有','待付款','已付款','已完成']}}" wx:key="item">{{item}}</view>
+</view>
+<view class="list" wx:if="{{current==0}}">
+    <view class="list_item mb20" wx:for="{{all}}" wx:key="item">
+        <view class="i_top fs26 color_gray border_bot_2 p20">
+            <view>分销等级：{{item.dengji}}</view>
+            <view>订单编号：{{item.order_num}}</view>
+            <view>下单时间：{{item.date}}</view>
+        </view>
+        <view class="bot p20 fs24">预计佣金：<text class="fs30">+{{item.money}}</text>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==1}}">
+    <view class="list_item mb20" wx:for="{{w_pay}}" wx:key="item">
+        <view class="i_top fs26 color_gray border_bot_2 p20">
+            <view>分销等级：{{item.dengji}}</view>
+            <view>订单编号：{{item.order_num}}</view>
+            <view>下单时间：{{item.date}}</view>
+        </view>
+        <view class="bot p20 fs24">预计佣金：<text class="fs30">+{{item.money}}</text>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==2}}">
+    <view class="list_item mb20" wx:for="{{payed}}" wx:key="item">
+        <view class="i_top fs26 color_gray border_bot_2 p20">
+            <view>分销等级：{{item.dengji}}</view>
+            <view>订单编号：{{item.order_num}}</view>
+            <view>下单时间：{{item.date}}</view>
+        </view>
+        <view class="bot p20 fs24">预计佣金：<text class="fs30">+{{item.money}}</text>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==3}}">
+    <view class="list_item mb20" wx:for="{{complete}}" wx:key="item">
+        <view class="i_top fs26 color_gray border_bot_2 p20">
+            <view>分销等级：{{item.dengji}}</view>
+            <view>订单编号：{{item.order_num}}</view>
+            <view>下单时间：{{item.date}}</view>
+        </view>
+        <view class="bot p20 fs24">预计佣金：<text class="fs30">+{{item.money}}</text>
+        </view>
+    </view>
+</view>

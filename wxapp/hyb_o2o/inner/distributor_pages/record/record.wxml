@@ -1,0 +1,31 @@
+<view>
+    <view class="top tc mb20" style="height:70px;">
+        <view style="float:left;width:50%;margin-top:10px;">
+            <view class="fs28 mb10">累计提现佣金数</view>
+            <view class="fs30" wx:if="{{Yjtixian.yongjin==null}}">0</view>
+            <view class="fs30" wx:else>{{Yjtixian.yongjin}}</view>
+        </view>
+        <view style="float:left;width:50%;margin-top:10px;">
+            <view class="fs28 mb10">累计提现金额(元)</view>
+            <view class="fs30" wx:if="{{Yjtixian.jin_e==null}}">0</view>
+            <view class="fs30" wx:else>{{Yjtixian.jin_e}}</view>
+        </view>
+    </view>
+    <view class="noadd" wx:if="{{Yjtixian.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无数据</view>
+    </view>
+    <view class="box" wx:if="{{Yjtixian.length!=0}}">
+        <view class="df title fs30 border_bot_2">
+            <view>日期</view>
+            <view>提现佣金数</view>
+            <view>提现金额（元）    </view>
+        </view>
+        <view></view>
+        <view class="item border_bot_2 df fs26" wx:for="{{Yjtixian}}" wx:key="item">
+            <view class="date">{{item.yj_time}}</view>
+            <view class="refill">{{item.yj_yongjin}}</view>
+            <view class="balance">{{item.yj_money}}</view>
+        </view>
+    </view>
+</view>

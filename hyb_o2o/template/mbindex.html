@@ -1,0 +1,46 @@
+{template 'common/header'}
+<div class="navss">
+  <!--导航左侧部分 start-->
+  <div class="nav-left">
+    <ul id="myTab" class="nav nav-tabs">
+      <li><a href="{php echo $this->createWebUrl('xiangmu_type',array('op'=>'display'))}" data-toggle="tab">项目分类</a></li>
+      <li><a href="{php echo $this->createWebUrl('Mendian',array('op'=>'display'))}" data-toggle="tab">基本设置</a></li>
+      <li><a href="{php echo $this->createWebUrl('xiangmu',array('op'=>'display'))}" data-toggle="tab">服务项目管理</a></li>
+      <li><a href="{php echo $this->createWebUrl('cunchu',array('op'=>'display'))}" data-toggle="tab">远程存储设置</a></li>
+      <li><a href="{php echo $this->createWebUrl('order',array('op'=>'display'))}" data-toggle="tab">订单管理</a></li>
+      <li><a href="{php echo $this->createWebUrl('huiyuan',array('op'=>'display'))}" data-toggle="tab">会员管理</a></li>
+      <li><a href="{php echo $this->createWebUrl('jibie',array('op'=>'display'))}" data-toggle="tab">会员等级管理</a></li>
+      <li><a href="{php echo $this->createWebUrl('tixian',array('op'=>'display'))}" data-toggle="tab">提现记录</a></li>
+      <li><a href="{php echo $this->createWebUrl('sjruzhu',array('op'=>'display'))}" data-toggle="tab">商家入驻条件设置</a></li>
+      <li><a href="{php echo $this->createWebUrl('sjtype',array('op'=>'display'))}" data-toggle="tab">商家分类</a></li>
+      <li><a href="{php echo $this->createWebUrl('shangjia',array('op'=>'display'))}" data-toggle="tab">商家管理</a></li>
+      <li><a href="{php echo $this->createWebUrl('pay',array('op'=>'display'))}" data-toggle="tab">支付管理</a></li>
+      <li><a href="{php echo $this->createWebUrl('news',array('op'=>'post'))}" data-toggle="tab">通知管理</a></li>
+
+    </ul>
+  </div>
+  <!--导航左侧部分 end-->
+  <!--导航右侧部分 start-->
+  <div class="nav-right">
+    <div>
+      <iframe id="myIframe" src="{php echo $this->createWebUrl('xiangmu_type')}" style="width: 100%;" name="iframepage" onload="changeFrameHeight()" frameborder="0"></iframe>
+    </div>
+  </div>
+  <!--导航右侧部分 end-->
+</div>
+
+<script type="text/javascript" language="javascript">
+  function changeFrameHeight(){
+    var ifm= document.getElementById("myIframe");
+    ifm.height=document.documentElement.clientHeight;
+  }
+  window.onresize=function(){
+    changeFrameHeight();
+  };
+  $("#myTab li a").on("click",function(e){
+    e.preventDefault();
+    var href=this.href;
+    $("#myIframe").attr("src",href);
+  });
+</script>
+{template 'common/footer'}

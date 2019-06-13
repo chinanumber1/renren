@@ -1,0 +1,41 @@
+<view class="title df fs28">
+    <view bindtap="switch_tab" class="title_item {{current==index?'sel':''}}" data-index="{{index}}" wx:for="{{['上架','下架']}}" wx:key="item">{{item}}</view>
+</view>
+<view wx:if="{{current==0}}">
+    <view class="noadd" wx:if="{{Sjxm.length==0}}">
+        <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无数据</view>
+    </view>
+    <view catchtap="look_detail" class="item df mb20" data-id="{{item.x_id}}" wx:for="{{Sjxm}}">
+        <view class="img">
+            <image mode="aspectFill" src="{{item.x_thumb}}"></image>
+        </view>
+        <view class="text fs32 color333 ">
+            <view class="mb10">{{item.x_name}}</view>
+            <view class="line_two fs24" style="color:#525252">{{item.x_content}}</view>
+            <view class="df jsb">
+                <text class="money">￥{{item.x_jiage}}</text>
+                <switch checked disabled class="swith_btn"></switch>
+            </view>
+        </view>
+    </view>
+</view>
+<view wx:if="{{current==1}}">
+    <view class="noadd" wx:if="{{Sjxm.length==0}}">
+        <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无数据</view>
+    </view>
+    <view catchtap="look_detail" class="item df mb20" data-id="{{item.x_id}}" wx:for="{{Sjxm}}">
+        <view class="img">
+            <image mode="aspectFill" src="{{item.x_thumb}}"></image>
+        </view>
+        <view class="text fs32 color333">
+            <view class="mb10">{{item.x_name}}</view>
+            <view class="line_two fs24" style="color:#525252">{{item.x_content}}</view>
+            <view class="df jsb">
+                <text class="money">￥{{item.x_jiage}}</text>
+                <switch disabled class="swith_btn"></switch>
+            </view>
+        </view>
+    </view>
+</view>

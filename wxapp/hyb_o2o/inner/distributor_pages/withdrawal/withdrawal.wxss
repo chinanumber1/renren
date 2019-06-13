@@ -1,0 +1,64 @@
+@import "../../../../__wuBaseWxss__/5.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.top {
+    background: #EF4A50;
+    padding: 20rpx 0;
+    color: #fff;
+}
+
+.title {
+    padding-top: 20rpx;
+}
+
+.input_box {
+    padding: 0 20rpx;
+    background: #fff;
+}
+
+.right {
+    float: right;
+    color: #FF7272;
+}
+
+.btn {
+    margin: 20rpx;
+    background: #EF4A50;
+    color: #fff;
+}
+
+.switchTab {
+    background: #fff;
+}
+
+.switchTab view {
+    border-bottom: 2rpx solid #eee;
+    padding: 20rpx 0;
+}
+
+.switchTab view.sel {
+    color: #EF4A50;
+    border-color: #EF4A50;
+}
+
+.part {
+    background: #fff;
+    margin: 20rpx 0;
+    padding: 0 20rpx;
+}
+
+.part .p_item {
+    padding: 20rpx 0;
+}
+
+.part .p_item label {
+    flex-shrink: 0;
+}
+
+.part .p_item input {
+    width: 85%;
+    margin-left: 2%;
+}

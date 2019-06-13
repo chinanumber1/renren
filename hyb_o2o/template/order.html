@@ -1,0 +1,274 @@
+{template 'common/header-base'}
+
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<div class="form-group">
+    <label class="col-sm-1" style="text-align:center;margin-left:20px;margin-top:5px;">订单状态</label>
+    <div class="col-sm-9 col-xs-12">
+        <div class="btn-group">
+            <div class="btn-group">
+                <div class="btn-group">
+                    <a href="{php echo $this->createWeburl('order', array('o_type' =>0,'op' =>'display'))}" class="btn btn-default">全部订单</a>
+                    <a href="{php echo $this->createWeburl('order', array('o_type' =>1,'op' =>'display'))}" class="btn btn-default">未支付</a>
+                    <a href="{php echo $this->createWeburl('order', array('o_type' =>2,'op' =>'display'))}" class="btn btn-default">已付款</a>
+                    <a href="{php echo $this->createWeburl('order', array('o_type' =>3,'op' =>'display'))}" class="btn btn-default">已完成</a>
+                    <a href="{php echo $this->createWeburl('order', array('o_type' =>4,'op' =>'display'))}" class="btn btn-default">已取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <div class="form-group">
+        <div class="form-controls col-sm-5" style="postion:relative;left:60px;margin-top: 20px">
+            <label class="col-sm-1" style="width:132px;">下单日期</label>
+             {php echo tpl_form_field_daterange('datelimit', array('starttime'=>date('Y-m-d', time()),'endtime'=>date('Y-m-d',time())),true);}
+            <!-- <input class="btn btn-primary" id="search_button" type="button" value="确定"/> -->
+            <input type="submit" class="btn btn-primary" name="submit" value="确定"/>
+        </div>
+    </div>
+    <!-- <div class="panel panel-default">
+        <div class="panel-body">
+            <input type="submit" class="btn btn-primary" name="submit" value="提交" style="margin-left:25%;margin-top:-150px;" />
+        </div>
+    </div> -->
+</form>
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <input type="text" class="form-control " id="keyword"  name="keyword" placeholder="请输入订单编号" style="width:80%; display:block; float: left;" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left:5%;float: left;" />
+        </div>
+    </div>
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+             <td style="width:100px">排序</td>
+            <td>订单号</td>
+            <td>下单人</td>
+            <td>下单人手机号</td>
+            <td>下单人人地址</td>
+            <td>预约时间</td>
+            <td>服务项目</td>
+            <td>订单金额</td>
+            <td>是否核销</td>
+            <td>付款状态</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {if $time_sel ==""}
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['o_id']}
+            </td>
+            <td>
+                {$item['ordersn']}
+            </td>
+            <td>
+               {$item['o_name']}
+            </td>
+            <td>
+                {$item['o_telphone']}
+            </td>
+            <td>
+                {$item['o_address']}
+            </td>
+            <td>
+               {$item['o_yy_riqi']}
+            </td>
+            <td>
+                {$item['o_xiangmu']}
+            </td>
+            <td>
+                {$item['o_count_money']}
+            </td>
+            <td>
+                {if $item['o_status']==0}
+                <a class="btn btn-default btn-sm" href="#" >未核销</a>
+                {/if}
+                {if $item['o_status']==1}
+                <a class="btn btn-default btn-sm" href="#" >已核销 </a>
+                {/if}
+            </td>
+            <td>
+                {if $item['o_type']=="未支付"}
+                <a class="btn btn-default btn-sm" href="#" >未支付</a>
+                {/if}
+                {if $item['o_type']=="已付款"}
+                <a class="btn btn-default btn-sm" href="#" >已付款 <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('order', array('o_id' => $item['o_id'], 'op' =>'save'))}" >是否完成[完成请点击]</a></a>
+                {/if}
+                {if $item['o_type']=="到店付款"}
+                <a class="btn btn-default btn-sm" href="#" >到店付款<a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('order', array('o_id' => $item['o_id'], 'op' =>'save','df'=>1))}" >是否完成[完成请点击]</a></a>
+                {/if}
+                {if $item['o_type']=="已完成"}
+                <a class="btn btn-default btn-sm" href="#" >已完成</a>
+                {/if}
+                {if $item['o_type']=="已取消"}
+                <a class="btn btn-default btn-sm" href="#" >已取消</a>
+                {/if}
+            </td>
+            <td class="text-center">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('order', array('o_id' => $item['o_id'], 'op' =>'post'))}" >查看</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWebUrl('order', array('o_id' => $item['o_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+        {/if}
+        {if $time_sel}
+        {loop $time_sel $itema}
+        <tr>
+            <td>
+                {$itema['o_id']}
+            </td>
+            <td>
+                {$itema['ordersn']}
+            </td>
+            <td>
+               {$itema['o_name']}
+            </td>
+            <td>
+                {$itema['o_telphone']}
+            </td>
+            <td>
+                {$itema['o_address']}
+            </td>
+            <td>
+               {$itema['o_yy_riqi']}
+            </td>
+            <td>
+                {$itema['o_xiangmu']}
+            </td>
+            <td>
+                {$itema['o_count_money']}
+            </td>
+            <td>
+                {if $itema['o_status']==0}
+                <a class="btn btn-default btn-sm" href="#" >未核销</a>
+                {/if}
+                {if $itema['o_status']==1}
+                <a class="btn btn-default btn-sm" href="#" >已核销 </a>
+                {/if}
+            </td>
+            <td>
+                {if $itema['o_type']=="未支付"}
+                <a class="btn btn-default btn-sm" href="#" >未支付</a>
+                {/if}
+                {if $itema['o_type']=="已付款"}
+                <a class="btn btn-default btn-sm" href="#" >已付款 <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('order', array('o_id' => $itema['o_id'], 'op' =>'save'))}" >是否完成[完成请点击]</a></a>
+                {/if}
+                {if $itema['o_type']=="到店付款"}
+                <a class="btn btn-default btn-sm" href="#" >到店付款</a>
+                {/if}
+                {if $itema['o_type']=="已完成"}
+                <a class="btn btn-default btn-sm" href="#" >已完成</a>
+                {/if}
+                {if $itema['o_type']=="已取消"}
+                <a class="btn btn-default btn-sm" href="#" >已取消</a>
+                {/if}
+            </td>
+            <td class="text-center">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('order', array('o_id' => $itema['o_id'], 'op' =>'post'))}" >查看</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWebUrl('order', array('o_id' => $itema['o_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+        {/if}
+        
+    </table>
+</form>
+{$pager}
+{/if}
+{if $op=="post"}
+
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">订单详情</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">订单号</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['ordersn']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单人</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单人手机号</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_telphone']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单人地址</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_address']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单时间</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_xdtime']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">预约时间</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_yy_riqi']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务项目</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_xiangmu']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务项目图片</label>
+                <div class="form-controls col-sm-5">
+                    <img src="{$item['o_xiangmu_thumb']}" width="100px;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">订单金额</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['o_count_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">是否核销</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{if $item['o_status']==0}未核销{/if} {if $item['o_status']==1}已核销 {/if}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div> 
+                
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">订单状态</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['o_type']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">备注</label>
+                <div class="form-controls col-sm-5">
+                    <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty" >{$item['o_beizhu']}</textarea>
+                </div>
+            </div>
+            
+    <!-- <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div> -->
+</form>
+{/if}

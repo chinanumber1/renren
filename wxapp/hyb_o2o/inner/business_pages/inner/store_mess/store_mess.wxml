@@ -1,0 +1,73 @@
+<view class="top tc">
+    <view class="fs28">门店信息</view>
+    <view bindtap="goback" class="back fs24 df">
+        <image class="right_arr" src="/hyb_o2o/resource/images/right.png"></image>返回 </view>
+</view>
+<form bindsubmit="formSubmit">
+    <view class="list">
+        <view class="item border_bot_2 p20  fs28">
+            <view class="title">服务商名称</view>
+            <view>
+                <input name="s_name" placeholder="请填写服务商名称" type="text" value="{{shangjia.s_name}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28">
+            <view class="title">联系电话</view>
+            <view>
+                <input bindblur="check_tel" name="s_telphone" placeholder="请填写负责人手机号" type="text" value="{{shangjia.s_telphone}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28">
+            <view class="title">门店简介</view>
+            <view>
+                <textarea autoHeight class="fs28" maxlength="100" name="s_content" placeholder="请填写门店简介(长度不能超过100)" style="width:100%" type="text" value="{{shangjia.s_content}}"></textarea>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20 fs28 df jsb">
+            <text class="title" style="margin-bottom:0">是否参与分销</text>
+            <switch bindchange="switchChange" checked="{{fenxiao}}" class="swith_btn" name="fenxiao" style="transform:scale(0.6);float:right;"></switch>
+        </view>
+        <view class="item border_bot_2 p20 fs28 df jsb" wx:if="{{fenxiao}}">
+            <view class="title">分销方式</view>
+            <picker bindchange="bindfenx" range="{{fxfs}}" value="{{fx_index}}">
+                <view class="picker">
+                    <input class="" disabled="disabled" name="fxfs" style="text-align:right;padding-right:20rpx;width:100rpx;" value="{{fxfs[fx_index]}}"></input>
+                </view>
+            </picker>
+        </view>
+        <view class="color_red fs24 p20" style="padding-bottom:0" wx:if="{{fenxiao}}">
+            <view>注：1、积分不能提现（可兑换商品）</view>
+            <view style="text-indent:2em">2、佣金可转为现金提现</view>
+            <view style="text-indent:2em">3、设置好后不介意更改，容易影响客户体验度</view>
+        </view>
+        <view class="item border_bot_2 p20  fs28">
+            <view class="title">接单时间段</view>
+            <view class="df">
+                <picker bindchange="bindTimeChange1" end="22:00" mode="time" start="08:00" value="{{time}}">
+                    <view class="picker">
+                        <input class="time_input" disabled="disabled" name="s_start" value="{{s_start}}"></input>
+                    </view>
+                </picker> -  
+        <picker bindchange="bindTimeChange2" end="22:00" mode="time" start="08:00" value="{{time}}">
+                    <view class="picker">
+                        <input class="time_input" disabled="disabled" name="s_end" value="{{s_end}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="item border_bot_2 fs28 p20">
+            <view class="title">门店log</view>
+            <view>
+                <view bindtap="uploadImg" class="uploadImg_box df">
+                    <image class="camera" src="/hyb_o2o/resource/images/camera.png" wx:if="{{shangjia.s_id==undefined&&uplogo==''}}"></image>
+                    <image class="logo" mode="aspectFill" src="{{shangjia.s_thumb}}" wx:if="{{shangjia.s_id!=undefined&&uplogo==''}}"></image>
+                    <image class="logo" mode="aspectFill" src="{{uplogo}}" wx:if="{{uplogo!=''}}"></image>
+                    <input hidden="true" name="s_thumb" value="{{shangjia.s_thumb}}" wx:if="{{shangjia.s_id!=undefined&&uplogo==''}}"></input>
+                    <input hidden="true" name="s_thumb" value="{{uplogo}}" wx:if="{{uplogo!=''}}"></input>
+                    <input hidden="true" name="id" value="{{shangjia.s_id}}"></input>
+                </view>
+            </view>
+        </view>
+    </view>
+    <button class="submit fs28" formType="submit">确定</button>
+</form>

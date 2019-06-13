@@ -1,0 +1,79 @@
+<view>
+    <view class="top_one">
+        <view class="top_t fs28 df">
+            <view class="img">
+                <image src="{{userInfo.y_thumb}}"></image>
+            </view>
+            <view class="t_right ">
+                <view class="nickname fs30 fw df">
+                    <text class="line_one" style="max-width:52%;display:inline-block;margin-right:20rpx;">{{userInfo.y_name}}</text>
+                    <text class="status">{{userInfo.y_typs}}</text>
+                    <text class="daoqi" wx:if="{{come=='js'}}">技师剩余时间：{{userInfo.jsrz_endday}}天</text>
+                </view>
+                <view class="df">
+                    <view class="df fs24" style="margin-right:10rpx;">
+                        <text style="color:#999999">余额：</text> ￥{{userInfo.y_money}}
+            <view bindtap="tixian" class="tx_btn" data-typs="yg">提现</view>
+                    </view>
+                    <view bindtap="link_sc" class="df fs24">
+                        <text style="color:#999999">接单数：</text>{{userInfo.y_jiedannum}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list_new" wx:if="{{userInfo.ptyg=='true'}}">
+        <view class="list_1">
+            <view class="l_i_title fs28 border_bot_2">常用功能</view>
+            <view class="list_box df">
+                <navigator url="{{item.url+'?come=js'}}" wx:for="{{y_mess}}" wx:key="always">
+                    <view class="item">
+                        <view class="left">
+                            <image class="icon" src="{{item.icon}}"></image>
+                        </view>
+                        <view class="right">
+              {{item.name}}
+            </view>
+                    </view>
+                </navigator>
+                <view bindtap="lookye" class="item" style="width:25%;">
+                    <view class="left">
+                        <image class="icon" src="/hyb_o2o/resource/images/m_yg_2.png"></image>
+                    </view>
+                    <view class="right">
+            抽成说明
+          </view>
+                </view>
+            </view>
+        </view>
+        <navigator class="goback" hoverClass="none" openType="navigateBack" url="/hyb_o2o/mine/mine">返回个人中心</navigator>
+    </view>
+    <view class="list_new" wx:if="{{userInfo.ptyg!='true'}}">
+        <view class="list_1">
+            <view class="l_i_title fs28 border_bot_2">常用功能</view>
+            <view class="list_box df">
+                <navigator url="{{item.url+'?come=yg'}}" wx:for="{{y_mess2}}" wx:key="always">
+                    <view class="item">
+                        <view class="left">
+                            <image class="icon" src="{{item.icon}}"></image>
+                        </view>
+                        <view class="right">
+              {{item.name}}
+            </view>
+                    </view>
+                </navigator>
+                <view bindtap="lookye" class="item" style="width:25%;">
+                    <view class="left">
+                        <image class="icon" src="/hyb_o2o/resource/images/m_yg_2.png"></image>
+                    </view>
+                    <view class="right">
+            抽成说明
+          </view>
+                </view>
+            </view>
+        </view>
+        <navigator class="goback" hoverClass="none" openType="navigateBack" url="/hyb_o2o/mine/mine">返回个人中心</navigator>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>
+<footer footerindex="3"></footer>

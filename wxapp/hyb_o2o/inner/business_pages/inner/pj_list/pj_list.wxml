@@ -1,0 +1,17 @@
+<view class="noadd" wx:if="{{Sjxm.length==0}}">
+    <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view catchtap="look_detail" class="item df mb20" data-id="{{item.x_id}}" data-num="{{item.count}}" wx:for="{{Sjxm}}">
+    <view class="img">
+        <image mode="aspectFill" src="{{item.x_thumb}}"></image>
+    </view>
+    <view class="text fs28 ">
+        <view class="mb10">{{item.x_name}}</view>
+        <view class="line_two fs24" style="color:#525252;margin-bottom:10rpx;">{{item.x_content}}</view>
+        <view class="df jsb fs26">
+            <text class="money">￥{{item.x_jiage}}</text>
+            <text style="margin-right:20rpx;color:#6E6E6E">评价数：{{item.count}}</text>
+        </view>
+    </view>
+</view>

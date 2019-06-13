@@ -1,0 +1,42 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>邀请人昵称</td>
+            <td>邀请人头像</td>
+            <td>被邀请人昵称</td>
+            <td>被邀请人头像</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['user']['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['user']['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('fenxiao', array('id' => $item['id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}

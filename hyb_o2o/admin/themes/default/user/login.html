@@ -1,0 +1,280 @@
+{template 'common/header-base'}
+<link href="/addons/hyb_o2o/template/public/login.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .clearfix:after{content:".";clear:both;display:block;height:0;overflow:hidden;visibility:hidden;}
+        ul,li{
+            list-style: none;
+        }
+        .headerTop{
+            width:1200px;
+            left:0;
+            right: 0;
+            margin: auto;
+        }
+        .message{
+            float: right;
+            list-style: none;
+        }
+        .message li{
+            float: left;
+            padding: 0px 20px 0px 26px;
+            color:#fff;
+            font-size: 16px;
+            line-height: 30px;
+        }
+        .message li:nth-child(2){
+            padding:0px 20px 0px 0px;
+        }
+        .message li:nth-child(3) a{
+            color:#fff;
+            text-decoration: none;
+        }
+        .message  li .poser{
+            display: none;
+            width:306px;
+            height: 174px;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background: rgba(233,234,234,0.9);
+            padding: 30px 40px;
+        }
+        .poser dd{
+            text-align: center;
+            color: #333;
+            font-family: "微软雅黑";
+            font-size:14px;
+        }
+        .poser dl{
+            margin-top:0;
+        }
+        .poser dl dt{
+            margin-bottom:5px;
+        }
+
+        .poser dl:nth-child(1){
+            float: left;
+        }
+        .poser dl:nth-child(2){
+            float: right;
+        }
+        .fluid{
+            margin-top:46px;
+        }
+        .form-control{
+            height:40px;
+            padding:6px 22px;
+            font-size: 14px!important;
+        }
+        .form-group{
+            margin-bottom:32px;
+        }
+        .form-group.has-error{
+            margin-bottom:10px;
+        }
+        .login-error{
+            margin-top:-10px;
+        }
+        footer{
+            width: 100%;
+            background: #1d2733;
+        }
+        .footerCon{
+            width: 1200px;
+            margin: 0px auto;
+            position: relative;
+        }
+        .footerTit{
+            position: absolute;
+            top: 125px;
+            left: 105px;
+            width: 227px;
+            height: 55px;
+        }
+        .footerTit h2{
+            color: #fff;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+        .footerTit p{
+            color: #fff;
+            font-size: 14px;
+            font-family: "微软雅黑";
+        }
+        .footerRight{
+            width: 538px;
+            float: right;
+            margin-top: 30px;
+            padding-bottom: 40px;
+        }
+        .foT{
+            width: 236px;
+            padding-left: 20px;
+        }
+        .foT li{
+            font-size: 16px;
+            color: #FFF;
+            font-weight: 600;
+        }
+        .foT li:nth-child(1){
+            list-style: disc;
+            float: left;
+        }
+        .foT li:nth-child(2){
+            list-style: disc;
+            float: right;
+        }
+        .fotrcon{
+            width: 100%;
+            border-bottom: 1px solid #6C6D71;
+            margin-top: 20px;
+        }
+        .fotLeft{
+            width: 71px;
+            font-size: 14px;
+            float: left;
+            margin:15px 116px 0px 20px;
+            font-family: "微软雅黑";
+            padding-left:0;
+        }
+        .fotLeft li a,.fotCenter li a{
+            color: #fff;
+        }
+        .fotLeft li,.fotCenter li{
+            margin-bottom: 15px;
+        }
+        .fotCenter{
+            margin-top: 15px;
+            float: left;
+            font-size: 14px;
+            width:65px;
+            font-family: "微软雅黑";
+            color: #fff;
+            padding-left:0;
+        }
+
+        .share{
+            width: 100%;
+            height: 20px;
+            margin-top: 30px;
+        }
+        .address{
+            float: left;
+            color:#fff;
+            font-size: 14px;
+            font-family: "微软雅黑";
+        }
+        .download{
+            margin-top: 15px;
+            width: 181px;
+            float: right;
+        }
+        .download dl:nth-child(1){
+            float: left;
+        }
+        .download dl:nth-child(2){
+            float: right;
+        }
+        .download dd{
+            color:#fff;
+            font-size: 14px;
+            font-family: "微软雅黑";
+            padding-top: 5px;
+        }
+        .shareTo{
+            float: right;
+            width: 78px;
+        }
+        .shareTo a:nth-child(1){
+            float: left;
+        }
+        .shareTo a:nth-child(2){
+            float: right;
+        }
+        @media only screen and (min-width: 100px) and (max-width: 1200px) {
+            footer,.bgpic{
+                width:1200px;
+            }
+
+        }
+        .fotrcon li a{
+            text-decoration: none;
+        }
+        .footer{
+            display: none;
+        }
+    </style>
+
+
+<div class="bgpic" style="background: url(/addons/hyb_o2o/template/images/update_login_bg.jpg) no-repeat ;height: 100vh;background-size: cover;">
+        <div class="headerTop clearfix" style=""> 
+        <!-- 派单logo -->
+            <!-- <a href="http://www.188yd.com/index.html" style="float: left;display: block;"> -->
+                <img src="/addons/hyb_o2o/template/images/icon.jpg"  style="width: 100px;">
+            <!-- </a> -->
+        </div>
+        <div class="content">
+            <div style="overflow: hidden;width: 80%;margin: 30px auto 0;">
+                <div style="float:left;color: #fff;margin-top: 140px">
+                    <div style="font-size: 50px;margin-bottom: 10px;font-weight: bold;">新零售 &nbsp; 始终领先一步</div>
+                    <div style="font-size: 45px;margin-bottom: 10px">因为专注 &nbsp; 所以专业</div>
+                    <div style="font-size: 38px;">派单o2o &nbsp; 引领电商新潮流</div>
+                </div>
+                <form class="form-horizontal" id="login-form" action="" method="post" style="position: relative; background-color: white;width:500px;height: 380px; float: right;margin-top: 100px;"onsubmit="return formcheck();">
+                    <input type="hidden" value="" name="identifier"/>
+                    <div class="fluid" style=" padding:0 67px;text-align: center;">
+                            
+                        <span style="font-size: 24px;color: #333;font-weight: 600;">商户后台登录</span>
+                        
+                    </div>
+                    <div class="form-body" style="padding: 25px 67px 0;">
+                        <div class="form-group">
+                                
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" autocomplete="off" placeholder="请输入登录账号" id="userName" name="username" value="">
+                                    
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                
+                            <div class="col-md-12">
+                                <input class="form-control" type="password" autocomplete="off" placeholder="请输入登录密码" name="password">
+                                    
+                            </div>
+                        </div>
+                        
+                  
+                        <div class="login-error">
+                            <p style="color: red;">
+                                
+                                    
+                            </p>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px">
+                            <div class="col-md-12">
+                                <input class="btn btn-lg btn-block" style="background: #F24137;color: #fff;font-size: 22px;" type="submit" id="submit" name="submit" value="登录"  value="登 录" />
+                            </div>
+                        <input name="token" value="{$_W['token']}" type="hidden" />
+                        </div>
+  
+                    </div>     
+                </form>                      
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+	function formcheck() {
+		if($('#remember:checked').length == 1) {
+			cookie.set('remember-username', $(':text[name="username"]').val());
+		} else {
+			cookie.del('remember-username');
+		}
+		return true;
+	}
+	$('#toggle').click(function() {
+		$('#imgverify').prop('src', '{php echo $_W['siteroot'].url("utility/code")}r='+Math.round(new Date().getTime()));
+		return false;
+	});
+</script>
+</html>

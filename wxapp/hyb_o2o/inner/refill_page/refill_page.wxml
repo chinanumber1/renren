@@ -1,0 +1,28 @@
+<view class="refill_box">
+    <view class="fs26 box_1">
+        <view>尊敬的：{{userInfo.u_name}}</view>
+        <view>当前会员等级：{{userInfo.huiyuan_name}}</view>
+        <view wx:if="{{userInfo.u_type!='0'}}">会员到期日期：{{userInfo.u_typeendtime}}</view>
+    </view>
+    <view class="titles fs30">会员充值/办理</view>
+    <view class="refill_item " wx:for="{{Huiyuan}}" wx:key="item">
+        <view class="df w100 jsb mb20 fs34 border_bot_2 p20">
+            <view class="df" style="width:60%">
+                <image class="h_thumb" src="{{item.h_thumb}}"></image>
+                <text class="fs28">{{item.h_name}}</text>
+            </view>
+            <view bindtap="refill" class="btn fs28" data-h_id="{{item.h_id}}">充值</view>
+        </view>
+        <view class="fs24 color_gray df" style="align-items: flex-start;margin:0 20rpx;">
+            <view class="fs28 color_gray mb10" style="padding-bottom:10rpx;margin-right:20rpx;">说明 </view>
+            <view>
+                <view class="mb10">1、办此会员支付金额为{{item.h_money}}元</view>
+                <view class="mb10">2、享受会员折扣{{item.h_zhekou}}折优惠</view>
+                <view class="mb10">3、办理此会员有效期为{{item.h_time}}天</view>
+                <view class="mb10">4、附赠{{item.h_song}}元</view>
+            </view>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}} "></template>

@@ -1,0 +1,106 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op=="display"}
+<div class="pull-right" >
+	<a href="{php echo $this->createWeburl('xiangmu_xq', array('op'=>'post'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加项目</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle" style="table-layout:fixed;">
+        <tr>
+            <td>排序</td>
+            <td>服务项目名称</td>
+            <td>服务项目详情名称</td>
+            <td>服务项目预约须知</td>
+            <td>服务项目详情内容</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td style="width:2%;">
+                {$item['xq_id']}
+            </td>
+            <td style="width:5%;">
+                {$item['x_name']}
+            </td>
+            <td style="width:5%;">
+                {$item['xq_title']}
+            </td>
+            <td style="width:35%;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">
+                {$item['xq_yuyuecontent']}
+            </td>
+            <td style="width:35%;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;">
+                {$item['xq_content']}
+            </td>
+            
+            <td style="width:15%;"" class="text-center">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('xiangmu_xq', array('xq_id' => $item['xq_id'], 'op' =>'post'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('xiangmu_xq', array('xq_id' => $item['xq_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $op=="post"}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加项目</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" id="x_type" name="x_type">服务项目名称</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="xq_xiangmu" id="xq_xiangmu" class="form-control">
+                        <option value="">--请选择--</option>
+                        {loop $type $item}
+                        <option value="{$item['x_id']}" {if $item['x_id']==$items["xq_xiangmu"]}selected{/if} >{$item['x_name']}</option>
+                        {/loop}
+                    </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">服务项目名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">服务项目详情名称</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">        
+                    <input type="text" name="xq_title" id="xq_title" value="{$items['xq_title']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">           
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">服务项目详情名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">项目预约须知</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">                   
+                   <!-- {php echo tpl_ueditor('xq_yuyuecontent', $items['xq_yuyuecontent']);} -->
+                   <textarea name="xq_yuyuecontent" id="xq_yuyuecontent" cols="110" rows="5">{$items['xq_yuyuecontent']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">项目预约须知</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">服务项目详情内容</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">                   
+                   {php echo tpl_ueditor('xq_content', $items['xq_content']);}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">服务项目详情内容</div>
+            </div>
+        
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}
+<!-- {template 'common/footer'} -->

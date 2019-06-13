@@ -1,0 +1,9 @@
+<view class="wrap">
+    <view class="item" wx:for="{{xmstyle}}" wx:for-item="fenlei" wx:key="message">
+        <view class="title">{{fenlei.xt_name}}</view>
+        <view class="child">
+            <view bindtap="choose" class="line_one wd100" data-f_name="{{fenlei.xt_name}}" data-xt_id="{{item.xt_id}}" data-xt_name="{{item.xt_name}}" wx:for="{{fenlei.erji}}" wx:key="child">{{item.xt_name}}</view>
+            <view wx:if="{{fenlei.erji.length==0}}">暂无数据</view>
+        </view>
+    </view>
+</view>

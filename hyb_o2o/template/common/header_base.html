@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>行业宝管理中心</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="shortcut icon" href="/addons/hyb_o2o/resouce/images/favicon.ico" />
+<link rel="icon" href="/addons/hyb_o2o/resouce/images/animated_favicon.gif" type="image/gif" />
+<link rel="stylesheet" type="text/css" href="/addons/hyb_o2o/resouce/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/addons/hyb_o2o/resouce/css/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/addons/hyb_o2o/resouce/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/addons/hyb_o2o/resouce/css/purebox.css" />
+<link rel="stylesheet" type="text/css" href="/addons/hyb_o2o/resouce/css/jquery-ui/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/addons/hyb_o2o/resouce/js/spectrum-master/spectrum.css" />
+<link rel="stylesheet" type="text/css" href="/addons/hyb_o2o/resouce/js/perfect-scrollbar/perfect-scrollbar.min.css" />
+<script type="text/javascript" src="/addons/hyb_o2o/resouce/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/addons/hyb_o2o/resouce/js/dsc_admin2.0.js"></script>
+<script type="text/javascript" src="/addons/hyb_o2o/style/js/mdialog.js"></script>
+<script type="text/javascript" src="/addons/hyb_o2o/style/js/zepto.min.js"></script>
+	<!-- <link rel="shortcut icon" href="{if !empty($_W['setting']['copyright']['icon'])}{$_W['attachurl']}{$_W['setting']['copyright']['icon']}{else}./resource/images/favicon.ico{/if}" /> -->
+	<!-- <link href="/addons/hyb_o2o/resouce/css/bootstrap.min.css?v=20170915" rel="stylesheet">
+	<link href="/addons/hyb_o2o/resouce/css/common.css?v=20170915" rel="stylesheet">
+	<link href="/addons/hyb_o2o/resouce/css/newcss.css" rel="stylesheet"> -->
+	<link href="./resource/css/bootstrap.min.css?v=20180115" rel="stylesheet">
+	<link href="./resource/css/common.css?v=20180115" rel="stylesheet">
+	<script type="text/javascript">
+	if(navigator.appName == 'Microsoft Internet Explorer'){
+		if(navigator.userAgent.indexOf("MSIE 5.0")>0 || navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0) {
+			alert('您使用的 IE 浏览器版本过低, 推荐使用 Chrome 浏览器或 IE8 及以上版本浏览器.');
+		}0
+	}
+	window.sysinfo = {
+		{if !empty($_W['uniacid'])}'uniacid': '{$_W['uniacid']}',{/if}
+		{if !empty($_W['acid'])}'acid': '{$_W['acid']}',{/if}
+		{if !empty($_W['openid'])}'openid': '{$_W['openid']}',{/if}
+		{if !empty($_W['uid'])}'uid': '{$_W['uid']}',{/if}
+		'isfounder': {if !empty($_W['isfounder'])}1{else}0{/if},
+		'family': '{IMS_FAMILY}',
+		'siteroot': '{$_W['siteroot']}',
+		'siteurl': '{$_W['siteurl']}',
+		'attachurl': '{$_W['attachurl']}',
+		'attachurl_local': '{$_W['attachurl_local']}',
+		'attachurl_remote': '{$_W['attachurl_remote']}',
+		'module' : {'url' : '{if defined('MODULE_URL')}{MODULE_URL}{/if}', 'name' : '{if defined('IN_MODULE')}{IN_MODULE}{/if}'},
+		'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'},
+		'account' : {php echo json_encode($_W['account'])},
+		'server' : {'php' : '{php echo phpversion()}'},
+	};
+	</script>
+	<script>var require = { urlArgs: 'v=20170915' };</script>
+	<script type="text/javascript" src="./resource/js/lib/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="./resource/js/lib/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./resource/js/app/util.js?v=20170915"></script>
+	<script type="text/javascript" src="./resource/js/app/common.min.js?v=20170915"></script>
+	<script type="text/javascript" src="./resource/js/require.js?v=20170915"></script>
+</head>

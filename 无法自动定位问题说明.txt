@@ -1,0 +1,22 @@
+首先源码没有问题
+
+请在系统设置--基本设置--把百度地图key--高德地图key--高德地图小程序key申请并填写好
+
+百度地图key申请小程序类型
+高德地图key申请web服务
+高德地图小程序key申请小程序类型
+
+然后在小程序后台需要添加地图的域名进去
+mp.weixin.qq.com
+左侧--开发--开发设置--服务器域名
+https://restapi.amap.com    高德地图
+https://apis.map.qq.com     腾讯地图（虽然这里没用到，添加下也不会怀孕）
+https://api.map.baidu.com  百度地图
+https://wx.qlogo.cn    生成海报很多模块需要添加此域名（添加下也不会怀孕）
+
+request合法域名socket合法域名uploadFile合法域名downloadFile合法域名
+
+都添加下不会怀孕
+
+
+小程序里面不显示图片请检查是否开了防盗链或者cdn

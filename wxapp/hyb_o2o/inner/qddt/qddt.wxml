@@ -1,0 +1,63 @@
+<view class="top">
+    <view class="choose_list df p20 fs28">
+        <view class="pick df">
+            <picker bindchange="bindfenlei" range="{{fenlei}}" value="{{index}}">
+                <view class="picker">
+                    <input disabled class="line_one" placeholder="分类" value="{{fenlei[index]}}"></input>
+                </view>
+            </picker>
+            <view class="sanjiao df">
+                <image src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+            </view>
+        </view>
+        <view class="pick df">
+            <picker bindchange="bindQuyu" range="{{quyu}}" value="{{index_two}}">
+                <view class="picker">
+                    <input disabled placeholder="区域" type="text" value="{{quyu[index_two]}}"></input>
+                </view>
+            </picker>
+            <view class="sanjiao df">
+                <image src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+            </view>
+        </view>
+        <view class="pick df">
+            <picker bindchange="bindjiage" range="{{jiage}}" value="{{index_three}}">
+                <view class="picker">
+                    <input disabled placeholder="价格" type="text" value="{{jiage[index_three]}}"></input>
+                </view>
+            </picker>
+            <view class="sanjiao df">
+                <image src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="order_list" wx:if="{{list!=''}}">
+        <view catchtap="lookdetail" class="item mb20" data-id="{{item.fa_id}}" wx:for="{{list}}" wx:key="item">
+            <view class="mid df p20">
+                <view class="img">
+                    <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+                </view>
+                <view class="m_r fs26 color333">
+                    <view class="fs30 mb20 line_one" style="width:60%">{{item.fa_fwname}} </view>
+                    <view class="mb10">{{item.fa_fwstyle1}}-{{item.fa_fwstyle2}}</view>
+                    <view>{{item.fa_fwaddress}}</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type!='上门估价'}}">预算: <text class="s_ok fs32">{{item.fa_fwmoney}}</text>元</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='上门估价'}}">上门估价</view>
+                </view>
+            </view>
+            <view catchtap="open_map" class="color999 fs28 p20 border_bot_2" data-index="{{index}}">
+          服务地址: <text class="color333">{{item.fa_fwaddresss}}</text>
+            </view>
+            <view class="df p20" style="justify-content: space-between;">
+                <view class="fs28" style="color:#333333">{{item.fa_time}} </view>
+                <view catchtap="qiang" class="qiang" data-fa_id="{{item.fa_id}}" data-fa_openid="{{item.fa_openid}}" data-id="{{index}}">立即抢单</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{list.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

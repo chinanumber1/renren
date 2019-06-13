@@ -1,0 +1,105 @@
+<view>
+    <view class="top_one">
+        <view class="top_t fs28 df">
+            <view class="img">
+                <image src="{{userInfo.u_thumb}}"></image>
+                <image class="vip" src="{{userInfo.huiyuan_thumb}}" wx:if="{{userInfo.u_type!='0'}}"></image>
+            </view>
+            <view class="t_right">
+                <view class="nickname fs30 fw">{{userInfo.u_name}}</view>
+                <view class="df">
+                    <view class="df fs22" style="margin-right:30rpx;">
+                        <text style="color:#999999">余额：</text> ￥{{userInfo.u_money}}
+            <view bindtap="tixian" class="tx_btn" data-typs="yh">提现</view>
+                    </view>
+                    <view bindtap="link_sc" class="df fs22">
+                        <text style="color:#999999">积分：</text>{{userInfo.u_jifen}}</view>
+                </view>
+                <view bindtap="refill" class="refill df">
+                    <image src="../resource/images/money.png"></image>充值
+          <image class="right_icon" src="../resource/images/right_arr.png"></image>
+                </view>
+                <view bindtap="bangdingtels" class="bdphone">
+                    <image src="../resource/images/{{userInfo.bangding=='true'?'tel_icon2':'tel_icon'}}.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list list_new">
+        <view class="list_1 mb20">
+            <view class="l_i_title fs28 border_bot_2">常用功能</view>
+            <view class="list_box df">
+                <navigator url="{{userInfo.u_fenxiao!='0'&&userInfo.f_type=='1'?'/hyb_o2o/distribution/yaoqing':'../inner/apply_distributor/apply_distributor'}}" wx:if="{{base.fx}}">
+                    <view class="item">
+                        <view class="left">
+                            <image class="icon" src="../resource/images/m_fx.png"></image>
+                        </view>
+                        <view class="right" wx:if="{{userInfo.f_type=='1'}}">
+              分销商详情
+            </view>
+                        <view class="right" wx:if="{{userInfo.f_type=='0'}}">
+              申请分销商
+            </view>
+                    </view>
+                </navigator>
+                <navigator url="{{item.url}}" wx:for="{{y_always}}" wx:key="always">
+                    <view class="item">
+                        <view class="left">
+                            <image class="icon" src="{{item.icon}}"></image>
+                        </view>
+                        <view class="right">
+              {{item.name}}
+            </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <view class="list_1 mb20">
+            <view class="l_i_title fs28 border_bot_2">所有功能</view>
+            <view class="list_box df">
+                <navigator url="{{item.url}}" wx:if="{{index<mess.length-2}}" wx:for="{{mess}}" wx:key="always">
+                    <view class="item">
+                        <view class="left">
+                            <image class="icon2" src="{{item.icon}}"></image>
+                        </view>
+                        <view class="right">
+              {{item.name}}
+            </view>
+                    </view>
+                </navigator>
+                <view bindtap="look_bot4" class="item" data-tel="{{base.telphone}}" style="width:25%" wx:if="{{index==mess.length-2}}" wx:for="{{mess}}">
+                    <view class="left">
+                        <image class="icon2" src="{{item.icon}}"></image>
+                    </view>
+                    <view class="right">
+            {{item.name}}
+          </view>
+                </view>
+                <button class="contact item " openType="contact" style="width:25%" wx:if="{{index==mess.length-1}}" wx:for="{{mess}}">
+                    <view class="left">
+                        <image class="icon2" src="{{item.icon}}"></image>
+                    </view>
+                    <view class="right">
+            {{item.name}}
+          </view>
+                </button>
+            </view>
+        </view>
+        <view class="list_1 ">
+            <view class="l_i_title fs28 border_bot_2">后台入口</view>
+            <view class="list_box df">
+                <view bindtap="switch_ht" class="item" data-index="{{index}}" style="width:25%;" wx:for="{{h_mess}}" wx:key="always">
+                    <view class="left">
+                        <image class="icon" src="{{item.icon}}"></image>
+                    </view>
+                    <view class="right">
+            {{item.name}}
+          </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>
+<footer footerindex="3"></footer>

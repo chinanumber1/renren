@@ -1,0 +1,80 @@
+@import "../../__wuBaseWxss__/5.wxss";
+
+@import "../template/template.wxss";
+
+page {
+    background: #F3F3F3;
+    color: #666;
+}
+
+.go_index {
+    width: 90%;
+    padding: 20rpx 0;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 8%;
+    background: #EF4A51;
+    color: #fff;
+    text-align: center;
+}
+
+.dian {
+    width: 10rpx;
+    height: 10rpx;
+    background: #94711C;
+    margin-right: 20rpx;
+    border-radius: 50%;
+}
+
+.order_top {
+    background: #F3E8B9;
+    margin-bottom: 20rpx;
+    padding: 20rpx 20rpx;
+    color: #94711C;
+    border-radius: 0rpx;
+}
+
+.order_item {
+    border: 2rpx solid #f3f3f3;
+    border-left: none;
+    border-right: none;
+    font-size: 28rpx;
+    background: #fff;
+    margin: 30rpx;
+}
+
+.order_item .title {
+    margin: 0 20rpx;
+    padding: 20rpx 0;
+}
+
+.order_item .title text {
+    float: right;
+}
+
+.order_item .bot {
+    justify-content: space-around;
+    text-align: center;
+    padding: 20rpx 0;
+}
+
+.xiadan {
+    color: #EF4A50;
+}
+
+.color_blue {
+    color: #00CBBA;
+}
+
+.icon {
+    width: 70rpx;
+    height: 70rpx;
+    margin: 0 auto;
+    margin-bottom: 10rpx;
+}
+
+.a_right {
+    width: 40rpx;
+    height: 40rpx;
+}

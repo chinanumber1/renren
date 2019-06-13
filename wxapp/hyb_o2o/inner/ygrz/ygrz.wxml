@@ -1,0 +1,163 @@
+<import src="/hyb_o2o/wxParse/wxParse.wxml"></import>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+    <view class="list">
+        <view class="item border_bot_2 df jsb" wx:if="{{come!='js'}}">
+            <view class="title">选择所属商家</view>
+            <view class="input fs28">
+                <picker bindchange="bindfenlei_one" range="{{shangjia}}" value="{{index_one}}">
+                    <view class="picker">
+                        <input disabled name="merchant" placeholder="请选择所属商家" type="text" value="{{shangjia[index_one]}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="item border_bot_2 df jsb">
+            <view class="title">姓名</view>
+            <view class="input fs28">
+                <input name="name" placeholder="点击填写您的姓名" type="text" value="{{yuangong.y_name}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 df jsb">
+            <view class="title">性别</view>
+            <view class="input fs28">
+                <radio-group bindchange="radioChange" class="radio-group">
+                    <label class="radio" wx:for="{{gender}}" wx:key="item">
+                        <input hidden="true" name="gender" value="{{gender_choose}}"></input>
+                        <radio checked="{{item.checked}}" class="radio_item" value="{{item.name}}"></radio>{{item.name}}
+          </label>
+                </radio-group>
+            </view>
+        </view>
+        <view class="item border_bot_2 df jsb">
+            <view class="title">年龄</view>
+            <view class="input fs28">
+                <input maxlength="2" name="age" placeholder="请输入年龄" type="number" value="{{yuangong.y_age}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 df jsb">
+            <view class="title">技能</view>
+            <view bindtap="confirmClick" class="input fs28" wx:if="{{jineng.length==0}}">
+                <input disabled name="jineng" placeholder="请选择技能"></input>
+            </view>
+            <view bindtap="confirmClick" class="input df line_one fs28" style="justify-content: flex-end" wx:else>
+                <view class="school-name fs28" data-j_id="{{item}}" wx:for="{{jineng}}">
+         {{item}}
+        </view>
+            </view>
+        </view>
+        <view class="item border_bot_2 df jsb" wx:if="{{region.length==1}}">
+            <view class="input fs28">
+                <picker bindchange="bindRegionChange" range="{{region}}" value="{{index_r}}">
+                    <view class="picker df">
+                        <input disabled="disabled" placeholder="请选择服务地区" type="text" value="{{region[index_r]}}"></input>
+                    </view>
+                </picker>
+                <input hidden="true" name="address1" value="{{region[index_r]}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 " wx:if="{{region.length>1}}">
+            <view class="title">选择接单服务地区(最多选两个)</view>
+            <view class="df">
+                <view class="input fs28" style="width:50%;text-align:center;">
+                    <picker bindchange="bindRegionChange" range="{{region}}" value="{{index_r}}">
+                        <view class="picker df">
+                            <input disabled="disabled" placeholder="请选择服务地区" type="text" value="{{region[index_r]}}"></input>
+                        </view>
+                    </picker>
+                    <input hidden="true" name="address1" value="{{region[index_r]}}"></input>
+                </view>
+                <view class="input fs28" style="width:50%;text-align:center;">
+                    <picker bindchange="bindRegionChange2" range="{{region}}" value="{{index_r2}}">
+                        <view class="picker df">
+                            <input disabled="disabled" placeholder="请选择服务地区" type="text" value="{{region[index_r2]}}"></input>
+                        </view>
+                    </picker>
+                    <input hidden="true" name="address2" value="{{region[index_r2]}}"></input>
+                </view>
+            </view>
+        </view>
+        <view class="item border_bot_2 df jsb">
+            <view class="title">接单公里数</view>
+            <view class="input fs28">
+                <picker bindchange="bindfenlei_two" range="{{fenlei_two}}" value="{{index_two}}">
+                    <view class="picker">
+                        <input disabled name="distance" placeholder="点击选择您的接单公里数" type="text" value="{{fenlei_two[index_two]}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28 df jsb">
+            <view class="title">联系电话</view>
+            <view class="input">
+                <input maxlength="11" name="telphone" placeholder="请填写您的联系电话" type="number" value="{{yuangong.y_telphone}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28">
+            <view class="title mb20">上传身份证</view>
+            <view class="input df">
+                <view bindtap="uploadImg1" class="uploadImg df">
+                    <image mode="aspectFit" src="{{src1}}" wx:if="{{src1}}"></image>
+                    <input hidden="true" name="IDcard1" value="{{src1}}"></input>
+                    <image catchtap="delPic" class="del_icon" src="/hyb_o2o/resource/images/del.png" wx:if="{{src1}}"></image>
+                    <text wx:if="{{!src1}}">正面</text>
+                </view>
+                <view bindtap="uploadImg2" class="uploadImg df">
+                    <image mode="aspectFit" src="{{src2}}" wx:if="{{src2}}"></image>
+                    <input hidden="true" name="IDcard2" value="{{src2}}"></input>
+                    <image catchtap="delPic2" class="del_icon" src="/hyb_o2o/resource/images/del.png" wx:if="{{src2}}"></image>
+                    <text wx:if="{{!src2}}">反面</text>
+                </view>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28">
+            <view class="title mb20">上传资格证</view>
+            <view class="input df">
+                <view bindtap="uploadImg3" class="uploadImg df">
+                    <image mode="aspectFit" src="{{zge}}" wx:if="{{zge}}"></image>
+                    <input hidden="true" name="zgeimg" value="{{zge}}"></input>
+                    <image catchtap="delPic3" class="del_icon" src="/hyb_o2o/resource/images/del.png" wx:if="{{zge}}"></image>
+                    <text wx:if="{{!zge}}">资格证</text>
+                </view>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28 df jsb" wx:if="{{typs=='发布'&&rz.length>0&&come=='js'}}">
+            <view class="title">选择入驻时长</view>
+            <view class="tr colorA0A0A0">
+                <picker bindchange="bindPickerChange_rz" range="{{array}}" value="{{bzjindex}}">
+                    <view class="picker">
+                        <input disabled name="rz_name" type="text" value="{{rz[bzjindex].r_content}}"></input>
+                        <input disabled hidden name="rz_money" type="text" value="{{rz[bzjindex].r_money}}"></input>
+                        <input disabled hidden name="rz_id" type="text" value="{{rz[bzjindex].r_id}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="df fs28 pq20">
+            <icon class="icons" size="20" type="{{choose?'success_no_circle':''}}"></icon>我已阅读并同意<text bindtap="lookck" style="color:#EF4A50">《入驻申请协议》</text>
+        </view>
+    </view>
+    <input hidden="true" name="openid" value="{{openid}}"></input>
+    <input hidden="true" name="typs" value="{{typs}}"></input>
+    <button class="submit" formType="submit" size="mini">提交审核</button>
+</form>
+<view class="zhezhao" hidden="{{fwxy}}"></view>
+<view class="kcrzxy" hidden="{{fwxy}}">
+    <view class="kcrzxyhd">《入驻申请协议》</view>
+    <scroll-view scrollY class="kcrzxybd" style="height: 600rpx;">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+    </scroll-view>
+    <view bindtap="queren" class="queren">确定</view>
+</view>
+<form bindsubmit="formSubmit_jn">
+    <view class="jineng" wx:if="{{jn}}">
+        <scroll-view scrollY class="j_item">
+            <view bindtap="choose_jineng" class="item border_bot_2 df fs28 jsb p20" data-index="{{index}}" wx:for="{{jineng_list}}" wx:key="item">{{item.name}}
+          <view class="right">
+                    <icon size="15" type="{{item.sel?'success_no_circle':''}}"></icon>
+                </view>
+            </view>
+        </scroll-view>
+        <button class="yes" formType="submit">保存并关闭</button>
+    </view>
+</form>

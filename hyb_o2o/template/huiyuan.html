@@ -1,0 +1,397 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<div>
+    <div style="margin-top: 20px;">
+        <span style="margin-left: 20px;">根据会员等级筛选:</span>
+        <a href="{php echo $this->createWeburl('huiyuan', array('type' =>0,'op' =>'display'))}" class="btn btn-default">全部</a>
+        {loop $jibies $jb}
+        <a href="{php echo $this->createWeburl('huiyuan', array('type' =>$jb['id'],'op' =>'display'))}" class="btn btn-default">{$jb['j_name']}</a>
+        {/loop}
+    </div>
+</div>
+
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <input type="text" class="form-control " id="keyword"  name="keyword" placeholder="请输入会员名" style="width:80%; display:block; float: left;" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="搜索" style="margin-left:5%;float: left;" />
+        </div>
+    </div>
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>会员名称</td>
+            <td>openid</td>
+            <td>会员头像</td>
+            <!-- <td>联系方式</td>
+            <td>会员地址</td> -->
+            <td>会员等级</td>
+            <td>消费总金额</td>
+            <td>消费余额</td>
+            <td>订单数</td>
+            <td>是否入驻</td>
+            <td>是否为分销商</td>
+            <td>充值记录</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['u_id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>  
+            <td>
+                {$item['openid']}
+            </td>        
+            <td>
+                <img src="{media $item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <!-- <td>
+                {$item['order']['o_telphone']}
+            </td>
+            <td>
+                {$item['order']['o_address']}
+            </td> -->
+            <td>
+                {if $item['u_type']==0}普通用户{/if}
+                {if $item['u_type']!=0}{$item['u_types']}{/if}
+            </td>
+            <td>
+                {if $item['total']['total']==null}0{/if}{$item['total']['total']}元
+            </td>
+            <td>
+                {$item['u_money']}元
+            </td>
+            <td>
+                {$item['num']['num']}
+            </td>
+           <td>
+                {if $item['u_ruzhu']==0}否{/if}
+                {if $item['u_ruzhu']!=0}是{/if}
+            </td>
+            <td>
+                {if $item['u_fenxiao']==0}否{/if}
+                {if $item['u_fenxiao']!=0}是{/if}
+            </td>
+            <td>
+                <a class="btn btn-default btn-sm"  href="{php echo $this->createWeburl('user', array('openid' => $item['openid'], 'op' => 'post'))}">查看</a>
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('huiyuan', array('openid' => $item['openid'], 'op' => 'look'))}">查看订单</a>
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('huiyuan', array('openid' => $item['openid'], 'op' => 'saves'))}">编辑信息</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('huiyuan', array('u_id' => $item['u_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{$pager}
+{/if}
+{if $op == 'post'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>充值金额</td>
+            <td>充值时间</td>
+            <td>支付方式</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['money']}
+            </td>  
+            <td>
+                {$item['time']}
+            </td>        
+            <td>
+                微信支付
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('huiyuan', array('id' => $item['id'], 'op' => 'deletes'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $op == 'look'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>订单号</td>
+            <td>下单人</td>
+            <td>下单人手机号</td>
+            <td>下单人人地址</td>
+            <td>服务方式</td>
+            <td>预约时间</td>
+            <td>服务项目</td>
+            <td>服务者</td>
+            <td>订单金额</td>
+            <!-- <td>是否核销</td> -->
+            <td>付款状态</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['o_id']}
+            </td>
+            <td>
+                {$item['ordersn']}
+            </td>
+            <td>
+               {$item['o_name']}
+            </td>
+            <td>
+                {$item['o_telphone']}
+            </td>
+            <td>
+                {$item['o_address']}
+            </td>
+            <td>
+                {$item['o_sx']}
+            </td>
+            <td>
+               {$item['o_yy_riqi']} {$item['o_yy_time']}
+            </td>
+            <td>
+                {$item['o_xiangmu']}
+            </td>
+            <td>
+                {$item['o_fw_name']}
+            </td>
+            <td>
+                {$item['o_count_money']}
+            </td>
+           <!--  <td>
+                {if $item['o_status']==0}
+                <a class="btn btn-default btn-sm" href="#" >未核销</a>
+                {/if}
+                {if $item['o_status']==1}
+                <a class="btn btn-default btn-sm" href="#" >已核销 </a>
+                {/if}
+            </td> -->
+            <td>
+                {if $item['o_type']=="未支付"}
+                <a class="btn btn-default btn-sm" href="#" >未支付</a>
+                {/if}
+                {if $item['o_type']=="已付款"}
+                <a class="btn btn-default btn-sm" href="#" >已付款 <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('order', array('o_id' => $item['o_id'], 'op' =>'save'))}" >是否完成[完成请点击]</a></a>
+                {/if}
+                {if $item['o_type']=="已完成"}
+                <a class="btn btn-default btn-sm" href="#" >已完成</a>
+                {/if}
+                {if $item['o_type']=="已取消"}
+                <a class="btn btn-default btn-sm" href="#" >已取消</a>
+                {/if}
+            </td>
+            <td class="text-center">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('huiyuan', array('o_id' => $item['o_id'], 'op' =>'looks'))}" >查看</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWebUrl('huiyuan', array('o_id' => $item['o_id'], 'op' => 'deletess'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+        <!-- <tr>{$pager}</tr> -->
+    </table>
+</form>
+{$pager}
+{/if}
+{if $op=="looks"}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">订单信息</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">订单号</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['ordersn']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单人</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单人手机号</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_telphone']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单人地址</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_address']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">下单时间</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_xdtime']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务方式</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_sx']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">预约时间</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_yy_time']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务项目</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_xiangmu']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务时长</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['o_count_time']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务项目图片</label>
+                <div class="form-controls col-sm-5">
+                    <img src="{media $item['o_xiangmu_thumb']}" width="100px;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务者</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['o_fw_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">订单金额</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['o_count_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">是否核销</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{if $item['o_status']==0}未核销{/if} {if $item['o_status']==1}已核销 {/if}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div> 
+                
+            </div> -->
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">订单状态</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['o_type']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">备注</label>
+                <div class="form-controls col-sm-5">
+                    <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty" >{$item['o_beizhu']}</textarea>
+                </div>
+            </div>
+            
+</form>
+{/if}
+
+{if $op == "saves"}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">会员信息</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">会员名称</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="u_name" id="u_name" value="{$items['u_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">会员名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">会员头像</label>
+                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('u_thumb', $items['u_thumb'])}
+                    <!-- <img src="{$items['j_thumb']}" width="300px" alt="">  -->
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">会员头像</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">会员等级</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select class="form-control" name="u_type">
+                    
+                    {loop $jibie $j}
+                        <option value="{$j['id']}" {if $items['u_type'] == $j['id']}selected="selected"{/if}>{$j['j_name']}</option>
+                    {/loop}
+                    <option value="0" {if $items['u_type'] == "0"}selected="selected"{/if}>普通用户</option>
+                </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">会员等级</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">会员余额</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="u_money" id="u_money" value="{$items['u_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">会员余额</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">会员是否入驻商家</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <label class="select_one">
+                        <input type="radio" name="u_ruzhu"  value="1" {if $items['u_ruzhu'] !=0} checked{/if} />是
+                        <input type="radio" name="u_ruzhu"  value="0" {if $items['u_ruzhu'] == '0'} checked{/if} />否
+                    </label>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">会员是否入驻商家</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">会员是否成为分销商</label>
+                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <label class="select_one">
+                        <input type="radio" name="u_fenxiao"  value="{$items['u_fenxiao']}" {if $items['u_fenxiao'] != '0'} checked{/if} />是
+                        <input type="radio" name="u_fenxiao"  value="0" {if $items['u_fenxiao'] == '0'} checked{/if} />否
+                    </label>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">会员是否成为分销商</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}

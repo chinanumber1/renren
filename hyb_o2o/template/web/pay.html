@@ -1,0 +1,93 @@
+﻿{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .ygmargin{margin-top: 10px;color: #999;}
+    input[type="radio"] + label::before {
+        content: "\a0"; /*不换行空格*/
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 16px;
+        width: 1em;
+        height: 1em;
+        margin-right: .4em;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        text-indent: .15em;
+        line-height: 1; 
+    }
+    input[type="radio"]:checked + label::before {
+        background-color: #44ABF7;
+        background-clip: content-box;
+        padding: .1em;
+        border: 2px solid #44ABF7;
+    }
+    input[type="radio"] {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+    }
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li class="active"><a href="javascript:void(0);">提现配置</a></li>
+</ul>
+ <div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="invitative">
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                系统设置&nbsp;>&nbsp;支付配置
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">提现手续费：</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="shouxufei" value="{$item['shouxufei']}"  class="form-control" />
+                         <div style="color: #999;margin-top: 10px;">*请输入提现手续费（输入整数）</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">小程序支付apiclient_cert.pem{if $item['apiclient_cert']}<font color="red">(已上传)</font>{/if}：</label>
+                    <div class="col-sm-9">
+                        <!-- <p class="form-control-static">
+                          <textarea name="apiclient_cert" class="form-control" placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" cols="30" rows="7"></textarea>
+                        </p>
+                        <div style="color: #999;">*使用文本编辑器打开apiclient_cert.pem文件，将文件的全部内容复制进来</div> -->
+                        <input type='file' name="upfile" value="{$item[upfile]}">{$item[upfile]}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">小程序支付apiclient_key.pem{if $item['apiclient_key']}<font color="red">(已上传)</font>{/if}：</label>
+                    <div class="col-sm-9">
+                        <!-- <p class="form-control-static">
+                                 <textarea name="apiclient_key" class="form-control" placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" cols="30" rows="7"></textarea>
+                        </p>
+                        <div style="color: #999;">*使用文本编辑器打开apiclient_key.pem文件，将文件的全部内容复制进来</div> -->
+                        <input type='file' name="keypem" value="{$item[upfile]}">{$item[upfile]}
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">IP地址：</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="ip" value="{if $item['ip']}******{/if}"  class="form-control" />
+                         <div style="color: #999;margin-top: 10px;">*请输入当前站点的服务器ip地址</div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" name="submit" value="保存设置" class="btn col-lg-3" style="color: white;background-color: #44ABF7;" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+            <input type="hidden" name="id" value="{$item['id']}"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        // $("#frame-14").addClass("in");
+        $("#frame-14").show();
+        $("#yframe-14").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

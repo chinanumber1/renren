@@ -1,0 +1,32 @@
+@import "../../../../__wuBaseWxss__/5.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.top {
+    background: #1FD1D5;
+    background: -webkit-linear-gradient(left,#23e5b1,#20ccd8);
+    padding: 20rpx 0;
+    color: #fff;
+}
+
+.title {
+    padding-top: 20rpx;
+}
+
+.input_box {
+    padding: 0 20rpx;
+    background: #fff;
+}
+
+.right {
+    float: right;
+    color: #FF7272;
+}
+
+.btn {
+    margin: 20rpx;
+    background: #02CCBA;
+    color: #fff;
+}

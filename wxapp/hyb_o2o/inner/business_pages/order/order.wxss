@@ -1,0 +1,74 @@
+@import "../../../../__wuBaseWxss__/5.wxss";
+
+@import "../../../template/template.wxss";
+
+page {
+    background: #F7F7F7;
+}
+
+.title {
+    background: #fff;
+    padding: 0 30rpx;
+    justify-content: space-around;
+}
+
+.title_item {
+    padding: 20rpx 40rpx;
+    border-bottom: 2rpx solid #fff;
+}
+
+.title .sel {
+    color: #02CCBA;
+    border-bottom: 2rpx solid #02CCBA;
+}
+
+.list {
+}
+
+.right_text {
+    color: #03cbba;
+    float: right;
+}
+
+.list_item {
+    background: #fff;
+}
+
+.list_item .title {
+    padding: 20rpx;
+    justify-content: space-between;
+}
+
+.list_item .business_icon {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.list_item .mid {
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.list_item .img {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+}
+
+.list_item .bot {
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.bot_btn {
+    padding: 8rpx 20rpx;
+    border: 2rpx solid #999999;
+    border-radius: 10rpx;
+    margin-left: 20rpx;
+    color: #555555;
+}
+
+.bot_btn.se {
+    border: 2rpx solid #03cbba;
+    color: #03cbba;
+}

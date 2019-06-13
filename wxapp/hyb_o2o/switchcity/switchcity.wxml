@@ -1,0 +1,34 @@
+<scroll-view bindtap="confirmClick" scrollIntoView="{{toView}}" scrollY="true" style="position:relative;height:1334rpx;">
+    <view class="current-city">
+        <view class="bg-color">
+            <text>当前城市</text>
+        </view>
+        <view class="city-con clearfix">
+            <text class="city-border hover" data-a_id="{{currentCity=='定位中...'?' ':currentCity}}">{{currentCity}}</text>
+        </view>
+    </view>
+    <view class="hot-city">
+        <view class="bg-color">
+            <text>热门城市</text>
+        </view>
+        <view class="city-con clearfix">
+            <text class="city-border" data-a_id="{{item.name}}" wx:for="{{info}}">{{item.name}}</text>
+        </view>
+    </view>
+    <view class="city-letter">
+        <view class="bg-color">
+            <text>城市字母</text>
+        </view>
+        <view class="city-con clearfix">
+            <text bindtap="anchorClick" class="city-letter-con" data-a_id="{{item}}" wx:for="{{letterArr}}" wx:key="letter">{{item}}</text>
+        </view>
+    </view>
+    <view class="letter-city" id="{{item.initial}}" wx:for="{{city1}}" wx:key="city">
+        <view class="bg-color">
+            <text>{{item.initial}}</text>
+        </view>
+        <view class="city-con clearfix">
+            <text class="city-border" data-a_id="{{item.city}}" wx:for="{{item.cityInfo}}" wx:key="city1">{{item.city}}</text>
+        </view>
+    </view>
+</scroll-view>

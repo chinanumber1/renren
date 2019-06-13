@@ -1,0 +1,55 @@
+page {
+    position: relative;
+    height: 100%;
+}
+
+.current-city {
+    width: 750rpx;
+}
+
+.city-letter-con {
+    display: inline-block;
+    width: 65rpx;
+    height: 60rpx;
+    font-size: 30rpx;
+    text-align: center;
+    color: #ff842a;
+}
+
+.bg-color {
+    width: 100%;
+    height: 66rpx;
+    line-height: 66rpx;
+    font-size: 22rpx;
+    background-color: #f7f7f7;
+}
+
+text {
+    margin: 8rpx 30rpx 8rpx 30rpx;
+}
+
+.city-con {
+    font-size: 26rpx;
+    border-top: 2rpx solid #d8d8d8;
+    border-bottom: 2rpx solid #d8d8d8;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}
+
+.city-border {
+    display: inline-block;
+    width: 186rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    border: 2rpx solid #f7f7f7;
+    border-radius: 10rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.city-border.hover {
+    border-color: #ff842a;
+    color: #ff842a;
+}

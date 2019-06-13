@@ -1,0 +1,59 @@
+<import src="/hyb_o2o/wxParse/wxParse.wxml"></import>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="swiper2" data="{{swiper:swiper}}"></template>
+<view class="top border_bot_20">
+    <view class="fs30 mb20 color333">{{shangpingxq.g_name}}</view>
+    <view class="color_pink fs24 mb10">￥ <text class="fw fs32">{{shangpingxq.g_jiage}}</text>
+    </view>
+    <view class="df fs26 color_gray">
+        <text wx:if="{{shangpingxq.g_baoyou==1}}">包邮</text>
+        <text wx:if="{{shangpingxq.g_baoyou==0}}">快递：￥{{shangpingxq.g_kuaidi}}</text>
+        <text style="margin-left:30rpx;">销量：{{shangpingxq.g_xiaoliang}}</text>
+    </view>
+</view>
+<view class="bottom">
+    <view class="bot_title df border_bot_2 fs30 color#333">
+        <text bindtap="switch_tab" class="{{currentTab==0?'on':''}}" data-index="0">商品介绍</text>
+        <text bindtap="switch_tab" class="{{currentTab==1?'on':''}}" data-index="1">客户评价</text>
+    </view>
+</view>
+<view class="bot_info fs26 color_gray" style="padding:20rpx ;" wx:if="{{currentTab==0}}">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+</view>
+<view class="bot_info fs26 color_gray" style="text-align:center;padding-bottom:30rpx;" wx:if="{{currentTab==0&&xmxq.x_content==''}}">暂无介绍</view>
+<view class="bot_info " wx:if="{{currentTab==1}}">
+    <view class="noadd" style="padding-bottom:30rpx;" wx:if="{{shangpingxq.pingjia.length==0}}">
+        <image mode="aspectFit" src="../../resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无评价</view>
+    </view>
+    <view class="pingjia_item border_bot_2" wx:for="{{shangpingxq.pingjia}}" wx:key="ite">
+        <view class="df jsb" style="width:100%">
+            <view class="df" style="width:70%;">
+                <view class="img">
+                    <image src="{{item.p_thumb}}"></image>
+                </view>
+                <view class="df">
+                    <view class="fs28 line_one color333" style="width:42%;">{{item.p_name}}</view>
+                    <view class="df" style="margin-left:10rpx;">
+                        <image class="star" src="../../resource/images/star.png" wx:for="{{item.p_fenshu-0}}" wx:key="item"></image>
+                        <image class="star" src="../../resource/images/star1.png" wx:for="{{5-item.p_fenshu}}" wx:key="item1"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="fs20" style="color:#868686">{{item.p_time}}</view>
+        </view>
+        <view class="fs30 content color666">{{item.p_content}}</view>
+        <view class="pic_list" wx:if="{{item.p_pic.length!=[]}}">
+            <image bindtap="previewImage" class="p_pic" data-inde="{{index}}" data-index="{{Index}}" data-list="{{item.p_pic}}" mode="aspectFit" src="{{Item}}" wx:for="{{item.p_pic}}" wx:for-index="Index" wx:for-item="Item" wx:key="pic"></image>
+        </view>
+        <view class="reply fs26" wx:if="{{item.p_huifu!=null}}">
+            <view class="mb20" style="position:relative;z-index:5;">店家回复：{{item.p_huifu}}</view>
+            <view class="fs20 tr">{{item.p_htime}}</view>
+        </view>
+    </view>
+</view>
+<view class="btn">
+    <view bindtap="look_detail" class="buy_btn" data-g_id="{{shangpingxq.g_id}}">立即购买</view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

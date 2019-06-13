@@ -1,0 +1,606 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+.imgList {
+    flex-wrap: wrap;
+}
+
+.imgList image {
+    width: 30%;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.m_box {
+    background: #fff;
+    width: 70%;
+    padding: 20rpx 0;
+    padding-bottom: 10rpx;
+}
+
+.border_top_2 {
+    border-top: 2rpx solid #f3f3f3;
+}
+
+.m_btn {
+    background: #fff;
+    border: none;
+    color: #EC6464;
+    line-height: 2em;
+}
+
+.m_btn::after {
+    border: none;
+    width: 0;
+    height: 0;
+}
+
+page {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.top {
+    background: #EF4A50;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 28rpx;
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    color: #fff;
+}
+
+#banner {
+    padding-top: 120rpx;
+}
+
+.city {
+    width: 68%;
+}
+
+.top .top_inner {
+    width: 100%;
+    margin: 0 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top .location {
+    width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 15rpx 20rpx;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50rpx;
+}
+
+.loca_icon {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.loca_icons {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}
+
+.location>image {
+    width: 14rpx;
+    height: 8rpx;
+    vertical-align: middle;
+    margin-left: 12rpx;
+}
+
+.top .search_input {
+    width: 66%;
+    justify-content: space-between;
+    padding: 10rpx 20rpx;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50rpx;
+    padding-top: 18rpx;
+}
+
+.top .search_input input {
+    color: #fff;
+    width: 80%;
+    font-size: 24rpx;
+}
+
+.top .sm_icon {
+    width: 50rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+}
+
+.top .search_input .ss_btn[plain] {
+    line-height: 0;
+    border: none;
+    padding: 0 40rpx;
+}
+
+.top .search_input .ss_btn image {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.tou_title {
+    width: 10%;
+    border-right: 4rpx solid #EF4A50;
+    margin-left: 20rpx;
+    padding: 0 10rpx;
+}
+
+.tou_title image {
+    width: 55rpx;
+    height: 45rpx;
+}
+
+.toutiao {
+    width: 90%;
+    height: 50rpx;
+}
+
+.disib {
+    display: inline-block;
+}
+
+.tou_label {
+    padding: 0rpx 10rpx;
+    border: 2rpx solid #EF4A50;
+    color: #EF4A50;
+    border-radius: 10rpx;
+    margin: 0 20rpx;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 8;
+    display: flex;
+    background: rgba(0,0,0,0.5);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.close_icon {
+    width: 50rpx;
+    height: 50rpx;
+    margin-top: 40rpx;
+}
+
+.m_swiper {
+    width: 60%;
+    height: 540rpx;
+}
+
+.wx-swiper-dots {
+    margin-bottom: 40rpx;
+}
+
+.nav {
+    flex-wrap: wrap;
+    font-size: 26rpx;
+    padding: 10rpx;
+    background: #fff;
+    width: 92%;
+    margin: 0 auto;
+    position: relative;
+    top: -50rpx;
+    border-radius: 10rpx;
+}
+
+.nav .nav_item {
+    width: 20%;
+    text-align: center;
+    margin: 20rpx 0;
+}
+
+.nav .nav_item .nav_icon {
+    width: 75rpx;
+    height: 75rpx;
+    margin: 0 auto;
+    margin-bottom: 15rpx;
+}
+
+.recomm_icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+}
+
+.a_right {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.list {
+    background: #fff;
+}
+
+.list_title {
+    padding: 20rpx;
+    position: relative;
+    background: #fff;
+    font-size: 26rpx;
+    color: #666;
+}
+
+.goods_list {
+    padding: 0 10rpx;
+    flex-wrap: wrap;
+}
+
+.goods_item {
+    padding: 0 10rpx;
+    box-sizing: border-box;
+}
+
+.goods_item .img {
+    width: 220rpx;
+    height: 220rpx;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.goods_item .baoyou_label {
+    color: #fff;
+    padding: 0 10rpx;
+    background: #EF4A50;
+    font-size: 22rpx;
+}
+
+.star {
+    width: 30rpx;
+    height: 25rpx;
+    margin-right: 5rpx;
+}
+
+.t_s_icon {
+    width: 43rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+}
+
+.tel {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.list_item {
+    padding: 20rpx 20rpx;
+    border-bottom: 10rpx solid #f3f3f3;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.list_item .img {
+    width: 200rpx;
+    height: 200rpx;
+    margin-right: 20rpx;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.zhichi.types {
+    color: #FFCE89;
+    border-color: #FFCE89;
+}
+
+.list_item .intro {
+    width: 65%;
+    position: relative;
+    padding: 0 10rpx;
+    height: 200rpx;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list_item .intro>view {
+    width: 100%;
+}
+
+.business_icon {
+    width: 40rpx;
+    height: 40rpx;
+    vertical-align: middle;
+}
+
+.list_item .intro .door text {
+    border: 2rpx solid #242424;
+    border-radius: 10rpx;
+    padding: 0rpx 5rpx;
+    color: #242424;
+}
+
+.list_item .intro .door .label {
+    border: 2rpx solid #ff7c51;
+    color: #ff7c51;
+    border-radius: 10rpx;
+    padding: 0rpx 5rpx;
+    margin-right: 10rpx;
+}
+
+.list_item .intro .door .label2 {
+    border: 2rpx solid #01bcb1;
+    color: #01bcb1;
+}
+
+.list_item .bot text {
+    float: right;
+}
+
+.list_item .intro .money {
+    border-bottom: 4rpx dashed #f3f3f3;
+    width: 100%;
+    color: #ff5b26;
+}
+
+.pay_type {
+    background: red;
+    color: #fff;
+    padding: 0rpx 10rpx;
+    font-size: 24rpx;
+    margin-left: 10rpx;
+}
+
+.sj_icon {
+    width: 35rpx;
+    height: 35rpx;
+    margin-right: 10rpx;
+}
+
+.list_cont {
+    padding: 20rpx;
+    text-align: center;
+}
+
+.list_inner {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.fen_item {
+    margin-right: 10rpx;
+}
+
+.f_img {
+    width: 150rpx;
+    height: 150rpx;
+    margin-bottom: 10rpx;
+    border-radius: 20rpx;
+}
+
+.s_biao {
+    padding: 0rpx 5rpx;
+    border: 2rpx solid #ff7773;
+    color: #ff7773;
+    font-size: 20rpx;
+    border-radius: 5rpx;
+    margin-right: 20rpx;
+}
+
+.b_icon {
+    width: 25rpx;
+    height: 25rpx;
+    margin-right: 10rpx;
+}
+
+.pingfen image {
+    width: 28rpx;
+    height: 28rpx;
+    margin-right: 5rpx;
+}
+
+.dingwei {
+    width: 100%;
+    position: relative;
+    padding-left: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: -10rpx;
+}
+
+.dingwei image {
+    width: 25rpx;
+    height: 25rpx;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.xmmoney {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.xmmoney view {
+    display: inline-flex;
+    align-items: center;
+}
+
+.xmmoney view image {
+    width: 25rpx;
+    height: 25rpx;
+    margin-right: 5rpx;
+}
+
+.xmmoney view:nth-child(2) {
+    position: relative;
+}
+
+.xmmoney view:nth-child(2) text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    border-top: 1rpx solid #999;
+    transform: translateY(-50%);
+}
+
+.xingshi {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 5rpx 10rpx;
+    font-size: 22rpx;
+}
+
+.list_item .img {
+    width: 200rpx;
+    height: 200rpx;
+    margin-right: 20rpx;
+    flex-shrink: 0;
+}
+
+.zhichi {
+    color: #666;
+    border-radius: 5rpx;
+    padding: 0rpx 10rpx;
+}
+
+.s_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 18rpx;
+}
+
+.row2 {
+    line-height: 24rpx;
+}
+
+.row3 {
+    line-height: 35rpx;
+    justify-content: space-between;
+}
+
+.star-wrapper>image {
+    width: 26rpx;
+    height: 26rpx;
+}
+
+.s_row:last-child {
+    margin-bottom: 0;
+    margin-top: 15rpx;
+}
+
+.icon-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.i-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 20rpx;
+}
+
+.i-wrapper>image {
+    width: 24rpx;
+    height: 24rpx;
+}
+
+.i-wrapper>text {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.score>.ml {
+    margin-left: 10rpx;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.score_number {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.zhichi.types {
+    color: #FFCE89;
+    border-color: #FFCE89;
+}
+
+.business_icon {
+    width: 35rpx;
+    height: 35rpx;
+    vertical-align: middle;
+}
+
+.list_item .intro .door text {
+    border: 2rpx solid #242424;
+    border-radius: 10rpx;
+    padding: 0rpx 5rpx;
+    color: #242424;
+}
+
+.list_item .intro .door .label {
+    border: 2rpx solid #ff7c51;
+    color: #ff7c51;
+    border-radius: 10rpx;
+    padding: 0rpx 5rpx;
+    margin-right: 10rpx;
+}
+
+.list_item .intro .door .label2 {
+    border: 2rpx solid #01bcb1;
+    color: #01bcb1;
+}
+
+.list_item .intro .door {
+    display: inline-block;
+    position: absolute;
+    top: 66rpx;
+}
+
+.list_item .intro .profile {
+    width: 100%;
+    position: absolute;
+    bottom: 85rpx;
+    color: #A5A5A5;
+}
+
+.list_item .intro .money {
+    position: absolute;
+    bottom: 50rpx;
+    border-bottom: 4rpx dashed #f3f3f3;
+    width: 100%;
+    color: #ff5b26;
+}
+
+.line_one image {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}
+
+.line_one text {
+    display: inline-block;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

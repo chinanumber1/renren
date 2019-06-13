@@ -1,0 +1,5 @@
+<import src="/hyb_o2o/wxParse/wxParse.wxml"></import>
+<view class="title">{{gonggaoxq.title}}</view>
+<view>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+</view>

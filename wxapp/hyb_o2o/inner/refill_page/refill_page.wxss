@@ -1,0 +1,65 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+@import "../../template/template.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.box_1 {
+    padding: 20rpx;
+    background: #fff;
+    margin: 20rpx;
+}
+
+.titles {
+    padding: 0rpx 20rpx;
+}
+
+.box_1 view {
+    margin-bottom: 10rpx;
+}
+
+.refill_box {
+    margin-top: 20rpx;
+    padding-bottom: 20rpx;
+}
+
+.refill_box .title {
+    padding: 30rpx;
+    color: #000;
+}
+
+.h_thumb {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 20rpx;
+}
+
+.refill_box .title image {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+}
+
+.refill_item {
+    margin: 20rpx;
+    padding: 20rpx;
+    background: #fff;
+}
+
+.color_red {
+    color: #FF5555;
+}
+
+.color_gray {
+    color: #686868;
+}
+
+.btn {
+    color: #EF4A50;
+    border: 2rpx solid #EF4A50;
+    float: right;
+    padding: 5rpx 20rpx;
+    border-radius: 30rpx;
+}

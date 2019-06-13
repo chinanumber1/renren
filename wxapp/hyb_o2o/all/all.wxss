@@ -1,0 +1,109 @@
+@import "../../__wuBaseWxss__/5.wxss";
+
+@import "../template/template.wxss";
+
+.top {
+    text-align: center;
+    height: 5vh;
+    line-height: 5vh;
+    background: #f0f0f0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sub_nav {
+    width: 200rpx;
+}
+
+.sub_nav text {
+    display: block;
+}
+
+.wrap {
+    height: 90vh;
+}
+
+.left {
+    width: 30%;
+    background: #f0f0f0;
+    height: 100%;
+    float: left;
+    text-align: center;
+    font-size: 28rpx;
+    overflow-y: scroll;
+}
+
+.left_item {
+    padding: 20rpx 0;
+}
+
+.left_item.sel {
+    background: #fff;
+    color: #EF4A50;
+}
+
+.right {
+    width: 70%;
+    height: 100%;
+    float: right;
+    background: #fff;
+    overflow-y: scroll;
+}
+
+.right .title {
+    padding: 20rpx;
+    color: #888888;
+}
+
+.right_item {
+    width: 100%;
+    margin-bottom: 10rpx;
+}
+
+.item {
+    padding: 20rpx;
+}
+
+.img {
+    width: 150rpx;
+    height: 150rpx;
+    margin-right: 20rpx;
+}
+
+.img_box {
+    background: #f5f5f5;
+}
+
+.img_box image {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 0 auto;
+}
+
+.text {
+    width: 63%;
+    height: 150rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.right_bot .right_item .name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.right_item .money {
+    color: #FF5926;
+}
+
+.xiadan {
+    color: #fff;
+    background: #EF4A50;
+    padding: 5rpx 30rpx;
+    border-radius: 5rpx;
+    float: right;
+}

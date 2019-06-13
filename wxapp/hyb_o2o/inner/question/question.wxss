@@ -1,0 +1,33 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+@import "../../template/template.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.list {
+    padding-top: 20rpx;
+}
+
+.question_box {
+    padding: 20rpx;
+    background: #fff;
+}
+
+.title {
+    padding-bottom: 20rpx;
+}
+
+.q_icon {
+    background: red;
+    color: #fff;
+    padding: 5rpx 10rpx;
+    border-radius: 10rpx;
+    margin-right: 20rpx;
+    font-size: 24rpx;
+}
+
+.a_icon {
+    background: #6f6ad9;
+}

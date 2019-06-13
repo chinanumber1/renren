@@ -1,0 +1,258 @@
+<form bindsubmit="formSubmit">
+    <view>
+        <view class="top df jsb">
+            <view class="line_one" style="width:95%">您选择的服务类别是： {{yiji}} > {{erji}}</view>
+            <input disabled hidden name="erjifl" type="text" value="{{erji}}"></input>
+            <input disabled hidden name="sshy" type="text" value="{{yiji}}"></input>
+            <view class="arrow df">
+                <image src="/hyb_o2o/resource/images/arrow_f.png"></image>
+            </view>
+        </view>
+        <view class="list">
+            <view class="item border_bot_2">
+                <view class="input fs28">
+                    <input bindinput="input_biaoti" maxlength="20" name="server_name" placeholder="请填写服务名称" style="width:95%" type="text" value="{{Sjxm.x_name}}"></input>
+                    <view class="name_num" style="color:#999999">{{num}}/20</view>
+                </view>
+            </view>
+            <view class="item">
+                <view class="input fs28">
+                    <textarea hidden="{{!addguigelist||!guigeform}}" maxlength="300" name="tips" placeholder="请详细填写服务内容，以吸引更多商家下单" style="width:100%" type="text" value="{{Sjxm.x_content}}"></textarea>
+                </view>
+            </view>
+            <view class="item border_bot_20" style="padding-top:0;">
+                <view class="imgList df">
+                    <view bindlongtap="pic_remove" class="upimage1 noborder" data-img="{{item}}" data-index="{{index}}" wx:for="{{imglist}}" wx:key="unique">
+                        <image class="item_img" mode="aspectFill" src="{{item}}"></image>
+                        <input hidden name="imglist" value="{{item}}"></input>
+                    </view>
+                    <image bindtap="choosePic" class="item_img" src="/hyb_o2o/resource/images/upImg_icon.png" wx:if="{{imglist.length<6}}"></image>
+                </view>
+            </view>
+            <view bindtap="edi_shoufei" class="item border_bot_2  fs28 df jsb">
+                <view class="title">服务收费</view>
+                <view class="cont">
+                    <image class="arrow_right" src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+                </view>
+            </view>
+            <view class="tishiall">
+                <view class="tishi">下面的优惠券活动和减免活动二选一</view>
+                <view class="tishi">若用户为会员则不参与优惠券和减免活动</view>
+            </view>
+            <view class="item fs30 {{openyh?'border_bot_2':'border_bot_20'}}">
+                <view class="title df jsb">
+                    <view class="">· 优惠活动</view>
+                    <view bindtap="openyh" class="fs28" wx:if="{{!openyh}}">查看</view>
+                    <view bindtap="openyh" class="fs28" wx:if="{{openyh}}">收起</view>
+                </view>
+            </view>
+            <view class="yhhd" wx:if="{{openyh}}">
+                <view class="item border_bot_2 fs28 df jsb bgff">
+                    <text class="title" style="margin-bottom:0">是否使用会员权益</text>
+                    <switch bindchange="switchhyqy" checked="{{hyqy_s}}" class="swith_btn" name="" style="transform:scale(0.6);float:right;"></switch>
+                    <input hidden="true" name="hyqy" value="{{hyqy_s}}"></input>
+                </view>
+                <view class="item border_bot_2 fs28 df jsb bgff">
+                    <text class="title" style="margin-bottom:0">是否参与满减活动</text>
+                    <switch bindchange="switcmj" checked="{{mj}}" class="swith_btn" name="mj" style="transform:scale(0.6);float:right;"></switch>
+                </view>
+                <view class="item border_bot_2 fs28 df jsb bgff" wx:if="{{mj}}">
+                    <view class="title">满减活动</view>
+                    <picker bindchange="bindfenx" range="{{manjian}}" value="{{mj_index}}">
+                        <view class="picker" style="margin-right:10rpx;">
+                            <input class="" disabled="disabled" name="manjian" style="text-align:right;padding-right:20rpx;width:100%" value="{{manjian[mj_index]}}"></input>
+                            <input disabled="disabled" hidden="true" name="manjian_id" value="{{manjians[mj_index].m_id}}"></input>
+                        </view>
+                    </picker>
+                </view>
+                <view class="item border_bot_2 fs28 df jsb bgff">
+                    <text class="title" style="margin-bottom:0">是否使用优惠卷</text>
+                    <switch bindchange="switchyhq" checked="{{yhq}}" class="swith_btn" name="" style="transform:scale(0.6);float:right;"></switch>
+                </view>
+                <view class="item border_bot_2 fs28 df jsb bgff" wx:if="{{yhq}}">
+                    <view class="title">优惠券</view>
+                    <picker bindchange="bindyhq" range="{{youhuiquan}}" value="{{yhq_index}}">
+                        <view class="picker cont">
+                            <input class="" disabled="disabled" name="youhuiquan" style="text-align:right;padding-right:20rpx;width:100%" value="{{youhuiquan[yhq_index]}}"></input>
+                            <input disabled="disabled" hidden="true" name="youhuiquan_id" value="{{youhuiquans[yhq_index].y_id}}"></input>
+                            <input disabled="disabled" hidden="true" name="yhq" value="{{yhq}}"></input>
+                        </view>
+                    </picker>
+                </view>
+                <view class="item border_bot_20 fs28 df jsb bgff">
+                    <text class="title" style="margin-bottom:0">是否允许累计积分</text>
+                    <switch bindchange="switchjf" checked="{{jf}}" class="swith_btn " name="" style="transform:scale(0.6);float:right;"></switch>
+                </view>
+                <view class="item border_bot_2 fs28 df jsb bgff" wx:if="{{jf}}">
+                    <view class="title">积分活动</view>
+                    <view class="df">购买此商品或服务获得
+            <input bindblur="save_jf" class="" maxlength="3" name="jifen" style="width:50rpx;" value="{{Sjxm.x_jifen}}"></input> 积分</view>
+                </view>
+            </view>
+            <view bindtap="shoufei" class="item border_bot_20  fs28">
+                <view class="title mb20">温馨提示</view>
+                <view class="cont" hidden="{{!addguigelist||!guigeform}}">
+                    <textarea class="fs28" maxlength="100" name="wxts" placeholder="温馨提示(长度不能超过100)" style="width:100%;min-height:160rpx;" type="text" value="{{Sjxm.x_wenxintishi}}"></textarea>
+                </view>
+            </view>
+            <view class="item border_bot_2 fs28">
+                <view class="title mb20">显示logo</view>
+                <view class="cont">
+                    <view bindtap="uploadImg" class="uploadImg_box df">
+                        <image class="camera" src="/hyb_o2o/resource/images/camera.png" wx:if="{{uplogo==''&&!Sjxm}}"></image>
+                        <image class="logo" mode="aspectFill" src="{{uplogo}}" wx:if="{{uplogo!=''}}"></image>
+                        <image class="logo" mode="aspectFill" src="{{Sjxm.x_thumb}}" wx:if="{{Sjxm&&uplogo==''}}"></image>
+                        <input hidden="true" name="logo" value="{{uplogo}}"></input>
+                        <input hidden="true" name="logo" value="{{Sjxm.x_thumb}}" wx:if="{{uplogo.length==0&&Sjxm.x_thumb!=''}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="item border_bot_2 fs28">
+                <view class="title mb20">服务图片</view>
+                <view class="cont" style="margin:0 auto;">
+                    <view class="hytitle df" style="flex-wrap: wrap;">
+                        <view bindlongtap="pic_remove" class="upimage noborder" data-img="{{item}}" wx:for="{{imglists}}" wx:key="unique">
+                            <image class="logo" mode="aspectFill" src="{{item}}"></image>
+                        </view>
+                        <view bindtap="choosePics" class="uploadImg_box df" wx:if="{{imglists.length<6}}">
+                            <image class="camera" src="/hyb_o2o/resource/images/camera.png"></image>
+                        </view>
+                    </view>
+                </view>
+                <input hidden="true" name="num" value="{{num}}"></input>
+                <input hidden="true" name="x_id" value="{{x_id}}"></input>
+            </view>
+            <view class="item border_bot_2 fs28 df bgff" style="justify-content: space-between">
+                <view class="title" style="margin-bottom:0">是否上架</view>
+                <view class="cont">
+                    <switch bindchange="switchChange" checked="{{status}}" class="swith_btn" name="status"></switch>
+                </view>
+            </view>
+        </view>
+        <button class="submit fs28" formType="submit">确定</button>
+    </view>
+</form>
+<view class="label_box guigeform" hidden="{{guigeform}}">
+    <view class="label_inner">
+        <view class="title fs30 fw df jsb border_bot_2" style="padding:20rpx;">设置规格
+      <view bindtap="opensl" class="color_pink fs26" style="font-weight:normal">
+                <image class="wenhao" src="/hyb_o2o/resource/images/wt.png"></image>点击查看事例</view>
+        </view>
+        <view class="df tc fs28 fw p20">
+            <view style="width:50%">规格</view>
+            <view style="width:45%">价钱</view>
+        </view>
+        <form bindsubmit="addlabel">
+            <view class="" wx:for="{{guige_list}}">
+                <view class="label_item df" wx:if="{{index<guige_list.length}}">
+                    <view class="label_input tc  df jsb">
+                        <view>
+                            <input bindblur="save_label" data-index="{{index}}" name="guigexiang" placeholder="添写规格项" value="{{item.guigexiang}}"></input>
+                        </view>
+                        <view>
+                            <input bindblur="save_label2" data-index="{{index}}" name="price" placeholder="添写价钱" type="digit" value="{{item.price}}"></input>
+                        </view>
+                    </view>
+                    <view class="df label_icon">
+                        <image bindtap="sublabel" data-index="{{index}}" src="/hyb_o2o/resource/images/sublabel.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="label_item df">
+                <view class="label_input tc df">
+                    <view>
+                        <input bindblur="save_label" name="guigexiang" placeholder="添写规格项" value="{{label_text}}"></input>
+                    </view>
+                    <view>
+                        <input bindblur="save_label2" name="price" placeholder="添写价钱" type="digit" value="{{label_price}}"></input>
+                    </view>
+                </view>
+                <view class="df label_icon">
+                    <button formType="submit" plain="plain">
+                        <image bindtap="addlabel" src="/hyb_o2o/resource/images/addlabel.png"></image>
+                    </button>
+                </view>
+            </view>
+            <button catchtap="close_addguige" class="submit fs28">保存并关闭</button>
+        </form>
+    </view>
+    <view class="modal df" wx:if="{{looksl}}"></view>
+    <view wx:if="{{looksl}}">
+        <view class="sl_box df jcc">
+            <image mode="widthFix" src="/hyb_o2o/resource/images/sl.png"></image>
+            <icon bindtap="closesl" color="white" size="40" type="cancel"></icon>
+        </view>
+    </view>
+</view>
+<form bindsubmit="submit_shoufei" class="label_box shoufei_box" hidden="{{addguigelist}}">
+    <view>
+        <view class="part border_bot_2">
+            <view class="c_title fs30 fw mb20 p20">服务方式</view>
+            <view>
+                <radio-group bindchange="radioChange2" class="radio-group df">
+                    <label class="radio" wx:for="{{['上门服务','到店服务']}}">
+                        <radio hidden value="{{item}}"></radio>
+                        <view class="charge_item {{diff==item?'sel':''}}">{{item}}</view>
+                        <input disabled hidden name="fwlx" type="text" value="{{diff}}"></input>
+                    </label>
+                </radio-group>
+            </view>
+        </view>
+        <view class="part border_bot_2">
+            <view class="c_title fs30 fw mb20 p20">付款方式</view>
+            <view>
+                <radio-group bindchange="radioChange" class="radio-group df">
+                    <label class="radio" wx:if="{{diff=='到店服务'&&index<2}}" wx:for="{{items}}">
+                        <radio hidden value="{{item.value}}"></radio>
+                        <view class="charge_item {{charge==item.value?'sel':''}}">{{item.value}}</view>
+                        <input disabled hidden name="pay_type" type="text" value="{{charge}}"></input>
+                    </label>
+                    <label class="radio" wx:if="{{diff!='到店服务'}}" wx:for="{{items}}">
+                        <radio hidden value="{{item.value}}"></radio>
+                        <view class="charge_item {{charge==item.value?'sel':''}}">{{item.value}}</view>
+                        <input disabled hidden name="pay_type" type="text" value="{{charge}}"></input>
+                    </label>
+                </radio-group>
+            </view>
+            <view class="fs24 p20 color666" wx:if="{{charge!=''&&charge==item.value}}" wx:for="{{items}}">{{item.text}}</view>
+            <view class="fs24 p20 color666" wx:if="{{charge==''}}">{{items[0].text}}</view>
+        </view>
+        <view class="part border_bot_2 fs28 df jsb" wx:if="{{charge=='定金支付'}}">
+            <view class="title">定金占比 (单位: %) </view>
+            <view class="cont tr">
+                <input maxlength="2" name="djzb" placeholder="请填写定金占比" type="number" value="{{Sjxm.x_pay_bili}}"></input>
+            </view>
+        </view>
+        <view class="part border_bot_2 fs28 df jsb" wx:if="{{charge=='上门估价'}}">
+            <view class="title">上门费用 (单位: 元) </view>
+            <view class="cont tr">
+                <input name="smfy" placeholder="请填写上门费用" type="digit" value="{{Sjxm.x_pay_smgj}}"></input>
+            </view>
+        </view>
+        <view class="part border_bot_2 fs28 df jsb">
+            <view class="title">金额(元)</view>
+            <view class="cont tr">
+                <input bindinput="input2" name="money" placeholder="请填写参考价格" type="digit" value="{{Sjxm.x_jiage}}"></input>
+            </view>
+        </view>
+        <view class="part border_bot_2  fs28 df jsb">
+            <view class="title">单位</view>
+            <view class="cont tr">
+                <input name="danwei" placeholder="请填写单位（次或者时）" type="danwei" value="{{Sjxm.x_danwei}}"></input>
+            </view>
+        </view>
+        <view class="part border_bot_2 fs28 df jsb">
+            <view class="title">服务规格名</view>
+            <view class="cont tr">
+                <input bindblur="save_guige_name" name="guige_name" placeholder="点击输入规格名" type="text" value="{{Sjxm.x_guigename}}"></input>
+            </view>
+        </view>
+        <view bindtap="open_addguige" class="part border_bot_20 fs28 df jsb">
+            <view class="title">编辑规格</view>
+            <view class="cont tr">
+                <input disabled placeholder="{{bianjiguige==0?'点击填写规格':'已编辑'}}" type="text"></input>
+            </view>
+        </view>
+        <button class="submit fs28" formType="submit">保存并关闭</button>
+    </view>
+</form>

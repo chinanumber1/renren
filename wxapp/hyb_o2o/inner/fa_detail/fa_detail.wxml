@@ -1,0 +1,42 @@
+<view class="df item">
+    <view bindtap="lookPic" class="img" data-list="{{info.fa_fwimgpath}}">
+        <image src="{{info.fa_fwimgpath[0]}}"></image>
+    </view>
+    <view class="fs28">
+        <view class="fs30 mb10">{{info.fa_fwname}}</view>
+        <view class="color999 mb10">{{info.fa_fwstyle1}}</view>
+        <view class="color333 mb20">{{info.fa_fwtime}}<text class="color999">(预约时间)</text>
+        </view>
+        <view class="color333">{{info.fa_fwaddress}}--{{info.fa_fwaddresss}}</view>
+    </view>
+</view>
+<view class="item df jsb fs28">
+    <view class="left color999">付款方式</view>
+    <view class="right color333 btn">{{info.fa_fwpay_type}}</view>
+</view>
+<view class="item df jsb fs28" wx:if="{{info.fa_fwpay_type=='定金'}}">
+    <view class="left color999">定金支付</view>
+    <view class="right color333">{{info.fa_fwdingjin}}</view>
+</view>
+<view class="item df jsb fs28" wx:if="{{info.fa_fwpay_type=='上门估价'}}">
+    <view class="left color999">上门费用</view>
+    <view class="right color333">{{info.fa_fwshagneng}}</view>
+</view>
+<view class="item df jsb fs28">
+    <view class="left color999">服务价格</view>
+    <view class="right color333" wx:if="{{info.fa_fwmoney!='0'}}">{{info.fa_fwmoney}}</view>
+    <view class="right color333" wx:if="{{info.fa_fwmoney=='0'}}">上门估价</view>
+</view>
+<view class="item df jsb fs28">
+    <view class="left color999">{{info.fa_time}} （发布）</view>
+    <view class="right color999">发布人： <text class="color333">{{info.fa_name}}</text>
+    </view>
+</view>
+<view class="item df jsb fs28" wx:if="{{openid==info.fa_openid}}">
+    <view class="left color999">联系电话</view>
+    <view class="right color333">{{info.fa_fwtelphone}}</view>
+</view>
+<view class="item fs28">
+    <view class="title fs30 fw p20 color333">服务详情</view>
+    <view class="cont color999">{{info.fa_fwcontent}}</view>
+</view>

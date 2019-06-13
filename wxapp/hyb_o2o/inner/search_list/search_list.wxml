@@ -1,0 +1,44 @@
+<view class="noadd" wx:if="{{Xiangmu.length==0}}">
+    <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="list">
+    <navigator class="list_item df" url="/hyb_o2o/inner/detail/detail?id={{item.x_id}}" wx:for="{{Xiangmu}}" wx:key="Xiangmu">
+        <view class="img">
+            <image mode="aspectFill" src="{{item.x_thumb}}"></image>
+            <view class="xingshi">{{item['x_xingshi']}}</view>
+        </view>
+        <view class="intro">
+            <view class="title df jsb">
+                <view class="fs30 line_one" style="max-width:70%;">
+            {{item.x_name}}
+          </view>
+                <view class="fs22" style="color:#999">距您约{{item.juli}}km</view>
+            </view>
+            <view class="pingfen df">
+                <image src="/hyb_o2o/resource/images/star.png" wx:for="{{5}}"></image>
+                <view class="pingfen-num fs22" style="color:#999">好评5分</view>
+            </view>
+            <view class="fs26 bot" style="margin-top:10rpx;">
+                <image class="business_icon" src="/hyb_o2o/resource/images/business.png"></image>{{item.s_name}}</view>
+            <view class="dingwei">
+                <image src="/hyb_o2o/resource/images/lo.png"></image>
+                <text class="fs26" style="color:#666;">{{item.s_address}}</text>
+            </view>
+            <view class="xmmoney df fs22">
+                <view class="color_red fs32">￥{{item.x_jiage}}</view>
+                <view style="color:#999">￥{{item.x_yjiage}}
+            <text class="xian"></text>
+                </view>
+                <view>
+                    <image src="/hyb_o2o/resource/images/pinglun.png"></image>
+                    <text style="color:#999">{{item.pinlunshu}}</text>
+                </view>
+                <view>
+                    <image src="/hyb_o2o/resource/images/buy.png"></image>
+                    <text style="color:#999">{{item.xiadancount}}</text>
+                </view>
+            </view>
+        </view>
+    </navigator>
+</view>

@@ -1,0 +1,27 @@
+<view>
+    <form bindsubmit="formSubmit">
+        <view class="top tc mb20" style="height:70px;">
+            <view style="float:left;width:60%;margin-top:10px;">
+                <view class="fs28 mb10">我的佣金数</view>
+                <view class="fs30">{{yj}}</view>
+            </view>
+            <view style="float:left;width:25%;margin-top:10px;">
+                <view class="fs28 mb10">可提现金额(元)</view>
+                <view class="fs30">￥{{yjmoney}}</view>
+            </view>
+        </view>
+        <view class="input_box">
+            <view class="title fs28">提现金额（元）</view>
+            <view class="df border_bot_2" style="padding:30rpx 0">
+                <text class="fw 30">￥</text>
+                <view>
+                    <input name="t_money" placeholder="0.00" type="digit" value="{{money}}"></input>
+                </view>
+            </view>
+            <view class="p20 fs28"> 备注：</view>
+            <view class="p20 fs28" style="color:red">满1元可提现</view>
+        </view>
+        <input hidden="true" name="s_money" type="text" value="{{yjmoney}}"></input>
+        <button class="btn fs28" formType="submit">提现</button>
+    </form>
+</view>

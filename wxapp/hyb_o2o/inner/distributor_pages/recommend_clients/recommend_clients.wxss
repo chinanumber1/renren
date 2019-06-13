@@ -1,0 +1,48 @@
+@import "../../../../__wuBaseWxss__/5.wxss";
+
+page {
+    background: #F7F7F7;
+}
+
+.top {
+    background: #1FD1D5;
+    background: -webkit-linear-gradient(left,#23e5b1,#20ccd8);
+    color: #fff;
+    padding: 20rpx;
+}
+
+.title {
+    background: #fff;
+    padding: 0 30rpx;
+    justify-content: space-around;
+}
+
+.title_item {
+    padding: 20rpx 40rpx;
+    border-bottom: 2rpx solid #fff;
+}
+
+.title .sel {
+    color: #02CCBA;
+    border-bottom: 2rpx solid #02CCBA;
+}
+
+.list_item {
+    padding: 20rpx;
+    background: #fff;
+}
+
+.list_item .img {
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 20rpx;
+}
+
+.list_item .img image {
+    border-radius: 50%;
+}
+
+.list_item .right {
+    margin-left: auto;
+    text-align: right;
+}

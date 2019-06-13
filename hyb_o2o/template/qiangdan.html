@@ -1,0 +1,354 @@
+{template 'common/header-base'}
+
+<ul class="nav nav-tabs">
+  <li{if $op == "display"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'display'))}">待审核</a></li>
+  <li{if $op == "daijiedan"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'daijiedan'))}">待接单</a></li>
+  <li{if $op == "yijiedan"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'yijiedan'))}">已接单</a></li>
+  <li{if $op == "yiwancheng"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'yiwancheng'))}">已完成</a></li>
+</ul>
+{if $op == "display"}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>发单者昵称</td>
+            <td>发单者头像</td>
+            <td>服务名称</td>
+            <td>服务金额</td>
+            <td>服务地址</td>
+            <td>服务时间</td>
+            <td>发单时间</td>
+            <td>是否审核通过</td>
+            <td>是否取消此单</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['fa_id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['fa_fwname']}
+            </td>         
+            <td>
+                {$item['fa_fwmoney']}
+            </td>
+            <td>
+                {$item['fa_fwaddress']}---{$item['fa_fwaddresss']}
+            </td>
+            <td>
+                {$item['fa_fwtime']}
+            </td>
+            <td>
+                {$item['fa_time']}
+            </td>
+            <td>
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'shenhesave'))}" style="color: red">是</a>
+            </td>
+            <td>
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'daijiedansave'))}" style="color: red">是</a>
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'shenhepost'))}">查看</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{$pager}
+{/if}
+{if $op == "shenhepost"}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">发单信息</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">发单者</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" value="{$item['u_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">发单者手机号</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_fwtelphone']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务名称</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_fwname']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务金额</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_fwmoney']}元" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务所属分类</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_fwstyle1']}/{$item['fa_fwstyle2']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务时间</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_fwtime']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务地址</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_fwaddress']}--{$item['fa_fwaddresss']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">服务备注</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_fwcontent']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">发单时间</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text"  value="{$item['fa_time']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+            </div>
+</form>
+{/if}
+{if $op == "daijiedan"}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>发单者昵称</td>
+            <td>发单者头像</td>
+            <td>服务名称</td>
+            <td>服务金额</td>
+            <td>服务地址</td>
+            <td>服务时间</td>
+            <td>发单时间</td>
+            <td>是否取消此单</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['fa_id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['fa_fwname']}
+            </td>         
+            <td>
+                {$item['fa_fwmoney']}
+            </td>
+            <td>
+                {$item['fa_fwaddress']}---{$item['fa_fwaddresss']}
+            </td>
+            <td>
+                {$item['fa_fwtime']}
+            </td>
+            <td>
+                {$item['fa_time']}
+            </td>
+            <td>
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'daijiedansave'))}" style="color: red">是</a>
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{$pager}
+{/if}
+{if $op == "yijiedan"}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>发单者昵称</td>
+            <td>发单者头像</td>
+            <td>服务名称</td>
+            <td>服务金额</td>
+            <td>服务地址</td>
+            <td>服务时间</td>
+            <td>发单时间</td>
+            <td>接单者</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['fa_id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['fa_fwname']}
+            </td>         
+            <td>
+                {$item['fa_fwmoney']}
+            </td>
+            <td>
+                {$item['fa_fwaddress']}---{$item['fa_fwaddresss']}
+            </td>
+            <td>
+                {$item['fa_fwtime']}
+            </td>
+            <td>
+                {$item['fa_time']}
+            </td>
+            <td>
+                {if $item[info]['q_types']=="商家"}
+                    {$item[info]['q_types']}-----{$item[info]['s_name']}
+                {else}
+                    {$item[info]['q_types']}-----{$item[infos]['y_name']}
+                {/if}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{$pager}
+{/if}
+{if $op == "yiwancheng"}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>发单者昵称</td>
+            <td>发单者头像</td>
+            <td>服务名称</td>
+            <td>服务金额</td>
+            <td>服务地址</td>
+            <td>服务时间</td>
+            <td>发单时间</td>
+            <td>接单者</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['fa_id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['fa_fwname']}
+            </td>         
+            <td>
+                {$item['fa_fwmoney']}
+            </td>
+            <td>
+                {$item['fa_fwaddress']}---{$item['fa_fwaddresss']}
+            </td>
+            <td>
+                {$item['fa_fwtime']}
+            </td>
+            <td>
+                {$item['fa_time']}
+            </td>
+            <td>
+                {if $item[info]['q_types']=="商家"}
+                    {$item[info]['q_types']}-----{$item[info]['s_name']}
+                {else}
+                    {$item[info]['q_types']}-----{$item[infos]['y_name']}
+                {/if}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{$pager}
+{/if}
+<!-- {if $op == "yiquxiao"}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>发单者昵称</td>
+            <td>发单者头像</td>
+            <td>服务名称</td>
+            <td>服务金额</td>
+            <td>服务地址</td>
+            <td>服务时间</td>
+            <td>发单时间</td>
+            <td>服务状态</td>
+            <td>退款</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['fa_id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['fa_fwname']}
+            </td>         
+            <td>
+                {$item['fa_fwmoney']}
+            </td>
+            <td>
+                {$item['fa_fwaddress']}---{$item['fa_fwaddresss']}
+            </td>
+            <td>
+                {$item['fa_fwtime']}
+            </td>
+            <td>
+                {$item['fa_time']}
+            </td>
+            <td>
+                {$item['fa_style']}
+            </td>
+            <td>
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'daijiedansave'))}" style="color: red">是</a>
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('qiangdan', array('fa_id' => $item['fa_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{$pager}
+{/if} -->

@@ -1,0 +1,61 @@
+@import "../../../../../__wuBaseWxss__/5.wxss";
+
+.top {
+    background: #FAFAFA;
+    padding: 20rpx 0;
+    color: #313131;
+    border-bottom: 2rpx solid #D9D9D9;
+    position: relative;
+}
+
+.back {
+    color: #242424;
+    position: absolute;
+    left: 20rpx;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right_arr {
+    transform: rotateY(180deg);
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}
+
+page {
+    background: #f3f3f3;
+}
+
+.box {
+    padding: 0 20rpx;
+    background: #fff;
+}
+
+.title {
+    width: 100%;
+    padding: 20rpx 0;
+}
+
+.title view {
+    text-align: center;
+}
+
+.title view:nth-child(2) {
+    border-left: 2rpx solid #f3f3f3;
+    border-right: 2rpx solid #f3f3f3;
+}
+
+.item {
+    width: 100%;
+    color: #595959;
+    padding: 20rpx 0;
+    justify-content: space-between;
+}
+
+.item view {
+    text-align: center;
+}
+
+.item .date,.item .balance,.item .refill {
+}

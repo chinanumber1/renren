@@ -1,0 +1,82 @@
+<view class="title df fs28 mb20">
+    <view bindtap="switch_tab" class="title_item {{current==index?'sel':''}}" data-index="{{index}}" wx:for="{{['未服务','已服务','已取消']}}" wx:key="item">{{item}}</view>
+</view>
+<view class="noadd" wx:if="{{Sjdingdan.length==0}}">
+    <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="list" wx:if="{{current==0}}">
+    <view class="list_item mb20 fs24" wx:for="{{Sjdingdan}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="/hyb_o2o/resource/images/business.png"></image>店名</view>
+            <text class="right_text">{{item.o_type}}</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-o_id="{{item.o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.o_xiangmu_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.o_xiangmu}}</view>
+                <view>总价：￥{{item.o_count_money}}</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.o_yy_riqi}}
+        <view class="fr">
+                <text class="bot_btn se" data-o_id="{{item.o_id}}" wx:if="{{item.o_type=='未支付'}}">等待支付</text>
+                <text bindtap="cuidan" class="bot_btn se" data-o_id="{{item.o_id}}" wx:if="{{item.o_type!='未支付'}}">确认完成</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==1}}">
+    <view class="list_item mb20 fs24" wx:for="{{Sjdingdan}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="/hyb_o2o/resource/images/business.png"></image>店名</view>
+            <text class="right_text">已完成</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-o_id="{{o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.o_xiangmu_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.o_xiangmu}}</view>
+                <view>总价：￥{{item.o_count_money}}</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.o_yy_riqi}}
+        <view class="fr">
+                <text bindtap="del_order" class="bot_btn se" data-o_id="{{item.o_id}}">删除</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==2}}">
+    <view class="list_item mb20 fs24" wx:for="{{Sjdingdan}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="/hyb_o2o/resource/images/business.png"></image>店名</view>
+            <text class="right_text">已取消</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-o_id="{{o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.o_xiangmu_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.o_xiangmu}}</view>
+                <view>总价：￥{{item.o_count_money}}</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.o_yy_riqi}}
+         <view class="fr">
+                <text bindtap="del_order" class="bot_btn se" data-o_id="{{item.o_id}}">删除</text>
+            </view>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="footer" data="{{footer:footer}}"></template>

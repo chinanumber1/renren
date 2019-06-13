@@ -1,0 +1,69 @@
+<view class="list_header">
+    <view bindtap="tabClick" class="list_title {{activeIndex==index?'default':'selsect'}}" id="{{index}}" wx:for="{{tabs}}">
+        <view>{{item}}</view>
+        <view class="list_border" hidden="{{activeIndex!=index}}" style="background-color:#34aaff;"></view>
+    </view>
+</view>
+<view class="list" hidden="{{activeIndex!=0}}">
+    <view class="list_imgbk2" hidden="{{list.length!=0}}">
+        <image class="list_imgbk" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="list_imgbk3">您暂时没有待审核的明细哦！</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:for="{{list}}">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">申请时间：{{item.t_time}}</view>
+            <view class="weui-cell__ft" style="color:#999">等待审核</view>
+        </view>
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <view>提现金额：{{item.t_money}}元</view>
+            </view>
+            <view class="weui-cell__ft">预计到账金额：{{item.t_money}}元</view>
+        </view>
+    </view>
+    <view class="kong" hidden="{{list.length==0}}">
+        <view>没有更多了</view>
+    </view>
+</view>
+<view class="list" hidden="{{activeIndex!=1}}">
+    <view class="list_imgbk2" hidden="{{list.length!=0}}">
+        <image class="list_imgbk" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="list_imgbk3">您暂时没有已通过的明细哦！</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:for="{{list}}">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">通过时间：{{item.t_time}}</view>
+            <view class="weui-cell__ft" style="color:#34aaff">提现成功</view>
+        </view>
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <view>提现金额：{{item.t_money}}元</view>
+            </view>
+            <view class="weui-cell__ft">预计到账金额：{{item.t_money}}元</view>
+        </view>
+    </view>
+    <view class="kong" hidden="{{list.length==0}}">
+        <view>没有更多了</view>
+    </view>
+</view>
+<view class="list" hidden="{{activeIndex!=2}}">
+    <view class="list_imgbk2" hidden="{{list.length!=0}}">
+        <image class="list_imgbk" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="list_imgbk3">您暂时没有已拒绝的明细哦！</view>
+    </view>
+    <view class="weui-cells weui-cells_after-title" wx:for="{{list}}">
+        <view class="weui-cell">
+            <view class="weui-cell__bd">审核时间：{{item.t_time}}</view>
+            <view class="weui-cell__ft" style="color:#ff6161">已被拒绝</view>
+        </view>
+        <view class="weui-cell">
+            <view class="weui-cell__bd">
+                <view>提现金额：{{item.t_money}}元</view>
+            </view>
+            <view class="weui-cell__ft">预计到账金额：{{item.count}}元</view>
+        </view>
+    </view>
+    <view class="kong" hidden="{{list.length==0}}">
+        <view>没有更多了</view>
+    </view>
+</view>

@@ -1,0 +1,14 @@
+<view>
+    <form bindsubmit="formSubmit">
+        <view class="input_box">
+            <view class="title fs28">充值金额（元）</view>
+            <view class="df border_bot_2" style="padding:30rpx 0">
+                <text class="fw 30">￥</text>
+                <view>
+                    <input bindinput="input" name="money" placeholder="0.00" type="digit"></input>
+                </view>
+            </view>
+        </view>
+        <button class="btn fs28" formType="submit">充值</button>
+    </form>
+</view>

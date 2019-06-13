@@ -1,0 +1,141 @@
+<view class="info_box" wx:if="{{come=='fw'||come=='sj'||come=='yg'}}">
+    <view class="top border_bot_20 jsb ">
+        <view class="df part_1 jsb color_999 mb20">
+            <view class=" fs24 df">
+                <image class="icon" src="/hyb_o2o/resource/images/business.png"></image>{{order_list.sj}} </view>
+            <view class="fs24">预约时间 {{order_list.o_yy_riqi}}</view>
+        </view>
+        <view class="part_2 df">
+            <view class="df wd100">
+                <view class="df jsb wd100">
+                    <view class="df" style="width:70%">
+                        <view class="img">
+                            <image src="{{order_list.x_thumb}}"></image>
+                        </view>
+                        <view style="width:80%">
+                            <view class="line_one fs28" style="color:#000">{{order_list.x_name}}</view>
+                            <view class="line_one fs24 color_999" wx:if="{{order_list.o_xiangmu_guige}}">规格:{{order_list.o_xiangmu_guige}}</view>
+                            <view class=" fs24 line_one color_999" wx:if="{{order_list.o_fwry}}">服务人员:{{order_list.o_fwry}}</view>
+                        </view>
+                    </view>
+                    <view class="tr" style="width:30%">
+                        <view class="line_one fs28" style="color:#000">￥{{order_list.x_jiage}}</view>
+                        <view class="line_one fs24 color_999" wx:if="{{order_list.o_xiangmu_guigemoney!=''}}">￥{{order_list.o_xiangmu_guigemoney}}</view>
+                        <view class=" fs24 line_one color_999">× {{order_list.o_num}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="df jsb border_bot_2 fs26 pq20">
+            <view class="color_999">联系人</view>
+            <view>{{order_list.o_name}} {{order_list.o_telphone}}</view>
+        </view>
+        <view class="df jsb fs26 pq20 border_bot_2" style="align-items: flex-start">
+            <view class="color_999">服务地址</view>
+            <view class="tr" style="width:80%;">{{order_list.o_address}}</view>
+        </view>
+        <view class="df jsb fs26 pq20 border_bot_20" style="align-items: flex-start">
+            <view class="color_999">详细地址</view>
+            <view class="tr" style="width:80%;">{{order_list.o_xxaddress}}</view>
+        </view>
+        <view class="fs26 pq20 border_bot_2">
+            <view class="df jsb mb20">
+                <view class="color_999">订单编号</view>
+                <view>{{order_list.ordersn}}</view>
+            </view>
+            <view class="df jsb mb10">
+                <view class="color_999">订单状态</view>
+                <view>{{order_list.o_type}}</view>
+            </view>
+        </view>
+        <view class="fs26 pq20 border_bot_2">
+            <view class="df jsb mb20">
+                <view class="color_999">订单价格</view>
+                <view class="color_999">￥ {{order_list.o_count_money}}</view>
+            </view>
+            <view class="df jsb mb20" wx:if="{{order_list.o_pay_type=='定金支付'}}">
+                <view class="color_999">已交定金</view>
+                <view class="color_999">￥ {{order_list.o_ding_money}}<text wx:if="{{order_list.o_pay_types=='1'}}">(已支付)</text>
+                    <text wx:if="{{order_list.o_pay_types=='0'}}">(未支付)</text>
+                </view>
+            </view>
+            <view class="df jsb fs30 " wx:if="{{order_list.o_pay_type=='定金支付'}}">
+                <view>剩余支付</view>
+                <view>￥ {{order_list.o_sheng_money}}</view>
+            </view>
+        </view>
+        <view class="fs26 pq20 border_bot_2">
+            <view class="df jsb mb20">
+                <view class="color_999">下单时间</view>
+                <view class="color_999">{{order_list.o_xdtime}}</view>
+            </view>
+            <view class="df jsb" style="align-items: flex-start">
+                <view class="color_999" style="width:20%;flex-shrink: 0;">备注</view>
+                <view class="color_999 tr">{{order_list.o_beizhu}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="info_box" wx:if="{{come=='sp'}}">
+    <view class="top border_bot_20 jsb ">
+        <view class="df part_1 jsb color_999 mb20">
+            <view class=" fs24 df">
+                <image class="icon" src="/hyb_o2o/resource/images/business.png"></image>平台自营</view>
+        </view>
+        <view class="part_2 df">
+            <view class="df wd100">
+                <view class="df jsb wd100">
+                    <view class="df" style="width:70%">
+                        <view class="img">
+                            <image src="{{order_list.o_goodsthumb}}"></image>
+                        </view>
+                        <view style="width:80%">
+                            <view class="line_one fs28" style="color:#000">{{order_list.o_goodsname}}</view>
+                            <view class="line_one fs24 color_999" wx:if="{{order_list.o_goodsguige}}">规格:{{order_list.o_goodsguige}}</view>
+                        </view>
+                    </view>
+                    <view class="tr" style="width:30%">
+                        <view class="line_one fs28" style="color:#000">￥{{order_list.o_monney}}</view>
+                        <view class=" fs24 line_one color_999">× {{order_list.o_num}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="df jsb border_bot_2 fs26 pq20">
+            <view class="color_999">联系人</view>
+            <view>{{order_list.o_name}} {{order_list.o_telphone}}</view>
+        </view>
+        <view class="df jsb fs26 pq20 border_bot_20" style="align-items: flex-start">
+            <view class="color_999">收货地址</view>
+            <view class="tr" style="width:80%;">{{order_list.o_address+order_list.o_xxaddress}}</view>
+        </view>
+        <view class="fs26 pq20 border_bot_2">
+            <view class="df jsb mb20 wd100">
+                <view class="color_999 fs0">订单编号</view>
+                <view class="fs0">{{order_list.ordersn}}</view>
+            </view>
+            <view class="df jsb mb10 wd100">
+                <view class="color_999 fs0">订单状态</view>
+                <view class="fs0">{{order_list.o_type}}</view>
+            </view>
+        </view>
+        <view class="fs26 pq20 border_bot_2">
+            <view class="df jsb fs28 wd100">
+                <view class="fs0">订单总价</view>
+                <view class="fs0">￥{{order_list.o_count_money}}</view>
+            </view>
+        </view>
+        <view class="fs26 pq20 border_bot_2">
+            <view class="df jsb mb20 wd100">
+                <view class="color_999 fs0">下单时间</view>
+                <view class="color_999 fs0">{{order_list.o_xdtime}}</view>
+            </view>
+            <view class="df jsb" style="align-items: flex-start">
+                <view class="color_999 fs0" style="width:20%;flex-shrink: 0;">备注</view>
+                <view class="color_999 tr fs0">{{order_list.o_beizhu}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

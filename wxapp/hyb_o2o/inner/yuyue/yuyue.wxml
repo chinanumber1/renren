@@ -1,0 +1,248 @@
+<form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+    <view class="box" style="padding-bottom:120rpx;" wx:if="{{status==0||status==3}}">
+        <view class="top mb20" wx:if="{{isaddress}}">
+            <view bindtap="choose_add" class="item df " style="padding-bottom:0;padding-top:0;j">
+                <view class="img df">
+                    <image src="../../resource/images/lo.png"></image>
+                </view>
+                <view class="border_bot_2 df text jsb">
+                    <view class="p20">
+                        <view class="title fs28 df mb10 jsb">收货人：{{mraddress.d_uname}}
+              <view>{{mraddress.d_phone}}</view>
+                        </view>
+                        <view class="fs28 ">
+                            <view>收货地址：{{mraddress.d_address}}{{mraddress.d_xxaddress}}</view>
+                        </view>
+                    </view>
+                    <view>
+                        <image src="../../resource/images/arrow_icon_03.png" style="width:17rpx;height:26rpx;margin-left:20rpx"></image>
+                    </view>
+                </view>
+            </view>
+            <input hidden="true" name="tel" type="text" value="{{mraddress.d_phone}}"></input>
+            <input hidden="true" name="location" type="text" value="{{mraddress.d_address}}"></input>
+            <input hidden="true" name="detailInfo" type="text" value="{{mraddress.d_xxaddress}}"></input>
+            <input hidden="true" name="name" type="text" value="{{mraddress.d_uname}}"></input>
+        </view>
+        <view class="top mb20">
+            <view wx:if="{{!isaddress}}">
+                <view class="item df" style="padding-bottom:0">
+                    <view class="img df">
+                        <image src="../../resource/images/lo.png"></image>
+                    </view>
+                    <view class="border_bot_2 text">
+                        <view class="title fs28 color_gray mb20">所在位置</view>
+                        <view bindtap="open_map" class="fs28 input_box">
+                            <input disabled name="location" placeholder="请点击获取位置" placeholderStyle="color:#242424" type="text" value="{{location}}"></input>
+                        </view>
+                    </view>
+                </view>
+                <view class="item df">
+                    <view class="img df">
+                        <image src=""></image>
+                    </view>
+                    <view class="border_bot_2 text">
+                        <view class="fs28 input_box">
+                            <input bindblur="input_detailInfo" name="detailInfo" placeholder="请填写详细地址、门牌号" type="text" value="{{detailInfo}}"></input>
+                        </view>
+                    </view>
+                </view>
+                <view class="item df">
+                    <view class="img df">
+                        <image src="../../resource/images/person.png"></image>
+                    </view>
+                    <view class="border_bot_2 text">
+                        <view class="title fs28 color_gray mb20">姓名</view>
+                        <view class="fs28 input_box">
+                            <input bindblur="input_name" name="name" placeholder="请输入姓名" type="text" value="{{name}}"></input>
+                        </view>
+                    </view>
+                </view>
+                <view class="item df">
+                    <view class="img df">
+                        <image src="../../resource/images/tel_icon.png"></image>
+                    </view>
+                    <view class="text">
+                        <view class="title fs28 color_gray mb20">手机号</view>
+                        <view class="fs28 input_box">
+                            <input bindblur="check_tel" maxlength="11" name="tel" placeholder="请输入手机号" type="number" value="{{tel}}"></input>
+                        </view>
+                    </view>
+                    <view class="color_line">
+                        <image mode="widthFix" src="../../resource/images/color_line_02.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view bindtap="bindDateChange" class="mid mb20 df" wx:if="{{count.length>0}}">
+                <view class="df">
+                    <view class="img1 df">
+                        <image src="../../resource/images/time.png"></image>
+                    </view>
+                    <view class="title fs28">服务日期</view>
+                </view>
+                <view class="fs28 df" style="color:#FF5B26">{{yydate}}	{{yytime}}
+          <image class="arr" src="../../resource/images/arrow_icon_03.png"></image>
+                </view>
+            </view>
+            <view bindtap="choose_peo" class="mid mb20 df fs28" wx:if="{{xmxq.yuangong.length>0}}">
+                <view class="df" style="width:50%;">
+                    <view class="img1 df">
+                        <image src="../../resource/images/ii.png"></image>
+                    </view>
+                    <view class="title fs28 ">选择服务人员</view>
+                </view>
+                <view class="df ">
+                    <input disabled class="tr" name="fwry_name" placeholder="请选择服务人员" value="{{choose_name}}"></input>
+                    <input class="tr" hidden="true" name="fwry" value="{{choose_name_id}}"></input>
+                    <input hidden="true" name="x_xingshi" value="{{xmxq.x_xingshi}}"></input>
+                    <image class="arr" src="../../resource/images/arrow_icon_03.png"></image>
+                </view>
+            </view>
+            <view bindtap="choose_guige" class="mid mb20 df fs28" wx:if="{{xmxq.x_guigecontent!=false}}">
+                <view class="df">
+                    <view class="img1 df">
+                        <image src="../../resource/images/ii.png"></image>
+                    </view>
+                    <view class="title fs28 ">选择服务规格</view>
+                </view>
+                <view class="df " style="width:68%;justify-content:flex-end;">
+                    <input disabled class="tr" name="fwgg" placeholder="请选择服务规格" value="{{xmxq.x_guigecontent[gui_index].guigexiang}}"></input>
+                    <image class="arr" src="../../resource/images/arrow_icon_03.png"></image>
+                </view>
+            </view>
+            <view class="bot">
+                <view class="df border_bot_2 top fs28 color_gray">
+                    <view class="df" style="width:80%;">
+                        <view class="photo">
+                            <image src="{{xmxq.x_thumb}}"></image>
+                        </view>
+                        <view class="text" wx:if="{{xmxq.x_pay_type!='上门估价'}}">
+                            <view class="mb10 df">
+                                <view class="line_one" style="width:60%;">{{xmxq.x_name}}</view>
+                                <view class="label right fs24 color_pink">{{xmxq.x_xingshi}}</view>
+                            </view>
+                            <view wx:if="{{gui_index==null}}">{{xmxq.x_jiage}}元</view>
+                            <view wx:if="{{gui_index!=null}}">{{xmxq.x_guigecontent[gui_index].price}}元</view>
+                        </view>
+                        <view class="text" wx:if="{{xmxq.x_pay_type=='上门估价'}}">
+                            <view class="mb10 df">
+                                <view class="line_one" style="width:60%;">{{xmxq.x_name}}</view>
+                                <view class="label right fs24 color_pink">{{xmxq.x_xingshi}}</view>
+                            </view>
+                            <view>上门费用：{{xmxq.x_pay_smgj}}元</view>
+                        </view>
+                    </view>
+                    <view class="df" style="margin-left:30rpx;">
+                        <view bindtap="sub" class="sub fuhao">
+                            <image src="../../resource/images/sub.png"></image>
+                        </view>
+                        <view class="number">{{num}}</view>
+                        <view bindtap="add" class="add fuhao">
+                            <image src="../../resource/images/add.png"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="df p20 fs28" style="width:100%;height:1.4em;">
+                    <view>备注</view>
+                    <view style="width:70%;margin-left:10rpx;">
+                        <input name="liuyan" placeholder="如有特殊要求，请给商家留言" type="text"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="df bot_fix fs28">
+                <view class="left" wx:if="{{gui_index==null}}">需支付
+          <text style="color:#FF5B26" wx:if="{{xmxq.x_pay_type=='全额付款'}}">{{foo.msg(xmxq.x_jiage*num)}}元</text>
+                    <text style="color:#FF5B26" wx:if="{{xmxq.x_pay_type=='定金支付'}}">{{foo.msg(xmxq.x_jiage*num*xmxq.x_pay_bili*0.01)}}元</text>
+                    <text style="color:#FF5B26" wx:if="{{xmxq.x_pay_type=='上门估价'}}">{{xmxq.x_pay_smgj}}元</text>
+                </view>
+                <view class="left" wx:else>需支付
+          <text style="color:#FF5B26" wx:if="{{xmxq.x_pay_type=='全额付款'}}">{{foo.msg(xmxq.x_guigecontent[gui_index].price*num)}}元</text>
+                    <text style="color:#FF5B26" wx:if="{{xmxq.x_pay_type=='定金支付'}}">{{foo.msg(xmxq.x_guigecontent[gui_index].price*num*xmxq.x_pay_bili*0.01)}}元</text>
+                    <text style="color:#FF5B26" wx:if="{{xmxq.x_pay_type=='上门估价'}}">{{xmxq.x_pay_smgj}}元</text>
+                </view>
+                <button class="right" formType="submit" wx:if="{{xmxq.x_pay_type=='全额付款'}}">立即支付</button>
+                <button class="right" formType="submit" wx:if="{{xmxq.x_pay_type=='定金支付'}}">定金支付</button>
+                <button class="right" formType="submit" wx:if="{{xmxq.x_pay_type=='上门估价'}}">上门估价</button>
+            </view>
+            <input hidden="true" name="lsdate" type="text" value="{{lsdate}}"></input>
+            <input hidden="true" name="lstime" type="text" value="{{lstime}}"></input>
+            <input hidden="true" name="yydate" type="text" value="{{yydate}}"></input>
+            <input hidden="true" name="yytime" type="text" value="{{yytime}}"></input>
+            <input hidden="true" name="x_id" type="text" value="{{xmxq.x_id}}"></input>
+            <input hidden="true" name="x_name" type="text" value="{{xmxq.x_name}}"></input>
+            <input hidden="true" name="x_pay_type" type="text" value="{{xmxq.x_pay_type}}"></input>
+            <input hidden="true" name="guige_money" type="text" value="{{xmxq.x_guigecontent[gui_index].price}}"></input>
+            <input hidden="true" name="xiangmu_money" type="text" value="{{xmxq.x_jiage}}"></input>
+            <input hidden="true" name="store" type="text" value="{{xmxq.x_shangjia}}"></input>
+            <input hidden="true" name="money" type="text" typs="{{xmxq.x_pay_type}}" value="{{foo.msg(xmxq.x_jiage*num)}}" wx:if="{{xmxq.x_pay_type=='全额付款'}}"></input>
+            <input hidden="true" name="money" type="text" typs="{{xmxq.x_pay_type}}" value="{{foo.msg(xmxq.x_jiage*num*xmxq.x_pay_bili*0.01)}}" wx:if="{{xmxq.x_pay_type=='定金支付'}}"></input>
+            <input hidden="true" name="money" type="text" typs="{{xmxq.x_pay_type}}" value="{{xmxq.x_pay_smgj}}" wx:if="{{xmxq.x_pay_type=='上门估价'}}"></input>
+            <input hidden="true" name="num" type="text" value="{{num}}"></input>
+        </view>
+    </view>
+    <view wx:if="{{clkyuyuetime}}">
+        <view class="zhezhao "></view>
+        <view class="yuyuetime">
+            <view class="timetitle">
+                <view class="title">请选择服务时间</view>
+                <view bindtap="bindDateChange" class="close">
+                    <image src="/hyb_o2o/resource/images/guan.png"></image>
+                </view>
+            </view>
+            <scroll-view bindscroll="scroll" class="weektime scroll-view_H" scrollLeft="{{scrollleft}}" scrollX="true">
+                <view bindtap="tabSwitch" class="{{tab_switch==index?'green':'scrollH'}}" data-tab_switch="{{index}}" wx:for="{{week}}" wx:key="index">
+                    <view class="week">{{item.week}}</view>
+                    <view class="datatime">{{item.days}}</view>
+                </view>
+            </scroll-view>
+            <scroll-view class="cishutime" scrollY="true">
+                <view bindtap="timeSwitch" class="{{time_switch==ide?'active':'yycstime'}}" data-time_switch="{{ide}}" wx:for="{{count}}" wx:for-index="ide" wx:key="ide">
+                    <view class="kyytime">{{item.time}}</view>
+                    <view class="kyycs">剩余{{item.count}}次</view>
+                </view>
+            </scroll-view>
+            <view bindtap="sureChange" class="button">确定</view>
+        </view>
+    </view>
+    <view class="choose_peo" wx:if="{{status==2}}">
+        <radio-group bindchange="radioChange" class="radio-group">
+            <label class="radio" wx:for="{{xmxq.yuangong}}">
+                <view class="c_p_i df jsb fs28 border_bot_2">
+                    <view class="df">
+                        <view class="c_p_img">
+                            <image class="br50" src="{{item.y_thumb}}"></image>
+                        </view>
+                        <view>
+                            <view class="fs30 df mb10">{{item.y_name}} <view style="color:red;margin-left:30rpx;">
+                                    <text class="fs34">{{item.pingfen}}</text>
+                                </view>分 </view>
+                            <view>
+                                <text class="mr20 color_gray" wx:for="{{item.y_fwqy}}" wx:for-item="Item">{{Item}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <radio data-name="{{item.y_name}}" value="{{item.y_id}}"></radio>
+                </view>
+            </label>
+        </radio-group>
+        <view class="color_gray fs30 tc" style="padding-top:100px;" wx:if="{{xmxq.yuangong.length==0}}"></view>
+    </view>
+    <view bindtap="close_modal" class="modal" wx:if="{{status==3}}"></view>
+    <view class="choose_huige {{status==3?'animate':''}}">
+        <view style="padding:0 30rpx">
+            <view class="fs30 mb20">{{xmxq.x_guigename}}</view>
+            <text bindtap="choose_gui" class="gui_item {{gui_index==index?'gui_sel':''}}" data-index="{{index}}" wx:for="{{xmxq.x_guigecontent}}" wx:key="ite">{{item.guigexiang}}</text>
+        </view>
+        <view bindtap="close_modal_3" class="sure_btnn">确定</view>
+    </view>
+</form>
+<wxs module="foo">
+var filters = ({
+    toFix: (function(value) {
+        return (value.toFixed(2))
+    }),
+});
+module.exports = ({
+    msg: filters.toFix,
+});
+</wxs>

@@ -1,0 +1,45 @@
+<view class="part mb20">
+    <view class="title df jsb color333 fs28 p20">
+        <view class="df">
+            <image class="icon" src="/hyb_o2o/resource/images/s_1.png"></image>近七天统计</view>
+    </view>
+    <canvas canvasId="lineCanvas" class="canvas" disableScroll="true" style=""></canvas>
+</view>
+<view class="part mb20">
+    <view class="title df jsb color333 fs28 p20">
+        <view class="df">
+            <image class="icon" src="/hyb_o2o/resource/images/s_2.png"></image>历史统计</view>
+        <view class="df color999">
+        年份选择
+        <view class="df choose_box">
+                <view class="pick">
+                    <picker bindchange="bindYear" fields="year" mode="date" value="{{index}}">
+                        <view class="picker">
+                            <input disabled class="input color333" end="{{year}}" placeholder="分类" value="{{year}}"></input>
+                        </view>
+                    </picker>
+                </view>
+                <view class="sanjiao df">
+                    <image src="/hyb_o2o/resource/images/right.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <canvas canvasId="lineCanvas2" class="canvas" disableScroll="true" style=""></canvas>
+</view>
+<view class="part mb20">
+    <view class="title df jsb color333 fs28 p20">
+        <view class="df">
+            <image class="icon" src="/hyb_o2o/resource/images/s_3.png"></image>今日收益</view>
+    </view>
+    <view class="data">
+        <view class="df fs28 jsb">
+            <view class="kuan">今日订单量</view>
+            <view class="kuan">成交金额（元）</view>
+        </view>
+        <view class="df fs28 jsb">
+            <view class="kuan">{{num}}</view>
+            <view class="kuan">{{money}}</view>
+        </view>
+    </view>
+</view>

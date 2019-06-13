@@ -1,0 +1,159 @@
+<form bindsubmit="formSubmit">
+    <view class="box mb20">
+        <view class="top" wx:if="{{isaddress}}">
+            <view bindtap="choose_add" class="item df " style="padding-bottom:0;padding-top:0;">
+                <view class="img df">
+                    <image src="../../resource/images/loca_icon_s.png"></image>
+                </view>
+                <view class="border_bot_2 df text jsb">
+                    <view class="p20">
+                        <view class="title fs28 df mb10 jsb">收货人：{{mraddress.d_uname}}
+              <view>{{mraddress.d_phone}}</view>
+                        </view>
+                        <view class="fs28 ">
+                            <view>收货地址：{{mraddress.d_address}}{{mraddress.d_xxaddress}}</view>
+                        </view>
+                    </view>
+                    <view>
+                        <image src="../../resource/images/arrow_icon_03.png" style="width:17rpx;height:26rpx;margin-left:20rpx"></image>
+                    </view>
+                </view>
+            </view>
+            <input hidden="true" name="tel" type="text" value="{{mraddress.d_phone}}"></input>
+            <input hidden="true" name="location" type="text" value="{{mraddress.d_address}}"></input>
+            <input hidden="true" name="detailInfo" type="text" value="{{mraddress.d_xxaddress}}"></input>
+            <input hidden="true" name="name" type="text" value="{{mraddress.d_uname}}"></input>
+        </view>
+        <view class="top" wx:else>
+            <view class="item df" style="padding-bottom:0">
+                <view class="img df">
+                    <image src="../../resource/images/lo.png"></image>
+                </view>
+                <view class="border_bot_2 text">
+                    <view class="title fs28 color_gray mb20">所在位置</view>
+                    <view bindtap="open_map" class="fs28 input_box">
+                        <input disabled name="location" placeholder="请点击获取位置" placeholderStyle="color:#242424" type="text" value="{{location}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="item df">
+                <view class="img df">
+                    <image src=""></image>
+                </view>
+                <view class="border_bot_2 text">
+                    <view class="fs28 input_box">
+                        <input bindblur="input_detailInfo" name="detailInfo" placeholder="请填写详细地址、门牌号" type="text" value="{{detailInfo}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="item df">
+                <view class="img df">
+                    <image src="../../resource/images/person.png"></image>
+                </view>
+                <view class="border_bot_2 text">
+                    <view class="title fs28 color_gray mb20">姓名</view>
+                    <view class="fs28 input_box">
+                        <input bindblur="input_name" name="name" placeholder="请输入姓名" type="text" value="{{name}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="item df">
+                <view class="img df">
+                    <image src="../../resource/images/tel_icon.png"></image>
+                </view>
+                <view class="text">
+                    <view class="title fs28 color_gray mb20">手机号</view>
+                    <view class="fs28 input_box">
+                        <input bindblur="check_tel" maxlength="11" name="tel" placeholder="请输入手机号" type="number" value="{{tel}}"></input>
+                    </view>
+                </view>
+                <view class="color_line">
+                    <image mode="widthFix" src="../../resource/images/color_line_02.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bot">
+        <view class="df border_bot_2 top fs28 color_gray">
+            <view class="df" style="width:100%;">
+                <view class="photo">
+                    <image src="{{shangpingxq.g_thumb}}"></image>
+                </view>
+                <view class="text" style="color:#333333">
+                    <view class="line_one mb10">{{shangpingxq.g_name}}</view>
+                    <view class="df jsb">
+                        <view class="fs24" style="color:#EF4A50" wx:if="{{gui_index==null}}">￥ <text class="fs30">{{shangpingxq.g_jiage}}</text>
+                        </view>
+                        <view class="fs24" style="color:#EF4A50" wx:if="{{gui_index!=null}}">￥<text class="fs30">{{guige_list.list[gui_index].spec_money}}</text>
+                        </view>
+                        <view>× {{num}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="choose_guige" class="mid df fs28 border_bot_2" wx:if="{{guige_list.list.length!=0}}">
+        <view class="title fs28 ">选择商品规格</view>
+        <view class="df " style="width:68%;justify-content:flex-end;">
+            <input disabled class="tr" name="fwgg" placeholder="请选择商品规格" value="{{guige_list.list[gui_index].spec_title}}"></input>
+            <image class="arr" src="../../resource/images/arrow_icon_03.png"></image>
+        </view>
+    </view>
+    <view class="mid df fs28 border_bot_2" wx:if="{{guige_list.list.length!=0}}">
+        <view class="title fs28 ">购买数量</view>
+        <view class="df " style="width:68%;justify-content:flex-end;">
+            <view bindtap="sub" class="sub fuhao">
+                <image src="../../resource/images/sub.png"></image>
+            </view>
+            <view class="number">{{num}}</view>
+            <view bindtap="add" class="add fuhao">
+                <image src="../../resource/images/add.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="mid df fs28 border_bot_2">
+        <view class="title fs28 ">配送费用</view>
+        <view class="df " style="width:68%;justify-content:flex-end;">
+            <input disabled class="tr" value="包邮" wx:if="{{shangpingxq.g_baoyou==1}}"></input>
+            <input disabled class="tr" value="￥{{shangpingxq.g_kuaidi}}" wx:if="{{shangpingxq.g_baoyou==0}}"></input>
+            <image class="arr" src="../../resource/images/arrow_icon_03.png"></image>
+        </view>
+    </view>
+    <view class="df p20 fs28" style="line-height:1.5em;padding:30rpx;background:#fff;align-items: flex-start;">
+        <view>备注</view>
+        <view style="margin-left:10rpx;width:88%">
+            <textarea autoHeight name="liuyan" placeholder="如有特殊要求，请给商家留言" style="min-height:42rpx;width:100%" type="text"></textarea>
+        </view>
+    </view>
+    <view class="bot_fix fs28">
+        <button class="right" formType="submit" wx:if="{{gui_index==null&&shangpingxq.g_baoyou==1}}">立即支付(共{{foo.msg(shangpingxq.g_jiage*num)}})</button>
+        <button class="right" formType="submit" wx:if="{{gui_index==null&&shangpingxq.g_baoyou==0}}">立即支付(共{{foo.msg(shangpingxq.g_jiage*num+shangpingxq.g_kuaidi-0)}})</button>
+        <button class="right" formType="submit" wx:if="{{gui_index!=null&&shangpingxq.g_baoyou==1}}">立即支付(共{{foo.msg(guige_list.list[gui_index].spec_money*num+shangpingxq.g_kuaidi-0)}})</button>
+        <button class="right" formType="submit" wx:if="{{gui_index!=null&&shangpingxq.g_baoyou==0}}">立即支付(共{{foo.msg(guige_list.list[gui_index].spec_money*num+shangpingxq.g_kuaidi-0)}})</button>
+    </view>
+    <input hidden="true" name="g_id" type="text" value="{{shangpingxq.g_id}}"></input>
+    <input hidden="true" name="money" type="text" value="{{foo.msg(guige_list.list[gui_index].spec_money*num)}}" wx:if="{{guige_list.list.length!=0&&shangpingxq.g_baoyou==1}}"></input>
+    <input hidden="true" name="money" type="text" value="{{foo.msg(guige_list.list[gui_index].spec_money*num+shangpingxq.g_kuaidi-0)}}" wx:if="{{guige_list.list.length!=0&&shangpingxq.g_baoyou==0}}"></input>
+    <input hidden="true" name="money" type="text" value="{{foo.msg(shangpingxq.g_jiage*num)}}" wx:if="{{guige_list.list.length==0&&shangpingxq.g_baoyou==1}}"></input>
+    <input hidden="true" name="money" type="text" value="{{foo.msg(shangpingxq.g_jiage*num+shangpingxq.g_kuaidi-0)}}" wx:if="{{guige_list.list.length==0&&shangpingxq.g_baoyou==0}}"></input>
+    <input hidden="true" name="guigejia" type="text" value="{{guige_list.list[gui_index].spec_money}}"></input>
+    <input hidden="true" name="num" type="text" value="{{num}}"></input>
+    <view bindtap="close_modal" class="modal" wx:if="{{status==3}}"></view>
+    <view class="choose_huige {{status==3?'animate':''}}">
+        <view style="padding:0 30rpx">
+            <view class="fs30 mb20">{{guige_list.title}}</view>
+            <text bindtap="choose_gui" class="gui_item {{gui_index==index?'gui_sel':''}}" data-index="{{index}}" wx:for="{{guige_list.list}}" wx:key="ite">{{item.spec_title}}</text>
+        </view>
+        <view bindtap="close_modal_3" class="sure_btnn">确定</view>
+    </view>
+</form>
+<wxs module="foo">
+var filters = ({
+    toFix: (function(value) {
+        return (value.toFixed(2))
+    }),
+});
+module.exports = ({
+    msg: filters.toFix,
+});
+</wxs>

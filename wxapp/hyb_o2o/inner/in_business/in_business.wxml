@@ -1,0 +1,193 @@
+<import src="/hyb_o2o/wxParse/wxParse.wxml"></import>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<form bindsubmit="formSubmit" reportSubmit="true">
+    <view class="list">
+        <view class="item border_bot_2 p20 df jsb  fs28">
+            <view class="title">门店名称</view>
+            <view class="tr colorA0A0A0">
+                <input name="s_name" placeholder="请填写门店名称" type="text" value="{{sjinfo.s_name}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28  df jsb ">
+            <view class="title">负责人姓名</view>
+            <view class="tr colorA0A0A0">
+                <input name="s_u_name" placeholder="请填写负责人姓名" type="text" value="{{sjinfo.s_u_name}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28 df jsb">
+            <view class="title">负责人手机号</view>
+            <view class="tr colorA0A0A0">
+                <input maxlength="11" name="s_telphone" placeholder="请填写负责人手机号" type="number" value="{{sjinfo.s_telphone}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_20 p20 fs28">
+            <view class="title mb20">门店简介</view>
+            <view class="colorA0A0A0" hidden="{{addLabel}}">
+                <textarea maxlength="100" name="s_content" placeholder="请填写门店简介（最多100字）" style="width:100%;height:100rpx" type="text" value="{{sjinfo.s_content}}"></textarea>
+            </view>
+        </view>
+        <view bindtap="bindlabel" class="item border_bot_20 df jsb p20 fs28">
+            <view class="title">添加标签</view>
+            <view class="colorA0A0A0">
+                <text class="label" wx:for="{{label}}">{{item}}</text>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28 df jsb" wx:if="{{pingtai=='0'}}">
+            <view class="title">所属类别</view>
+            <view class="tr colorA0A0A0">
+                <picker bindchange="bindPickerChange" range="{{Sjtype}}" value="{{index}}">
+                    <view class="picker">
+                        <input disabled name="s_t_name" type="text" value="{{Sjtype[index]}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20 fs28 df jsb">
+            <view class="title">营业时间</view>
+            <view class="df tr colorA0A0A0">
+                <picker bindchange="bindTimeChange1" end="24:00" mode="time" start="00:00" value="{{time}}">
+                    <view class="picker">
+                        <input class="time_input" disabled="disabled" name="time1" value="{{time1}}"></input>
+                    </view>
+                </picker> - 
+        <picker bindchange="bindTimeChange2" end="24:00" mode="time" start="00:00" value="{{time}}">
+                    <view class="picker">
+                        <input class="time_input" disabled="disabled" name="time2" value="{{time2}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28 df jsb">
+            <view class="title">门店地址</view>
+            <view class="tr colorA0A0A0">
+                <picker bindchange="bindRegionChange" customItem="{{customItem}}" mode="region" value="{{region}}">
+                    <view class="picker df" style="margin-bottom:20rpx;">
+                        <input disabled="disabled" name="provinceName" type="text" value="{{region[0]}}"></input>
+                        <input disabled="disabled" name="cityName" type="text" value="{{region[1]}}"></input>
+                        <input disabled="disabled" name="countyName" type="text" value="{{region[2]}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="item border_bot_20 p20  fs28 df jsb">
+            <view class="title">详细地址</view>
+            <view class="tr colorA0A0A0">
+                <input name="s_address" placeholder="请输入详细地址" type="text" value="{{sjinfo.s_xxaddress}}"></input>
+            </view>
+        </view>
+        <view bindtap="open_map" class="item border_bot_2 p20  fs28 df jsb">
+            <view class="title">获取经纬度</view>
+            <view class="df tr colorA0A0A0 fs24">
+                <text>纬度：</text>
+                <text>{{lon}}</text>
+                <input disabled hidden name="jing" type="text" value="{{lon}}"></input>
+                <text style="margin-left:20rpx;"> 经度：</text>
+                <text>{{lati}}</text>
+                <input disabled hidden name="wei" type="text" value="{{lati}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 fs28 p20">
+            <view class="title mb20">门店logo</view>
+            <view>
+                <view bindtap="uploadImg" class="uploadImg_box df">
+                    <image class="camera" src="/hyb_o2o/resource/images/camera.png" wx:if="{{uplogo.length==0}}"></image>
+                    <image class="logo" mode="aspectFill" src="{{uplogo}}" wx:if="{{uplogo.length!=0}}"></image>
+                    <input hidden="true" name="logo" value="{{uplogo}}"></input>
+                </view>
+            </view>
+        </view>
+        <view class="item border_bot_2 fs28 p20">
+            <view class="title mb20">营业执照</view>
+            <view>
+                <view bindtap="uploadImg_zz" class="uploadImg_box df">
+                    <image class="camera" src="/hyb_o2o/resource/images/camera.png" wx:if="{{upzhizhao.length==0}}"></image>
+                    <image class="logo" mode="aspectFill" src="{{upzhizhao}}" wx:if="{{upzhizhao.length!=0}}"></image>
+                    <input hidden="true" name="zhizhao" value="{{upzhizhao}}"></input>
+                </view>
+            </view>
+        </view>
+        <view class="item border_bot_2 fs28 p20">
+            <view class="title mb20">上传身份证正反面</view>
+            <view class="df">
+                <view>
+                    <view bindtap="uploadImg_sfz" class="uploadImg_box df" style="margin-right:20rpx;">
+                        <image class="camera" src="/hyb_o2o/resource/images/camera.png" wx:if="{{upshengfenz.length==0}}"></image>
+                        <image class="logo" mode="aspectFill" src="{{upshengfenz}}" wx:if="{{upshengfenz.length!=0}}"></image>
+                        <input hidden="true" name="Idcard" value="{{upshengfenz}}"></input>
+                    </view>
+                    <view class="tc fs28 color999">(正面)</view>
+                </view>
+                <view>
+                    <view bindtap="uploadImg_sfz2" class="uploadImg_box df">
+                        <image class="camera" src="/hyb_o2o/resource/images/camera.png" wx:if="{{upshengfenz2.length==0}}"></image>
+                        <image class="logo" mode="aspectFill" src="{{upshengfenz2}}" wx:if="{{upshengfenz2.length!=0}}"></image>
+                        <input hidden="true" name="Idcard2" value="{{upshengfenz2}}"></input>
+                    </view>
+                    <view class="tc fs28 color999">(反面)</view>
+                </view>
+            </view>
+        </view>
+        <view class="item border_bot_2 fs28 p20">
+            <view class="title mb20">门店幻灯片</view>
+            <view class="uploadImg3">
+                <image bindlongtap="delPic" data-index="{{index}}" src="{{item}}" wx:for="{{imglist}}" wx:key="img"></image>
+                <image bindtap="choosePic" src="/hyb_o2o/resource/images/upimg_bg_03.png" wx:if="{{imglist.length<6}}"></image>
+            </view>
+        </view>
+        <view class="item border_bot_2 p20  fs28 df jsb" wx:if="{{typs=='发布'&&rz.length>0}}">
+            <view class="title">选择入驻时长</view>
+            <view class="tr colorA0A0A0">
+                <picker bindchange="bindPickerChange_rz" range="{{array}}" value="{{bzjindex}}">
+                    <view class="picker">
+                        <input disabled name="rz_name" type="text" value="{{rz[bzjindex].r_content}}"></input>
+                        <input disabled hidden name="rz_money" type="text" value="{{rz[bzjindex].r_money}}"></input>
+                        <input disabled hidden name="rz_id" type="text" value="{{rz[bzjindex].r_id}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="df fs28 pq20">
+            <icon class="icons" size="20" type="{{choose?'success_no_circle':''}}"></icon>我已阅读并同意<text bindtap="lookck" style="color:#EF4A50">《入驻申请协议》</text>
+        </view>
+        <button class="submit fs28" formType="submit" wx:if="{{typs=='发布'}}">确定入驻</button>
+        <button class="submit fs28" formType="submit" wx:else>确定修改</button>
+    </view>
+    <view class="label_box {{addLabel?'z10':''}}" wx:if="{{addLabel}}">
+        <form bindsubmit="formSubmit_label">
+            <view class="label_inner">
+                <view class="title fs30 fw mb20">添加标签</view>
+                <view class="">
+                    <view class="label_item df jsb" wx:if="{{index<label.length}}" wx:for="{{label}}">
+                        <view class="label_input tc">
+                            <input bindblur="save_label" data-index="{{index}}" maxlength="5" name="label{{index}}" placeholder="添加标签（5字以内）" value="{{item}}"></input>
+                        </view>
+                        <view class="df label_icon">
+                            <image bindtap="sublabel" data-index="{{index}}" src="/hyb_o2o/resource/images/sublabel.png"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="label_item df jsb">
+                    <view class="label_input tc">
+                        <input bindblur="save_label" name="label{{label.length}}" placeholder="添加标签（5字以内）" value="{{label_text}}"></input>
+                    </view>
+                    <view class="df label_icon">
+                        <image bindtap="addlabel" src="/hyb_o2o/resource/images/addlabel.png"></image>
+                    </view>
+                </view>
+            </view>
+            <button class="submit fs28" formType="submit">保存</button>
+        </form>
+    </view>
+    <input hidden="true" name="openid" value="{{openid}}"></input>
+    <input hidden="true" name="typs" value="{{typs}}"></input>
+    <input hidden="true" name="s_id" value="{{s_id}}"></input>
+    <input hidden="true" name="pingtai" value="{{pingtai}}"></input>
+</form>
+<view class="zhezhao" hidden="{{fwxy}}"></view>
+<view class="kcrzxy" hidden="{{fwxy}}">
+    <view class="kcrzxyhd">《入驻申请协议》</view>
+    <scroll-view scrollY class="kcrzxybd" style="height: 600rpx;">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+    </scroll-view>
+    <view bindtap="queren" class="queren">确定</view>
+</view>

@@ -1,0 +1,623 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+        padding: 8px;
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li {if $op == "display"} class="active"{/if}><a href="{php echo $this->createWebUrl('shangjia',array('op'=>'display'))}">商家列表</a></li>
+    <li {if $op == "displays"} class="active"{/if}><a href="{php echo $this->createWebUrl('shangjia',array('op'=>'displays'))}">待审核</a></li>
+    <li {if $op == "post"} class="active"{/if}><a href="{php echo $this->createWebUrl('shangjia',array('op'=>'post'))}">添加商家</a></li>
+</ul>
+{if $op =="display"}
+<div class="main">
+    <div class="panel panel-default">
+    <div class="panel-body">
+                <div class="row">                    
+                    <form action="" method="post">
+                             <input type="hidden" name="c" value="site" />
+                            <input type="hidden" name="a" value="entry" />
+                           <input type="hidden" name="m" value="hyb_o2o" />
+                          <input type="hidden" name="do" value="shangjia" />
+                         <input type="hidden" name="op" value="display" />
+                        <div class="col-md-3 yg5_key">
+                            <div>输入关键字：</div>
+                            <div class="input-group" style="width: 240px">                                
+                                <input name="keywords" class="form-control" placeholder="请输入商家名称" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-3 yg5_key">
+                            <div>商家分类：</div>
+                            <select class="input-group" style="width: 240px" name="type">  
+                            <option value="">不限</option>
+                                                               
+                                  {loop $fenlei $item}
+                <option value="{$item['xt_name']}">{$item['xt_name']}</option>
+                {/loop}
+              </select>
+                        </div>
+                        <div class="col-md-3 yg5_key">
+                            <div>所属区域：</div>
+                            <select class="input-group" style="width: 240px" name="area">  
+                                <option value="">不限</option>
+                                {loop $city $c}                         
+                                 <option value="{$c['name']}">{$c['name']}</option>
+                                {/loop}
+                            </select>
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="input-group" style="width: 100px">
+                            <input class="btn yg5_btn" name="submit" value="搜索" type="submit">
+                             <input name="token" value="{$_W['token']}" type="hidden">
+                        </div><!-- /input-group -->
+                    </form>
+                </div>  
+            </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">商家列表</div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+                <table class="yg5_tabel col-md-12" >
+                    <tr class="yg5_tr1">
+                        <td style="width:100px">排序</td>
+                        <td>商户名称</td>
+                        <td>logo</td>
+                        <td>负责人</td>
+                        <td>联系方式</td>
+                        <td>商家地址</td>
+                        <td>主营项目</td>
+                       <!--  <td>营业时间</td> -->
+                        <td>入驻时间</td>
+                        <td>到期时间</td>
+                        <td>商家收益</td>
+                        <td>抽水比例</td>
+                        <td>是否审核</td>
+                        <td>是否推荐</td>
+                        <td>操作</td>
+                    </tr>
+                    {loop $products $item}
+                    <tr class="yg5_tr2">
+                        <td>
+                            {$item['s_id']}
+                        </td>
+                        <td>
+                            {$item['s_name']}
+                        </td>  
+                        <td>
+                            {if strpos($item['s_thumb'],"https")===false}
+                           
+                            <img class="store_list_img" src="{media $item['s_thumb']}"  alt="">
+                            {else}
+                            <img class="store_list_img" src="{$item['s_thumb']}"  alt="">
+                            {/if}
+                        </td>
+                        <td>
+                            {$item['s_u_name']}
+                        </td>
+                        <td>
+                            {$item['s_telphone']}
+                        </td>
+                        <td>
+                            {$item['s_address']}
+                        </td>
+                        <td >
+                      <span class="btn btn-xs storewarning">{$item['s_type']}</span> 
+                            
+                        </td>
+                      <!--   <td>
+                            {$item['s_yingyetime']}
+                        </td> -->
+                         <td>
+                            {$item['s_time']}
+                        </td>
+                        <td>
+                            {$item['ruzhu_endtime']}
+                            {if $item['ruzhu_endtime']<=date("Y-m-d H:i:s",time())}
+                            <!-- <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'], 'op' => 'saveruzhu'))}" class="storespan btn btn-xs"> -->
+                                <span style="color: red" >入驻已到期</span>
+                                <!-- <span class="bianji">点击修改状态
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a> -->
+                            {/if}
+                        </td>
+                        <td>
+                            {$item['s_money']}元
+                        </td>
+                         <td>
+                            {php echo $item['choushui']*100}%
+                        </td>
+                        <td><span class="btn btn-xs ygyouhui">{$item['s_status']}</span></td>
+                        <td>
+                            {if $item['s_tuijian']=="是"}
+                                <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'],'s_tuijian'=>$item['s_tuijian'], 'op' => 'tuijian'))}" class="storespan btn btn-xs">
+                                    <span class="fa fa-files-o"></span>
+                                    <span class="bianji">点击不推荐
+                                        <span class="arrowdown"></span>
+                                    </span>
+                                </a>
+                            {elseif $item['s_tuijian']=="否"}
+                                <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'],'s_tuijian'=>$item['s_tuijian'], 'op' => 'tuijian'))}" class="storespan btn btn-xs">
+                                    <span class="fa fa-files-o"></span>
+                                    <span class="bianji">点击推荐
+                                        <span class="arrowdown"></span>
+                                    </span>
+                                </a>
+                            {/if}
+                        </td>
+                      <!--   <td>
+                            <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'],'s_tuijian'=>$item['s_tuijian'], 'op' => 'tuijian'))}" class="storespan btn btn-xs">
+                                <span style="color: red" >{$item['s_tuijian']}</span>
+                                <span class="bianji">点击修改状态
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                        </td> -->
+                        <td>
+                            {if $item['s_status']=="待审核"}
+                                <a href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'],'s_u_openid'=>$item['s_u_openid'], 'op' => 'shen'))}" class="storespan btn btn-xs">
+                                    <span class="fa fa-user" style="margin-right: 0px"></span>
+                                    <span class="bianji">点击审核通过
+                                        <span class="arrowdown"></span>
+                                    </span>
+                                </a>
+                            {/if}
+                              
+                            <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'], 'op' => 'post'))}" class="storespan btn btn-xs">
+                                <span class="fa fa-pencil"></span>
+                                <span class="bianji">编辑
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                            <a href="{php echo $this->createWeburl('shangjia', array('id' => $item['s_id'], 'op' => 'delete'))}" class="storespan btn btn-xs">
+                                <span class="fa fa-trash-o"></span>
+                                <span class="bianji">删除
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    {/loop}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-right we7-margin-top">
+     {$pager}
+</div>
+{/if}
+{if $op =="displays"}
+<div class="main">
+    <div class="panel panel-default">
+        <div class="panel-body">
+                <div class="row">                    
+                    <form action="" method="post">
+                             <input type="hidden" name="c" value="site" />
+                            <input type="hidden" name="a" value="entry" />
+                           <input type="hidden" name="m" value="hyb_o2o" />
+                          <input type="hidden" name="do" value="shangjia" />
+                         <input type="hidden" name="op" value="display" />
+                        <div class="col-md-3 yg5_key">
+                            <div>输入关键字：</div>
+                            <div class="input-group" style="width: 240px">                                
+                                <input name="keywords" class="form-control" placeholder="请输入商家名称" type="text">
+                            </div>
+                        </div>
+<!--                         <div class="col-md-3 yg5_key">
+                            <div>商家分类：</div>
+                            <select class="input-group" style="width: 240px" name="type">  
+                            <option value="">不限</option>
+                                                               
+                                  {loop $fenlei $item}
+                <option value="{$item['xt_name']}">{$item['xt_name']}</option>
+                {/loop}
+              </select>
+                        </div> -->
+                        <!-- <div class="col-md-3 yg5_key">
+                            <div>所属区域：</div>
+                            <select class="input-group" style="width: 240px" name="area">  
+                            <option value="">不限</option>
+                                                             
+                                 <option value="1">太原市</option>
+                                                        </select>
+                        </div> -->
+                        <div class="col-md-3"></div>
+                        <div class="input-group" style="width: 100px">
+                            <input class="btn yg5_btn" name="submit" value="搜索" type="submit">
+                             <input name="token" value="{$_W['token']}" type="hidden">
+                        </div><!-- /input-group -->
+                    </form>
+                </div>  
+            </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">商家</div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+              <table class="yg5_tabel col-md-12" >
+                    <tr class="yg5_tr1">
+                        <td style="width:100px">排序</td>
+                        <td>商户名称</td>
+                        <td>logo</td>
+                        <td>负责人</td>
+                        <td>联系方式</td>
+                        <td>商家地址</td>
+                        <td>主营项目</td>
+                       <!--  <td>营业时间</td> -->
+                        <td>入驻时间</td>
+                        <td>到期时间</td>
+                        <td>商家收益</td>
+                        <td>抽水比例</td>
+                        <td>是否审核</td>
+                       <!--  <td>是否推荐</td> -->
+                        <td>操作</td>
+                    </tr>
+                    {loop $products $item}
+                    <tr class="yg5_tr2">
+                        <td>
+                            {$item['s_id']}
+                        </td>
+                        <td>
+                            {$item['s_name']}
+                        </td>  
+                        <td>
+                            {if strpos($item['s_thumb'],"https")===false}
+                           
+                            <img class="store_list_img" src="{media $item['s_thumb']}"  alt="">
+                            {else}
+                            <img class="store_list_img" src="{$item['s_thumb']}"  alt="">
+                            {/if}
+                        </td>
+                        <td>
+                            {$item['s_u_name']}
+                        </td>
+                        <td>
+                            {$item['s_telphone']}
+                        </td>
+                        <td>
+                            {$item['s_address']}
+                        </td>
+                        <td >
+                      <span class="btn btn-xs storewarning">{$item['s_type']}</span> 
+                            
+                        </td>
+                      <!--   <td>
+                            {$item['s_yingyetime']}
+                        </td> -->
+                         <td>
+                            {$item['ruzhu_time']}2018-07-26 19:15:49
+                        </td>
+                        <td>
+                            {$item['ruzhu_endtime']}
+                            {if $item['ruzhu_endtime']<=date("Y-m-d H:i:s",time())}
+                           <!--  <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'], 'op' => 'saveruzhu'))}" class="storespan btn btn-xs"> -->
+                                <span style="color: red" >入驻已到期</span>
+                               <!--  <span class="bianji">点击修改状态
+                                    <span class="arrowdown"></span>
+                                </span> -->
+                           <!--  </a> -->
+                            {/if}
+                        </td>
+                        <td>
+                            {$item['s_money']}元
+                        </td>
+                         <td>
+                            {php echo $item['choushui']*100}%
+                        </td>
+                        <td><span class="btn btn-xs ygyouhui">{$item['s_status']}</span></td>
+                      <!--   <td>
+                            <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'],'s_tuijian'=>$item['s_tuijian'], 'op' => 'tuijian'))}" class="storespan btn btn-xs">
+                                <span style="color: red" >{$item['s_tuijian']}</span>
+                                <span class="bianji">点击修改状态
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                        </td> -->
+                        <td>
+                            {if $item['s_status']=="待审核"}
+                                <a href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'],'s_u_openid'=>$item['s_u_openid'], 'op' => 'shen'))}" class="storespan btn btn-xs">
+                                    <span class="fa fa-user" style="margin-right: 0px"></span>
+                                    <span class="bianji">点击审核通过
+                                        <span class="arrowdown"></span>
+                                    </span>
+                                </a>
+                            {/if}
+                              <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'],'s_tuijian'=>$item['s_tuijian'], 'op' => 'tuijian'))}" class="storespan btn btn-xs">
+                                <span class="fa fa-files-o"></span>
+                                <span class="bianji">推荐
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                            <a  href="{php echo $this->createWeburl('shangjia', array('s_id' => $item['s_id'], 'op' => 'post'))}" class="storespan btn btn-xs">
+                                <span class="fa fa-pencil"></span>
+                                <span class="bianji">编辑
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                            <a href="{php echo $this->createWeburl('shangjia', array('id' => $item['s_id'], 'op' => 'delete'))}" class="storespan btn btn-xs">
+                                <span class="fa fa-trash-o"></span>
+                                <span class="bianji">删除
+                                    <span class="arrowdown"></span>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                    {/loop}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-right we7-margin-top">
+     {$pager}
+</div>
+{/if}
+{if $op == 'post'}
+<div class="main">
+    <form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">商家详情</h3>
+        </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">排序</label>
+                <div class="col-sm-9">
+                    <input name="s_ids" class="form-control" value="{$items['s_ids']}" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label"><font color="red">*</font>门店名称</label>
+                <div class="col-sm-9">
+                    <input name="s_name"  id="s_name" class="form-control" value="{$items['s_name']}" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label"">商家负责人</label>
+                <div class="col-sm-9">
+                    <input name="s_u_name" id="s_u_name" class="form-control" value="{$items['s_u_name']}" type="text">
+                    <div class="help-block">* 商户负责人</div>
+                </div>      
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label" style="margin-right: 15px;"><font color="red">*</font>负责人openid</label>
+                <select class="col-sm-8" name="s_u_openid" id="s_u_openid">
+                    <option value="">--请选择--</option>
+                    {loop $openidlist $item}
+                    <option value="{$item['openid']}" {if $items['s_u_openid']==$item["openid"]} selected {/if} >{$item['u_name']}</option>
+                    {/loop}
+                </select>
+                <div class="help-block col-md-8 col-md-offset-2">* 请选择商户分类</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label"> <font color="red">*</font>身份证正面</label>
+             <div class="col-sm-9">
+                    {php echo tpl_form_field_image('s_idcard', $items['s_idcard'])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label"> <font color="red">*</font>身份证反面</label>
+             <div class="col-sm-9">
+                    {php echo tpl_form_field_image('s_idcard2', $items['s_idcard2'])}
+                </div>
+            </div>
+            <input type="hidden" name="s_telphone" value="{$items['s_telphone']}" />
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">商家电话</label>
+                <div class="col-sm-9">
+                    <input name="s_telphone" id="s_telphone" class="form-control" value="{$items['s_telphone']}" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label"> <font color="red">*</font>商家logo</label>
+             <div class="col-sm-9">
+                    {php echo tpl_form_field_image('s_thumb', $items['s_thumb'])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label" style="margin-right: 15px;"><font color="red">*</font>商家分类</label>
+                <select class="col-sm-8" name="s_type" id="s_type">
+                    <option value="">--请选择--</option>
+                    {loop $type $item}
+                    <option value="{$item['xt_name']}" {if $items['s_type']==$item["xt_name"]} selected {/if} >{$item['xt_name']}</option>
+                    {/loop}
+                </select>
+                <div class="help-block col-md-8 col-md-offset-2">* 请选择商户分类</div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label" ><font color="red">*</font>所属区域</label>
+                <div class="col-sm-9" >
+                    {php echo tpl_form_field_district('s_address', $s_address)}
+                </div>
+                <div class="help-block col-md-8 col-md-offset-2">* 商户所在区域</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label" >商家地址</label>
+                <div class="col-sm-9">
+                    <input type="text" name="s_xxaddress" id="s_xxaddress" value="{$items['s_xxaddress']}" class="form-control"  placeholder="" autocomplete="off">                   
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label" >商家截止日期</label>
+                <div class="col-sm-9">
+                    <input type="text" name="ruzhu_endtime" id="ruzhu_endtime" value="{$items['ruzhu_endtime']}" class="form-control"  placeholder="" autocomplete="off">                   
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <label  class="col-xs-12 col-sm-3 col-md-2 control-label">地址坐标</label>
+                <div class="col-sm-9">
+                    <input class="form-control" value="{$items['wei']},{$items['jing']}" type="text" name="jw">
+                    <div class="form-controls col-sm-4 help-block" style="padding-left: 15px">例如:37.885151,112.528496 <a href="http://lbs.qq.com/tool/getpoint/" target="_blank" style="color:#428BCA"> 经纬度查询 请用,隔开</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">商家简介</label>
+                <div class="col-sm-9">
+                    <input name="s_content" class="form-control" value="{$items['s_content']}" type="text">
+                    <div class="help-block">* 请填写商家简介</div>
+                </div>     
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">营业时间(开始时间)</label>
+                <div class="col-sm-10">   
+                    <script type="text/javascript">
+                        require(["clockpicker"], function($){
+                            $(function(){
+                                $(".clockpicker").clockpicker({
+                                    autoclose: true
+                                });
+                            });
+                        });
+                    </script>
+                    <div class="input-group clockpicker">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input name="time" value="{$items['s_yingyetime'][0]}" class="form-control" type="text">
+                    </div> 
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">营业时间(结束时间)</label>
+                <div class="col-sm-10" style="margin-bottom: 20px;">
+                    <div class="input-group clockpicker">
+                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                    <input name="time2" value="{$items['s_yingyetime'][1]}" class="form-control" type="text">
+                </div>  
+            </div>
+           
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 control-label">商家保障</label>
+                <div class="col-sm-10">
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="未服务随时退" type="checkbox" {if in_array('未服务随时退',$items['baozhang'])} checked  {/if}> 未服务随时退
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="标准服务" type="checkbox" {if in_array('标准服务',$items['baozhang'])} checked  {/if}> 标准服务
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="无额外收费"  type="checkbox" {if in_array('无额外收费',$items['baozhang'])} checked  {/if}> 无额外收费
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="安全保障"  type="checkbox" {if in_array('安全保障',$items['baozhang'])} checked  {/if}>安全保障
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="迟到赔" type="checkbox" {if in_array('迟到赔',$items['baozhang'])} checked  {/if}> 迟到赔
+                    </label>
+                    <span class="seebz" style="color: #428BCA">查看保障详情</span>
+                    <p></p>
+                    <div class="help-block">* 备注：可以多选，保障越多，认可度越高</div>
+                </div>
+                
+            </div>
+            <style type="text/css">
+                    .bzbox{width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.5);display: none;z-index: 10;}
+                    .bzbox .bz_inner{width: 30%;background: #fff;padding: 30px;position: relative;left: 50%;top: 50%;transform: translate(-40%,-50%);-webkit-translate:translate(-40%,-50%);-ms-translate:translate(-40%,-50%);-moz-translate:translate(-40%,-50%);}
+                    .seebz{cursor: pointer;vertical-align: middle;margin-left: 30px;padding-top: 7px;}
+                    .bz{margin-bottom: 10px;}
+                    .bz_title{font-size: 15px;font-weight: bold;margin-bottom: 5px;}
+                    .bz_con{font-size: 12px;color: #666;text-indent: 2em;}
+                </style>
+                <div class="bzbox">
+                    <div class="bz_inner">
+                        <div class="bz">
+                            <div class="bz_title">未服务随时退</div>
+                            <p class="bz_con">商家未接单，商家接单未开始服务前，均支持全额退款。用户可以通过在线或致电客服进行取消完成退款操作。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">标准服务</div>
+                            <p class="bz_con">商家承诺按服务内容提供相应服务，如未提供相应服务，可联系客服进行协商处理。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">无额外收费</div>
+                            <p class="bz_con">商家承诺，客户预约时一次性支付全部费用，不再收取任何费用。如有用户投诉，平台或商家将核实解决</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">安全保障</div>
+                            <p class="bz_con">当服务过程中用户产生人身、财产损失、可通过致电商家或平台进行理赔操作。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">迟到赔</div>
+                            <p class="bz_con">商家迟到超过15分钟上门服务的，经核实可获得30元代金券。</p>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(".seebz").click(function(){
+                        $(".bzbox").fadeIn();
+                    })
+                    $(".bzbox").click(function(){
+                        $(".bzbox").fadeOut();
+                    })
+                </script>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label">标签</label>
+                <div class="col-sm-6">
+                    <input name="label" class="form-control" value="{$label}" type="text">
+                </div>
+                <div class="input-group multi-img-details" style="color: red">例如:  服务好|质量好</div>                       
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label">营业资质</label>
+                <div class="col-sm-9">
+                    {php echo tpl_form_field_image('s_zhizhao', $items['s_zhizhao'])}
+                </div>
+                <div class="input-group multi-img-details"></div>                       
+            </div>
+              
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label" >商家店铺幻灯片</label>
+                <div class="col-sm-9">
+                    {php echo tpl_form_field_multi_image('s_imgpath', $items['s_imgpath'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="input-group multi-img-details"></div>                       
+            </div>
+            <!-- <div class="form-group">
+                <label class="col-sm-offset-1 col-sm-1 control-label">接单距离设置</label>
+                <div class="col-sm-9">
+                 <input name="distance" value="1" class="form-control" id="inputEmail3" placeholder="请填写配送的最大距离,单位千米" type="number">
+                    <div class="ygmargin">*单位为:公里(千米)</div>
+             </div> -->
+         </div>
+        <div class="form-group" style="margin-left: 100px;">
+            <input type="submit" name="submit" value="提交" class="btn col-lg-3" style="color: white;background-color: #44ABF7;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+</form>
+</div>
+{/if}
+<script type="text/javascript">
+    $(function(){
+        $("#frame-3").show();
+        $("#yframe-3").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

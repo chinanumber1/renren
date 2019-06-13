@@ -1,0 +1,102 @@
+<view class="modal" wx:if="{{f_parentid!='0'&&getUseInfo}}">
+    <view class="m_box" style="text-align:center">
+        <view class="title fs32">提示</view>
+        <view class="fs28 p20">请先开启用户授权</view>
+        <view class="border_top_2">
+            <button bindgetuserinfo="getUsetInfo" bindtap="close_modal" class="m_btn" openType="getUserInfo">确定</button>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<view class="yao">
+    <view class="yqbox">
+        <template is="swiper2" data="{{swiper:swiper}}"></template>
+        <view class="section">
+            <view class="jbbgimjg" wx:if="{{havecode}}">
+                <image class="jbbgimjg2" src="data:image/png;base64,{{code}}"></image>
+            </view>
+            <button bindtap="ljyq" class="secbtn">立即邀请</button>
+        </view>
+    </view>
+    <view class="banner">
+        <view class="b-head">我的收益</view>
+    </view>
+    <view class="b-bd">
+        <navigator class="b1" hoverClass="none" url="fxyj">
+            <image src="/hyb_o2o/resource/images/wallet.png"></image>
+            <view class="b2">
+                <text class="text1">分销佣金</text>
+                <text class="text2" style="color:orange">{{UserFenxiao.f_money}}元</text>
+            </view>
+        </navigator>
+        <navigator class="b1" hoverClass="none" url="wdtd">
+            <image src="/hyb_o2o/resource/images/wdtd.png"></image>
+            <view class="b2">
+                <text class="text1">我的团队</text>
+                <text class="text2" style="color:#34aaff">{{UserFenxiao.fenxiaoxiajinum}}人</text>
+            </view>
+        </navigator>
+        <navigator class="b1" hoverClass="none" style="border-right:none" url="txmx">
+            <image src="/hyb_o2o/resource/images/dhjl.png"></image>
+            <view class="b2">
+                <text class="text1">提现明细</text>
+                <text class="text2" style="color:orange">{{UserFenxiao.tixiannum}}笔</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="banner" style="margin-top:20rpx;">
+        <view class="b-head">收益明细</view>
+        <navigator class="ckgd" hoverClass="none" url="symx" wx:if="{{UserFenxiao.shouyi.length!=0}}">更多</navigator>
+    </view>
+    <view class="integral" wx:if="{{index<3}}" wx:for="{{UserFenxiao.shouyi}}">
+        <image src="{{item.thumb}}"></image>
+        <view class="integral-left">
+            <view>{{item.yonghu}}</view>
+            <view>{{item.time}}</view>
+        </view>
+        <view class="integral-right">
+            <text style="color:#6AC20B">+{{item.yongjin}}<text class="integral-right1">元</text>
+            </text>
+        </view>
+    </view>
+    <view bindtap="sy" class="mygd" wx:if="{{UserFenxiao.shouyi.length!=0}}">点击更多查看哦~</view>
+    <view class="mygd" wx:if="{{UserFenxiao.shouyi.length==0}}">没有更多了哦</view>
+</view>
+<view class="share-modal {{share_modal_active}}">
+    <view class="share-modal-body">
+        <view class="share-modal-close flex-y-center flex-x-center" style="background:#fff">去邀请好友</view>
+        <view class="flex-row">
+            <view class="flex-grow-1 flex-x-center">
+                <button bindtap="shareModalClose" class="share-bottom" openType="share">
+                    <image src="/hyb_o2o/resource/images/weixin1.png"></image>
+                    <view>微信</view>
+                </button>
+            </view>
+            <view class="flex-grow-1 flex-x-center">
+                <view bindtap="mdmfx" class="share-bottom">
+                    <image src="/hyb_o2o/resource/images/mdm.png"></image>
+                    <view>面对面</view>
+                </view>
+            </view>
+            <view class="flex-grow-1 flex-x-center">
+                <view bindtap="fxhb" class="share-bottom">
+                    <image src="/hyb_o2o/resource/images/fxhb.png"></image>
+                    <view>分享海报</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">取消</view>
+    </view>
+</view>
+<view bindtap="yczz" class="zhezhao" hidden="{{fwxy}}"></view>
+<view bindtap="closezhezhao" catchtouchmove="move" class="zhezhao" hidden="{{!hbStatus}}"></view>
+<view class="kcrzxy" hidden="{{fwxy}}">
+    <view class="kcrzxyhd">请朋友扫码来下单获取佣金</view>
+    <view class="kcrzxybd">
+        <image src="{{UserFenxiao.yaoqingma}}"></image>
+    </view>
+</view>
+<canvas bindtap="save_img" canvasId="myCanvas" catchtouchmove="move" class="canvass" style="width:{{windowWidth*0.8}}px;height:{{windowHeight*0.6}}px;" wx:if="{{hbStatus}}"></canvas>
+<view bindtap="goIndex" class="go_index df jcc" wx:if="{{f_parentid!='0'}}">
+    <image src="/hyb_o2o/resource/images/f_1_sel.png"></image>
+</view>

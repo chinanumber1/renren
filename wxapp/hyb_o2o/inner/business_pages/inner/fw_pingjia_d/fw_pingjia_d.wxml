@@ -1,0 +1,59 @@
+<import src="/hyb_o2o/template/template.wxml"></import>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<view>
+    <template is="swiper2" data="{{swiper:swiper}}"></template>
+    <view class="top">
+        <view class="border_bot_2 box">
+            <view>
+                <text class="fs30  color_black">{{Sjxmpj.x_name}}</text>
+            </view>
+            <view class="fs24">{{Sjxmpj.x_content}}</view>
+        </view>
+        <view class="df box_bot border_bot_20">
+            <view class="money">
+                <text class="fs34">{{Sjxmpj.x_jiage}}</text>
+                <text class="fs22">元</text>
+            </view>
+        </view>
+    </view>
+    <view class="bot_info">
+        <view class="title fs30 border_bot_2 p20">
+            <image class="pj_icon" src="/hyb_o2o/resource/images/m_s_10.png"></image> 评价 </view>
+        <view class="noadd" wx:if="{{Sjxmpj.pingjia.length==0}}">
+            <image mode="aspectFit" src="/hyb_o2o/resource/images/no_pl.png"></image>
+            <view class="color_gray fs28">暂无数据</view>
+        </view>
+        <view class="pingjia_item border_bot_2" wx:for="{{Sjxmpj.pingjia}}" wx:key="ite">
+            <view class="df">
+                <view class="img">
+                    <image src="{{item.p_thumb}}"></image>
+                </view>
+                <view>
+                    <view class="fs28">{{item.p_name}}</view>
+                    <view class="df">
+                        <image class="star" src="/hyb_o2o/resource/images/star.png" wx:for="{{item.p_fenshu-0}}" wx:key="item"></image>
+                        <image class="star" src="/hyb_o2o/resource/images/star1.png" wx:for="{{5-item.p_fenshu-0}}" wx:key="item1"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="fs28 content">{{item.p_content}}</view>
+            <view class="pic_list" wx:if="{{item.p_pic.length!=[]}}">
+                <image bindtap="previewImage" class="p_pic" data-inde="{{index}}" data-index="{{Index}}" data-list="{{item.p_pic}}" mode="aspectFit" src="{{Item}}" wx:for="{{item.p_pic}}" wx:for-index="Index" wx:for-item="Item" wx:key="pic"></image>
+            </view>
+            <view class="reply_box" wx:if="{{item.p_huifu!=null}}">回复：{{item.p_huifu}}</view>
+            <view class="df jsb">
+                <text class="fs26" style="color:#868686">{{item.p_time}}</text>
+                <text bindtap="click_h" class="reply_t fs24 " data-index="{{index}}" wx:if="{{item.p_huifu==null}}">回复</text>
+            </view>
+        </view>
+    </view>
+    <template is="copy" data="{{copy:copy}}"></template>
+    <form bindsubmit="submit">
+        <view class="reply_input df fs28" wx:if="{{focus}}">
+            <view class="input">
+                <input focus="{{focus}}" name="reply" type="text" value="{{reply}}"></input>
+            </view>
+            <button class="btn" formType="submit" size="mini">确定</button>
+        </view>
+    </form>
+</view>

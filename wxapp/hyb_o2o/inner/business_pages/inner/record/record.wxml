@@ -1,0 +1,16 @@
+<view>
+    <view class="top tc">
+        <view class="fs28">申请提现</view>
+        <view bindtap="goback" class="back fs24 df">
+            <image class="right_arr" src="/pages/resource/images/right.png"></image>返回 </view>
+    </view>
+    <view class="box">
+        <view class="item border_bot_2 df fs26 mb20" wx:for="{{mess}}" wx:key="item">
+            <view class="date">
+                <view>{{item.date}} {{item.time}}</view>
+                <view></view>
+            </view>
+            <view class="refill" style=" color:#1BC3B9">-{{item.record}}</view>
+        </view>
+    </view>
+</view>

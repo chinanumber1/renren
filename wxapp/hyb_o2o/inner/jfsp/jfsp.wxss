@@ -1,0 +1,114 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+page {
+    padding-bottom: 160rpx;
+}
+
+swiper {
+    height: 400rpx;
+}
+
+.jf_icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+}
+
+.name {
+    font-size: 34rpx;
+    font-weight: bold;
+}
+
+.detail {
+    padding: 20rpx 0;
+}
+
+.array_right {
+    width: 16rpx;
+    height: 25rpx;
+}
+
+.send {
+    padding: 20rpx 0;
+}
+
+.bot {
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.sure_btn {
+    background: #f15c48;
+    color: #fff;
+    text-align: center;
+    padding: 20rpx 0;
+    margin: 20rpx;
+    border-radius: 10rpx;
+}
+
+.submit_btn {
+    color: #f15c48;
+}
+
+.submit_btn::after {
+    width: 0;
+    height: 0;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal_box {
+    width: 80%;
+    text-align: center;
+    background: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20rpx;
+}
+
+.modal_box .title {
+    padding: 30rpx 0;
+    font-size: 34rpx;
+}
+
+.mess_detail {
+    text-align: left;
+    margin: 0 60rpx;
+}
+
+.mess_detail view {
+    line-height: 1.5em;
+}
+
+.mess_detail .left {
+    text-align: justify;
+    text-align-last: justify;
+    display: inline-block;
+    width: 142rpx;
+}
+
+.btns {
+    border-top: 2rpx solid #f3f3f3;
+    margin-top: 20rpx;
+}
+
+.btns view {
+    width: 49.9%;
+    padding: 20rpx 0;
+    text-align: center;
+}
+
+.btns view:nth-child(1) {
+    border: 2rpx solid #f3f3f3;
+}

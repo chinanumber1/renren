@@ -1,0 +1,308 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcsslist.css">
+<style type="text/css">
+    .page-header{display: block;height: 65px;line-height: 30px;font-size: 12px;position: relative;padding-left: 10px;margin: 0;border: none;overflow: hidden;padding-top: 25px;padding-bottom: 9px;}
+    .text-primary {color: #44abf7 !important;}
+    .text-danger {color: #eb6060 !important;}
+    .page-content {width: 100%;background: #fff;padding: 20px 30px;position: relative;height: auto;overflow: hidden;}
+    .page-toolbar {position: relative;width: 100%;padding: 0;height: 35px;line-height: 1;vertical-align: middle;margin-bottom: 15px;}
+    .input-group-select {display: table-cell;width: 1%;white-space: nowrap;vertical-align: middle;}
+    .input-group .form-control, .input-group .input-group-addon, .input-group .input-group-btn > .btn, .input-group select.form-control { border-radius: 1px;font-size: 12px;height: 30px;}
+    .input-group .form-control, .input-group-addon, .input-group-btn { display: table-cell;}
+    .input-group .form-control, .input-group .input-group-addon, .input-group .input-group-btn > .btn, .input-group select.form-control {border-radius: 1px;font-size: 12px;height: 30px !important;}
+    .tables{font-size:12px;line-height: 18px;border: 1px solid #e5e5e5; }
+    .table-header{background:#f8f8f8;height: 35px;line-height: 35px;padding: 0 20px;display: flex;}
+    .table-header .others {-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;text-align: center;}
+    .tables .table-row > div {padding: 14px 0 !important;}
+    .table-row .goods-des .title {width: 180px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .table-row.table-top{padding:0  20px;background: #f7f7f7;}
+    .table-row.table-top .times{font-weight: bold;margin-right: 10px;color: #2d2d31}
+    .table-row.middle_box{margin:0  20px;display: flex;align-content: space-around;}
+    .table-row .goods-des{width:400px;text-align: left;border-right: 1px solid #efefef;vertical-align: middle;}
+    .table-row .goods-des image{width:70px;height:70px;border:1px solid #efefef; padding:1px;}
+    .table-row .goods-des .goods_info{-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;margin-left: 10px;text-align: left;display: flex;align-items: center
+    }
+    .table-row .list-inner {-webkit-box-flex: 1;-webkit-flex: 1; -ms-flex: 1; flex: 1;text-align: center;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;-webkit-flex-direction: column;flex-direction: column;border-right: 1px solid #efefef;vertical-align: middle;}
+    .saler > div { width: 130px;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;}
+    .btn-primary{background: #3c9be1 !important;border-color: #3c9be1 !important;}
+    .order-container {display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;position: relative;
+overflow: hidden;border: 1px solid #efefef;margin: 0px;}
+    .order-container ul li {line-height: 26px;color: #999;font-size: 12px;}
+    .col-sm {float: left;padding-right: 10px;padding-left: 10px;position: relative;width: 80px;}
+    .text-default {color: #000 !important;}
+    .order-container-left {padding: 30px !important;padding-left: 15px !important;}
+    .order-container-static {-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;padding: 30px 50px 20px;}
+    .order-container .status {height: 70px;line-height: 22px;}
+    .font18 {font-size: 20px;font-weight: bold;}
+    .text-warning {color: #ffc000 !important;}
+    .order-container .ops {height: 40px;line-height: 20px;margin-bottom: 15px;}
+    .order-container .order-container-footer { padding: 0;border-top: none;line-height: 20px;display: -webkit-box;display:-webkit-flex;display: -ms-flexbox;display: flex;color:#999;font-size: 12px;}
+    .order-title {line-height: 62px;font-size: 16px;color: #000;font-weight: bold;}
+    .table {table-layout: fixed;position: relative;color: #666;font-size: 12px;}
+    .table .trorder, .table .trfooter {border: 1px solid #efefef;}
+
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {border-top: 1px solid #efefef;vertical-align: middle;}
+    .table .trorder th{border-bottom: none}
+    .table .trorder td { border-right: 1px solid #efefef;}
+</style>
+{if $op=="display"}
+<div class="page-header">
+    当前位置：<span class="text-primary">订单管理</span>
+    <span>订单数:  <span class="text-danger">{$ordernum}</span> 订单金额:  <span class="text-danger">{$ordermoney}</span> </span>
+</div>
+<div class="page-content">
+    <form action="" method="post" >
+        <input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="hyb_o2o" />
+        <input type="hidden" name="do" value="orderfwsm" />
+        <input type="hidden" name="op" value="display" />
+        <div class="page-toolbar">
+            <div class="input-group">
+                <span class="input-group-select">
+                    <select name="paytypes" class="form-control" style="width:100px;padding:0 5px;">
+                        <option value="" selected="">支付方式</option>
+                        <option value="余额支付">余额支付</option>
+                        <option value="微信支付">微信支付</option>
+                        <option value="现金支付">现金支付</option>
+                    </select>
+                </span>
+                <span class="input-group-select">
+                    <select name="paytype" class="form-control" style="width:100px;padding:0 5px;">
+                        <option value="" selected="">项目支付</option>
+                        <option value="全额付款">全额付款</option>
+                        <option value="免费预约">免费预约</option>
+                        <option value="定金支付">定金支付</option>
+                    </select>
+                </span>
+                <!-- <span class="input-group-btn">
+                        
+        <script type="text/javascript">
+            require(["daterangepicker"], function(){
+                $(function(){
+                    $(".daterange.daterange-time").each(function(){
+                        var elm = this;
+                        $(this).daterangepicker({
+                            startDate: $(elm).prev().prev().val(),
+                            endDate: $(elm).prev().val(),
+                            format: "YYYY-MM-DD HH:mm",
+                            timePicker: true,
+                            timePicker12Hour : false,
+                            timePickerIncrement: 1,
+                            minuteStep: 1
+                        }, function(start, end){
+                            $(elm).find(".date-title").html(start.toDateTimeStr() + " 至 " + end.toDateTimeStr());
+                            $(elm).prev().prev().val(start.toDateTimeStr());
+                            $(elm).prev().val(end.toDateTimeStr());
+                        });
+                    });
+                });
+            });
+        </script>
+
+        <input name="time[start]" value="2018-05-23 09:21" type="hidden">
+        <input name="time[end]" value="2018-06-23 09:21" type="hidden">
+        <button class="btn btn-default daterange daterange-time btn-sm" type="button"><span class="date-title">2018-05-23 09:21 至 2018-06-23 09:21</span> <i class="fa fa-calendar"></i></button></span> -->
+                <span class="input-group-select">
+                    <select name="type" class="form-control" style="width:110px;padding:0 5px;">
+                        <option value="">订单状态</option>
+                        <option value="未支付">未支付</option>
+                        <option value="已付款">已付款</option>
+                        <option value="已完成">已完成</option>
+                        <option value="已删除">已删除</option>
+                        <option value="已取消">已取消</option>
+                    </select>
+                </span>
+                <input class="form-control input-sm" name="keyword" value="" placeholder="请输入订单编号" type="text">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" name="submit" type="submit"> 搜索</button>
+                    <!-- <button type="submit" name="export" value="1" class="btn btn-success ">导出</button> -->
+                </span>
+                </div>
+
+            </div>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <!-- 头部状态 -->
+                <div class="table-header">
+                    <div style="border-left:1px solid #f2f2f2;width: 400px;text-align: left;">服务名称</div>
+                    <div class="others">买家</div>
+                    <div class="others">支付/服务方式</div>
+                    <div class="others">价格</div>
+                    <div class="others">服务员工</div>
+                    <div class="others">操作</div>
+                    <div class="others">状态</div>
+                </div>
+
+                <div class="table-row"><div style="height:20px;padding:0;border-top:none;">&nbsp;</div></div>
+                <!-- 循环体  -->
+                {loop $products $item}
+                <div class="tables">
+                    <!-- 订单编号以及下单时间 -->
+                    <div class="table-row table-top">
+                        <div style="text-align: left;color: #8f8e8e;padding: 14px 0">
+                            <span class="times">2018-06-22&nbsp; 17:53:26</span>订单编号:{$item['ordersn']}
+                        </div>
+                    </div>
+                    <!-- 中间内容 -->
+                    <div class="table-row middle_box">
+                        <div class="goods-des">
+                            <div style="display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;margin: 10px 0">
+                                <img src="{media $item['x_thumb']}">
+                                <div class="goods_info" style="">
+                                    <div class="title">
+                                       {$item['x_name']}<br>
+                                    </div>
+                                    <span style="float: right;text-align: right;display: inline-block;width:130px;">
+                                        ￥{$item['o_xiangmu_money']}<br>x{$item['o_num']} 
+                                    </span>
+                                </div>
+                            </div>
+                               
+                        </div>
+                        <div class="list-inner saler" style="text-align: center;">
+                            <div>
+                                <a href="">{$item['o_name']}</a><br>{$item['o_address']}<br>{$item['o_telphone']}
+                            </div>
+                        </div> 
+                        <div class="list-inner paystyle" style="text-align:center;">
+                            <span> 
+                                <i class="icow icow-yue text-warning" style="font-size: 17px;"></i>
+                                <span>{$item['o_pay_type']}</span>
+                            </span>
+                            <span style="margin-top:5px;display:block;">上门服务&nbsp;&nbsp;{if $item['o_fw_type']=='0'}[未服务]{elseif $item['o_fw_type']=='1'}[服务中]{elseif $item['o_fw_type']=='2'}[服务完成]{/if}</span>
+                        </div>
+                        <a class="list-inner" data-toggle="popover" data-html="true" data-placement="right" data-trigger="hover" data-original-title="" title=""> 
+                            <div style="text-align:center">￥{$item['o_count_money']}</div>
+                        </a>
+                        <div class="list-inner paystyle" style="text-align:center;">
+                            <span> 
+                                <i class="icow icow-yue text-warning" style="font-size: 17px;"></i>
+                                <span>{$item['o_fwry']}</span>
+                            </span>
+                        </div>
+                        <div class="list-inner" style="text-align:center">
+                            <a class="op text-primary"  href="{php echo $this->createWebUrl('orderfwsm',array('o_id'=>$item['o_id'],'op'=>'post'))}">查看详情</a>
+                        </div>                       
+                        <div class="ops list-inner" style="line-height:20px;text-align:center;border-right: none;">
+                            <a class="btn btn-primary btn-xs" data-toggle="ajaxModal" href="">{$item['o_type']}</a>
+                            <a class="btn"  style="color: red"  href="{php echo $this->createWebUrl('orderfwsm',array('o_id'=>$item['o_id'],'op'=>'delete'))}">删除</a>
+                        </div>
+                    </div>
+                    <!-- 备注 -->
+                    <div class="table-row">
+                        <div style="background:#fdeeee;color:red;flex: 1;padding: 14px !important;">买家备注: {$item['o_beizhu']}</div>
+                    </div>
+
+                </div>
+                {/loop}     
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="text-align:right;width:100%;">
+    {$pager}
+</div>
+{/if}
+{if $op =="post"}
+    <div class="order_detail">
+        <div class="page-header">
+            当前位置：<span class="text-primary">订单详情</span><span class="btn btn-primary btn-xs" style="margin-left: 30px;"><a href="{php echo $this->createWebUrl('orderfwsm',array('op'=>'display'))}">返回上门服务订单</a></span>
+        </div>
+        <div class="page-content">
+            <form class="form-horizontal form" action="" method="post">
+                <div class="row order-container">
+                    <!-- 左 -->
+                    <div class="order-container-left" style="border-right: 1px solid #efefef">
+                        <div class="row" style="margin-right: -10px;margin-left: -10px;">
+                            <div class="col-md-12">
+                                <ul class="" style="margin-bottom: 20px;">
+                                    <li class="text"><span class="col-sm">订单编号：</span><span class="text-default">{$info['ordersn']}</span></li>
+                                     <li class="text">
+                                        <span class="col-sm">付款方式：</span>
+                                        <span class="text-default"> {$info['o_pay_type']}</span>
+                                    </li>
+                                    <li class="text">
+                                        <span class="col-sm">买家：</span>
+                                        <span class="text-default">
+                                            <a href="" style="color: #44abf7 !important;">{$info['o_name']}</a> &nbsp;&nbsp;<a data-toggle="popover" data-html="true" data-trigger="hover" data-placement="right" data-original-title="" title=""><i class="icow icow-help" style="font-size: 13px;color: #2f3434;margin-left: -3px"></i></a>
+                                        </span>
+                                    </li>
+                                   <li class="text">
+                                        <span class="col-sm">收货地址：</span>
+                                        <span class="text-default">{$info['o_address']} {$info['o_xxaddress']} {$info['o_telphone']}<a class="text-primary op js-clip" data-url="{$info['o_address']} {$info['o_xxaddress']} {$info['o_name']} {$info['o_telphone']}" style="cursor: pointer;">复制</a>
+                                        </span>
+                                    </li>
+
+                                    
+                                    <li class="text">
+                                        <span class="col-sm">买家备注：</span><span class="text-default">{$info['o_beizhu']}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <div class="col-md-12 ops">
+                                <a class="btn btn-primary" style="margin-left: 10px" data-toggle="ajaxModal" href="">修改订单收货信息</a>                    
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- 右 -->
+                    <div class=" order-container-static">
+                        <div class=" status">
+                           <span class="text"> 订单状态：</span>
+                           <span class="text-warning font18">{$info['o_type']}  {if $info['o_fw_type']=='0'}[未服务]{elseif $info['o_fw_type']=='1'}[服务中]{elseif $info['o_fw_type']=='2'}[服务完成]{/if}</span>
+                         </div>
+                        
+                        </div>
+                </div>
+                <h3 class="order-title">服务信息</h3>
+                <table class="table ">
+                    <thead>
+                        <tr class="trorder" style="background: #fff">
+                            <th class="" style="width: 75px;text-align: right;padding-right: 0">服务名称</th>
+                            <th style=""></th>
+                            <th style="padding-left: 20px">规格</th>
+                            <th style="text-align: center;width: 10%">单价</th>
+                            <th style="text-align: center;width: 10%">数量</th>
+                            <th style="text-align: center;width: 15%;">总计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="trorder" style="background: #fff">
+                            <td style="text-align: right;padding-right: 0;border-right: none">
+                                <img src="{$info['x_thumb']}" style="width:52px;height:52px;border:1px solid #efefef; padding:1px;" >
+                            </td>
+                            <td style="min-width: 300px">
+                               {$info['x_name']}
+                            </td>
+                            <td style="padding: 10px 20px">
+                                <p style="white-space:normal;">规格：{$info['o_xiangmu_guige']} </p>
+                            </td>
+                            <td style="text-align: center">
+                                <p>￥{$info['money']}</p>
+                            </td>
+                            <td style="text-align: center">
+                                <p>{$info['o_num']}</p>
+                            </td>
+                            <td style="text-align: center">
+                                <div class="price" style="float: right">
+                                    <p><span class="price-inner">实付款：</span><span style="font-size: 14px;font-weight: bold;color: #e4393c">￥{$info['o_count_money']}</span></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{/if}
+<script type="text/javascript">
+    $(function(){
+        $("#frame-5").show();
+        $("#yframe-5").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

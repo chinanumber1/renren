@@ -1,0 +1,37 @@
+<view class="selec">
+    <view bindtap="bind_xiaoliang" class="section fs28 tc {{xl?'color_pink':''}}">销量</view>
+    <view class="section">
+        <picker bindchange="bindFirstChange" range="{{fenLei}}" value="{{index1}}">
+            <view class="picker">
+                <input disabled placeholder="分类" placeholderStyle="color:#000" value="{{fenLei[index1]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+    <view class="section fs28 tc jiage">价格
+    <image bindtap="choose_up" class="arrow_dowm arrow_up" src="{{up?'../../resource/images/right_sel.png':'../../resource/images/right.png'}}"></image>
+        <image bindtap="choose_down" class="arrow_dowm" src="{{down?'../../resource/images/right_sel.png':'../../resource/images/right.png'}}"></image>
+    </view>
+</view>
+<view class="list">
+    <view class="df goods_list">
+        <view class="goods_item" style="width:47%" wx:for="{{shangpinglist}}" wx:key="Xmtj">
+            <navigator hoverClass="none" url="/hyb_o2o/inner/goods_page/goods_page?id={{item.g_id}}">
+                <view class="img mb10">
+                    <image mode="aspectFill" src="{{item.g_thumb}}"></image>
+                </view>
+                <view style="padding:0 20rpx;">
+                    <view class="name fs26 line_one mb20" style="width:100%">{{item.g_name}}</view>
+                    <view class="df jsb fs24 mb20">
+                        <view class="color_pink fs34">￥{{item.g_jiage}}</view>
+                        <view class="tr fs22 color_gray">{{item.g_xiaoliang}}人购买过</view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+        <view class="noadd" style="padding-bottom:30rpx;" wx:if="{{shangpinglist.length==0}}">
+            <image mode="aspectFit" src="../../resource/images/no_dd.png"></image>
+            <view class="color_gray fs28">暂无商品</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,50 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.list .item {
+    padding: 20rpx;
+    background: #fff;
+    align-items: flex-start;
+}
+
+.item .left {
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 20rpx;
+    flex-shrink: 0;
+}
+
+.star {
+    width: 30rpx;
+    height: 26rpx;
+}
+
+.colory {
+    color: #F5CE47;
+}
+
+.store {
+    background: #f6f6f6;
+    padding: 20rpx;
+}
+
+.store .s_img {
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 20rpx;
+    flex-shrink: 0;
+}
+
+.p_pic {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+    border: 2rpx solid #f3f3f3;
+}
+
+.pic_list {
+    margin-bottom: 20rpx;
+}

@@ -1,0 +1,17 @@
+<view class="noadd" wx:if="{{Czlist.length==0}}">
+    <image mode="widthFix" src="../../resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="box">
+    <view class="item border_bot_2 " wx:for="{{Czlist}}" wx:key="item">
+        <view class=" df item_i border_bot_2 jsb fs28">
+            <view class="date color666">
+                <view>{{item.time}}</view>
+                <view></view>
+            </view>
+            <view class="refill color333">+{{item.money}}</view>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

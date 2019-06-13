@@ -1,0 +1,74 @@
+<view class="tops df">
+    <view bindtap="switch_top" class="t_item fs30 {{current==index?'sel':''}}" data-index="{{index}}" wx:for="{{top_list}}" wx:key="item">{{item}}</view>
+</view>
+<view class="list" wx:if="{{current==0}}">
+    <view catchtap="look_detail" class="item" data-id="{{item.y_openid}}" wx:if="{{list.length!=0}}" wx:for="{{list}}" wx:key="item">
+        <view class="top p20 border_bot_2 df">
+            <view class="img">
+                <image src="{{item.y_thumb}}"></image>
+            </view>
+            <view class="t_r color333">
+                <view class="mb20 df jsb">
+                    <view>
+                        <text class="fs32">{{item.y_name}} </text>
+                        <text class="status_one fs26">{{item.y_typs}}</text>
+                    </view>
+                </view>
+                <view class="fs28 mb5">收益 :￥{{item.y_money}}  <text style="margin-left:30rpx;">接单数 : {{item.jdnum}}</text>
+                </view>
+                <view class="fs26">电话：{{item.y_telphone}}</view>
+                <view class="pingfen fs24">
+                    <text class="fs32">{{item.pingfen}}</text> 分</view>
+                <view class="shenfen" wx:if="{{item.y_rz==0}}">员工</view>
+                <view class="shenfen" wx:else>技师</view>
+            </view>
+        </view>
+        <view class="bot df p20 fs28">
+            <view class="df" style="margin-left:auto" wx:if="{{come=='guanli'}}">
+                <view catchtap="jinzhijd" class="btn {{item.y_jin==0?'status_three':'j_default'}} " data-id="{{item.y_id}}" data-index="{{index}}" style="{{item.y_jin==0?'border-color:#999999':'border-color:#F35959'}}">禁止接单</view>
+                <view catchtap="tichu" class="btn status_two" data-id="{{item.y_id}}" data-index="{{index}}" style="color:#EF4A50;">剔除员工</view>
+            </view>
+            <view class="df" style="margin-left:auto" wx:if="{{come=='zhipai'}}">
+                <view catchtap="zhipai" class="btn" data-fa_id="{{id}}" data-y_id="{{item.y_id}}" style="color:#EF4A50;">指派TA</view>
+            </view>
+            <view class="df" style="margin-left:auto" wx:if="{{come=='zhipaidingdan'}}">
+                <view catchtap="choose_fwyg" class="btn" data-y_id="{{item.y_id}}" style="color:#EF4A50;">指派TA</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{list.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==1}}">
+    <view catchtap="look_detail" class="ditem" data-id="{{item.y_openid}}" wx:if="{{lists.length!=0}}" wx:for="{{lists}}" wx:key="item">
+        <view class="dtop p20 border_bot_2 df">
+            <view class="dimg">
+                <image src="{{item.u_thumb}}"></image>
+            </view>
+            <view class="t_r">
+                <view class="mb20">
+                    <text class="fs32">{{item.y_name}} </text>
+                </view>
+                <view class="fs28 mb5">性别 :{{item.y_sex}}  <text style="margin-left:30rpx;">年龄 :{{item.y_age}}</text>
+                </view>
+                <view class="fs26">联系电话：{{item.y_telphone}}</view>
+            </view>
+        </view>
+        <view class="dbot df p20 fs28">
+            <view class="color_gray">申请时间：{{item.y_time}}</view>
+            <view class="df" style="margin-left:auto" wx:if="{{item.y_styles=='待审核'}}">
+                <view catchtap="through" class="dbtn" data-id="{{item.y_id}}">通过</view>
+                <view catchtap="cancel" class="dbtn djujue" data-id="{{item.y_id}}">拒绝</view>
+            </view>
+            <view class="df" style="margin-left:auto" wx:if="{{item.y_styles=='审核通过'}}">
+                <view class="dbtn" data-id="{{index}}">审核通过</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{lists.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>

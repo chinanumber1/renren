@@ -1,0 +1,71 @@
+<view class="selec">
+    <view class="section" style="width:{{parentid==0?'33.33%':'50%'}}">
+        <picker bindchange="bindFirstChange" range="{{erji}}" value="{{index1}}">
+            <view class="picker">
+                <input disabled placeholder="地区" value="{{erji[index1]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+    <view class="section" wx:if="{{parentid==0}}">
+        <picker bindchange="bindSecChange" range="{{title}}" value="{{index2}}">
+            <view class="picker">
+                <input disabled placeholder="分类" value="{{title[index2]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+    <view class="section" style="width:{{parentid==0?'33.33%':'50%'}}">
+        <picker bindchange="bindThreeChange" range="{{array3}}" value="{{index3}}">
+            <view class="picker">
+                <input disabled placeholder="筛选" value="{{array3[index3]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+</view>
+<view class="noadd" wx:if="{{Xiangmu.length==0}}">
+    <image mode="aspectFit" src="../../resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="list">
+    <view class="list_item" wx:for="{{Xiangmu}}" wx:key="Xiangmu">
+        <navigator class="df" hoverClass="none" style="align-items: flex-start;" url="../detail/detail?id={{item.x_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.x_thumb}}"></image>
+                <view class="xingshi">{{item['x_xingshi']}}</view>
+            </view>
+            <view class="intro">
+                <view class="title df jsb">
+                    <view class="fs30 line_one" style="max-width:70%;">
+                {{item.x_name}}
+              </view>
+                    <view class="fs22" style="color:#999">{{item.juli}}km</view>
+                </view>
+                <view class="pingfen df">
+                    <image src="/hyb_o2o/resource/images/star.png" wx:for="{{5}}"></image>
+                    <view class="pingfen-num fs22" style="color:#999">好评5分</view>
+                </view>
+                <view class="dingwei">
+                    <image src="/hyb_o2o/resource/images/lo.png"></image>
+                    <text class="fs26" style="color:#666;">{{item.s_address}}</text>
+                </view>
+                <view class="xmmoney df fs22">
+                    <view class="color_red fs32">￥{{item.x_jiage}}</view>
+                    <view style="color:#999">￥{{item.x_yjiage}}<text class="xian"></text>
+                    </view>
+                    <view>
+                        <image src="/hyb_o2o/resource/images/pinglun.png"></image>
+                        <text style="color:#999">{{item.pinlunshu}}/次</text>
+                    </view>
+                    <view>
+                        <image src="/hyb_o2o/resource/images/buy.png"></image>
+                        <text style="color:#999">{{item.xiadancount}}/单</text>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

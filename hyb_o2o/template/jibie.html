@@ -1,0 +1,162 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+     /*个人自定义*/
+  .form-controls .img-thumbnail{
+      width:200px;
+      height:200px;
+  }
+</style>
+{if $op == 'display'}
+<div class="pull-right">
+    <a href="{php echo $this->createWeburl('jibie', array('op'=>'post'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加会员级别</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>等级名称</td>
+            <td>等级图标</td>
+            <td>等级折扣</td>
+            <!-- <td>按充值成长</td>
+            <td>按消费成长</td> -->
+            <td>会员金额</td>
+            <td>赠送金额</td>
+            <td>等级说明</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['j_name']}
+            </td>
+            <td>
+                <img src="{media $item['j_thumb']}" style="width:50px;height:50px;" alt="">
+            </td>
+            <td>
+                {$item['j_zhekou']}
+            </td>
+            <!-- <td>
+                {if $item['j_chong']==0}
+                关闭
+                {/if}
+                {if $item['j_chong']!=0}
+                充值满{$item['j_chong']}元
+                {/if}
+            </td>
+            <td>
+                {if $item['j_xiaofei']==0}
+                关闭
+                {/if}
+                {if $item['j_xiaofei']!=0}
+                消费满{$item['j_xiaofei']}元
+                {/if}
+            </td> -->
+            <td>
+                {$item['j_money']}
+            </td>
+            <td>
+                {$item['j_song']}
+            </td>
+            <td>
+                {$item['j_content']}
+            </td>
+            <td class="text-center">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('jibie', array('id' => $item['id'], 'op' =>'post'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('jibie', array('id' => $item['id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $op == 'post'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加会员级别</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >等级名称</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_name" name="j_name" value="{$items['j_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">等级名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">等级图标</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('j_thumb', $items['j_thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">等级图标</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >折扣</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_zhekou" name="j_zhekou" value="{$items['j_zhekou']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">折扣</div>
+            </div>
+           <!--  <div class="form-group">
+                <label for="" class="control-label col-sm-1" >充值成长</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_chong" name="j_chong" value="{$items['j_chong']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">充值满升级为此会员（0为关闭此功能，默认为关闭）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >消费成长</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_xiaofei" name="j_xiaofei" value="{$items['j_xiaofei']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">消费满升级为此会员（0为关闭此功能，默认为关闭）</div>
+            </div> -->
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >等级说明</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <textarea id="j_content" name="j_content" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">{$items['j_content']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">等级说明</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >会员金额设置</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_money" name="j_money" value="{$items['j_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">会员金额设置</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >赠送金额</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_song" name="j_song" value="{$items['j_song']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">赠送金额</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}
+<!-- {template 'common/footer'} -->

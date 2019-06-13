@@ -1,0 +1,201 @@
+<view wx:if="{{typs=='sj'}}">
+    <form bindsubmit="formSubmit">
+        <view class="top tc mb20" style="height:70px;">
+            <view style="float:left;width:60%;margin-top:10px;">
+                <view class="fs28 mb10">账户余额(元)</view>
+                <view class="fs30" wx:if="{{Sjmoney.s_money==''}}">￥0</view>
+                <view class="fs30" wx:else>￥{{Sjmoney.s_money}}</view>
+            </view>
+            <view bindtap="link_txmx" data-typs="sj" style="float:left;width:25%;margin-top:10px;">
+                <view class="fs28 mb10">累计提现(元)</view>
+                <view class="fs30">￥{{sjtixian?sjtixian:0}}</view>
+                <view class="fs30">点此查看记录</view>
+            </view>
+        </view>
+        <view class="switchTab df jsb fs30">
+            <view bindtap="switchTab" class="sw_item tc {{cur==index?'sel':''}}" data-index="{{index}}" style="width:{{100/withDraw.length}}%" wx:for="{{withDraw}}">{{item}}</view>
+        </view>
+        <view class="part" wx:if="{{cur==0}}">
+            <view class="fs30">
+                <view class="df p_item border_bot_2">
+                    <label for="name">持卡人</label>
+                    <input name="name" placeholder="持卡人姓名" type="text"></input>
+                </view>
+                <view class="df p_item border_bot_2">
+                    <label for="cardNum">卡号</label>
+                    <input name="cardNum" placeholder="卡号" type="number"></input>
+                </view>
+                <view class="df p_item">
+                    <label for="place">开户行地址</label>
+                    <input name="place" placeholder="开户行地址" type="text"></input>
+                </view>
+            </view>
+        </view>
+        <view class="part" wx:if="{{cur==1}}">
+            <view class="fs30">
+                <view class="df p_item border_bot_2">
+                    <label for="name">姓名</label>
+                    <input name="name" placeholder="请填写姓名" type="text"></input>
+                </view>
+                <view class="df p_item">
+                    <label for="cardNum">账号</label>
+                    <input name="cardNum" placeholder="支付宝账号" type="number"></input>
+                </view>
+            </view>
+        </view>
+        <view class="input_box">
+            <view class="title fs28">提现金额（元）</view>
+            <view class="df border_bot_2" style="padding:30rpx 0">
+                <text class="fw 30">￥</text>
+                <view>
+                    <input bindinput="input" name="t_money" placeholder="0.00" type="digit" value="{{money}}"></input>
+                </view>
+            </view>
+            <view class="p20 fs28">手续费 {{tianxshezhi.shouxufei}}% 
+       <text class="right">提现金额不可超过账户余额</text>
+            </view>
+            <view class="p20 fs28"> 备注：</view>
+            <view class="p20 fs28" style="color:red">1.手续费从账户余额中扣除。</view>
+            <text class="p20 fs28" style="color:red">2.若提现后余额不够手续费，则从提现金额中扣除。</text>
+        </view>
+        <input hidden="true" name="s_money" type="text" value="{{Sjmoney.s_money}}"></input>
+        <input hidden="true" name="shouxufei" type="text" value="{{tianxshezhi.shouxufei}}"></input>
+        <input hidden="true" name="id" type="text" value="{{Sjmoney.s_id}}"></input>
+        <button class="btn fs28" formType="submit" wx:if="{{btns==true}}">提现</button>
+        <button disabled class="btn fs28" style="background:#eee;" wx:else>提现</button>
+    </form>
+</view>
+<view wx:if="{{typs=='yg'}}">
+    <form bindsubmit="formSubmit">
+        <view class="top tc mb20" style="height:70px;">
+            <view style="float:left;width:60%;margin-top:10px;">
+                <view class="fs28 mb10">账户余额(元)</view>
+                <view class="fs30" wx:if="{{ygmoney.y_money==''}}">￥0</view>
+                <view class="fs30" wx:else>￥{{ygmoney.y_money}}</view>
+            </view>
+            <view bindtap="link_txmx" data-typs="yg" style="float:left;width:25%;margin-top:10px;">
+                <view class="fs28 mb10">累计提现(元)</view>
+                <view class="fs30">￥{{ygtixian?ygtixian:0}}</view>
+                <view class="fs30">点此查看记录</view>
+            </view>
+        </view>
+        <view class="switchTab df jsb fs30">
+            <view bindtap="switchTab" class="sw_item tc {{cur==index?'sel':''}}" data-index="{{index}}" style="width:{{100/withDraw.length}}%" wx:for="{{withDraw}}">{{item}}</view>
+        </view>
+        <view class="part" wx:if="{{cur==0}}">
+            <view class="fs30">
+                <view class="df p_item border_bot_2">
+                    <label for="name">持卡人</label>
+                    <input name="name" placeholder="持卡人姓名" type="text"></input>
+                </view>
+                <view class="df p_item border_bot_2">
+                    <label for="cardNum">卡号</label>
+                    <input name="cardNum" placeholder="卡号" type="number"></input>
+                </view>
+                <view class="df p_item ">
+                    <label for="place">开户行地址</label>
+                    <input name="place" placeholder="请输入开户行地址" type="text"></input>
+                </view>
+            </view>
+        </view>
+        <view class="part" wx:if="{{cur==1}}">
+            <view class="fs30">
+                <view class="df p_item border_bot_2">
+                    <label for="name">姓名</label>
+                    <input name="name" placeholder="请填写姓名" type="text"></input>
+                </view>
+                <view class="df p_item">
+                    <label for="cardNum">账号</label>
+                    <input name="cardNum" placeholder="支付宝账号" type="number"></input>
+                </view>
+            </view>
+        </view>
+        <view class="input_box">
+            <view class="title fs28">提现金额（元）</view>
+            <view class="df border_bot_2" style="padding:30rpx 0">
+                <text class="fw 30">￥</text>
+                <view>
+                    <input bindinput="input" name="t_money" placeholder="0.00" type="digit" value="{{money}}"></input>
+                </view>
+            </view>
+            <view class="p20 fs28">手续费 {{tianxshezhi.shouxufei}}% 
+       <text class="right">提现金额不可超过账户余额</text>
+            </view>
+            <view class="p20 fs28"> 备注：</view>
+            <view class="p20 fs28" style="color:red">1.手续费从账户余额中扣除。</view>
+            <text class="p20 fs28" style="color:red">2.若提现后余额不够手续费，则从提现金额中扣除。</text>
+        </view>
+        <input hidden="true" name="s_money" type="text" value="{{ygmoney.y_money}}"></input>
+        <input hidden="true" name="shouxufei" type="text" value="{{tianxshezhi.shouxufei}}"></input>
+        <input hidden="true" name="id" type="text" value="{{ygmoney.y_id}}"></input>
+        <button class="btn fs28" formType="submit" wx:if="{{btns==true}}">提现</button>
+        <button disabled class="btn fs28" style="background:#eee;" wx:else>提现</button>
+    </form>
+</view>
+<view wx:if="{{typs=='yh'}}">
+    <form bindsubmit="formSubmit">
+        <view class="top tc mb20" style="height:70px;">
+            <view style="float:left;width:60%;margin-top:10px;">
+                <view class="fs28 mb10">账户余额(元)</view>
+                <view class="fs30" wx:if="{{Yhmoney.u_money==''}}">￥0</view>
+                <view class="fs30" wx:else>￥{{Yhmoney.u_money}}</view>
+            </view>
+            <view bindtap="link_txmx" data-typs="sj" style="float:left;width:25%;margin-top:10px;">
+                <view class="fs28 mb10">累计提现(元)</view>
+                <view class="fs30">￥{{yhtixian?yhtixian:0}}</view>
+                <view class="fs30">点此查看记录</view>
+            </view>
+        </view>
+        <view class="switchTab df jsb fs30">
+            <view bindtap="switchTab" class="sw_item tc {{cur==index?'sel':''}}" data-index="{{index}}" style="width:{{100/withDraw.length}}%" wx:for="{{withDraw}}">{{item}}</view>
+        </view>
+        <view class="part" wx:if="{{cur==0}}">
+            <view class="fs30">
+                <view class="df p_item border_bot_2">
+                    <label for="name">持卡人</label>
+                    <input name="name" placeholder="持卡人姓名" type="text"></input>
+                </view>
+                <view class="df p_item border_bot_2">
+                    <label for="cardNum">卡号</label>
+                    <input name="cardNum" placeholder="卡号" type="number"></input>
+                </view>
+                <view class="df p_item">
+                    <label for="place">开户行地址</label>
+                    <input name="place" placeholder="开户行地址" type="text"></input>
+                </view>
+            </view>
+        </view>
+        <view class="part" wx:if="{{cur==1}}">
+            <view class="fs30">
+                <view class="df p_item border_bot_2">
+                    <label for="name">姓名</label>
+                    <input name="name" placeholder="请填写姓名" type="text"></input>
+                </view>
+                <view class="df p_item">
+                    <label for="cardNum">账号</label>
+                    <input name="cardNum" placeholder="支付宝账号" type="number"></input>
+                </view>
+            </view>
+        </view>
+        <view class="input_box">
+            <view class="title fs28">提现金额（元）</view>
+            <view class="df border_bot_2" style="padding:30rpx 0">
+                <text class="fw 30">￥</text>
+                <view>
+                    <input bindinput="input" name="t_money" placeholder="0.00" type="digit" value="{{money}}"></input>
+                </view>
+            </view>
+            <view class="p20 fs28">手续费 {{tianxshezhi.shouxufei}}% 
+       <text class="right">提现金额不可超过账户余额</text>
+            </view>
+            <view class="p20 fs28"> 备注：</view>
+            <view class="p20 fs28" style="color:red">1.手续费从账户余额中扣除。</view>
+            <text class="p20 fs28" style="color:red">2.若提现后余额不够手续费，则从提现金额中扣除。</text>
+        </view>
+        <input hidden="true" name="s_money" type="text" value="{{Yhmoney.u_money}}"></input>
+        <input hidden="true" name="shouxufei" type="text" value="{{tianxshezhi.shouxufei}}"></input>
+        <input hidden="true" name="id" type="text" value="{{Yhmoney.u_id}}"></input>
+        <button class="btn fs28" formType="submit" wx:if="{{btns==true}}">提现</button>
+        <button disabled class="btn fs28" style="background:#eee;" wx:else>提现</button>
+    </form>
+</view>

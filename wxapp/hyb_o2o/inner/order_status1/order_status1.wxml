@@ -1,0 +1,168 @@
+<view class="top df mb20">
+    <view bindtap="switch_tab" class="p20 to {{currentTab==index?'bb':''}}" data-index="{{index}}" style="width:{{100/top.length}}%" wx:for="{{top}}" wx:key="top">
+        <view class="fs28 top_item">
+            <view>{{item.name}}</view>
+        </view>
+    </view>
+</view>
+<view class="noadd" wx:if="{{order_list.length==0}}">
+    <image mode="widthFix" src="../../resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无订单</view>
+</view>
+<view class="list" wx:if="{{currentTab==0}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text" wx:if="{{item.o_type=='未支付'}}">待付款</text>
+            <text class="right_text" wx:if="{{item.o_type=='已付款'}}">待发货</text>
+            <text class="right_text" wx:if="{{item.o_type=='已发货'}}">待收货</text>
+            <text class="right_text" wx:if="{{item.o_type=='已完成'&&item.o_pingjia==1}}">已完成</text>
+            <text class="right_text" wx:if="{{item.o_type=='已完成'&&item.o_pingjia==0}}">待评价</text>
+            <text class="right_text" wx:if="{{item.o_type=='已取消'}}">已取消</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.o_id}}">
+            <view class="img">
+                <image src="{{item.g_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.g_name}}</view>
+                <view>总价：￥{{item.o_count_money}}元</view>
+            </view>
+        </view>
+        <view class="bot p20 df jsb">
+        {{item.o_xdtime}}
+        <view class="tr" wx:if="{{item.o_type=='未支付'}}">
+                <text bindtap="cancel_order" class="bot_btn" data-id="{{item.o_id}}">取消订单</text>
+                <text bindtap="pay_order" class="bot_btn se" data-id="{{item.o_id}}">立即支付</text>
+            </view>
+            <view class="tr" wx:if="{{item.o_type=='已付款'}}">
+                <text bindtap="cancel_order" class="bot_btn" data-id="{{item.o_id}}">申请退款</text>
+                <text bindtap="cuidan" class="bot_btn se" data-id="{{item.o_id}}">确认收货</text>
+            </view>
+            <view class="tr" wx:if="{{item.o_type=='已发货'}}">
+                <text bindtap="cuidan" class="bot_btn se" data-id="{{item.o_id}}">确认收货</text>
+            </view>
+            <view class="tr" wx:if="{{item.o_type=='申请退款'}}">
+                <text class="bot_btn">申请退款中</text>
+            </view>
+            <view class="tr" wx:if="{{item.o_type=='已完成'&&item.o_pingjia==0}}">
+                <text bindtap="del_order" class="bot_btn" data-id="{{item.o_id}}">删除</text>
+                <text bindtap="pingjia_order" class="bot_btn se" data-g_thumb="{{item.g_thumb}}" data-o_id="{{item.o_id}}">评价</text>
+            </view>
+            <view class="tr" wx:if="{{item.o_type=='已完成'&&item.o_pingjia==1}}">
+                <text bindtap="del_order" class="bot_btn" data-id="{{item.o_id}}">删除</text>
+            </view>
+            <view class="tr" wx:if="{{item.o_type=='已取消'}}">
+                <text bindtap="del_order" class="bot_btn" data-id="{{item.o_id}}">删除</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==1}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text" wx:if="{{item.o_type=='未支付'}}">待付款</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.g_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.g_name}}</view>
+                <view>总价：￥{{item.o_count_money}}元</view>
+            </view>
+        </view>
+        <view class="bot p20 df jsb">
+        {{item.o_xdtime}}
+        <view class="tr" wx:if="{{item.o_type=='未支付'}}">
+                <text bindtap="cancel_order" class="bot_btn" data-id="{{item.o_id}}" data-typs="{{item.o_type}}">取消订单</text>
+                <text bindtap="pay_order" class="bot_btn se" data-id="{{item.o_id}}">立即支付</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==2}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text">待收货</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.g_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.g_name}}</view>
+                <view>总价：￥{{item.o_count_money}}元</view>
+            </view>
+        </view>
+        <view class="bot p20 df jsb">
+        {{item.o_xdtime}}
+        <view class="tr" wx:if="{{item.o_type=='已付款'}}">
+                <text bindtap="cancel_order" class="bot_btn" data-id="{{item.o_id}}">申请退款</text>
+                <text bindtap="cuidan" class="bot_btn se" data-id="{{item.o_id}}">确认收货</text>
+            </view>
+            <view class="tr" wx:if="{{item.o_type=='已发货'}}">
+                <text bindtap="cuidan" class="bot_btn se" data-id="{{item.o_id}}">确认收货</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==3}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text">待评价</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.g_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.g_name}}</view>
+                <view>总价：￥{{item.o_count_money}}元</view>
+            </view>
+        </view>
+        <view class="bot p20 df jsb">
+        {{item.o_xdtime}}
+        <view class="tr" wx:if="{{item.o_type=='已完成'&&item.o_pingjia==0}}">
+                <text bindtap="del_order" class="bot_btn" data-id="{{item.o_id}}">删除</text>
+                <text bindtap="pingjia_order" class="bot_btn se" data-g_thumb="{{item.g_thumb}}" data-o_id="{{item.o_id}}">评价</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==4}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text" wx:if="{{item.o_type=='已退款'}}">已退款</text>
+            <text class="right_text" wx:if="{{item.o_type=='申请退款'}}">申请退款中</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.g_thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.g_name}}</view>
+                <view>总价：￥{{item.o_count_money}}元</view>
+            </view>
+        </view>
+        <view class="bot p20 df jsb">
+        {{item.o_xdtime}}
+        <view class="tr">
+                <text bindtap="del_order" class="bot_btn se" data-currentTab="{{currentTab}}" data-id="{{item.o_id}}">删除</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="close_hx" class="modal_img" wx:if="{{img_true}}"></view>
+<view class="er_img" wx:if="{{img_true}}">
+    <image src="{{hx_img}}"></image>
+</view>

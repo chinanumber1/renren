@@ -1,0 +1,254 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcss.css">
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li class="active"><a href="javascript:void(0);">短信通知</a></li>
+</ul>
+  <div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="invitative">
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                系统设置&nbsp;>&nbsp;短信通知
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                <label for="" class="control-label col-sm-1">accessKeyId</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="accessKeyId"  value="{$item['accessKeyId']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">阿里短信accessKeyId</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">accessKeySecret</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="accessKeySecret"  value="{$item['accessKeySecret']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">阿里短信accessKeySecret</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">SignName</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="SignName"  value="{$item['SignName']}"  class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">阿里短信SignName</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">验证码通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="yzm" value="{$item['yzm']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                      <div style="color: red;">模版类型：验证码通知，模版CODE示例：SMS_135034418  模版内容示例：您的验证码为${code}，请在5分钟之内输入。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于商家/技师审核通知</div>
+            </div>
+            
+         
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商家入驻通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="sjrztz" value="{$item['sjrztz']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                      <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139236336  模版内容示例：您有新的商家申请入驻，请及时查看。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于商家入驻通知</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">员工/技师入驻通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="rztz" value="{$item['rztz']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139236321  模版内容示例：您有新的技师申请入驻，请及时查看。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于工/技师入驻通知</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商家/员工/技师审核通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="shtz" value="{$item['shtz']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                      <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139225706  模版内容示例：姓名为${name}的用户，您的${content}入驻申请已通过，欢迎加入</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于商家/员工/技师审核通知</div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">用户下单服务通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="xdtzyg" value="{$item['xdtzyg']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139231158  模版内容示例：您有新的服务订单产生，名称为${name}，日期为${daytime}时间为${time}，联系人为${content}，联系方式为${tel}。</div>
+                </div>
+                <div class="col-sm-1"></div>s
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知员工</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">用户下单派单通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="pdtzyh" value="{$item['pdtzyh']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版CODE示例：SMS_139230743  模版内容示例：您预约订单编号为${ordersn}的服务，服务日期为${daytime}服务时间为${time},服务人员为${content},联系方式为${tel},请及时查看订单。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知用户</div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">员工派单通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="pdtzyg" value="{$item['pdtzyg']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_1392225794  模版内容示例：您有一个公司的指派订单，订单编号为${ordersn},服务日期为${daytime}服务时间为${time},请及时查看订单。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知员工</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">用户发单审核通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fdtzsh" value="{$item['fdtzsh']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：验证码，模版CODE示例：SMS_139241459  模版内容示例：尊敬的${name},您于${time}发布的${content}服务已审核通过，等待接单，请您耐心等待。</div>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">平台发单通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fdtz" value="{$item['fdtz']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139240789 模版内容示例：尊敬的${name},您服务的区域有新的订单产生，请您及时查看。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知该区域下的商家进行抢单</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商家抢单通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="qdtzyh" value="{$item['qdtzyh']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139226679  模版内容示例：尊敬的${name},您发布的${content}服务，已被${shop}接单，5分钟内会与您联系。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知用户</div>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">发单服务通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fdtzyh" value="{$item['fdtzyh']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139231158  模版内容示例：您发布的${name}已被接单，服务时间为${time},服务人员为${content},联系方式为${tel},请及时查看联系。</div>
+                </div>
+                <div class="col-sm-1"></div>s
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知用户</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">发单服务通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fdtzyg" value="{$item['fdtzyg']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139231158  模版内容示例：您有新的服务订单待您查看，服务名称${name}，服务时间为${time},用户联系方式为${tel},请及时联系。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知员工</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">发单服务开始通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fdtzfwk" value="{$item['fdtzfwk']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139241695 模版内容示例：服务名称为${name}的订单，${content}已经开始服务,请及时查看。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知商家</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">发单服务完成通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fdtzfww" value="{$item['fdtzfww']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139241695 模版内容示例：服务名称为${name}的订单，${content}已经完成服务,请及时查看。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知商家</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">订单服务开始通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="ddtzsjkf" value="{$item['ddtzsjkf']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                     <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139226390 模版内容示例：订单编号为${name}，服务日期为${daytime}服务时间为${time}，服务人员${content}已确认开始服务，请及时查看。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知商家</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">订单服务完成通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="ddtzsjwc" value="{$item['ddtzsjwc']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139226390 模版内容示例：订单编号为${name}的订单已经完成服务，服务人员${content},请您指派新的任务。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知商家</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">请求付款通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="ddtzzf" value="{$item['ddtzzf']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139226995 模版内容示例：订单编号为${name}的订单已经完成，请您支付剩余服务费用${money}，感谢您的积极配合我们的服务。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知用户</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">员工确认支付通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="ddtzzfq" value="{$item['ddtzzfq']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_139227002 模版内容示例：订单编号为${name}的订单服务人员${content}已确认尾款支付成功,支付方式为${type}金额为${money}，请及时查看。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知商家</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">上门报价通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="baojia" value="{$item['baojia']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_142383262 模版内容示例：订单编号为${name}，服务名称为${conrtent}，商家报价为${money}，请及时查看如若同意请点击同意报价并支付反之请点击不同意报价订单关闭。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知用户</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">上门报价同意通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="tybaojia" value="{$item['tybaojia']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_142383262 模版内容示例：服务名称为${name}的服务，发布者已同意您的报价，请及时查看联系。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知商家户</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">上门报价不同意通知</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="btybaojia" value="{$item['btybaojia']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                    <div style="color: red;">模版类型：短信通知，模版CODE示例：SMS_142383262 模版内容示例：服务名称为${name}的服务，发布者未同意您的报价，请及时查看联系。</div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">用于通知商家户</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" name="submit" value="保存设置" class="btn col-lg-3" style="color: white;background-color: #44ABF7;" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+            <input type="hidden" name="id" value="{$item['id']}"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        // $("#frame-14").addClass("in");
+        $("#frame-14").show();
+        $("#yframe-14").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

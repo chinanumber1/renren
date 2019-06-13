@@ -1,0 +1,132 @@
+<form bindsubmit="formSubmit">
+    <view>
+        <view class="top df jsb">
+            <view bindtap="back" class="line_one" style="width:95%">您选择的服务类别是： {{yiji}} > {{erji}}</view>
+            <view class="arrow df">
+                <image src="/hyb_o2o/resource/images/arrow_f.png"></image>
+            </view>
+        </view>
+        <view class="list">
+            <view class="item border_bot_2">
+                <view class="input fs28">
+                    <input bindinput="input_biaoti" maxlength="20" name="server_name" placeholder="请输入服务名称" style="width:95%" type="text"></input>
+                    <view class="name_num" style="color:#999999">{{num}}/20</view>
+                </view>
+            </view>
+            <view class="item">
+                <view class="input fs28">
+                    <textarea autoHeight bindinput="input_biaoti" hidden="{{edit_charge}}" maxlength="100" name="server_intro" placeholder="请详细填写服务内容，方便商家精准服务" style="width:100%" type="text"></textarea>
+                </view>
+            </view>
+            <view class="item mb20" style="padding-top:0;">
+                <view class="imgList df">
+                    <view class="item_img" wx:for="{{imgList}}">
+                        <image mode="aspectFit" src="{{item}}"></image>
+                        <image bindtap="del" class="del" data-index="{{index}}" src="/hyb_o2o/resource/images/del.png"></image>
+                    </view>
+                    <image bindtap="choosePic" class="item_img" src="/hyb_o2o/resource/images/upImg_icon.png"></image>
+                </view>
+            </view>
+            <view class="content">
+                <view class="part border_bot_2">
+                    <view class="c_title fs30 fw p20">付款方式</view>
+                    <view>
+                        <radio-group bindchange="radioChange" class="radio-group df " style="margin:0 120rpx;">
+                            <label class="radio charge_item" wx:for="{{items}}">
+                                <radio checked="{{charge==item.value}}" value="{{item.value}}"></radio>{{item.value}}
+              </label>
+                        </radio-group>
+                    </view>
+                    <view class="fs24 p20 color666" wx:if="{{charge!=''&&charge==item.value}}" wx:for="{{items}}">{{item.text}}</view>
+                    <view class="fs24 p20 color666" wx:if="{{charge==''}}">{{items[0].text}}</view>
+                </view>
+                <view class="part border_bot_2 df" wx:if="{{charge=='一口价'}}">
+                    <view class="c_title fs30 fw">价格</view>
+                    <view class="input fs28 df" style="margin-left:auto;width:60%">
+                        <input bindblur="input_blur" class="tr" name="money" placeholder="请填写服务费用" style="margin-left:auto" type="digit" value="{{money}}"></input>
+                    </view>
+                </view>
+                <view class="part border_bot_2 df" wx:if="{{charge!='上门估价'}}">
+                    <view class="c_title fs30 fw">市场参考价</view>
+                    <view class="input fs28 df" style="margin-left:auto;width:60%">
+                        <text class="tr" style="margin-left:auto;color:red;" type="digit">{{erjiprice}}元</text>
+                    </view>
+                </view>
+                <view class="part border_bot_2 df" wx:if="{{charge=='上门估价'}}">
+                    <view class="c_title fs30 fw">上门费用</view>
+                    <view class="input fs28 df" style="margin-left:auto;width:60%">
+                        <input class="tr" disabled="true" name="smfy" placeholder="请填写上门费用" style="margin-left:auto" type="digit" value="{{smfy}}"></input>
+                    </view>
+                </view>
+            </view>
+            <view class="item border_bot_2 df jsb mb20">
+                <view class="title">服务时间</view>
+                <view class="input fs28 df">
+                    <picker bindchange="bindDate" mode="date" style="width:180rpx;margin-left:auto">
+                        <view class="picker tr">
+                            <input disabled name="server_date" placeholder="{{date}}" type="text" value="{{date}}"></input>
+                        </view>
+                    </picker>
+                    <picker bindchange="bindTime" mode="time" style="width:120rpx;">
+                        <view class="picker tr">
+                            <input disabled name="server_Time" placeholder="{{time}}" type="text" value="{{time}}"></input>
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="item  border_bot_2">
+                <view class="c_title fs30 fw p20">支付方式</view>
+                <view>
+                    <radio-group bindchange="radioChange_pay" class="radio-group df ">
+                        <label class="radio charge_item" wx:for="{{payTypes}}">
+                            <radio checked="{{paytype==item}}" value="{{item}}"></radio>{{item}}
+                <input hidden="hidden" name="paytype" value="{{paytype}}"></input>
+                        </label>
+                    </radio-group>
+                </view>
+            </view>
+            <view bindtap="open_map" class="item border_bot_2 df">
+                <view class="title">获取位置</view>
+                <view class="input fs28 df" style="margin-left:auto;width:60%">
+                    <input disabled class="tr" name="location" placeholder="请点击获取位置" style="margin-left:auto" type="text" value="{{location}}"></input>
+                    <image class="arrow_r" src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+                </view>
+            </view>
+            <view class="item border_bot_2 df">
+                <view class="title">详细地址</view>
+                <view class="input fs28 df" style="margin-left:auto;width:60%">
+                    <input class="tr" name="address_detail" placeholder="请输入详细地址" style="margin-left:auto" type="text"></input>
+                    <image class="arrow_r" src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+                </view>
+            </view>
+            <view class="item border_bot_2 df">
+                <view class="title">联系人</view>
+                <view class="input fs28 df" style="margin-left:auto;width:60%">
+                    <input class="tr" name="name" placeholder="请填写联系人姓名" style="margin-left:auto" type="text"></input>
+                    <image class="arrow_r" src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+                </view>
+            </view>
+            <view class="item border_bot_2 df">
+                <view class="title">联系方式</view>
+                <view class="input fs28 df" style="margin-left:auto;width:760%">
+                    <input bindblur="getTel" class="tr" maxlength="13" name="telphone" placeholder="请填写手机号" style="margin-left:auto;width:100%;" type="number" value="{{userInfo.u_tel}}"></input>
+                </view>
+            </view>
+        </view>
+    </view>
+    <input hidden="true" name="openid" value="{{openid}}"></input>
+    <input hidden name="fenlei_one" value="{{yiji}}"></input>
+    <input hidden name="fenlei_two" value="{{erji}}"></input>
+    <input hidden="true" name="longitude" value="{{longitude}}"></input>
+    <input hidden="true" name="latitude" value="{{latitude}}"></input>
+    <input hidden="true" name="money" value="{{money}}"></input>
+    <input hidden="true" name="diff" value="{{diff}}"></input>
+    <input hidden="true" name="bangding" value="{{userInfo.bangding}}"></input>
+    <button class="submit" formType="submit" size="mini">确认发布</button>
+</form>
+<view catchtouchmove="disscroll" class="phonemoadl" hidden="!{{userInfo.bangding}}">
+    <view class="moadlbox">
+        <view>绑定手机号才可以发单哦！</view>
+        <view bindtap="phonebd">去绑定</view>
+    </view>
+</view>

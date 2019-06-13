@@ -1,0 +1,113 @@
+<view class="order_top fs30 df" wx:if="{{typs=='yonghu'}}">
+    <view class="dian"></view> 未处理订单  <text style="margin-left:20rpx"> {{list.count}}</text>
+</view>
+<view class="order_top fs30 df" wx:if="{{typs=='shangjia'}}">
+    <view class="dian"></view>未处理订单  <text style="margin-left:20rpx"> {{list.count}}</text>
+</view>
+<view class="order_item border_bot_20">
+    <view class="title border_bot_2 df jsb">服务订单 <view bindtap="order_default" class="xiadan">去下单 <image class="a_right" src="/hyb_o2o/resource/images/right_sel.png"></image>
+        </view>
+    </view>
+    <view class="df bot">
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status/order_status?id=1&typs={{typs}}">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon1.png"></image>
+                </view>
+                <view>待付款 <text class="color_pink">{{list.fwweizhifu}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status/order_status?id=2&typs={{typs}}">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon2.png"></image>
+                </view>
+                <view>待使用 <text class="color_pink">{{list.fwyifukuan}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status/order_status?id=3&typs={{typs}}">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon3.png"></image>
+                </view>
+                <view>待评价 <text class="color_pink">{{list.fwyiwancheng}}</text>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<view class="order_item" wx:if="{{typs=='yonghu'}}">
+    <view class="title border_bot_2 df jsb">商品订单 
+    <view bindtap="order_defaul_goods" class="xiadan">去下单 <image class="a_right" src="/hyb_o2o/resource/images/right_sel.png"></image>
+        </view>
+    </view>
+    <view class="df bot">
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status1/order_status1?id=1&typs={{typs}}">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon1.png"></image>
+                </view>
+                <view>待付款 <text class="color_pink">{{list.spweizhifu}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status1/order_status1?id=2&typs={{typs}}">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon2.png"></image>
+                </view>
+                <view>待收货 <text class="color_pink">{{list.spyifukan}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status1/order_status1?id=3&typs={{typs}}">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon3.png"></image>
+                </view>
+                <view>待评价 <text class="color_pink">{{list.spyiwancheng}}</text>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<view class="order_item" wx:if="{{typs=='yonghu'}}">
+    <view class="title border_bot_2 df jsb">积分订单 
+    <view bindtap="order_jifen_goods" class="xiadan">去下单 <image class="a_right" src="/hyb_o2o/resource/images/right_sel.png"></image>
+        </view>
+    </view>
+    <view class="df bot">
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status2/order_status2?id=1">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon1.png"></image>
+                </view>
+                <view>待发货<text class="color_pink">{{list.jfdaifahuo}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status2/order_status2?id=2">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon2.png"></image>
+                </view>
+                <view>待收货 <text class="color_pink">{{list.jfdaishouhuo}}</text>
+                </view>
+            </navigator>
+        </view>
+        <view>
+            <navigator hoverClass="none" url="../inner/order_status2/order_status2?id=3">
+                <view class="icon">
+                    <image src="/hyb_o2o/resource/images/order_icon3.png"></image>
+                </view>
+                <view>已完成 <text class="color_pink">{{list.jfyiwancheng}}</text>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data></template>
+<view bindtap="goIndex" class="go_index fs30">返回首页</view>

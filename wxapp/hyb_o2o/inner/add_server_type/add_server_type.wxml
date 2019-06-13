@@ -1,0 +1,30 @@
+<view class="wrap" wx:if="{{xmstyle[0].pingtai=='1'}}">
+    <view class="item" wx:for="{{xmstyle}}" wx:for-item="fenlei" wx:key="message">
+        <view class="title">
+            <image class="icon" src="{{fenlei.xt_thumb}}"></image> {{fenlei.xt_name}}</view>
+        <view class="child">
+            <view bindtap="choose" class="c_item" data-parent="{{fenlei.xt_name}}" data-xt_name="{{item.xt_name}}" wx:for="{{fenlei.erji}}" wx:key="child">
+                <view class="img">
+                    <image src="{{item.xt_thumb}}"></image>
+                </view>
+                <view>{{item.xt_name}}</view>
+            </view>
+            <view wx:if="{{fenlei.erji.length==0}}">暂无数据</view>
+        </view>
+    </view>
+</view>
+<view class="wrap" wx:if="{{xmstyle.pingtai=='0'}}">
+    <view class="item">
+        <view class="title">
+            <image class="icon" src="{{xmstyle.xt_thumb}}"></image> {{xmstyle.xt_name}}</view>
+        <view class="child">
+            <view bindtap="choose" class="c_item" data-parent="{{xmstyle.xt_name}}" data-xt_name="{{item.xt_name}}" wx:for="{{xmstyle.erji}}" wx:key="child">
+                <view class="img">
+                    <image src="{{item.xt_thumb}}"></image>
+                </view>
+                <view>{{item.xt_name}}</view>
+            </view>
+            <view wx:if="{{xmstyle.erji.length==0}}">暂无数据</view>
+        </view>
+    </view>
+</view>

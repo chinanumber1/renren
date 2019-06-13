@@ -1,0 +1,51 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>用户昵称</td>
+            <td>openid</td>
+            <td>用户头像</td>
+            <td>充值订单号</td>
+            <td>充值金额</td>
+            <td>充值时间</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['user']['u_name']}
+            </td>  
+            <td>
+                {$item['user']['openid']}
+            </td>        
+            <td>
+                <img src="{media $item['user']['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['cnum']}
+            </td>
+            <td>
+                {$item['money']}元
+            </td>
+            <td>
+                {$item['time']}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('chongzhi', array('id' => $item['id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+

@@ -1,0 +1,23 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+.item {
+    padding: 20rpx;
+}
+
+.img {
+    width: 150rpx;
+    height: 150rpx;
+    margin-right: 20rpx;
+}
+
+.status {
+    color: #b0b0b0;
+}
+
+.name {
+}
+
+.right {
+    width: 20rpx;
+    height: 34rpx;
+}

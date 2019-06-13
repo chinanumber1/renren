@@ -1,0 +1,258 @@
+{template 'public/headers'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+        padding: 8px;
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+</style>
+
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li class="active" ><a href="#">商铺信息设置</a></li>
+</ul>
+
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                商家详情
+            </div>
+                <div class="form-group" style="margin-top: 10px;">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">排序</label>
+                <div class="col-sm-9">
+                    <input name="s_ids" class="form-control" value="{$items['s_ids']}" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label"><font color="red">*</font>门店名称</label>
+                <div class="col-sm-9">
+                    <input name="s_name"  id="s_name" class="form-control" value="{$items['s_name']}" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label"">商家负责人</label>
+                <div class="col-sm-9">
+                    <input name="s_u_name" id="s_u_name" class="form-control" value="{$items['s_u_name']}" type="text">
+                    <div class="help-block">* 商户负责人</div>
+                </div>      
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label"> <font color="red">*</font>身份证正面</label>
+             <div class="col-sm-9">
+                    {php echo tpl_form_field_image('s_idcard', $items['s_idcard'])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label"> <font color="red">*</font>身份证反面</label>
+             <div class="col-sm-9">
+                    {php echo tpl_form_field_image('s_idcard2', $items['s_idcard2'])}
+                </div>
+            </div>
+            <input type="hidden" name="s_u_openid" value="{$items['s_u_openid']}" />
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">商家电话</label>
+                <div class="col-sm-9">
+                    <input name="s_telphone" id="s_telphone" class="form-control" value="{$items['s_telphone']}" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label"> <font color="red">*</font>商家logo</label>
+             <div class="col-sm-9">
+                    <!-- {php echo tpl_form_field_image('s_thumb', $items['s_thumb'])} -->
+                     {php echo tpl_form_field_image('s_thumb', $items['s_thumb'])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label" style="margin-right: 15px;"><font color="red">*</font>商家分类</label>
+                <select class="col-sm-8" name="s_type" id="s_type">
+                    <option value="">--请选择--</option>
+                    {loop $type $item}
+                    <option value="{$item['xt_name']}" {if $items['s_type']==$item["xt_name"]} selected {/if} >{$item['xt_name']}</option>
+                    {/loop}
+                </select>
+                <div class="help-block col-md-8 col-md-offset-2">* 请选择商户分类</div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label" ><font color="red">*</font>所属区域</label>
+                <div class="col-sm-9" >
+                    {php echo tpl_form_field_district('s_address', $s_address)}
+                </div>
+                <div class="help-block col-md-8 col-md-offset-2">* 商户所在区域</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label" >商家地址</label>
+                <div class="col-sm-9">
+                    <input type="text" name="s_xxaddress" id="s_xxaddress" value="{$items['s_xxaddress']}" class="form-control"  placeholder="" autocomplete="off">
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <label  class="col-xs-12 col-sm-3 col-md-2 control-label">地址坐标</label>
+                <div class="col-sm-9">
+                    <input class="form-control" value="{$items['wei']},{$items['jing']}" type="text" name="jw">
+                    <div class="form-controls col-sm-4 help-block" style="padding-left: 15px">例如:37.885151,112.528496 <a href="http://lbs.qq.com/tool/getpoint/" target="_blank" style="color:#428BCA"> 经纬度查询 [请用,隔开]</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">商家简介</label>
+                <div class="col-sm-9">
+                    <input name="content" id="content" class="form-control" value="{$items['s_content']}" type="text">
+                    <div class="help-block">* 请填写商家简介</div>
+                </div>     
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">营业时间(开始时间)</label>
+                <div class="col-sm-10">   
+                    <script type="text/javascript">
+                        require(["clockpicker"], function($){
+                            $(function(){
+                                $(".clockpicker").clockpicker({
+                                    autoclose: true
+                                });
+                            });
+                        });
+                    </script>
+                    <div class="input-group clockpicker">
+                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                        <input name="time" value="{$items['s_yingyetime'][0]}" class="form-control" type="text">
+                    </div> 
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">营业时间(结束时间)</label>
+                <div class="col-sm-10">
+                    <div class="input-group clockpicker">
+                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                    <input name="time2" value="{$items['s_yingyetime'][1]}" class="form-control" type="text">
+                </div>  
+            </div>
+           
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 control-label">商家保障</label>
+                <div class="col-sm-10">
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="未服务随时退" type="checkbox" {if in_array('未服务随时退',$items['baozhang'])} checked  {/if}> 未服务随时退
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="标准服务" type="checkbox" {if in_array('标准服务',$items['baozhang'])} checked  {/if}> 标准服务
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="无额外收费"  type="checkbox" {if in_array('无额外收费',$items['baozhang'])} checked  {/if}> 无额外收费
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="安全保障"  type="checkbox" {if in_array('安全保障',$items['baozhang'])} checked  {/if}>安全保障
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="baozhang[]" value="迟到赔" type="checkbox" {if in_array('迟到赔',$items['baozhang'])} checked  {/if}> 迟到赔
+                    </label>
+                    <span class="seebz" style="color: #428BCA">查看保障详情</span>
+                    <p></p>
+                    <div class="help-block">* 备注：可以多选，保障越多，认可度越高</div>
+                </div>
+            </div>
+             <style type="text/css">
+                    .bzbox{width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.5);display: none;z-index: 10;}
+                    .bzbox .bz_inner{width: 30%;background: #fff;padding: 30px;position: relative;left: 50%;top: 50%;transform: translate(-40%,-50%);-webkit-translate:translate(-40%,-50%);-ms-translate:translate(-40%,-50%);-moz-translate:translate(-40%,-50%);}
+                    .seebz{cursor: pointer;vertical-align: middle;margin-left: 30px;padding-top: 7px;}
+                    .bz{margin-bottom: 10px;}
+                    .bz_title{font-size: 15px;font-weight: bold;margin-bottom: 5px;}
+                    .bz_con{font-size: 12px;color: #666;text-indent: 2em;}
+                </style>
+                <div class="bzbox">
+                    <div class="bz_inner">
+                        <div class="bz">
+                            <div class="bz_title">未服务随时退</div>
+                            <p class="bz_con">商家未接单，商家接单未开始服务前，均支持全额退款。用户可以通过在线或致电客服进行取消完成退款操作。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">标准服务</div>
+                            <p class="bz_con">商家承诺按服务内容提供相应服务，如未提供相应服务，可联系客服进行协商处理。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">无额外收费</div>
+                            <p class="bz_con">商家承诺，客户预约时一次性支付全部费用，不再收取任何费用。如有用户投诉，平台或商家将核实解决</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">安全保障</div>
+                            <p class="bz_con">当服务过程中用户产生人身、财产损失、可通过致电商家或平台进行理赔操作。</p>
+                        </div>
+                        <div class="bz">
+                            <div class="bz_title">迟到赔</div>
+                            <p class="bz_con">商家迟到超过15分钟上门服务的，经核实可获得30元代金券。</p>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(".seebz").click(function(){
+                        $(".bzbox").fadeIn();
+                    })
+                    $(".bzbox").click(function(){
+                        $(".bzbox").fadeOut();
+                    })
+                </script>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label">标签</label>
+                <div class="col-sm-6">
+                    <input name="label" class="form-control" value="{$label}" type="text">
+                </div>
+                <div class="input-group multi-img-details" style="color: red">例如:  服务好|质量好</div>                       
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label">营业资质</label>
+                <div class="col-sm-9">
+                    {php echo tpl_form_field_image('s_zhizhao', $items['s_zhizhao'])}
+                </div>
+                <div class="input-group multi-img-details"></div>                       
+            </div>
+              
+            <div class="form-group">
+                <label for="" class="col-xs-12 col-sm-3 col-md-2 control-label" >商家店铺幻灯片</label>
+                <div class="col-sm-9">
+                    {php echo tpl_form_field_multi_image('s_imgpath', $items['s_imgpath'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="input-group multi-img-details"></div>                       
+            </div>
+
+                
+        <div class="form-group" style="margin-top: 20px;">
+            <input name="x_id" value="{$x_id}" hidden="true" />
+            <input type="submit" name="submit" value="提交" class="btn col-lg-3" style="color: white;background-color: #44ABF7;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        $("#frame-0").show();
+        $("#yframe-0").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

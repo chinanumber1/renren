@@ -1,0 +1,148 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .tablestyle,.tablestyle tr{
+        width: 100%;
+    }
+    .tablestyle tr td.tdstyle01{
+        text-align: right;
+        padding-right: 10px;
+        color: red;
+    }
+    .tablestyle tr td.tdstyle02{
+        text-align: left;
+        padding-left: 10px;
+        color: red;
+    }
+
+    .we7-table td{
+      text-align: center;
+    }
+     /*个人自定义*/
+  .form-controls .img-thumbnail{
+      width:200px;
+      height:200px;
+  }
+</style>
+{if $op == 'display'}
+
+<div class="pull-right">
+    <a href="{php echo $this->createWeburl('daohang', array('op'=>'post'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加导航分类</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>导航名称</td>
+            <td>导航图标</td>
+            <td>导航切换图标</td>
+            <td>导航链接</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['ids']}
+            </td>
+            <td>
+                {$item['title']}
+            </td>
+            <td>
+                <img src="{media $item['thumb']}" style="width: 80px;height: 80px;" alt="">
+            </td>           
+            <td>
+                <img src="{media $item['thumb2']}" style="width: 80px;height: 80px;" alt="">
+            </td>
+            <td>
+              {$item['lianjie']}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('daohang', array('id' => $item['id'], 'op' =>'post'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('daohang', array('id' => $item['id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $op == 'post'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加导航分类</h3>
+        </div>
+        <div class="panel-heading">
+            <h1 style="color: red; text-align: center;">导航内容链接请按下方链接输入</h1>
+           <table class="tablestyle">
+               <tr>
+                   <td class="tdstyle01">首页链接</td>
+                   <td class="tdstyle02">/hyb_o2o/index/index</td>
+               </tr>
+               <tr>
+                   <td class="tdstyle01">全部服务链接</td>
+                   <td class="tdstyle02">/hyb_o2o/all/all</td>
+               </tr>
+               <tr>
+                   <td class="tdstyle01">订单链接</td>
+                   <td class="tdstyle02">/hyb_o2o/orders/orders</td>
+               </tr>
+               <tr>
+                   <td class="tdstyle01">个人中心链接</td>
+                   <td class="tdstyle02">/hyb_o2o/mine/mine</td>
+               </tr>
+           </table>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >排序</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="ids" name="ids" value="{$items['ids']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">数字越大排列越靠前</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >导航名称</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="title" name="title" value="{$items['title']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">导航名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">导航链接</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="lianjie" name="lianjie" value="{$items['lianjie']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">导航链接[请看提示红字]</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">导航图标</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('thumb', $items['thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">导航图标</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">导航切换图标</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('thumb2', $items['thumb2'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">导航图标</div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}

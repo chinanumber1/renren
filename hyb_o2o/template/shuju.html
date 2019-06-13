@@ -1,0 +1,27 @@
+{template 'common/header-base'}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            全国市县区数据导入<p style="color: red">{$title} {if $title=="暂无数据"}请到服务器模块目录中下载上传 [hyb_o2o->style->shuju]{/if}</p>
+        </h3>
+    </div>
+<form id="importform" class="form-horizontal form" action="" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="col-lg control-label must">EXCEL</label>
+            <input type="hidden" value="1212" name="pd">
+            <div class="col-sm-5 goodsname"  style="padding-right:0;" >
+                <input type="file" name="file" class="form-control" style="height: 38px;" />
+            </div>
+        </div>
+        
+        <div class='form-group'>
+            <div class="col-sm-12">
+                <div class="modal-footer" style="text-align: left">
+                <input name="token" type="hidden" value="{$_W['token']}" />
+                <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="确认导入" style="margin-left: 45%;" />
+                    <!-- <button type="submit" class="btn btn-primary" name="submit" value="yes">确认导入</button> -->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

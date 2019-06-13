@@ -1,0 +1,55 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>商户昵称</td>
+            <td>商户logo</td>
+            <td>提现订单号</td>
+            <td>提现金额</td>
+            <td>提现手续费</td>
+            <td>提现时间</td>
+            <td>提现状态</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['user']['s_name']}
+            </td>         
+            <td>
+                <img src="{$item['user']['s_mendian']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['tnum']}
+            </td>
+            <td>
+                {$item['money']}元
+            </td>
+            <td>
+                {$item['s_money']}元
+            </td>
+            <td>
+                {$item['time']}
+            </td>
+            <td>
+                {if $item['statue']=="提现完成"} <a class="btn btn-info btn-sm">提现完成</a>{/if}
+                {if $item['statue']=="待提现"} <a class="btn btn-default btn-sm" onclick="return confirm('确认商家提现完成？'); return false;" href="{php echo $this->createWeburl('tixian', array('id' => $item['id'], 'op' => 'post'))}">待提现</a>{/if}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('tixian', array('id' => $item['id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}

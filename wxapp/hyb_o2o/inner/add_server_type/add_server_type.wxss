@@ -1,0 +1,75 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+@import "../../template/template.wxss";
+
+.list {
+    padding: 20rpx;
+    flex-wrap: wrap;
+}
+
+.list {
+    padding: 20rpx;
+    flex-wrap: wrap;
+}
+
+.wrap {
+    padding-bottom: 30rpx;
+}
+
+.icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+}
+
+.wrap .item {
+    background: #fff;
+    padding: 20rpx 20rpx;
+    padding-bottom: 0;
+}
+
+.wrap1 .item:nth-child(1) {
+    padding-bottom: 30rpx;
+}
+
+.wrap .item .title {
+    color: #EF4A50;
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+    display: inline-block;
+    padding: 10rpx 20rpx;
+    border-radius: 10rpx;
+    padding-left: 0;
+}
+
+.arrow_right {
+    width: 20rpx;
+    height: 20rpx;
+    margin-left: 20rpx;
+}
+
+.wrap .item .child {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+}
+
+.img {
+    width: 100rpx;
+    height: 100rpx;
+    margin-bottom: 10rpx;
+    margin: 0 auto;
+    border-radius: 20rpx;
+}
+
+.wrap .child .c_item {
+    width: 31%;
+    text-align: center;
+    padding: 20rpx 0;
+    font-size: 28rpx;
+    border-radius: 5rpx;
+    color: #000;
+}

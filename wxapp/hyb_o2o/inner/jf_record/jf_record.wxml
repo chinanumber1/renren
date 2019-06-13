@@ -1,0 +1,23 @@
+<view class="list" wx:if="{{jfjl.length>0}}">
+    <view bindtap="lookdetail" class="df item p20 border_bot_2 jsb" data-id="{{item.id}}" wx:for="{{jfjl}}" wx:key="record">
+        <view class="df">
+            <view class="img">
+                <image src="{{item.thumb}}"></image>
+            </view>
+            <view>
+                <view class="name mb20 fs30">{{item.name}}</view>
+                <view class="status fs26" wx:if="{{item.statues==1}}">待发货</view>
+                <view class="status fs26" wx:if="{{item.statues==2}}">待收货</view>
+                <view class="status fs26" wx:if="{{item.statues==3}}">兑换成功</view>
+            </view>
+        </view>
+        <view class="right">
+            <image src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+        </view>
+    </view>
+    <view class="nomore">没有更多了</view>
+</view>
+<view class="no_more" wx:if="{{jfjl.length==0}}">
+    <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+    <view class="fs30 color_gray">暂无信息</view>
+</view>

@@ -1,0 +1,104 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.top {
+    background: #fff;
+}
+
+.top_item {
+    text-align: center;
+}
+
+.top .img {
+    width: 40rpx;
+    height: 40rpx;
+    margin: 0 auto;
+    margin-bottom: 20rpx;
+}
+
+.to {
+    border-bottom: 2rpx solid #fff;
+}
+
+.to:nth-child(2) .top_item,.to:nth-child(4) .top_item {
+    border-left: 2rpx solid #f3f3f3;
+    border-right: 2rpx solid #f3f3f3;
+}
+
+.top .bb {
+    border-bottom: 2rpx solid #EF4A50;
+}
+
+.list {
+}
+
+.right_text {
+    color: #EF4A50;
+    float: right;
+}
+
+.list_item {
+    background: #fff;
+}
+
+.list_item .title {
+    padding: 20rpx;
+    justify-content: space-between;
+}
+
+.list_item .business_icon {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.list_item .mid {
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.list_item .img {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+}
+
+.list_item .bot {
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+}
+
+.bot_btn {
+    padding: 8rpx 15rpx;
+    border: 2rpx solid #999999;
+    border-radius: 10rpx;
+    margin-left: 20rpx;
+    color: #555555;
+}
+
+.bot_btn.se {
+    border: 2rpx solid #EF4A50;
+    color: #EF4A50;
+}
+
+.modal_img {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+.er_img {
+    width: 400rpx;
+    height: 400rpx;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+}

@@ -1,0 +1,81 @@
+<view class="selec">
+    <view class="section">
+        <picker bindchange="bindFirstChange" range="{{erji}}" value="{{index1}}">
+            <view class="picker">
+                <input disabled placeholder="全部" value="{{erji[index1]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+    <view class="section">
+        <picker bindchange="bindSecChange" range="{{fenlei}}" value="{{index2}}">
+            <view class="picker">
+                <input disabled placeholder="全部" value="{{fenlei[index2]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+    <view class="section">
+        <picker bindchange="bindThreeChange" range="{{array3}}" value="{{index3}}">
+            <view class="picker">
+                <input disabled placeholder="筛选" value="{{array3[index3]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+</view>
+<view class="noadd" wx:if="{{shangjialist==''}}">
+    <image mode="aspectFit" src="../../resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="list" wx:else>
+    <view class="list_item" wx:for="{{shangjialist}}" wx:key="Xmtj">
+        <navigator class="df" hoverClass="none" style="align-items: flex-start;" url="/hyb_o2o/inner/store_page/store_page?id={{item.s_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.s_thumb}}"></image>
+                <view class="xingshi" style="flex-shrink: 0;margin:0" wx:if="{{item.pingtai=='0'}}">企业</view>
+                <view class="xingshi" style="flex-shrink: 0;margin:0" wx:else>平台</view>
+            </view>
+            <view class="intro">
+                <view class="title df mb10 jsb">
+                    <view class="df" style="width:65%;">
+                        <view class="fs32 line_one over" style="max-width:90%;margin-right:10rpx;">{{item.s_name}}</view>
+                        <view class="df" style="margin-left:20rpx;"></view>
+                    </view>
+                    <view class="zhichi fs22" style="flex-shrink: 0;margin:0">距您约{{item.juli}}km</view>
+                </view>
+                <view class="s_row row2">
+                    <view class="star-wrapper">
+                        <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                        <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                        <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                        <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                        <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                    </view>
+                    <view class="score">
+                        <text class="ml">好评</text>
+                        <text class="score_number">5分</text>
+                    </view>
+                </view>
+                <view class="line_one fs24 df">
+                    <image class="loca_icons" src="/hyb_o2o/resource/images/location.png"></image>
+                    <text>{{item.s_xxaddress}}</text>
+                </view>
+                <view class="s_row row3">
+                    <view class="icon-box">
+                        <view class="i-wrapper">
+                            <image src="/hyb_o2o/resource/images/pinglun.png"></image>
+                            <text>{{item.pinglunshu}}/次</text>
+                        </view>
+                        <view class="i-wrapper iml">
+                            <image src="/hyb_o2o/resource/images/buy.png"></image>
+                            <text>{{item.xiaoliang}}/单</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+<view class="nomore">我是有底线的</view>
+<footer footerindex="2"></footer>

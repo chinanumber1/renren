@@ -1,0 +1,16 @@
+<view class="footer df" style="">
+    <view style="width:{{100/(footer.list.length+1)}}%;{{index==2?'margin-left:auto':''}}" wx:for="{{footer.list}}" wx:key="footer">
+        <navigator data-index="{{index}}" hoverClass="none" openType="reLaunch" url="{{item.lianjie}}?index={{index}}" wx:if="{{index!=1}}">
+            <image data-index="{{index}}" src="{{index==footerindex?item.thumb:item.thumb2}}"></image>
+            <text style=" color:{{index==footerindex?footer.seltxt:footer.txtcolor}}">{{item.title}}</text>
+        </navigator>
+        <navigator data-index="{{index}}" hoverClass="none" openType="reLaunch" url="{{item.lianjie}}?index={{index}}" wx:if="{{index==1}}">
+            <image data-index="{{index}}" src="{{index==footerindex?item.thumb:item.thumb2}}"></image>
+            <text style=" color:{{index==footerindex?footer.seltxt:footer.txtcolor}}">{{item.title}}</text>
+        </navigator>
+    </view>
+    <view class="fabu">
+        <image bindtap="link_fabu" src="/hyb_o2o/resource/images/addlabel.png"></image>
+        <view>发布</view>
+    </view>
+</view>

@@ -1,0 +1,266 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+    .detail_box{width: 400px;padding: 20px 100px;position: fixed;left: 50%;top: 50%;transform: translate(-50%,-50%);background: #fff;font-size: 14px;text-align: center;z-index: 5;display: none}
+    .detail_box>div>div{
+        margin-bottom: 20px;
+    }
+    .detail_box .left{width: 70px;}
+    .modals{width: 100%;height: 100%;position: fixed;left: 0;top: 0;background: rgba(0,0,0,0.3);display: none}
+    
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li{if $op == "display"} class="active"{/if}><a href="{php echo $this->createWebUrl('mdqiangdan',array('op' =>'display','fa_style'=>'未指派'))}">待派单</a></li>
+    <li{if $op == "yijiedan"} class="active"{/if}><a href="{php echo $this->createWebUrl('mdqiangdan',array('op' =>'yijiedan','fa_style'=>'已派单'))}">已派单</a></li>
+    <li{if $op == "yiwancheng"} class="active"{/if}><a href="{php echo $this->createWebUrl('mdqiangdan',array('op' =>'yiwancheng','fa_style'=>'已完成'))}">已完成</a></li>
+    <li{if $op == "all"} class="active"{/if}><a href="{php echo $this->createWebUrl('mdqiangdan',array('op' =>'all','fa_style'=>'全部'))}">全部</a></li>
+</ul>
+<div class="main">
+
+    <div class="panel panel-default">
+<input type="hidden" value="" id="pd_ids" >
+
+        <div class="panel-heading">
+
+            派单中心
+
+        </div>
+
+        <div class="panel-body" style="padding: 0px 15px;">
+
+            <div class="row">
+
+                <table class="yg5_tabel col-md-12">
+
+                    <tr class="yg5_tr1">
+                        <td class="store_td1">排序</td>
+                        <td>发单者昵称</td>
+                        <td>发单者头像</td>
+                        <td>服务名称</td>
+                        <td>服务金额</td>
+                        <td>服务地址</td>
+                        <td>服务备注</td>
+                        <td>服务时间</td>
+                        <td>发单时间</td>
+                        <td >操作</td>
+                    </tr>
+                    {loop $products $item}
+                    <tr class="yg5_tr2">
+                     <td class="store_td1">{$item['q_id']}</td>
+                     <td>{$item['u_name']}</td>
+                     <td> <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt=""></td>
+                     <td>{$item['fa_fwname']}</td>
+                     <td>{$item['fa_fwmoney']}</td>
+                     <td>
+                        <span style="display: block;">服务地址：{$item['fa_fwaddress']}</span>
+                        <span style="display: block;">详细地址：{$item['fa_fwaddresss']}</span>
+                        <span style="display: block;">联系电话：{$item['fa_fwtelphone']}</span>
+                     </td>
+                     <td>{$item['fa_fwcontent']}</td>
+                     <td>{$item['fa_fwtime']}</td>
+                     <td>{$item['fa_time']}</td>
+                   <td>
+                      {if $item['q_styles']=='未指派'}
+                      <a class="btn ygyouhui2 btn-xs open_detail1" data-q_id="{$item['q_id']}">去指派</a>
+                      {else}
+                      <a class="btn ygyouhui2 btn-xs open_detail2" data-fid="{$item['fa_id']}">查看接单信息</a>
+                      {/if}
+                      <a href="{php echo $this->createWebUrl('tixian', array('id' => $item['id'],'type'=>'delete'))}" class="storespan btn btn-xs" onclick="return confirm('确认删除吗？');return false;">
+                          <span class="fa fa-trash-o"></span>
+                          <span class="bianji">删除
+                              <span class="arrowdown"></span>
+                          </span>
+                      </a>
+                  </td>
+
+              </td>
+
+          </tr>
+
+          {/loop}        
+
+
+
+  </table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="text-right we7-margin-top">
+   {$pager}
+</div>
+
+
+
+<!-- 选择员工 -->
+
+<div class="modal fade" id="user-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog" style="width:800px;top:360px;">
+
+        <div class="modal-content">
+
+            <input type="hidden" name="m" value=""/>
+
+            <div class="modal-header"><h4>选择用户</h4> </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" name="keyword" value="" id="keyword_user" placeholder="请输入用户名称关键字">
+
+                        <span class="input-group-btn"><button type="button" class="btn btn-default" onclick="search_users();">搜索</button></span>
+
+                    </div>
+
+                </div>
+
+                <div id="module-menus" style="padding-top:5px;"><div style="max-height:500px;overflow:auto;min-width:750px;">
+
+                    <table class="table table-hover" style="min-width:750px;">
+
+                        <tbody id="user_list">  
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+$("#frame-7").show();
+        $("#yframe-7").addClass("wyactive");
+           /*指派员工*/
+        $(".open_detail1").click(function(){
+          console.log($(this).data("q_id"));
+          var q_id = $(this).data("q_id");
+          $('#pd_ids').val(q_id);
+          $('#user-info').modal('show'); 
+        })
+        /*接单信息*/
+        $(".open_detail2").click(function(){
+          console.log($(this).data("fid"))
+          $.ajax({
+                type:"post",
+                url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=jieinfo&do=mdqiangdan&m=hyb_o2o",
+                dataType:"json",
+                data:{fa_id:$(this).data("fid")},
+                success:function(data){
+                    $("body").append(data.d)
+                    $(".detail_box").fadeIn();
+                    $(".modals").show();
+                    $(".close_box").click(function(){
+                        $(".detail_box").fadeOut();
+                        $(".modals").hide();
+                    })
+                }
+            })
+            
+        })
+function search_users(){
+
+    var keyword_user=$("#keyword_user").val();
+
+    $("#user_list").empty();
+    $.ajax({
+          type:"post",
+          url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=zhipai&do=mdqiangdan&m=hyb_o2o",
+          dataType:"json",
+          data:{},
+          success:function(data){
+          var data = data.d;
+          var html=getuserRows(data);
+          $("#user_list").append(html);
+          }
+      })
+}
+
+function getuserRows(data){
+
+    var html='';
+
+    for(i=0;i<data.length;i++){
+
+        html+='<tr>';
+
+        html+='<td><img src="'+data[i].y_thumb+'" style="width:30px;height:30px;padding:1px;border:1px solid #ccc"> '+data[i].y_name+'</td>';
+
+        html+='<td></td>';
+
+        html+='<td></td>';
+
+        html+='<td style="width:80px;"><a href="javascript:;" onclick="select_user(this)"  data-user_uid='+data[i].y_id+'>选择</a></td>';
+
+        html+='</tr>';
+
+    }
+
+    return html;
+
+}
+
+
+
+
+function select_user(obj){
+   var boj = $(obj).data("user_uid");
+   var pd_id = $('#pd_ids').val();
+   console.log(pd_id)
+   $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=paidan&do=mdqiangdan&m=hyb_o2o",
+            data: {q_pdname:boj,pd_id:pd_id},
+            success:function(data){
+              console.log(data)
+            location.reload() 
+        }
+        });
+
+
+   $('#user-info').modal('hide');
+
+}
+</script>
+{template "common/footer"}

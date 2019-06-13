@@ -1,0 +1,68 @@
+{template 'common/header-base'}
+{if $op == 'display'}
+<div class="pull-right">
+    <a href="{php echo $this->createWeburl('sex', array('op'=>'post'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加人物性别</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>性别名称</td>
+            <td>性别图标</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['name']}
+            </td>
+            <td>
+                <img src="{media $item['thumb']}" width="100px" alt="">
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('sex', array('id' => $item['id'], 'op' =>'post'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('sex', array('id' => $item['id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $op == 'post'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加人物</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">性别名称</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="name" id="name" value="{$item['name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">性别名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">性别图标</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('thumb', $item['thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">（建议尺寸60X60）</div>
+            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}
+<!-- {template 'common/footer'} -->

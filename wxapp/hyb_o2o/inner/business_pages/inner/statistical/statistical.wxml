@@ -1,0 +1,22 @@
+<view class="selec">
+    <view class="section" style="width:50%">
+        <picker bindchange="bindFirstChange" range="{{project}}" value="{{index1}}">
+            <view class="picker">
+                <input disabled placeholder="地区" value="{{erji[index1]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+    <view class="section" style="width:50%">
+        <picker bindchange="bindThreeChange" range="{{array3}}" value="{{index3}}">
+            <view class="picker">
+                <input disabled placeholder="筛选" value="{{array3[index3]}}"></input>
+                <image class="arrow_dowm" src="../../resource/images/right.png"></image>
+            </view>
+        </picker>
+    </view>
+</view>
+<view class="noadd" wx:if="{{Xiangmu.length==0}}">
+    <image mode="aspectFit" src="../../resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>

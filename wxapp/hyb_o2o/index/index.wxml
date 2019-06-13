@@ -1,0 +1,194 @@
+<view class="wrap">
+    <form bindsubmit="formsubmit">
+        <view class="top df p20" style="background:{{base.bcolor}}">
+            <view class="top_inner df">
+                <view bindtap="chooseCity" class="location df jcc" data-city_type="{{base.city_type}}">
+                    <text class="fs26 city line_one">{{city}}</text>
+                    <image class="loca_icon" src="/hyb_o2o/resource/images/hui.png"></image>
+                </view>
+                <view class="search_input df">
+                    <input bindblur="bindblur" bindconfirm="confirm" confirmType="search" name="search" placeholder="请输入服务名称" style="" type="text" value="{{search}}"></input>
+                    <button class="ss_btn df" formType="submit" plain="plain" size="mini" style="padding:0 20rpx;">
+                        <image src="/hyb_o2o/resource/images/hui2.png"></image>
+                    </button>
+                </view>
+            </view>
+            <view clas bindtap="sm" s="sm_icon">
+                <image src="/hyb_o2o/resource/images/sm.png"></image>
+            </view>
+        </view>
+    </form>
+    <swiper autoplay circular indicatorDots class="border_bot_20" duration="1000" id="banner" indicatorActiveColor="#65a0fe" indicatorColor="#ffffff" interval="3000">
+        <swiper-item class="indexlb" wx:for="{{base.thumb}}" wx:key="base">
+            <image mode="aspectFill" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+    <view class="modal" wx:if="{{getUseInfo}}">
+        <view class="m_box tc">
+            <view class="title fs32">提示</view>
+            <view class="fs28 p20">请先开启用户授权</view>
+            <view class="border_top_2">
+                <button bindgetuserinfo="getUsetInfo" class="m_btn" openType="getUserInfo">确定</button>
+            </view>
+        </view>
+    </view>
+    <view class="nav df">
+        <view class="nav_item" wx:if="{{index<=9}}" wx:for="{{xmtype}}" wx:key="nav">
+            <navigator hoverClass="none" url="../inner/nav_list/nav_list?xt_id={{item.xt_id}}&parentid={{item.xt_parentid}}" wx:if="{{item.xt_tuijian_fabu==0}}">
+                <view class="nav_icon">
+                    <image src="{{item.xt_thumb}}"></image>
+                </view>
+                <view>{{item.xt_name}}</view>
+            </navigator>
+            <view bindtap="link_fabu" data-f_name="{{item.xt_name}}" data-xt_name="{{item.tz_ejname}}" data-xt_tzej="{{item.xt_tzej}}" hoverClass="none" wx:if="{{item.xt_tuijian_fabu==1}}">
+                <view class="nav_icon">
+                    <image src="{{item.xt_thumb}}"></image>
+                </view>
+                <view>{{item.xt_name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="df border_bot_20" style="background:#fff;padding:20rpx 0;width:100%;margin:0 auto;margin-top:-32rpx;">
+        <view class="tou_title">
+            <image src="{{base.s_ttthumb}}"></image>
+        </view>
+        <swiper autoplay circular vertical class=" toutiao fs24" duration="1000" interval="3000">
+            <swiper-item class="df jsb" wx:for="{{gonggao}}" wx:key="base">
+                <view bindtap="lookAd" class="df wd100" data-id="{{item.id}}">
+                    <text class="tou_label">公告</text>
+                    <text class="line_one disib" style="width:80%;">{{item.title}}</text>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="list border_bot_20" wx:if="{{shangping.length>0}}">
+        <view class="list_title df jsb ">
+            <view class="fs30">
+                <image class="recomm_icon" src="/hyb_o2o/resource/images/recomm_log.png"></image>推荐商品</view>
+            <view bindtap="getmore_goods" class="getmore df">更多
+        <image class="a_right" src="/hyb_o2o/resource/images/right.png"></image>
+            </view>
+        </view>
+        <view class="df goods_list">
+            <view class="goods_item mb20" style="width:33.33%" wx:for="{{shangping}}" wx:key="Xmtj">
+                <navigator hoverClass="none" url="../inner/goods_page/goods_page?id={{item.g_id}}">
+                    <view class="img mb10">
+                        <image mode="aspectFill" src="{{item.g_thumb}}"></image>
+                    </view>
+                    <view class="name fs26 line_one mb20" style="width:100%">{{item.g_name}}</view>
+                    <view class="df jsb fs24 mb20">
+                        <view class="color_pink fs34">￥{{item.g_jiage}}</view>
+                        <view class="tr fs22 color_gray">{{item.g_xiaoliang}}人购买过</view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view class="list border_bot_20" wx:if="{{shangjia.length>0}}">
+        <view class="list_title df jsb border_bot_2">
+            <view class="fs32">
+                <image class="recomm_icon" src="/hyb_o2o/resource/images/recomm_log2.png"></image>推荐商家</view>
+            <view bindtap="getmore" class="getmore df">更多
+        <image class="a_right" src="/hyb_o2o/resource/images/right.png"></image>
+            </view>
+        </view>
+        <view class="list_item" wx:for="{{shangjia}}" wx:key="shangjia">
+            <navigator class="df" hoverClass="none" style="align-items: flex-start;" url="../inner/store_page/store_page?id={{item.s_id}}">
+                <view class="img">
+                    <image mode="aspectFill" src="{{item.s_thumb}}"></image>
+                    <view class="xingshi" style="flex-shrink: 0;margin:0" wx:if="{{item.pingtai=='0'}}">企业</view>
+                    <view class="xingshi" style="flex-shrink: 0;margin:0" wx:else>平台</view>
+                </view>
+                <view class="intro">
+                    <view class="title df mb10 jsb">
+                        <view class="df" style="width:70%;">
+                            <view class="fs32 line_one over" style="max-width:90%;margin-right:10rpx;">{{item.s_name}}</view>
+                        </view>
+                        <view class="zhichi fs22" style="flex-shrink: 0;margin:0">距您约{{item.juli}}km</view>
+                    </view>
+                    <view class="s_row row2">
+                        <view class="star-wrapper">
+                            <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                            <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                            <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                            <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                            <image src="/hyb_o2o/resource/images/star-on.png"></image>
+                        </view>
+                        <view class="score">
+                            <text class="ml">好评</text>
+                            <text class="score_number">5分</text>
+                        </view>
+                    </view>
+                    <view class="line_one fs24 df">
+                        <image class="loca_icons" src="/hyb_o2o/resource/images/location.png"></image>
+                        <text>{{item.s_xxaddress}}</text>
+                    </view>
+                    <view class="s_row row3">
+                        <view class="icon-box">
+                            <view class="i-wrapper">
+                                <image src="/hyb_o2o/resource/images/pinglun.png"></image>
+                                <text>{{item.pinlunshu}}/次</text>
+                            </view>
+                            <view class="i-wrapper iml">
+                                <image src="/hyb_o2o/resource/images/buy.png"></image>
+                                <text>{{item.xiadancount}}/单</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="list border_bot_20" wx:if="{{fuwu.length>0}}">
+        <view class="list_title df jsb border_bot_2">
+            <view class="fs30">
+                <image class="recomm_icon" src="/hyb_o2o/resource/images/recomm_log3.png"></image>推荐服务</view>
+            <view bindtap="getmore_servers" class="getmore df">查看更多
+        <image class="a_right" src="/hyb_o2o/resource/images/right.png"></image>
+            </view>
+        </view>
+        <view class="list_item" wx:for="{{fuwu}}" wx:key="shangjia">
+            <navigator class="df" hoverClass="none" style="align-items: flex-start;" url="../inner/detail/detail?id={{item.x_id}}">
+                <view class="img">
+                    <image mode="aspectFill" src="{{item.x_thumb}}"></image>
+                    <view class="xingshi">{{item['x_xingshi']}}</view>
+                </view>
+                <view class="intro">
+                    <view class="title df jsb">
+                        <view class="fs30 line_one" style="max-width:70%;">
+                {{item.x_name}}
+              </view>
+                        <view class="fs22" style="color:#999">{{item.juli}}km</view>
+                    </view>
+                    <view class="pingfen df">
+                        <image src="/hyb_o2o/resource/images/star.png" wx:for="{{5}}"></image>
+                        <view class="pingfen-num fs22" style="color:#999">好评5分</view>
+                    </view>
+                    <view class="dingwei">
+                        <image src="/hyb_o2o/resource/images/lo.png"></image>
+                        <text class="fs26" style="color:#666;">{{item.s_address}}</text>
+                    </view>
+                    <view class="xmmoney df fs22">
+                        <view class="color_red fs32">￥{{item.x_jiage}}</view>
+                        <view style="color:#999">￥{{item.x_yjiage}}<text class="xian"></text>
+                        </view>
+                        <view>
+                            <image src="/hyb_o2o/resource/images/pinglun.png"></image>
+                            <text style="color:#999">{{item.pinlunshu}}/次</text>
+                        </view>
+                        <view>
+                            <image src="/hyb_o2o/resource/images/buy.png"></image>
+                            <text style="color:#999">{{item.x_xiaoliang}}/单</text>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+    <view class="nomore" wx:if="{{fuwu.length!=0||shangjia.length!=0||shangping.length!=0}}">我是有底线的</view>
+</view>
+<view class="noadd" style="margin-bottom:50rpx;" wx:if="{{fuwu.length==0&&shangjia.length==0&&shangping.length==0}}">
+    <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png" style="margin-top:0rpx;"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<footer footer="{{footer}}" footerindex="0"></footer>

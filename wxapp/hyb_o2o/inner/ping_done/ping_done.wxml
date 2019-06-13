@@ -1,0 +1,26 @@
+<view class="box">
+    <view class="top df">
+        <view class="s_p">
+            <image src="{{pingjia.p_thumb}}"></image>
+        </view>
+        <view class="df">
+            <view class="fs30 mr30">{{pingjia.p_name}}</view>
+            <view class="df">
+                <image class="star" data-index="{{index}}" src="/hyb_o2o/resource/images/star.png" wx:for="{{pingjia.sp_pingfen}}" wx:key="item"></image>
+                <image class="star" data-index="{{pingjia.sp_pingfen+index}}" src="/hyb_o2o/resource/images/star1.png" wx:for="{{5-pingjia.sp_pingfen}}" wx:key="item1"></image>
+            </view>
+        </view>
+    </view>
+    <view class="mess fs24 mb20 df">{{pingjia.p_time}} <text class="name p_name">项目名称：{{pingjia.p_xiangmu}}</text>
+        <text class="name">项目数量：{{pingjia.o_num}}</text>
+    </view>
+    <view class="p20 mb20" style="padding-top:0">
+        <view class="content fs28" style="margin-bottom:20rpx">{{pingjia.p_content}}</view>
+        <view>
+            <image class="pic-item" mode="widthFix" src="{{item}}" wx:for="{{pingjia.p_pic}}"></image>
+        </view>
+        <view class="reply fs26 " wx:if="{{pingjia.p_huifu!=null}}">
+            <view style="position:relative;z-index:5;">掌柜回复：{{pingjia.p_huifu}}</view>
+        </view>
+    </view>
+</view>

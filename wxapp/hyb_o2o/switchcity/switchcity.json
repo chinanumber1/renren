@@ -1,0 +1,7 @@
+{
+    "backgroundTextStyle": "light",
+    "navigationBarTitleText": "选择城市",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false,
+    "disableScroll": true
+}

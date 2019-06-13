@@ -1,0 +1,32 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+@import "../../template/template.wxss";
+
+@import "../detail/detail.wxss";
+
+.swiper_wrap {
+    height: 700rpx;
+}
+
+.top {
+    padding: 20rpx;
+}
+
+.buy_btn {
+    padding: 20rpx 0;
+    text-align: center;
+    color: #fff;
+    background: #EF4A50;
+    font-size: 30rpx;
+    margin: 0 30rpx;
+    border-radius: 10rpx;
+}
+
+.btn {
+    z-index: 555;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20rpx 0;
+    background: #fff;
+}

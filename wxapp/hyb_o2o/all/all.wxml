@@ -1,0 +1,37 @@
+<import src="../template/template.wxml"></import>
+<view class="wrap">
+    <scroll-view scrollY class="left">
+        <view bindtap="swichNav" class="left_item {{currentTab==index?'sel':''}}" data-current="{{index}}" wx:for="{{title}}" wx:key="item">{{item}}</view>
+    </scroll-view>
+    <scroll-view scrollWithAnimation scrollY class="right" data-scroll="{{scroll}}" id="j_page" scrollTop="{{scroll}}">
+        <view wx:for="{{list.children_type}}" wx:for-item="item1">
+            <view class="title fs30">{{item1.xt_name}}</view>
+            <view class="right_item fs28">
+                <view class="df border_bot_2 item" wx:if="{{item1.xiangmu.length>0}}" wx:for="{{item1.xiangmu}}" wx:for-item="items" wx:key="item">
+                    <view class="img">
+                        <image src="{{items.x_thumb}}"></image>
+                    </view>
+                    <view class="text">
+                        <view class="name line_one fs30">{{items.x_name}}</view>
+                        <view class="blurb line_one fs26" style="color:#888">{{items.x_content}}</view>
+                        <view class="money">￥{{items.x_jiage}} <text bindtap="look_depart" class="xiadan" data-x_id="{{items.x_id}}">下单</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="df border_bot_2 item" wx:if="{{item1.xiangmu.length==0}}">
+                    <view class="img img_box dfja">
+                        <image src="../resource/images/no.png"></image>
+                    </view>
+                    <view class="name line_one fs28 color_gray">暂无服务</view>
+                </view>
+            </view>
+        </view>
+        <view class="df border_bot_2 item" wx:if="{{list.children_type.length==0}}">
+            <view class="img img_box dfja">
+                <image src="../resource/images/no.png"></image>
+            </view>
+            <view class="name line_one fs28 color_gray">暂无服务</view>
+        </view>
+    </scroll-view>
+    <template is="footer" data="{{footer:footer}}"></template>
+</view>

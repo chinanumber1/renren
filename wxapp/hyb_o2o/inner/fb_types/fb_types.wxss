@@ -1,0 +1,56 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+.list {
+    padding: 20rpx;
+    flex-wrap: wrap;
+}
+
+.wrap {
+    padding-bottom: 30rpx;
+}
+
+.wrap .item {
+    background: #fff;
+    padding: 20rpx 20rpx;
+    padding-bottom: 0;
+}
+
+.wrap1 .item:nth-child(1) {
+    padding-bottom: 30rpx;
+}
+
+.wrap .item .title {
+    color: #EF4A50;
+    font-size: 28rpx;
+    margin-bottom: 20rpx;
+    display: inline-block;
+    padding: 10rpx 20rpx;
+    border-radius: 10rpx;
+}
+
+.arrow_right {
+    width: 20rpx;
+    height: 20rpx;
+    margin-left: 20rpx;
+}
+
+.wrap .item .child {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: flex-start;
+}
+
+.wrap .child view {
+    width: 31%;
+    text-align: center;
+    padding: 20rpx 0;
+    background: #F3F3F3;
+    font-size: 28rpx;
+    margin-right: 13rpx;
+    margin-bottom: 13rpx;
+    border-radius: 5rpx;
+    color: #666;
+}

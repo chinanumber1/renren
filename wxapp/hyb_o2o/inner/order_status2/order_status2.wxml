@@ -1,0 +1,142 @@
+<view class="top df mb20">
+    <view bindtap="switch_tab" class="p20 to {{currentTab==index?'bb':''}}" data-index="{{index}}" style="width:{{100/top.length}}%" wx:for="{{top}}" wx:key="top">
+        <view class="fs28 top_item">
+            <view>{{item.name}}</view>
+        </view>
+    </view>
+</view>
+<view class="noadd" wx:if="{{order_list.length==0}}">
+    <image mode="widthFix" src="../../resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无订单</view>
+</view>
+<view class="list" wx:if="{{currentTab==0}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text" wx:if="{{item.type=='待发货'}}">待发货</text>
+            <text class="right_text" wx:if="{{item.type=='待收货'}}">待收货</text>
+            <text class="right_text" wx:if="{{item.type=='已完成'}}">已完成</text>
+            <text class="right_text" wx:if="{{item.type=='已取消'}}">已取消</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.id}}">
+            <view class="img">
+                <image src="{{item.thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.name}}</view>
+                <view>积分：{{item.jifen}}</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.time}}
+        <view class="fr" wx:if="{{item.type=='待发货'}}">
+                <text bindtap="del_orders" class="bot_btn se" data-id="{{item.id}}">取消</text>
+            </view>
+            <view class="fr" wx:if="{{item.type=='待收货'}}">
+                <text bindtap="sure_order" class="bot_btn se" data-id="{{item.id}}">确认收货</text>
+            </view>
+            <view class="fr" wx:if="{{item.type=='已完成'}}">
+                <text bindtap="del_order" class="bot_btn se" data-id="{{item.id}}">删除</text>
+            </view>
+            <view class="fr" wx:if="{{item.type=='已取消'}}">
+                <text bindtap="del_order" class="bot_btn se" data-id="{{item.id}}">删除</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==1}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.name}}</view>
+                <view>积分：￥{{item.jifen}}元</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.time}}
+        <view class="fr">
+                <text bindtap="del_orders" class="bot_btn se" data-id="{{item.id}}">取消</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==2}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text">进行中</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.o_id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.name}}</view>
+                <view>积分：￥{{item.jifen}}元</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.time}}
+        <view class="fr">
+                <text bindtap="sure_order" class="bot_btn se" data-id="{{item.id}}">确认收货</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==3}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text">已完成</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.name}}</view>
+                <view>积分：￥{{item.jifen}}元</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.time}}
+        <view class="fr" wx:if="{{item.type=='已完成'}}">
+                <text bindtap="del_order" class="bot_btn" data-id="{{item.id}}" style="color:#686868;border-color:#686868">删除</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{currentTab==4}}">
+    <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="df">
+                <image class="business_icon" src="../../resource/images/business.png"></image>平台自营</view>
+            <text class="right_text">已取消</text>
+        </view>
+        <view bindtap="look_detail" class="mid df p20 border_bot_2" data-id="{{item.id}}">
+            <view class="img">
+                <image mode="aspectFill" src="{{item.thumb}}"></image>
+            </view>
+            <view class="">
+                <view>{{item.name}}</view>
+                <view>积分：￥{{item.jifen}}元</view>
+            </view>
+        </view>
+        <view class="bot p20">
+        {{item.time}}
+        <view class="fr">
+                <text bindtap="del_order" class="bot_btn" data-id="{{item.id}}" style="color:#686868;border-color:#686868">删除</text>
+            </view>
+        </view>
+    </view>
+</view>

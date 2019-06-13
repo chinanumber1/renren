@@ -1,0 +1,24 @@
+<template name="copy">
+    <view class="copy">
+        <text>{{copy}}</text>
+    </view>
+</template>
+<template name="sub_nav">
+    <scroll-view class="sub_nav" scrollX="true" style="white-space:nowrap">
+        <text bindtap="swichNav" class="{{nav.currentTab==index?'onon':''}}" data-current="{{index}}" wx:for="{{nav.nav_list}}" wx:key="list">{{item}}</text>
+    </scroll-view>
+</template>
+<template name="swiper2">
+    <swiper autoplay indicatorDots class="swiper_wrap">
+        <swiper-item bindtap="swiperUrl" class="swiper_item" data-id="{{item}}" mode="aspectFit" wx:for="{{swiper.imgUrls}}" wx:key="swiper">
+            <image class="slide-image" src="{{item}}"></image>
+        </swiper-item>
+    </swiper>
+</template>
+<template name="swiper">
+    <swiper autoplay="{{swiper.autoplay}}" class="swiper_wrap" duration="{{swiper.duration}}" indicatorDots="{{swiper.indicatorDots}}" interval="{{swiper.interval}}">
+        <swiper-item bindtap="swiperUrl" class="swiper_item" data-id="{{item.id}}" mode="aspectFit" wx:for="{{swiper.imgUrls}}" wx:key="swiper">
+            <image class="slide-image" src="{{item.img}}"></image>
+        </swiper-item>
+    </swiper>
+</template>

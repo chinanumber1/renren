@@ -1,0 +1,35 @@
+<view bindtap="saoma" class="box">
+    <view class="qr_btn fs28 mb20">二维码核销</view>
+    <view class="cen fs28">扫描订单二维码,核销订单</view>
+</view>
+<block wx:if="{{display}}">
+    <import src="/hyb_o2o/template/template.wxml"></import>
+    <view>
+        <view class="top mb20">
+            <view class="fs28 fw mb10">{{hexiaop.o_name}} <text>{{hexiaop.o_telphone}}</text>
+            </view>
+            <view class="loca df fs28" style="color:#717171">
+                <image src="/hyb_o2o/resource/images/lo.png"></image>{{hexiaop.o_address}}{{hexiaop.o_xxaddress}}</view>
+        </view>
+        <view class="order_detail fs26">
+            <view class="title border_bot_2 fs28 p20">订单信息</view>
+            <view class="detail">
+                <view>预约时间：{{hexiaop.o_yy_riqi}}</view>
+                <view>服务项目：{{hexiaop.o_xiangmu}}</view>
+                <view>数量：{{hexiaop.o_num}}</view>
+                <view>订单总价： <text class="money">￥{{hexiaop.o_count_money}}</text>
+                </view>
+                <view>订单状态：{{hexiaop.o_type}}</view>
+                <view wx:if="{{hexiaop.o_status==0}}">核销状态：未核销</view>
+                <view wx:if="{{hexiaop.o_status!=0}}">核销状态：已核销</view>
+                <view>服务门店：{{hexiaop.s_name}}</view>
+                <view>其他说明：{{hexiaop.o_beizhu}}</view>
+            </view>
+        </view>
+        <template is="copy" data="{{copy:copy}}"></template>
+    </view>
+</block>
+<view bindtap="close" class="modal" wx:if="{{status}}"></view>
+<view class="erweima" wx:if="{{status}}">
+    <image src="{{hexiaop.erweima}}"></image>
+</view>

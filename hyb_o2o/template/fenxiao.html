@@ -1,0 +1,55 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>用户昵称</td>
+            <td>用户头像</td>
+            <td>联系电话</td>
+            <td>拥有佣金</td>
+            <td>申请时间</td>
+            <td>审核状态</td>
+            <td>邀请成功的人数</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['f_id']}
+            </td>
+            <td>
+                {$item['f_name']}
+            </td>         
+            <td>
+                <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['f_tel']}
+            </td>
+            <td>
+                {$item['yj_money']}
+            </td>
+            <td>
+                {$item['f_time']}
+            </td>
+            <td>
+                {if $item['f_style']=="待审核"}<a class="btn btn-default btn-sm"  onclick="return confirm('确认通过审核？'); return false;" href="{php echo $this->createWeburl('fenxiao', array('f_id' => $item['f_id'],'f_openid'=>$item['f_openid'], 'op' => 'shen'))}">{$item['f_style']}</a>{/if}
+                {if $item['f_style']=="审核通过"}<a class="btn btn-success btn-sm">{$item['f_style']}</a>{/if}
+            </td>
+            <td>
+                {$item['fx_num']}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('fenxiao', array('f_id' => $item['f_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}

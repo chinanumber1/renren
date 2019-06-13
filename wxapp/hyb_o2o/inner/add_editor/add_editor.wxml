@@ -1,0 +1,33 @@
+<view class="add_box">
+    <view class="title mb20 fs30" wx:if="{{!d_id}}">添加地址</view>
+    <view class="title mb20 fs30" wx:else>修改地址信息</view>
+    <form bindsubmit="formSubmit1">
+        <view class="df item fs28 border_bot_2">
+            <text class="">姓名:</text>
+            <view class="right" style="width:70%;">
+                <input name="name" type="text" value="{{name}}"></input>
+            </view>
+        </view>
+        <view class="df item fs28 border_bot_2">
+            <text class="">联系电话:</text>
+            <view class="right" style="width:70%;">
+                <input bindblur="check_tel" maxlength="11" name="tel" type="number" value="{{tel}}"></input>
+            </view>
+        </view>
+        <view class="df item fs28 border_bot_2">
+            <text class="">所在地区:</text>
+            <view class="right">
+                <picker bindchange="bindRegionChange" customItem="{{customItem}}" mode="region" value="{{region}}">
+                    <view class="picker">
+                        <input disabled="disabled" name="region" type="text" value="{{region[0]}}-{{region[1]}}-{{region[2]}}"></input>
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="df item fs28">
+            <textarea class="textarea" name="address" placeholder="请填写详细地址，不少于5个字" value="{{address}}"></textarea>
+        </view>
+        <button bindtap="choose_address" class="btn_1 fs28">读取微信地址</button>
+        <button class="btn_2 fs28" formType="submit">保存</button>
+    </form>
+</view>

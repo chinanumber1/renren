@@ -1,0 +1,43 @@
+<view class="box">
+    <swiper autoplay="{{swiper.autoplay}}" class="swiper_wrap" duration="{{swiper.duration}}" indicatorDots="{{swiper.indicatorDots}}" interval="{{swiper.interval}}" nextMargin="{{next}}" previousMargin="{{previous}}">
+        <swiper-item bindtap="swiperUrl" class="swiper_item" data-appid="{{item.appid}}" data-path="{{item.path}}" wx:for="{{swiper.imgUrls}}" wx:key="swiper">
+            <image class="slide-image" mode="aspectFill" src="{{item.thumb}}"></image>
+        </swiper-item>
+    </swiper>
+    <view class="df jcc bgff border_bot_20">
+        <view class="tc jf_top" style="width:50%;">
+            <view class="jf_inner df">
+                <image class="icon" src="/hyb_o2o/resource/images/jf_icon.png"></image>
+                <view class="fs34 tc cobai fw">积分{{user.u_jifen}}</view>
+            </view>
+            <image class="bg" src="/hyb_o2o/resource/images/jfsc_bg1.png"></image>
+        </view>
+        <view bindtap="record" class="tc jf_top" style="width:50%;">
+            <view class="jf_inner df">
+                <image class="icon" src="/hyb_o2o/resource/images/jf_icon2.png"></image>
+                <view class="fs34 tc cobai fw">兑换记录</view>
+            </view>
+            <image class="bg" src="/hyb_o2o/resource/images/jfsc_bg2.png"></image>
+        </view>
+    </view>
+    <view class="goods_list">
+        <view class="list_title df jsb border_bot_2">
+            <view class="fs30">
+                <image class="recomm_icon" src="/hyb_o2o/resource/images/jf_t_i.png"></image>积分兑换</view>
+        </view>
+        <view class="goods df">
+            <view bindtap="look_detail" class="g_item fs28 mb20" data-id="{{item.id}}" wx:for="{{list}}" wx:key="goods">
+                <view class="g_img">
+                    <image src="{{item.thumb}}"></image>
+                </view>
+                <view class="line_one p20" style="width:100%;padding-bottom:10rpx;">{{item.name}}</view>
+                <view class="df jsb wd100">
+                    <view class="color_red">
+                        <image class="jf_icon" src="/hyb_o2o/resource/images/jf.png"></image>{{item.num}}</view>
+                    <view class="tr fs22 color_gray">{{item.g_xiaoliang}}人兑换过</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="nomore">我是有底线的</view>
+</view>

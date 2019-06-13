@@ -1,0 +1,60 @@
+.df {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 20rpx 10rpx;
+    box-sizing: border-box;
+    background: #fff;
+    z-index: 2;
+}
+
+.footer view {
+    flex-shrink: 0;
+}
+
+.footer .fabu {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 26rpx;
+    text-align: center;
+    background: #fff;
+    border-radius: 50%;
+    width: 20%;
+}
+
+.footer view image {
+    width: 40rpx;
+    height: 40rpx;
+    display: block;
+    margin: 0 auto;
+}
+
+.footer .fabu image {
+    width: 70rpx;
+    height: 70rpx;
+    margin-bottom: 10rpx;
+    margin-top: 10rpx;
+    border-radius: 50%;
+}
+
+.footer view text {
+    display: block;
+    width: 100%;
+    font-size: 22rpx;
+    color: #AFAFAF;
+    text-align: center;
+    margin-top: 5rpx;
+}
+
+.footer view .sel_color {
+    color: #04a9f0;
+}

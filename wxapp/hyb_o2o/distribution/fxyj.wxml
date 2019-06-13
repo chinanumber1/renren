@@ -1,0 +1,53 @@
+<import src="./../wxParse/wxParse.wxml"></import>
+<form bindreset="formReset" bindsubmit="formSubmit">
+    <view class="top">
+        <view class="fx_bg">
+            <image src="/hyb_o2o/resource/images/fx.png"></image>
+        </view>
+        <view class="cont">
+            <view class="circle">{{userfenxiaotixian.f_money}}</view>
+            <view>现有佣金（元）</view>
+        </view>
+    </view>
+    <view class="input_box df jsb border_bot_20">
+        <view class="input df fs30">
+            <input class="weui-input" name="je" placeholder="请输入提现金额" type="digit"></input>元</view>
+        <view class="fs30 weui-label color_red">
+            <navigator class="text" url="txmx">提现明细</navigator>
+        </view>
+    </view>
+    <view style="background:#fff;">
+        <view class="title fs30 border_bot_2">用户须知</view>
+        <view class="fs26 content">
+            <view class="item">1、佣金满{{userfenxiaotixian.txsmoney}},方可提现</view>
+            <view class="item">2、提现手续费为{{userfenxiaotixian.txsxf}}%</view>
+            <view class="item">3、下线下单完成方可获得佣金</view>
+            <view class="item">4、提现金额等于佣金时,手续费从提现金额中扣除</view>
+        </view>
+    </view>
+    <view class="bot">
+        <view class="read df" style="margin-bottom:20rpx;">
+            <checkbox-group name="checkbox">
+                <checkbox color="#ff6161" style="zoom:80%" value="1"></checkbox>
+            </checkbox-group>
+            <view>我已阅读并同意
+      <text bindtap="lookck" class="readfont">《分销商提现协议》</text>
+            </view>
+        </view>
+        <view class="weui-btn-area">
+            <input hidden="true" name="openid" value="{{userfenxiaotixian.f_openid}}"></input>
+            <input hidden="true" name="u_money" value="{{userfenxiaotixian.f_money}}"></input>
+            <input hidden="true" name="shouxufei" value="{{userfenxiaotixian.txsxf}}"></input>
+            <input hidden="true" name="zd_txmoney" value="{{userfenxiaotixian.txsmoney}}"></input>
+            <button class="weui-btn" formType="submit" style="background:{{disabled?'#999':'#EF4A50'}};" type="primary">确定提现</button>
+        </view>
+    </view>
+</form>
+<view class="zhezhao" hidden="{{fwxy}}"></view>
+<view class="kcrzxy" hidden="{{fwxy}}">
+    <view class="kcrzxyhd">分销商提现协议</view>
+    <scroll-view scrollY class="kcrzxybd" style="height: 600rpx;">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"></template>
+    </scroll-view>
+    <view bindtap="queren" class="queren">确定</view>
+</view>

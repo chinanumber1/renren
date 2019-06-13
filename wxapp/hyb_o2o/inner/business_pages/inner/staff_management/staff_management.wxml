@@ -1,0 +1,46 @@
+<view class="top tc">
+    <view class="fs28" wx:if="{{status==0}}">员工管理</view>
+    <view class="fs28" wx:if="{{status==1}}">员工信息</view>
+    <view bindtap="goback" class="back fs24 df">
+        <image class="right_arr" src="/pages/resource/images/right.png"></image>返回 </view>
+</view>
+<view wx:if="{{status==0}}">
+    <view class="list">
+        <view class="list_item df mb20 fs28" wx:for="{{list}}" wx:key="item">
+            <view class="head_img df">
+                <image src="/pages/resource/images/ren.png"></image>
+            </view>
+            <view>
+                <view class="mb10">{{item.name}} <text class="label fs20">未绑定</text>
+                </view>
+                <view>{{item.tel}} <image bindtap="look_erweima" class="erweima" data-index="{{index}}" src="{{item.erweima}}"></image>
+                </view>
+            </view>
+            <view bindtap="xiugai" class="write2" data-index="{{index}}">
+                <image src="/pages/resource/images/write2.png"></image>
+            </view>
+            <view class="mid_erweima sel" wx:if="{{item.see_erweima}}">
+                <image src="{{erweima}}"></image>
+            </view>
+            <view bindtap="close_modal" class="modal" data-index="{{index}}" wx:if="{{item.see_erweima}}"></view>
+        </view>
+    </view>
+    <view bindtap="add" class="btn fs30">+添加员工</view>
+</view>
+<view wx:if="{{status==1}}">
+    <form bindsubmit="formSubmit">
+        <view class="item border_bot_2 fs28">
+            <text class="left">姓名</text>
+            <view class="fr">
+                <input class="tr" name="name" placeholder="请输入姓名" type="text" value="{{name}}"></input>
+            </view>
+        </view>
+        <view class="item border_bot_2 fs28">
+            <text class="left">手机号</text>
+            <view class="fr">
+                <input bindblur="check_tel" class="tr" name="tel" placeholder="请输入手机号" type="text" value="{{tel}}"></input>
+            </view>
+        </view>
+        <button class="save fs30" formType="submit">保存</button>
+    </form>
+</view>

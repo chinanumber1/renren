@@ -1,0 +1,42 @@
+<view class="list_header">
+    <view bindtap="tabClick" class="list_title {{activeIndex==index?'default':'selsect'}}" id="{{index}}" wx:for="{{tabs}}">
+        <view>{{item}}</view>
+        <view class="list_border" hidden="{{activeIndex!=index}}" style="background-color:#34aaff;"></view>
+    </view>
+</view>
+<view class="list" hidden="{{activeIndex!=0}}">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell df l_item" wx:for="{{list}}">
+            <view class="weui-cell__hd">
+                <image class="himg" src="{{item.u_thumb}}"></image>
+            </view>
+            <view class="weui-cell__bd">
+                <view>{{item.f_name}}</view>
+                <view class="sj">佣金：{{item.f_money}}</view>
+                <view class="sj">注册时间：{{item.f_time}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="kong" hidden="{{list.length!=0}}">
+        <image src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view>您暂时没有一级团队哦！</view>
+    </view>
+</view>
+<view class="list" hidden="{{activeIndex!=1}}">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell df l_item" wx:for="{{list}}">
+            <view class="weui-cell__hd">
+                <image class="himg" src="{{item.u_thumb}}"></image>
+            </view>
+            <view class="weui-cell__bd">
+                <view>{{item.f_name}}</view>
+                <view class="sj">佣金：{{item.f_money}}</view>
+                <view class="sj">注册时间：{{item.f_time}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="kong" hidden="{{list.length!=0}}">
+        <image src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view>您暂时没有二级团队哦！</view>
+    </view>
+</view>

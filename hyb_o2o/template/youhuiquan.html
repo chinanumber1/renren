@@ -1,0 +1,287 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+
+{if $map=='all'}
+<div class="pull-left">
+    <a href="{php echo $this->createWeburl('Xiangmu_hd', array('op'=>'post'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 10px">添加优惠券</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>优惠券名称</td>
+            <td>优惠券金额</td>
+            <td>使用说明</td>
+            <td>使用要求</td>
+            <td>使用时间段</td>
+            <td>适用项目</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['y_id']}
+            </td>
+            <td>
+                {$item['y_name']}
+            </td>
+            <td>
+                {$item['y_money']}
+            </td>
+            <td>
+                {$item['y_shuoming']}
+            </td>
+            <td>
+                {$item['y_yaoqiu']}
+            </td>
+            <td>
+                {$item['y_starttime']}~{$item['y_endtime']}
+            </td>
+            <td>
+                {$item['x_name']}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('Xiangmu_hd', array('y_id' => $item['y_id'], 'op' =>'post'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('Xiangmu_hd', array('y_id' => $item['y_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $map=='1'}
+<div class="pull-left">
+    <a href="{php echo $this->createWeburl('Xiangmu_hd', array('op'=>'post1'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加减免活动</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>消费金额</td>
+            <td>减免金额</td>
+            <td>是否开启</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {if $item['m_money']}满{$item['m_money']}元{/if}
+            </td>
+            <td>
+                {if $item['j_money']}减{$item['j_money']}元{/if}
+            </td>
+            <td>
+                {if $item['statue']==1}
+                    开启
+                {/if}
+                {if $item['statue']==0}
+                    关闭
+                {/if}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('Xiangmu_hd', array('id' => $item['id'], 'op' =>'post1'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('Xiangmu_hd', array('id' => $item['id'], 'op' => 'delete1'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $map=='2'}
+<div class="pull-left">
+    <a href="{php echo $this->createWeburl('Xiangmu_hd', array('op'=>'post2'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加积分设置</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>购买项目所得积分数</td>
+            <td>是否开启</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['b_jifen']}
+            </td>
+            <td>
+                {if $item['statue']!=0}
+                    开启
+                {/if}
+                {if $item['statue']==0}
+                    关闭
+                {/if}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('Xiangmu_hd', array('id' => $item['id'], 'op' =>'post2'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('Xiangmu_hd', array('id' => $item['id'], 'op' => 'delete2'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{/if}
+{if $op == 'post'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加优惠券</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >优惠券名称</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="y_name" name="y_name" value="{$items['y_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">优惠券名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >优惠券金额</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="y_money" name="y_money" value="{$items['y_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">优惠券金额</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >优惠券使用说明</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="y_shuoming" name="y_shuoming" value="{$items['y_shuoming']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">优惠券使用说明[建议10字]</div>
+           </div>
+           <div class="form-group">
+                <label for="" class="control-label col-sm-1">优惠券使用要求</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="y_yaoqiu" id="y_yaoqiu" class="form-control">
+                        <option selected="selected">--请选择--</option>
+                        <option value="会员可使用" {if $items['y_yaoqiu']=="会员可使用"}selected{/if} >会员可使用</option>   
+                        <option value="普通用户可使用"  {if $items['y_yaoqiu']=="普通用户可使用"}selected{/if} >普通用户可使用</option>   
+                        <option value="两者均可使用"  {if $items['y_yaoqiu']=="两者均可使用"}selected{/if} >两者均可使用</option>    
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">优惠券适用项目</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="y_xm" id="y_xm" class="form-control">
+                       <option value="">--请选择--</option>
+                        {loop $xm $item}
+                        <option value="{$item['x_id']}" {if $item['x_id']==$items["y_xm"]}selected{/if} >{$item['x_name']}</option>
+                        {/loop}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >优惠券使用时间</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_daterange('time',array('start' =>$list['start_time'], 'end' =>$list['end_time']));}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">优惠券使用说明</div>
+           </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}
+
+{if $op == 'post1'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加减免活动</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >消费金额</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="m_money" name="m_money" value="{$items['m_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">消费金额(减免的条件金额)</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >减免金额</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_money" name="j_money" value="{$items['j_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">减免金额(满足条件后减免的金额)</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >是否开启</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="statue" id="statue" class="form-control">
+                        <option selected="selected">--请选择--</option>
+                        <option value=1 {if $items['statue']==1}selected{/if} >开启</option>   
+                        <option value=0  {if $items['statue']==0}selected{/if} >关闭</option>   
+                    </select>
+                </div>
+           </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}
+
+{if $op == 'post2'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加积分活动</h3>
+        </div>
+        <div class="panel-body" id="xuan_bd">
+            <div class="form-group xuanthis" id="buyg">
+                <label for="" class="control-label col-sm-1" >购买所得积分</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="b_jifen" name="b_jifen" value="{$items['b_jifen']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">购买所得积分</div>
+            </div>
+           <div class="form-group">
+                <label for="" class="control-label col-sm-1" >是否关闭</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <!-- <input type="checkbox" name="statue" id="statue" value="0" {if $items['statue']==0}selected{/if}>关闭 -->
+                    <select name="statue" id="statue" class="form-control">
+                        <option selected="selected">--请选择--</option>
+                        <option value=1 {if $items['statue']==1}selected{/if} >开启</option>   
+                        <option value=0  {if $items['statue']==0}selected{/if} >关闭</option>   
+                    </select>
+                </div>
+           </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}

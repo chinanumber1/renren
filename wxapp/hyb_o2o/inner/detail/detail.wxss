@@ -1,0 +1,439 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+@import "../../template/template.wxss";
+
+page {
+    color: #333;
+    background: #f3f3f3;
+    padding-bottom: 120rpx;
+}
+
+.color_black {
+    color: #000;
+}
+
+.box {
+    padding: 10rpx 20rpx;
+    padding-bottom: 0;
+}
+
+.top {
+    background: #fff;
+    padding-bottom: 10rpx;
+}
+
+.baoz view {
+    margin-right: 20rpx;
+}
+
+.label2 {
+    border: 2rpx solid #01bcb1;
+    color: #01bcb1;
+}
+
+.box .label {
+    border: 2rpx solid #FFE988;
+    color: #FFE988;
+    border-radius: 10rpx;
+    padding: 5rpx 20rpx;
+    margin-right: 10rpx;
+}
+
+.box .label2 {
+    border: 2rpx solid #EF4A50;
+    color: #EF4A50;
+}
+
+.door {
+    display: inline-block;
+    background: #fff;
+}
+
+.money {
+    color: #EF4A50;
+    margin-right: 30rpx;
+}
+
+.box_bot {
+    justify-content: space-between;
+    padding: 20rpx;
+    padding-top: 0;
+}
+
+.yuyue {
+    color: #fff;
+    background: #EF4A50;
+    padding: 10rpx 20rpx;
+    border-radius: 10rpx;
+}
+
+.member {
+    background: #fff;
+}
+
+.member .title {
+    justify-content: space-between;
+    padding: 20rpx;
+}
+
+.vip_icon {
+    width: 45rpx;
+    height: 35rpx;
+    margin-right: 10rpx;
+}
+
+.member_item {
+    justify-content: space-around;
+    text-align: center;
+    padding: 20rpx;
+}
+
+.color_ye {
+    color: #FAAF28;
+}
+
+.company {
+    padding: 20rpx;
+    background: #fff;
+}
+
+.company .img {
+    width: 130rpx;
+    height: 130rpx;
+    margin-right: 10rpx;
+}
+
+.company .text {
+    width: 80%;
+}
+
+.profile {
+    margin-top: 10rpx;
+}
+
+.right {
+    float: right;
+}
+
+.loca_icon {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}
+
+.loca {
+    width: 80%;
+    border-right: 4rpx solid #F3F3F3;
+}
+
+.tel_box {
+    width: 20%;
+    text-align: center;
+}
+
+.tel {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.tips {
+    padding: 20rpx;
+    padding-bottom: 0;
+    background: #fff;
+}
+
+.tips .title {
+    padding-left: 10rpx;
+}
+
+.tips .detail {
+    padding: 20rpx 0;
+}
+
+.bot_title {
+    justify-content: space-around;
+    text-align: center;
+}
+
+.bot_title text {
+    padding: 20rpx 0;
+    width: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.bot_title text.on::after {
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 2rpx solid #EF4A50;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.bot_info {
+    padding: 0 20rpx;
+    background: #fff;
+}
+
+.bottom {
+    background: #fff;
+}
+
+.pingjia_item .p_pic {
+    width: 120rpx;
+    height: 120rpx;
+    margin-right: 20rpx;
+    border: 2rpx solid #f3f3f3;
+}
+
+.pingjia_item .pic_list {
+    margin-bottom: 20rpx;
+}
+
+.pingjia_item {
+    align-items: center;
+    padding: 20rpx;
+}
+
+.pingjia_item .img {
+    width: 60rpx;
+    height: 60rpx;
+    margin-right: 10rpx;
+    flex-shrink: 0;
+}
+
+.pingjia_item .img image {
+    border-radius: 50%;
+}
+
+.star {
+    width: 34rpx;
+    height: 30rpx;
+}
+
+.pingjia_item .content {
+    padding: 20rpx;
+}
+
+.noadd image {
+    width: 60%;
+    margin-top: 30rpx;
+}
+
+.border_left {
+    border-left: 10rpx solid #F5CE47;
+    padding-left: 10rpx;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.youhuijuan {
+    background: #fff;
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+}
+
+.color333 {
+    color: #333;
+}
+
+.color666 {
+    color: #666;
+}
+
+.juan {
+    margin: 20rpx 50rpx;
+    color: #fff;
+    border-left: 8rpx dotted #fff;
+    border-right: 8rpx dotted #fff;
+}
+
+.j_left {
+    width: 75%;
+    padding: 20rpx;
+    border-right: 2rpx dashed #fff;
+    position: relative;
+}
+
+.j_left::after {
+    content: "";
+    display: block;
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    top: -5rpx;
+    transform: translate(50%,-50%);
+}
+
+.j_left::before {
+    content: "";
+    display: block;
+    width: 30rpx;
+    height: 30rpx;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    right: 0;
+    bottom: -5rpx;
+    transform: translate(50%,50%);
+}
+
+.j_right {
+    width: 25%;
+    padding: 20rpx;
+}
+
+.buy_list {
+    padding: 20rpx;
+}
+
+.buy_list image {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 20rpx;
+    border-radius: 50%;
+}
+
+.reply {
+    background: #f8f8f8;
+    margin: 20rpx 0;
+    padding: 20rpx;
+    color: #6e6e6e;
+    position: relative;
+}
+
+.reply::after {
+    content: "";
+    display: block;
+    width: 30rpx;
+    height: 30rpx;
+    background: #f8f8f8;
+    transform: rotate(45deg) translate(50%,-50%);
+    position: absolute;
+    top: -10rpx;
+    left: 0;
+}
+
+.baozan_box {
+    position: fixed;
+    bottom: 10%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+}
+
+.bz_inner {
+    padding: 30rpx 20rpx;
+}
+
+.b_icon1 {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.bz_cont {
+    padding: 20rpx;
+    width: 93%;
+    margin-left: 4%;
+}
+
+.xqimgs {
+    width: 100%;
+}
+
+.xqimgs image {
+    width: 100%;
+    margin-bottom: 20rpx;
+    margin-top: 20rpx;
+}
+
+.btns {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.btns view button {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    height: 120rpx;
+    border-radius: 0;
+    line-height: 0;
+    background: #fff;
+}
+
+.btns view button::after {
+    border: none;
+}
+
+.btns view.btnsmini {
+    width: 32%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.btns view.btnsmini button {
+    width: 120rpx;
+    font-size: 24rpx;
+    color: #AAAAAA;
+    padding: 18rpx 0;
+}
+
+.btns view.btnsmini button:first-child {
+    border-right: 1rpx solid #E9E9E9;
+}
+
+.btns view.btnsmini button image {
+    width: 55rpx;
+    height: 55rpx;
+    margin-bottom: 12rpx;
+}
+
+.btns view.btnsmini button text {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.btns view.btnslog {
+    box-sizing: border-box;
+    width: 68%;
+    display: flex;
+    align-items: center;
+}
+
+.btns view.btnslog button {
+    width: 50%;
+    height: 120rpx;
+    line-height: 120rpx;
+    font-size: 30rpx;
+    color: #fff;
+}
+
+.btns view.btnslog button:first-child {
+    background: #F39800;
+}
+
+.btns view.btnslog button:last-child {
+    background: #FF4544;
+}

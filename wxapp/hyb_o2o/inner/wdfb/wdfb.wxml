@@ -1,0 +1,279 @@
+<view class="top_list df">
+    <view catchtap="switch_tab" class="top_item fs28 {{current==index?'sel':''}}" data-index="{{index}}" style="width:{{100/top_list.length}}%" wx:for="{{top_list}}">{{item}}</view>
+</view>
+<view wx:if="{{current==0}}">
+    <view class="order_list">
+        <view catchtap="look_detail" class="item mb20" data-id="{{item.fa_id}}" wx:for="{{userfadan}}" wx:key="item">
+            <view class="i_t border_bot_2 fs28 df jsb pzy20">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.fa_ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.fa_fwpay_type}})</text>
+                </view>
+                <view class="color999" wx:if="{{item.fa_style=='已接单'}}">服务中</view>
+                <view class="color999" wx:if="{{item.fa_style!='已接单'}}">{{item.q_styles}}</view>
+            </view>
+            <view class="mid border_bot_2 df pzy20">
+                <view class="img">
+                    <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+                </view>
+                <view class="m_r fs24">
+                    <view class="fs30 mb20 df jsb">
+                        <view class="line_one fw" style="width:55%;">{{item.fa_fwname}} </view>
+                        <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney=='0'}}">上门估价</view>
+                        <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'}}">￥{{item.fa_fwmoney}}</view>
+                        <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='一口价'}}">￥{{item.fa_fwmoney}}</view>
+                    </view>
+                    <view class="fs28" style="color:#003333">{{item.fa_fwstyle1}}</view>
+                </view>
+            </view>
+            <view class="df pzy20 border_bot_2 fs28 jsb">
+                <view>{{item.fa_fwtime}}<text class="color999"> (预约时间)</text>
+                </view>
+                <view catchtap="call" data-tel="{{item.yuangong.y_telphone}}" wx:if="{{item.fa_style=='已接单'||item.fa_style=='已完成'}}">
+                    <text class="color999">评估员：</text>{{item.yuangong.y_name}} <image class="tel" src="/hyb_o2o/resource/images/wdfb_icon3.png"></image>
+                </view>
+            </view>
+            <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_style=='已接单'||item.fa_style=='已完成'}}">
+                <view class="color666">
+                    <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>{{item.shangjia.s_name}}
+          </view>
+                <view catchtap="call" data-tel="{{item.shangjia.s_telphone}}">
+                    <text class="color999">商家热线：</text>{{item.shangjia.s_telphone}}</view>
+            </view>
+            <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_fwpay_type=='定金'}}">
+                <view class="color666">
+                    <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>定金费用
+          </view>
+                <view class="color_pink">￥{{item.fa_fwdingjin}}</view>
+            </view>
+            <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_fwpay_type=='上门估价'}}">
+                <view class="color666" wx:if="{{item.fa_fwmoney=='0'}}">
+                    <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>上门费用
+          </view>
+                <view class="color666" wx:if="{{item.fa_fwmoney!='0'}}">
+                    <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>服务费用
+          </view>
+                <view class="color_pink" wx:if="{{item.fa_fwmoney!='0'}}">￥{{item.fa_fwmoney}}</view>
+                <view class="color_pink" wx:if="{{item.fa_fwmoney=='0'}}">￥{{item.fa_fwshagneng}}</view>
+            </view>
+            <view class="df pzy20 border_bot_2 jsb">
+                <view class="fs26 color333">{{item.fa_time}} <text class="color999">发布</text>
+                </view>
+                <view catchtap="cancel" class="qiang sure_order" data-fa_id="{{item.fa_id}}" wx:if="{{item.fa_style=='待审核'||item.fa_style=='派单中'}}">取消订单</view>
+                <view catchtap="sure_order" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='一口价'&&item.q_styles=='服务中'&&item.fa_fwpay_types=='1'}}">确定完成</view>
+                <view catchtap="sureDoor" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='一口价'&&item.q_styles=='已派单'}}">确认上门</view>
+                <view catchtap="sureDoor" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='已派单'&&item.fa_fwmoney=='0'}}">确认上门</view>
+                <view catchtap="sureDoor" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='已派单'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='1'}}">确认上门</view>
+                <view catchtap="sure_order" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='服务中'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='1'}}">确认完成</view>
+                <view catchtap="payOrder" class="qiang pay_order" data-baojia="{{item.fa_fwmoney}}" data-fa_id="{{item.fa_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='0'&&item.fa_style!='已取消'}}">同意报价</view>
+                <view catchtap="notongyi" class="qiang pay_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" style="background:#aba2a2;" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='0'&&item.fa_style!='已取消'}}">不同意报价</view>
+                <view catchtap="del" class="qiang sure_order" data-fa_id="{{item.fa_id}}" wx:if="{{item.q_styles=='已完成'&&item.fa_style=='已完成'}}">删除</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{current==0&&userfadan.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view wx:if="{{current==1||current==2}}">
+    <view class="order_list">
+        <view catchtap="look_detail" class="item mb20" data-id="{{item.fa_id}}" wx:for="{{userfadan}}" wx:key="item">
+            <view class="i_t border_bot_2 fs28 df jsb pzy20">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.fa_ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.fa_fwpay_type}})</text>
+                </view>
+                <view class="color999">{{item.q_styles}}</view>
+            </view>
+            <view class="mid border_bot_2 df pzy20">
+                <view class="img">
+                    <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+                </view>
+                <view class="m_r fs24">
+                    <view class="fs30 mb20 df jsb">
+                        <view class="line_one fw" style="width:55%;">{{item.fa_fwname}} </view>
+                        <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='上门估价'}}">上门估价</view>
+                        <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type!='上门估价'}}">￥{{item.fa_fwmoney}}</view>
+                    </view>
+                    <view class="fs28" style="color:#003333">{{item.fa_fwstyle1}}</view>
+                </view>
+            </view>
+            <view class="df pzy20 border_bot_2 fs28 jsb">
+                <view>{{item.fa_fwtime}}<text class="color999"> (预约时间)</text>
+                </view>
+            </view>
+            <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_fwpay_type=='定金'}}">
+                <view class="color666">
+                    <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>定金费用
+          </view>
+                <view class="color_pink">￥{{item.fa_fwdingjin}}</view>
+            </view>
+            <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_fwpay_type=='上门估价'}}">
+                <view class="color666">
+                    <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>上门费用
+          </view>
+                <view class="color_pink">￥{{item.fa_fwshagneng}}</view>
+            </view>
+            <view class="df pzy20 border_bot_2 jsb">
+                <view class="fs28 color333">{{item.fa_time}} <text class="color999">发布</text>
+                </view>
+                <view catchtap="cancel" class="qiang sure_order" data-fa_id="{{item.fa_id}}">取消订单</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{current==1&&userfadan.length==0||current==2&&userfadan.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="order_list" wx:if="{{current==3}}">
+    <view catchtap="look_detail" class="item mb20" data-id="{{item.fa_id}}" wx:for="{{userfadan}}" wx:key="item">
+        <view class="i_t border_bot_2 fs28 df jsb pzy20">
+            <view>
+                <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.fa_ordersn}}</text>
+                </text>
+                <text class="color_pink">({{item.fa_fwpay_type}})</text>
+            </view>
+            <view class="color999" wx:if="{{item.fa_style=='已接单'}}">服务中</view>
+            <view class="color999" wx:if="{{item.fa_style!='已接单'}}">{{item.q_styles}}</view>
+        </view>
+        <view class="mid border_bot_2 df pzy20">
+            <view class="img">
+                <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+            </view>
+            <view class="m_r fs24">
+                <view class="fs30 mb20 df jsb">
+                    <view class="line_one fw" style="width:55%;">{{item.fa_fwname}} </view>
+                    <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney=='0'}}">上门估价</view>
+                    <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'}}">￥{{item.fa_fwmoney}}</view>
+                    <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='一口价'}}">￥{{item.fa_fwmoney}}</view>
+                </view>
+                <view class="fs28" style="color:#003333">{{item.fa_fwstyle1}}</view>
+            </view>
+        </view>
+        <view class="df pzy20 border_bot_2 fs28 jsb">
+            <view>{{item.fa_fwtime}}<text class="color999"> (预约时间)</text>
+            </view>
+            <view catchtap="call" data-tel="{{item.yuangong.y_telphone}}" wx:if="{{item.yuangong!=false}}">
+                <text class="color999">评估员：</text>{{item.yuangong.y_name}} <image class="tel" src="/hyb_o2o/resource/images/wdfb_icon3.png"></image>
+            </view>
+        </view>
+        <view class="df pzy20 border_bot_2 fs28 jsb">
+            <view class="color666">
+                <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>{{item.shangjia.s_name}}
+          </view>
+            <view catchtap="call" data-tel="{{item.shangjia.s_telphone}}" wx:if="{{item.yuangong==false}}">
+                <text class="color999">商家热线：</text>{{item.shangjia.s_telphone}}</view>
+        </view>
+        <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_fwpay_type=='上门估价'}}">
+            <view class="color666" wx:if="{{item.fa_fwmoney=='0'}}">
+                <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>上门费用
+          </view>
+            <view class="color666" wx:if="{{item.fa_fwmoney!='0'}}">
+                <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>服务费用
+          </view>
+            <view class="color_pink" wx:if="{{item.fa_fwmoney!='0'}}">￥{{item.fa_fwmoney}}</view>
+            <view class="color_pink" wx:if="{{item.fa_fwmoney=='0'}}">￥{{item.fa_fwshagneng}}</view>
+        </view>
+        <view class="df pzy20 border_bot_2 jsb">
+            <view class="fs28 color333">{{item.fa_time}} <text class="color999">发布</text>
+            </view>
+            <view catchtap="sure_order" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='一口价'&&item.q_styles=='服务中'&&item.fa_fwpay_types=='1'}}">确定完成</view>
+            <view catchtap="sureDoor" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='一口价'&&item.q_styles=='已派单'}}">确认上门</view>
+            <view catchtap="sureDoor" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='已派单'&&item.fa_fwmoney=='0'}}">确认上门</view>
+            <view catchtap="sureDoor" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='已派单'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='1'}}">确认上门</view>
+            <view catchtap="sure_order" class="qiang sure_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='服务中'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='1'}}">确认完成</view>
+            <view catchtap="payOrder" class="qiang pay_order" data-baojia="{{item.fa_fwmoney}}" data-fa_id="{{item.fa_id}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='0'}}">同意报价</view>
+            <view catchtap="notongyi" class="qiang pay_order" data-id="{{item.fa_id}}" data-index="{{index}}" data-y_id="{{item.yuangong.y_id}}" style="background:#aba2a2;" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='0'}}">不同意报价</view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{current==3&&userfadan.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="order_list" wx:if="{{current==4}}">
+    <view catchtap="look_detail" class="item mb20" data-id="{{item.fa_id}}" wx:for="{{userfadan}}" wx:key="item">
+        <view class="i_t border_bot_2 fs28 df jsb pzy20">
+            <view>
+                <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.fa_ordersn}}</text>
+                </text>
+                <text class="color_pink">({{item.fa_fwpay_type}})</text>
+            </view>
+            <view class="color999">{{item.q_styles}}</view>
+        </view>
+        <view class="mid border_bot_2 df pzy20">
+            <view class="img">
+                <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+            </view>
+            <view class="m_r fs24">
+                <view class="fs30 mb20 df jsb">
+                    <view class="line_one fw" style="width:55%;">{{item.fa_fwname}} </view>
+                    <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type=='上门估价'}}">上门估价</view>
+                    <view class="fs30 color_pink" wx:if="{{item.fa_fwpay_type!='上门估价'}}">￥{{item.fa_fwmoney}}</view>
+                </view>
+                <view class="fs28" style="color:#003333">{{item.fa_fwstyle1}}</view>
+            </view>
+        </view>
+        <view class="df pzy20 border_bot_2 fs28 jsb">
+            <view>{{item.fa_fwtime}}<text class="color999"> (预约时间)</text>
+            </view>
+            <view catchtap="call" data-tel="{{item.yuangong.y_telphone}}" wx:if="{{item.yuangong!=false}}">
+                <text class="color999">评估员：</text>{{item.yuangong.y_name}} <image class="tel" src="/hyb_o2o/resource/images/wdfb_icon3.png"></image>
+            </view>
+        </view>
+        <view class="df pzy20 border_bot_2 fs28 jsb">
+            <view class="color666">
+                <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>{{item.shangjia.s_name}}
+        </view>
+            <view catchtap="call" data-tel="{{item.shangjia.s_telphone}}" wx:if="{{item.yuangong==false}}">
+                <text class="color999">商家热线：</text>{{item.shangjia.s_telphone}}</view>
+        </view>
+        <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_fwpay_type=='定金'}}">
+            <view class="color666">
+                <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>定金费用
+          </view>
+            <view class="color_pink">￥{{item.fa_fwdingjin}}</view>
+        </view>
+        <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.fa_fwpay_type=='上门估价'}}">
+            <view class="color666">
+                <image class="s_icon" src="/hyb_o2o/resource/images/wdfb_icon2.png"></image>上门费用
+          </view>
+            <view class="color_pink">￥{{item.fa_fwshagneng}}</view>
+        </view>
+        <view class="df pzy20 border_bot_2 jsb">
+            <view class="fs28 color333">{{item.fa_time}} <text class="color999">发布</text>
+            </view>
+            <view catchtap="del" class="qiang sure_order" data-fa_id="{{item.fa_id}}">删除</view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{current==4&&userfadan.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="pay_box df jcc" wx:if="{{open_pay}}">
+    <view class="pay_inner">
+        <view class="fs30 pay_title">请选择支付方式</view>
+        <radio-group bindchange="pay_choose" class="df">
+            <label class="mr20 df">
+                <radio name="pay_type" value="余额支付"></radio>
+                <text>余额支付</text>
+            </label>
+            <label class="df">
+                <radio name="pay_type" value="微信支付"></radio>
+                <text>微信支付</text>
+            </label>
+        </radio-group>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>
+<view class="go_index">
+    <view catchtap="goIndex">
+    返回首页    
+  </view>
+</view>

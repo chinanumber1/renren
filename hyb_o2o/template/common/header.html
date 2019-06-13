@@ -1,0 +1,235 @@
+{template 'common/header_base'}
+<body style="background-color: #31b4e1; overflow:hidden;">
+<script type="text/javascript" src="/addons/hyb_o2o/resouce/js/adminIndex.js"></script>
+<div class="admin-header clearfix">
+    <!-- 颜色选择层 bylu -->
+    <div class="bgSelector">
+    </div>
+    <div class="admin-logo">
+        <a  href="{php echo $this->createWebUrl('main')}" data-url="" data-param="index|main" target="workspace"><img id="adminLogo" src="/addons/hyb_o2o/resouce/images/admin-logo.png"/></a>
+        <div class="foldsider">
+            <i class="icon icon-indent-left"></i>
+        </div>
+    </div>
+    <div class="module-menu">
+        <ul>
+            <li data-param="menuplatform"><a href="javascript:void(0);">全局管理</a></li>
+            <li data-param="qiangdan"><a href="javascript:void(0);">抢单中心</a></li>
+            <li data-param="menushopping"><a href="javascript:void(0);">营销管理</a></li>
+            <li data-param="finance"><a href="javascript:void(0);">分销管理</a></li>
+        </ul>
+    </div>
+    <div class="admin-header-right">
+        <div class="manager">
+            <span class="avatar">
+            <form action="index.php" id="fileForm" method="post" enctype="multipart/form-data" runat="server">
+                <input name="img" type="file" class="admin-avatar-file" id="_pic" title="设置管理员头像">
+            </form>
+            <img nctype="admin_avatar" src="/addons/hyb_o2o/resouce/images/admin.png"/>
+            </span>
+            <div id="admin-manager-btn" class="admin-manager-btn" style="width: 90px;">
+                <a href="javascript:;" class="dropdown-toggle" style="position: relative;top: 5px;color: #fff;" data-toggle="dropdown">{$_W['user']['username']} <span class="caret" style="border-top: 4px solid #fff"></span></a>
+                <ul class="dropdown-menu color-gray" role="menu" style="top: 160%;left: -23%;">
+                            <li>
+                                <a href="{url 'user/profile'}" target="_blank"><i class="wi wi-account color-gray"></i> 我的账号</a>
+                            </li>
+                            <li class="divider"></li>
+                            {if permission_check_account_user('see_system_upgrade')}<li><a href="{url 'cloud/upgrade'}" target="_blank"><i class="wi wi-update color-gray"></i> 自动更新</a></li>{/if}
+                            <li><a href="{url 'system/updatecache'}" target="_blank"><i class="wi wi-cache color-gray"></i> 更新缓存</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{url 'user/logout'}"><i class="fa fa-sign-out color-gray"></i> 退出系统</a>
+                            </li>
+                        </ul>
+            </div>
+        </div>
+        <div class="operate">
+            <li><a href="{php echo url('wxapp/display')}" class="sitemap" title="切换小程序">&nbsp;</a></li>
+            <i></i>
+            <li><a href="javascript:void(0);" id="trace_show" class="style-color" title="给管理中心换个颜色">&nbsp;</a></li>
+            <i></i>
+            <li><a href="{url 'system/updatecache'}" class="clear"  title="清除缓存">&nbsp;</a></li>
+            <i></i>
+            <li>
+                <a href="{url 'user/logout'}" class="prompt" title="安全退出管理中心">&nbsp;</a>
+            </li>
+        </div>
+    </div>
+</div>
+<div class="admin-main start_home">
+    <div class="top-border">
+    </div>
+    <div class="admin-main-left">
+        <div class="admincj_nav">
+            <div class="navLeftTab" id="adminNavTabs_index">
+                <div class="item current" data-type="home">
+                    <div class="tit">
+                        <a href="{php echo $this->createWebUrl('main')}" data-url="" data-param="index|main" target="workspace"><i class="nav_icon i_home"></i>
+                        <h4>首页</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="navLeftTab" id="adminNavTabs_menuplatform" style="display:none;">
+                <div class="item">
+                    <div class="tit">
+                        <a href="javascript:void(0)"><i class="nav_icon icon_01_system"></i>
+                        <h4>设置</h4>
+                        </a>
+                    </div>
+                    <div class="sub-menu">
+                        <ul>
+                            <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('Mendian',array('op'=>'display'))}" data-param="menuplatform|jiben" target="workspace">基本设置</a></li>
+                            <!-- <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('Daohang',array('op'=>'display'))}" data-param="menuplatform|jiben" target="workspace">底部导航设置</a></li> -->
+                            <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('Question',array('op'=>'display'))}" data-param="menuplatform|jiben" target="workspace">常见问题</a></li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="item">
+                <div class="tit">
+                    <a href="javascript:void(0)"><i class="nav_icon icon_08_members"></i>
+                    <h4>会员</h4>
+                    </a>
+                </div>
+                <div class="sub-menu">
+                    <ul>
+                        <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('huiyuan',array('op'=>'display'))}" data-param="menuplatform|huiyuan" target="workspace">会员列表</a></li>
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('jibie',array('op'=>'display'))}" data-param="menuplatform|huiyuanjibie" target="workspace">会员等级</a></li>
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('address',array('op'=>'display'))}" data-param="menuplatform|address" target="workspace">地址管理</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item">
+                <div class="tit">
+                    <a href="javascript:void(0)"><i class="nav_icon icon_02_goods_storage"></i>
+                    <h4>订单</h4>
+                    </a>
+                </div>
+                <div class="sub-menu">
+                    <ul>
+                        <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('order',array('op'=>'display'))}" data-param="menuplatform|order" target="workspace">订单管理</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item">
+                <div class="tit">
+                    <a href="javascript:void(0)"><i class="nav_icon icon_13_backup"></i>
+                    <h4>服务</h4>
+                    </a>
+                </div>
+                <div class="sub-menu">
+                    <ul>
+                        <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('xiangmu_type',array('op'=>'display'))}" data-param="menuplatform|setting" target="workspace">项目分类</a></li>
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('xiangmu',array('op'=>'display'))}"  data-param="menuplatform|tongyong_yindao" target="workspace">服务项目</a></li>
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('pingjia',array('op'=>'display'))}"  data-param="menuplatform|pingjia" target="workspace">服务评价</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item">
+                <div class="tit">
+                    <a href="javascript:void(0)"><i class="nav_icon icon_17_merchants"></i>
+                    <h4>商家</h4>
+                    </a>
+                </div>
+                <div class="sub-menu">
+                    <ul>
+                        <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('sjruzhu',array('op'=>'display'))}" data-param="menuplatform|card_jichu" target="workspace">商家入驻条件</a></li>
+                      <!--   <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('sjtype',array('op'=>'display'))}" data-param="menuplatform|card_yindao" target="workspace">商家分类</a></li> -->
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('shangjia',array('op'=>'display'))}" data-param="menuplatform|card_button_lianjie" target="workspace">商家管理</a></li>
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('shangjia',array('op'=>'yuangong'))}" data-param="menuplatform|card_button_lianjie" target="workspace">商家员工管理</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item">
+                <div class="tit">
+                    <a href="javascript:void(0)"><i class="nav_icon icon_03_promotion"></i>
+                    <h4>提现</h4>
+                    </a>
+                </div>
+                <div class="sub-menu">
+                    <ul>
+                        <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('tixian',array('op'=>'display'))}" data-param="menuplatform|card_taocan_style" target="workspace">商家提现记录</a></li>
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('zhengshu',array('op'=>'display'))}" data-param="menuplatform|zhengshu" target="workspace">证书设置</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="tit">
+                    <a href="javascript:void(0)"><i class="nav_icon icon_12_template"></i>
+                    <h4>配置</h4>
+                    </a>
+                </div>
+                <div class="sub-menu">
+                    <ul>
+                        <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('pay',array('op'=>'display'))}" data-param="menuplatform|zhifu" target="workspace">支付管理</a></li>
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('shuju',array('op'=>'post'))}" data-param="menuplatform|shuju" target="workspace">数据导入</a></li> 
+                        <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('cunchu',array('op'=>'display'))}" data-param="menuplatform|cunchu" target="workspace">远程存储设置</a></li> 
+                    </ul>
+                </div>
+            </div>
+</div>
+<div class="navLeftTab" id="adminNavTabs_qiangdan" style="display:none;">
+     <div class="item">
+        <div class="tit">
+            <a href="javascript:void(0)"><i class="nav_icon icon_01_cat_and_goods"></i>
+            <h4>抢单</h4>
+            </a>
+        </div>
+        <div class="sub-menu">
+            <ul>
+                <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('qiangdan',array('op'=>'display','map'=>'all'))}" data-param="qiangdan|qiangdan" target="workspace">抢单中心</a></li>
+            </ul>
+        </div>
+    </div> 
+</div>
+<div class="navLeftTab" id="adminNavTabs_menushopping" style="display:none;">
+     <div class="item">
+        <div class="tit">
+            <a href="javascript:void(0)"><i class="nav_icon icon_01_cat_and_goods"></i>
+            <h4>活动</h4>
+            </a>
+        </div>
+        <div class="sub-menu">
+            <ul>
+                <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('Xiangmu_hd',array('op'=>'display','map'=>'all'))}" data-param="menushopping|card_jichu" target="workspace">优惠券</a></li>
+               
+                <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('Xiangmu_hd',array('op'=>'display','map'=>'1'))}" data-param="menushopping|manjian" target="workspace">满减活动</a></li> 
+
+                <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('Xiangmu_hd',array('op'=>'display','map'=>'2'))}" data-param="menushopping|jifen" target="workspace">积分管理</a></li>
+
+                <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('Jfgoods',array('op'=>'display'))}" data-param="menushopping|jfgoods" target="workspace">积分商品管理</a></li>
+                <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('userjifen',array('op'=>'display'))}" data-param="menushopping|userjifen" target="workspace">积分兑换记录</a></li>
+            </ul>
+        </div>
+    </div> 
+</div>
+<div class="navLeftTab" id="adminNavTabs_finance" style="display:none;">
+    <div class="item">
+        <div class="tit">
+            <a href="javascript:void(0)"><i class="nav_icon icon_01_cat_and_goods"></i>
+            <h4>分销</h4>
+            </a>
+        </div>
+        <div class="sub-menu">
+            <ul>
+                <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('fenxiao',array('op'=>'display'))}" data-param="finance|fenxiao" target="workspace">分销用户管理</a></li>
+                <li><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('fxuser',array('op'=>'display'))}" data-param="finance|fxuser" target="workspace">分销情况</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="item">
+        <div class="tit">
+            <a href="javascript:void(0)"><i class="nav_icon icon_13_backup"></i>
+            <h4>佣金</h4>
+            </a>
+        </div>
+        <div class="sub-menu">
+            <ul>
+                <li class="curr"><s></s><a href="javascript:void(0);" data-url="{php echo $this->createWebUrl('yjtixian',array('op'=>'display'))}" data-param="finance|yjtixain" target="workspace">佣金提现记录</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</div>

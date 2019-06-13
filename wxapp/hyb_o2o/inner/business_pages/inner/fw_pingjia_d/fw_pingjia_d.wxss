@@ -1,0 +1,150 @@
+@import "../../../../../__wuBaseWxss__/5.wxss";
+
+@import "../../../../template/template.wxss";
+
+page {
+    color: #242424;
+    background: #f3f3f3;
+    padding-bottom: 120rpx;
+}
+
+.color_black {
+    color: #000;
+}
+
+.box {
+    padding: 10rpx 20rpx;
+}
+
+.top {
+    background: #fff;
+}
+
+.box view {
+    margin-bottom: 5rpx;
+}
+
+.box .label {
+    border: 2rpx solid #ff7c51;
+    color: #ff7c51;
+    border-radius: 10rpx;
+    padding: 5rpx 20rpx;
+    margin-right: 10rpx;
+}
+
+.box .label2 {
+    border: 2rpx solid #01bcb1;
+    color: #01bcb1;
+}
+
+.door {
+    display: inline-block;
+    background: #e0e0e0;
+    color: #afafaf;
+    border-radius: 10rpx;
+    padding: 5rpx;
+}
+
+.money {
+    color: #FF5B26;
+}
+
+.box_bot {
+    justify-content: space-between;
+    padding: 20rpx;
+}
+
+.color_ye {
+    color: #FAAF28;
+}
+
+.right {
+    float: right;
+}
+
+.bot_info {
+    padding: 0 20rpx;
+    background: #fff;
+}
+
+.bot_info .pj_icon {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.bottom {
+    background: #fff;
+}
+
+.pingjia_item {
+    align-items: center;
+    padding: 20rpx 0;
+}
+
+.pingjia_item .p_pic {
+    width: 150rpx;
+    height: 150rpx;
+    margin-right: 20rpx;
+    border: 2rpx solid #f3f3f3;
+}
+
+.pingjia_item .pic_list {
+    margin-bottom: 20rpx;
+}
+
+.pingjia_item .img {
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 10rpx;
+}
+
+.pingjia_item .reply_t {
+    padding: 5rpx 20rpx;
+    border: 2rpx solid #EF4A50;
+    color: #EF4A50;
+    border-radius: 10rpx;
+}
+
+.reply_box {
+    background: #f8f8f8;
+    font-size: 26rpx;
+    color: #F0AC2D;
+    padding: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.pingjia_item .img image {
+    border-radius: 50%;
+}
+
+.star {
+    width: 30rpx;
+    height: 26rpx;
+}
+
+.pingjia_item .content {
+    padding: 20rpx 10rpx;
+}
+
+.reply_input {
+    width: 100%;
+    padding: 20rpx;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.reply_input .input {
+    width: 77%;
+    font-size: 28rpx;
+    margin-right: 20rpx;
+    border: 2rpx solid #EF4A50;
+    border-radius: 20rpx;
+}
+
+.btn {
+    background: #EF4A50;
+    color: #fff;
+    margin: 0;
+}

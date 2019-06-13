@@ -1,0 +1,35 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+@import "../../template/template.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.item {
+    padding: 20rpx;
+    color: #737373;
+    background: #fff;
+    justify-content: space-between;
+}
+
+.img {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+
+.img image {
+    border-radius: 50%;
+}
+
+.tr {
+    text-align: right;
+}
+
+.submit {
+    color: #fff;
+    background: #20D5CB;
+    background: -webkit-linear-gradient(left,#24e7b0,#1eccd8);
+    margin: 20rpx;
+}

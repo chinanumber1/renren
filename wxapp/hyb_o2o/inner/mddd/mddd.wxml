@@ -1,0 +1,148 @@
+<view class="switch border_bot_2">
+    <view class="item_box df">
+        <view bindtap="switch_top" class="items fs28 {{currentTab==index?'sel':''}}" data-index="{{index}}" wx:for="{{switch_list}}">{{item}}</view>
+    </view>
+</view>
+<view class="top" wx:if="{{currentTab==0}}">
+    <view class="choose_list df p20 fs28">
+        <view class="pick df">
+            <picker bindchange="bindfenlei" range="{{fenlei}}" value="{{index}}">
+                <view class="picker">
+                    <input disabled class="line_one" placeholder="分类" value="{{fenlei[index]}}"></input>
+                </view>
+            </picker>
+            <view class="sanjiao df">
+                <image src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+            </view>
+        </view>
+        <view class="pick df">
+            <picker bindchange="bindQuyu" range="{{quyu}}" value="{{index_two}}">
+                <view class="picker">
+                    <input disabled placeholder="区域" type="text" value="{{quyu[index_two]}}"></input>
+                </view>
+            </picker>
+            <view class="sanjiao df">
+                <image src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+            </view>
+        </view>
+        <view class="pick df">
+            <picker bindchange="bindjiage" range="{{jiage}}" value="{{index_three}}">
+                <view class="picker">
+                    <input disabled placeholder="价格" type="text" value="{{jiage[index_three]}}"></input>
+                </view>
+            </picker>
+            <view class="sanjiao df">
+                <image src="/hyb_o2o/resource/images/arrow_icon_03.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="order_list" wx:if="{{list!=''}}">
+        <view catchtap="lookdetail" class="item mb20" data-id="{{item.fa_id}}" wx:for="{{list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.fa_ordersn}}</text>
+                </text>
+            </view>
+            <view class="mid df p20">
+                <view class="img">
+                    <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+                </view>
+                <view class="m_r fs26 color333">
+                    <view class="fs30 mb20 line_one" style="width:60%">{{item.fa_fwname}} </view>
+                    <view class="mb10">{{item.fa_fwstyle1}}-{{item.fa_fwstyle2}}</view>
+                    <view class="df jsb">
+                        <view class="color999"> 下单客户： <text class="color333">{{item.fa_name}}</text>
+                        </view>
+                        <view catchtap="call" class="call_btn" data-tel="{{item.fa_fwtelphone}}">联系电话</view>
+                    </view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='一口价'}}">预算: <text class="s_ok fs32">{{item.fa_fwmoney}}</text>元</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney=='0'}}">上门估价</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'}}">服务费用: <text class="s_ok fs32">{{item.fa_fwmoney}}</text>元</view>
+                </view>
+            </view>
+            <view catchtap="open_map" class="color999 fs28 p20 border_bot_2" data-index="{{index}}">
+          服务地址: <text class="color333">{{item.fa_fwaddress}}--{{item.fa_fwaddresss}}</text>
+            </view>
+            <view class="df p20" style="justify-content: space-between;" wx:if="{{item.fa_fwpay_type=='一口价'}}">
+                <view class="fs28" style="color:#333333">{{item.fa_time}} </view>
+                <view catchtap="zhipai" class="qiang" data-fa_id="{{item.fa_id}}" data-fa_openid="{{item.fa_openid}}">去指派</view>
+                <view catchtap="surefw" class="qiang" data-fa_fwpay_type="{{item.fa_fwpay_type}}" data-fa_id="{{item.fa_id}}" data-fa_openid="{{item.fa_openid}}" data-q_id="{{item.q_id}}">确定服务</view>
+            </view>
+            <view class="df p20" style="justify-content: space-between;" wx:if="{{item.fa_fwpay_type=='上门估价'}}">
+                <view class="fs28" style="color:#333333">{{item.fa_time}} </view>
+                <view catchtap="zhipai" class="qiang" data-fa_id="{{item.fa_id}}" data-fa_openid="{{item.fa_openid}}" data-id="{{index}}" wx:if="{{item.fa_fwmoney=='0'}}">去指派</view>
+                <view catchtap="zhipai" class="qiang" data-fa_id="{{item.fa_id}}" data-fa_openid="{{item.fa_openid}}" data-id="{{index}}" wx:if="{{item.fa_fwmoney!='0'&&item.fa_fwpay_types=='1'}}">去指派</view>
+                <view catchtap="surefw" class="qiang" data-fa_fwpay_type="{{item.fa_fwpay_type}}" data-fa_id="{{item.fa_id}}" data-fa_openid="{{item.fa_openid}}" data-id="{{index}}" data-q_id="{{item.q_id}}" wx:if="{{item.q_pdname==''||item.q_pdname==null}}">开始服务</view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{list.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="top" wx:if="{{currentTab==1}}">
+    <view class="order_list" wx:if="{{list!=''}}">
+        <view catchtap="lookdetail" class="item mb20" data-id="{{item.fa_id}}" wx:for="{{list}}" wx:key="item">
+            <view class="title border_bot_2">
+                <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.fa_ordersn}}</text>
+                </text>
+            </view>
+            <view class="mid border_bot_2 df p20">
+                <view class="img">
+                    <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+                </view>
+                <view class="m_r fs24">
+                    <view class="fs32 mb20">{{item.fa_fwname}} </view>
+                    <view class="df jsb mb10">
+                        <view class="color999"> 下单客户： <text class="color333">{{item.fa_name}}</text>
+                        </view>
+                        <view catchtap="call" class="call_btn" data-tel="{{item.fa_fwtelphone}}">联系电话</view>
+                    </view>
+                    <view class="color999">服务地址: {{item.fa_fwaddress}}</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='一口价'}}">预算: <text class="s_ok fs32">{{item.fa_fwmoney}}</text>元</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney=='0'}}">上门估价</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'}}">服务费用: <text class="s_ok fs32">{{item.fa_fwmoney}}</text>元</view>
+                </view>
+            </view>
+            <view class="df p20 border_bot_2" style="justify-content: space-between;">
+                <view class="fs28" style="color:#B2B2B2">{{item.fa_fwtime}} 发布</view>
+                <view class="qiang" wx:if="{{item.q_styles!='已完成'&&item.fa_fwmoney=='0'}}">{{item.q_styles}}</view>
+                <view class="qiang" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.q_styles!='已完成'}}">{{item.q_styles}}</view>
+                <view class="qiang" wx:if="{{item.fa_fwpay_type=='一口价'}}">{{item.q_styles}}</view>
+                <view class="qiang" wx:if="{{item.fa_style=='已接单'&&item.q_styles=='已完成'&&item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types!='0'}}">服务中</view>
+                <view class="qiang" wx:if="{{item.fa_style=='已完成'&&item.q_styles=='已完成'&&item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types!='0'}}">已完成</view>
+                <view catchtap="baojia" class="qiang" data-fa_id="{{item.fa_id}}" data-q_id="{{item.q_id}}" wx:if="{{item.q_styles=='已完成'&&item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney=='0'}}">去报价</view>
+                <view class="qiang" data-fa_id="{{item.fa_id}}" data-fa_openid="{{item.fa_openid}}" data-id="{{index}}" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='0'}}">等待用户同意报价</view>
+            </view>
+            <view class="jiedanren p20 fs28 df jsb">
+                <view>
+                    <image class="j_img" src="{{item.jiedan.u_thumb}}"></image>
+            接单人：<text>{{item.jiedan.y_name}}</text>
+                    <text> {{item.jiedan.y_telphone}}</text>
+                </view>
+                <view catchtap="tel" class="tel_box" data-tel="{{item.jiedan.y_telphone}}">
+                    <image class="tel" src="/hyb_o2o/resource/images/tel.png"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="no_more" wx:if="{{list.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="fs30 color_gray">暂无信息</view>
+    </view>
+</view>
+<view class="baojiamodal" hidden="{{baojiahide}}">
+    <view bindtap="hidebaojiamodal" class="baojiahid"></view>
+    <view class="baojiaform">
+        <form bindsubmit="baojiaform">
+            <input hidden="true" name="baojiaid" type="text" value="{{baojiaid}}"></input>
+            <input hidden="true" name="q_id" type="text" value="{{q_id}}"></input>
+            <view>
+                <input name="bjmoney" placeholder="请输入报价金额(元)" type="bigit"></input>
+            </view>
+            <button formType="submit" size="mini">提交</button>
+        </form>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

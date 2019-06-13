@@ -1,0 +1,17 @@
+<view class="bdmodal-form">
+    <form bindsubmit="bdtells">
+        <view class="bdmodal-group">
+            <view>手机号</view>
+            <input bindinput="tels" maxlength="11" name="tells" placeholder="请输入手机号" type="number" value="{{userInfo.u_tel}}"></input>
+        </view>
+        <view class="bdmodal-group">
+            <view>验证码</view>
+            <view class="yanzhengma">
+                <input name="yzm" placeholder="请输入验证码" type="number"></input>
+                <view bindtap="yzm" class="hqyzm" wx:if="{{!send}}">获取验证码</view>
+                <view class="hqyzm" wx:if="{{send}}">{{second+'s'}}</view>
+            </view>
+        </view>
+        <button formType="submit" hoverClass="none">确认绑定</button>
+    </form>
+</view>

@@ -1,0 +1,29 @@
+<view class="title df fs28 mb20"></view>
+<view class="noadd" wx:if="{{fxorder.yiji.length==0}}">
+    <image mode="widthFix" src="../../resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="list" wx:if="{{fxorder.yiji.length!=0}}">
+    <view class="list_item mb20" wx:for="{{fxorder.yiji}}" wx:key="item">
+        <view class="i_top fs26 color_gray border_bot_2 p20">
+            <view>分销等级：{{item.fx_jibie}}</view>
+            <view>订单编号：{{item.ordersn}}</view>
+            <view>下单时间：{{item.o_xdtime}}</view>
+            <view>订单状态：{{item.o_type}}</view>
+        </view>
+        <view class="bot p20 fs24">预计佣金：<text class="fs30">+{{base.md_f_yongjin}}</text>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{fxorder.erji.length!=0}}">
+    <view class="list_item mb20" wx:for="{{fxorder.erji}}" wx:key="item">
+        <view class="i_top fs26 color_gray border_bot_2 p20">
+            <view>分销等级：{{item.fx_jibie}}</view>
+            <view>订单编号：{{item.ordersn}}</view>
+            <view>下单时间：{{item.o_xdtime}}</view>
+            <view>订单状态：{{item.o_type}}</view>
+        </view>
+        <view class="bot p20 fs24">预计佣金：<text class="fs30">+{{base.md_f_eyongjin}}</text>
+        </view>
+    </view>
+</view>

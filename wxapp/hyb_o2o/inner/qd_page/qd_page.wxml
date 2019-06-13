@@ -1,0 +1,125 @@
+<view class="order_list" wx:if="{{come=='mine'}}">
+    <view class="list_item mb20 fs24" data-id="{{item.fa_id}}" wx:for="{{list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="fs0" style="width:65%">
+                <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.fa_ordersn}}</text>
+                </text>
+                <text class="color_pink">({{item.fa_fwpay_type}})</text>
+            </view>
+        </view>
+        <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.fa_id}}">
+            <view class="img">
+                <image mode="aspectFit" src="{{item.fa_fwimgpath[0]}}"></image>
+            </view>
+            <view class="m_r fs24" style="width:82%;">
+                <view class="fs30 mb20 df jsb">
+                    <view class="line_one fw" style="width:55%;">{{item.fa_fwname}} </view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type!='上门估价'}}">服务金额: <text class="s_ok fs32">￥{{item.fa_fwmoney}}</text>
+                    </view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney=='0'}}">上门估价</view>
+                    <view class="budget" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney!='0'}}">服务金额:<text class="s_ok fs32">￥{{item.fa_fwmoney}}</text>
+                    </view>
+                </view>
+                <view class="fs24 color999 mb10">
+                    <view>预约时间：{{item.fa_fwtime}}</view>
+                    <view>地址:{{item.fa_fwaddress}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="df pzy20 fs26 jsb color666 border_bot_2">
+            <view class="">{{item.fa_time}}</view>
+            <view catchtap="call" data-tel="{{item.fa_fwtelphone}}">
+                <text class="color666">发布者：</text>{{item.fa_name}}
+            <text class="call_btn">联系电话</text>
+            </view>
+        </view>
+        <view class="p20 tr" style="padding:20rpx;">
+            <text catchtap="sure_orderfw" class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" wx:if="{{item.q_styles=='已派单'}}">开始服务</text>
+            <text catchtap="baojia" class="qiang sure_order" data-fa_id="{{item.fa_id}}" data-index="{{index}}" data-q_id="{{item.q_id}}" data-ts="1" wx:if="{{item.q_styles=='服务中'&&item.fa_fwpay_type=='上门估价'&&item.fa_fwmoney=='0'}}">估价</text>
+            <text class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" data-ts="0" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='服务中'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='0'}}">等待用户同意报价</text>
+            <text class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" data-ts="0" wx:if="{{item.fa_fwpay_type=='一口价'&&item.q_styles=='服务中'&&item.fa_fwmoney!='0'}}">等待用户确认完成</text>
+            <text class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" data-ts="0" wx:if="{{item.fa_fwpay_type=='上门估价'&&item.q_styles=='服务中'&&item.fa_fwmoney!='0'&&item.fa_fwpay_types=='1'}}">等待用户确认完成</text>
+            <text class="qiang sure_order" wx:if="{{item.fa_style=='已完成'&&item.q_styles=='已完成'}}">服务已完成</text>
+        </view>
+    </view>
+</view>
+<view class="order_list" wx:if="{{come=='company'}}">
+    <view class="list_item mb20 fs24" data-id="{{item.info.fa_id}}" wx:for="{{list}}" wx:key="item">
+        <view class="title border_bot_2 df">
+            <view class="fs0" style="width:65%">
+                <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.info.fa_ordersn}}</text>
+                </text>
+                <text class="color_pink">({{item.info.fa_fwpay_type}})</text>
+            </view>
+        </view>
+        <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.info.fa_id}}">
+            <view class="img">
+                <image mode="aspectFit" src="{{item.info.fa_fwimgpath[0]}}"></image>
+            </view>
+            <view class="m_r fs24" style="width:82%;">
+                <view class="fs30 mb20 df jsb">
+                    <view class="line_one fw" style="width:55%;">{{item.info.fa_fwname}} </view>
+                    <view class="budget" wx:if="{{item.info.fa_fwpay_type!='上门估价'}}">服务金额: <text class="s_ok fs32">￥{{item.info.fa_fwmoney}}</text>
+                    </view>
+                    <view class="budget" wx:if="{{item.info.fa_fwpay_type=='上门估价'&&item.info.fa_fwmoney=='0'}}">上门估价</view>
+                    <view class="budget" wx:if="{{item.info.fa_fwpay_type=='上门估价'&&item.info.fa_fwmoney!='0'}}">服务金额:<text class="s_ok fs32">￥{{item.info.fa_fwmoney}}</text>
+                    </view>
+                </view>
+                <view class="fs24 color999 mb10">
+                    <view>预约时间：{{item.info.fa_fwtime}}</view>
+                    <view>地址:{{item.info.fa_fwaddress}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="df pzy20 fs26 jsb color666 border_bot_2">
+            <view class="">{{item.info.fa_time}}</view>
+            <view catchtap="call" data-tel="{{item.info.fa_fwtelphone}}">
+                <text class="color666">发布者：</text>{{item.info.fa_name}}
+            <text class="call_btn">联系电话</text>
+            </view>
+        </view>
+        <view class="p20 tr" style="padding:20rpx;">
+            <text catchtap="sure_orderfw" class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" wx:if="{{item.q_styles=='已派单'}}">开始服务</text>
+            <text catchtap="sure_order" class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" data-ts="1" wx:if="{{item.q_styles=='服务中'&&item.info.fa_fwpay_type=='上门估价'&&item.info.fa_fwmoney=='0'}}">请求商家估价</text>
+            <text class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" data-ts="0" wx:if="{{item.q_styles=='服务中'&&item.info.fa_fwmoney!='0'}}">等待用户确认完成</text>
+            <text class="qiang sure_order" wx:if="{{item.info.fa_style=='已接单'&&item.q_styles=='已完成'&&item.info.fa_pay=='0'}}">等待用户同意报价</text>
+            <text class="qiang sure_order" data-id="{{item.q_id}}" data-index="{{index}}" data-ts="0" wx:if="{{item.info.fa_style=='已接单'&&item.q_styles=='已完成'&&item.info.fa_fwmoney!='0'&&item.info.fa_pay=='1'}}">等待用户确认完成</text>
+            <text class="qiang sure_order" wx:if="{{item.info.fa_style=='已完成'&&item.q_styles=='已完成'}}">服务已完成</text>
+        </view>
+    </view>
+</view>
+<view class="order_list" wx:if="{{come=='complete'}}">
+    <view catchtap="look_detail" class="item mb20" data-id="{{item.info.fa_id}}" wx:for="{{list}}" wx:key="item">
+        <view class="mid border_bot_2 df p20">
+            <view class="img">
+                <image mode="aspectFit" src="{{item.info.u_thumb}}"></image>
+            </view>
+            <view class="m_r fs24">
+                <view class="fs32 mb20">{{item.info.fa_fwname}} </view>
+                <view>联系电话:{{item.info.fa_fwtelphone}}</view>
+                <view>地址:{{item.info.fa_fwaddress}}</view>
+                <view class="budget">服务金额: <text class="s_ok fs32">{{item.info.fa_fwmoney}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="no_more" wx:if="{{list.length==0}}">
+    <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+    <view class="fs30 color_gray tc">暂无信息</view>
+</view>
+<view class="baojiamodal" hidden="{{baojiahide}}">
+    <view bindtap="hidebaojiamodal" class="baojiahid"></view>
+    <view class="baojiaform">
+        <form bindsubmit="baojiaform">
+            <input hidden="true" name="baojiaid" type="text" value="{{baojiaid}}"></input>
+            <input hidden="true" name="q_id" type="text" value="{{q_id}}"></input>
+            <view>
+                <input name="bjmoney" placeholder="请输入报价金额(元)" type="bigit"></input>
+            </view>
+            <button formType="submit" size="mini">提交</button>
+        </form>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

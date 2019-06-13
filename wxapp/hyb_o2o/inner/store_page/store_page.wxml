@@ -1,0 +1,110 @@
+<view class="box">
+    <view class="top border_bot_20">
+        <swiper autoplay circular indicatorDots class="" duration="1000" id="banner" interval="3000">
+            <swiper-item class="indexlb" wx:for="{{shangjia.s_imgpath}}" wx:key="base">
+                <image mode="aspectFill" src="{{item}}"></image>
+            </swiper-item>
+        </swiper>
+        <view class="top_cont tc">
+            <view class="shangjiabox">
+                <view class="shangjiabox-top">
+                    <view class="fs32 shangjiabox-top1">
+                        <view>{{shangjia.s_name}}</view>
+                        <view>
+                            <image src="../../resource/images/star.png" wx:for="{{5}}"></image>
+                        </view>
+                    </view>
+                    <view class="fs24 color666 shangjiabox-top2">
+                        <image src="../../resource/images/time.png"></image>
+            {{shangjia.s_yingyetime}}
+          </view>
+                    <view class="fs24 color666 shangjiabox-top2">
+                        <image src="../../resource/images/loca_icon.png"></image>
+            {{shangjia.s_xxaddress}}
+          </view>
+                </view>
+                <view class="shangjiabox-bot">
+                    <view bindtap="callphone" data-tels="{{shangjia.s_telphone}}">
+                        <image src="../../resource/images/tels-x.png"></image>
+                        <text>电话</text>
+                    </view>
+                    <view bindtap="mapClick" data-add="{{shangjia.s_address}}" data-lat="{{shangjia.wei}}" data-loc="{{shangjia.jing}}">
+                        <image src="../../resource/images/dingwei-x.png"></image>
+                        <text>地图</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="tops df">
+        <view bindtap="switch_top" class="t_item fs30 {{current==0?'sel':''}}" data-index="0">服务 </view>
+        <view bindtap="switch_top" class="t_item fs30 {{current==1?'sel':''}}" data-index="1">评价 </view>
+        <view bindtap="switch_top" class="t_item fs30 {{current==2?'sel':''}}" data-index="2">商家 </view>
+    </view>
+    <view class="server_list" wx:if="{{current==0}}">
+        <view class="item df border_bot_2" data-id="{{item.x_id}}" style="align-items:flex-start;" wx:for="{{shangjia.xiangmu}}" wx:key="list">
+            <view class="img">
+                <image src="{{item.x_thumb}}"></image>
+            </view>
+            <view class="text fs28 df jsb">
+                <view style="width:80%;flex-shrink: 0">
+                    <view class="color333">{{item.x_name}}</view>
+                    <view class="fs22 door df" style="flex-wrap:wrap;">
+                        <view class="label2">{{item.x_xingshi}}</view>
+                        <view class="label2" wx:if="{{item.x_youhuiquanstatus=='1'}}">优惠卷</view>
+                        <view class="label2" wx:if="{{item.x_manjianstatus=='1'}}">满减</view>
+                        <view class="label2" wx:if="{{item.x_huiyuanstatus=='1'}}">会员权益</view>
+                    </view>
+                    <view class="line_one fs26 color_gray">{{item.x_content}}</view>
+                    <view style="color:#EF6D75;">￥{{item.x_jiage}}元起
+              <text class="pay_type">{{item.x_pay_type}}</text>
+                    </view>
+                </view>
+                <view bindtap="xiadan" class="xiadan" data-id="{{item.x_id}}">下单</view>
+            </view>
+        </view>
+        <view class="nomore" wx:if="{{shangjia.xiangmu.length>0}}">没有更多了</view>
+        <view class="noadd" wx:if="{{shangjia.xiangmu.length==0}}">
+            <image mode="aspectFit" src="../../resource/images/no_dd.png"></image>
+            <view class="color_gray fs28">暂无数据</view>
+        </view>
+    </view>
+    <view class="bot_info " wx:if="{{current==1}}">
+        <view class="noadd" style="padding-bottom:30rpx;" wx:if="{{shangjia.pingjia.length==0}}">
+            <image mode="aspectFit" src="../../resource/images/no_dd.png"></image>
+            <view class="color_gray fs28">暂无评价</view>
+        </view>
+        <view class="pingjia_item border_bot_2" wx:for="{{shangjia.pingjia}}" wx:key="ite">
+            <view class="df jsb mb20" style="width:100%">
+                <view class="df" style="width:70%;">
+                    <view class="img">
+                        <image src="{{item.p_thumb}}"></image>
+                    </view>
+                    <view class="df">
+                        <view class="fs28 line_one" style="width:42%;">{{item.p_name}}</view>
+                        <view class="df" style="margin-left:10rpx;">
+                            <image class="star" src="../../resource/images/star.png" wx:for="{{item.p_fenshu-0}}" wx:key="item"></image>
+                            <image class="star" src="../../resource/images/star1.png" wx:for="{{5-item.p_fenshu}}" wx:key="item1"></image>
+                        </view>
+                    </view>
+                </view>
+                <view class="fs20" style="color:#868686">{{item.p_time}}</view>
+            </view>
+            <view class="fs28 content mb20" style="color:#666666">{{item.p_content}}</view>
+            <view class="pic_list mb20" wx:if="{{item.p_pic.length!=[]}}">
+                <image bindtap="previewImage" class="p_pic" data-inde="{{index}}" data-index="{{Index}}" data-list="{{item.p_pic}}" mode="aspectFit" src="{{Item}}" wx:for="{{item.p_pic}}" wx:for-index="Index" wx:for-item="Item" wx:key="pic"></image>
+            </view>
+            <view class="reply fs26" wx:if="{{item.p_huifu!=null}}">
+                <view class="mb20" style="position:relative;z-index:5;">店家回复：{{item.p_huifu}}</view>
+            </view>
+            <view class="fs20 tr">服务名称:{{item.fw_name}}</view>
+        </view>
+    </view>
+    <view wx:if="{{current==2}}">
+        <view class="border_bot_2 intro_box">
+            <view class="titlee">商家简介</view>
+            <view class="info fs26 color_gray" wx:if="{{shangjia.s_content==''}}">暂无简介</view>
+            <view class="info fs26" style="color:#999999" wx:else>{{shangjia.s_content}}</view>
+        </view>
+    </view>
+</view>

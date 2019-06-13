@@ -1,0 +1,47 @@
+<view class="pingfen_box ">
+    <form bindsubmit="submit">
+        <view class="top df border_bot_2 p20">
+            <view class="s_p">
+                <image mode="aspectFill" src="{{g_thumb}}"></image>
+            </view>
+            <view class="df">
+                <view class="fs28 mr30">描述相符</view>
+                <view class="df">
+                    <image bindtap="choose_s" class="star" data-index="{{index}}" src="/hyb_o2o/resource/images/star.png" wx:for="{{pingjia}}" wx:key="item"></image>
+                    <image bindtap="choose_s" class="star" data-index="{{pingjia+index}}" src="/hyb_o2o/resource/images/star1.png" wx:for="{{5-pingjia}}" wx:key="item1"></image>
+                </view>
+            </view>
+        </view>
+        <view class="mid border_bot_20 ">
+            <view>
+                <textarea name="content" placeholder="有什么想说的吗..."></textarea>
+            </view>
+            <view class="df" style="width:100%;flex-wrap:wrap">
+                <view class="upimgbox" wx:for="{{imglist}}" wx:key="img">
+                    <image mode="aspectFit" src="{{item}}"></image>
+                    <image bindtap="del" class="del_img" data-index="{{index}}" src="/hyb_o2o/resource/images/del.png"></image>
+                </view>
+                <view bindtap="choosePic" class="upimg tc df jcc" wx:if="{{imglist.length<3}}">
+                    <view>
+                        <image src="/hyb_o2o/resource/images/camera2.png"></image>
+                        <view class="fs26">添加图片</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bot ">
+            <view class="title p20 fs30">
+                <image src="/hyb_o2o/resource/images/business.png"></image>店铺评分</view>
+            <view class="df mb10" style="margin-left:20rpx">
+                <view class="fs26 mr30">服务态度</view>
+                <view class="df">
+                    <image bindtap="choose_fw" class="star" data-index="{{index}}" src="/hyb_o2o/resource/images/star.png" wx:for="{{fw_pingjia}}" wx:key="item"></image>
+                    <image bindtap="choose_fw" class="star" data-index="{{fw_pingjia+index}}" src="/hyb_o2o/resource/images/star1.png" wx:for="{{5-fw_pingjia}}" wx:key="item1"></image>
+                </view>
+            </view>
+        </view>
+        <input hidden="true" name="sp_pingfen" value="{{pingjia}}"></input>
+        <input hidden="true" name="fw_pingfen" value="{{fw_pingjia}}"></input>
+        <button class="submit" formType="submit">发表</button>
+    </form>
+</view>

@@ -1,0 +1,54 @@
+<view class="noadd" wx:if="{{pingjialist.length==0}}">
+    <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="list" wx:if="{{pingjialist.length>0}}">
+    <view class="item df mb20" wx:for="{{pingjialist}}" wx:key="item">
+        <view class="left">
+            <image src="{{item.u_thumb}}"></image>
+        </view>
+        <view class="right" style="width:86%;">
+            <view class="df wd100 jsb">
+                <view class="fs28 line_one mb10" style="width:60%;">{{item.pj_name}}</view>
+                <view class="color_gray fs24">{{item.pj_time}}</view>
+            </view>
+            <view class="df">
+                <view class="fs24 colory">评分 ：</view>
+                <image class="star" src="../../resource/images/star.png" wx:for="{{item.pj_fen}}" wx:key="item"></image>
+                <image class="star" src="../../resource/images/star1.png" wx:for="{{5-item.pj_fen}}" wx:key="item1"></image>
+            </view>
+            <view class="fs28 p20">{{item.pj_content}}</view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{pingjialist.length>0}}">
+    <view class="item df mb20" wx:for="{{pingjialist.goodspj}}" wx:key="item">
+        <view class="left">
+            <image src="{{item.p_thumb}}"></image>
+        </view>
+        <view class="right" style="width:86%;">
+            <view class="df wd100 jsb">
+                <view class="fs28 line_one mb10" style="width:60%;">{{item.p_name}}</view>
+                <view class="color_gray fs24">{{item.p_time}}</view>
+            </view>
+            <view class="df">
+                <view class="fs24 colory">评分 ：</view>
+                <image class="star" src="../../resource/images/star.png" wx:for="{{item.p_fenshu-0}}" wx:key="item"></image>
+                <image class="star" src="../../resource/images/star1.png" wx:for="{{5-item.p_fenshu}}" wx:key="item1"></image>
+            </view>
+            <view class="fs28 p20">{{item.p_content}}</view>
+            <view class="pic_list" wx:if="{{item.p_pic.length!=0}}">
+                <image bindtap="previewImage" class="p_pic" data-inde="{{index}}" data-index="{{Index}}" data-list="{{item.p_pic}}" mode="aspectFit" src="{{Item}}" wx:for="{{item.p_pic}}" wx:for-index="Index" wx:for-item="Item" wx:key="pic"></image>
+            </view>
+            <view bindtap="look_stores" class="store df p20" data-id="{{item.p_sid}}" wx:if="{{item.g_name!=''}}">
+                <view class="s_img">
+                    <image src="{{item.g_thumb}}"></image>
+                </view>
+                <view class="fs28">{{item.g_name}}</view>
+            </view>
+            <view class="reply_box fs26 p20" wx:if="{{item.p_huifu&&item.p_huifu!=''}}">
+                <text class="color_gray">商家回应：</text>{{item.p_huifu}}
+        </view>
+        </view>
+    </view>
+</view>

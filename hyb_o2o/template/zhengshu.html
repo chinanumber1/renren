@@ -1,0 +1,35 @@
+{template 'common/header-base'}
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post" name="uploadfile"  enctype="multipart/form-data">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">证书设置</h3>
+        </div>
+        <div class="panel-heading">
+            <h3 style="color: red; text-align: center;">{$type}</h3>
+        </div>
+
+
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 control-label">微信商户支付证书apiclient_cert.pem</label>
+                <div class="col-sm-1" style="margin-left: 50px; margin-top: 10px;">
+                    <input type='file' name="upfile" value="{$item[upfile]}">{$item[upfile]}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 control-label">微信商户支付证书apiclient_key.pem</label>
+                <div class="col-sm-1" style="margin-left: 50px; margin-top: 10px;">
+                    <input type='file' name="keypem" value="{$item[keypem]}">{$item[keypem]}
+                    
+                </div>
+            </div>
+
+    <div class="form-group">
+        <div class="col-sm-12" style="margin-left: 200px;">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+        </div>
+    </div>
+</form>
+{/if}

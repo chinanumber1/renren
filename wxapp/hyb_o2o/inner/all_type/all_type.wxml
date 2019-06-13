@@ -1,0 +1,11 @@
+<view class="wrap">
+    <view class="item" wx:for="{{xmstyle}}" wx:for-item="fenlei" wx:key="message">
+        <view bindtap="choose" class="title" data-parentid="{{fenlei.xt_parentid}}" data-xt_id="{{fenlei.xt_id}}">
+            <image class="icon" src="{{fenlei.xt_thumb}}"></image> {{fenlei.xt_name}}</view>
+        <view class="child">
+            <view bindtap="choose" class="line_one wd100" data-parentid="{{item.xt_parentid}}" data-xt_id="{{item.xt_id}}" wx:for="{{fenlei.erji}}" wx:key="child">{{item.xt_name}}</view>
+            <view wx:if="{{fenlei.erji.length==0}}">暂无数据</view>
+        </view>
+    </view>
+</view>
+<footer footerindex="1"></footer>

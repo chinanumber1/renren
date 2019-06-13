@@ -1,0 +1,18 @@
+<view class="noadd" wx:if="{{question.length==0}}">
+    <image mode="aspectFit" src="/hyb_o2o/resource/images/no_dd.png"></image>
+    <view class="color_gray fs28">暂无数据</view>
+</view>
+<view class="list">
+    <view class="question_box border_bot_2" wx:for="{{question}}">
+        <view class="title fs30 df">
+            <view class="q_icon">问</view>
+            <view style="width:90%;">{{item.question}}</view>
+        </view>
+        <view class="detail fs28 color_gray df">
+            <view class="q_icon a_icon">答</view>
+            <view style="width:90%;">{{item.answer}}</view>
+        </view>
+    </view>
+</view>
+<import src="/hyb_o2o/template/template.wxml"></import>
+<template is="copy" data="{{copy:copy}}"></template>

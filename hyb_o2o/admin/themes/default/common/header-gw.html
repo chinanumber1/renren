@@ -1,0 +1,60 @@
+{template 'common/header-base'}
+<style type="text/css">
+	.xiaoren{width: 67px;height: 97px;position: fixed;right: 20%;bottom: 10%;z-index: 10;}
+	.xiaoren>img{width: 67px;height: 97px;}
+	.ygcheck{
+		margin-top: 15px;
+		display: inline-block;
+		width:100px;
+		height: 100px;
+	}
+	.jumbotron{background-color: rgba(0,0,0,0);border:none;}
+	.alert-success .alert-link,.alert-success{color: white;}
+</style>
+<div class="gw-container">
+	<div class="navbar navbar-static-top" role="navigation" style="padding-top:20px;">
+		<div class="container-fluid">
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		{if defined('IN_MESSAGE')}
+		<div>
+		<!-- wi text-success wi-right-sign -->
+			<div class="jumbotron clearfix alert alert-{$label}">
+				<div class="row">
+					<div class="col-md-2 col-md-push-3">
+						<img src="../hyb_o2o/template/images/duigoubai.png" class="ygcheck"/>
+					</div>
+					<div class="col-md-5 col-md-push-2">
+						{if is_array($msg)}
+							<h2>MYSQL 错误：</h2>
+							<p>{php echo cutstr($msg['sql'], 300, 1);}</p>
+							<p><b>{$msg['error'][0]} {$msg['error'][1]}：</b>{$msg['error'][2]}</p>
+						{else}
+						<h2>{$caption}</h2>
+						<p>{$msg}</p>
+						{/if}
+						{if $redirect}
+						<p><a href="{$redirect}" class="alert-link">如果你的浏览器没有自动跳转，请点击此链接</a></p>
+						<div class="xiaoren"><img src="../hyb_o2o/template/images/stick.gif"></div>
+						<script type="text/javascript">
+							setTimeout(function () {
+								location.href = "{$redirect}";
+							}, 3000);
+						</script>
+						{else}
+							<p>[<a href="javascript:history.go(-1);" class="alert-link">点击这里返回上一页</a>] &nbsp; [<a href="./?refresh" class="alert-link">首页</a>]</p>
+							<div class="xiaoren"><img src="../hyb_o2o/template/images/stick.gif"></div>
+						{/if}
+					</div>
+				</div>
+			</div>
+		{else}
+		<div class="well">
+		{/if}
+<script>
+	var h = document.documentElement.clientHeight;
+	$(".gw-container").css('min-height',h);
+	{php echo site_profile_perfect_tips();}
+</script>

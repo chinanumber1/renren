@@ -1,0 +1,155 @@
+@import "../../../__wuBaseWxss__/5.wxss";
+
+page {
+    background: #f3f3f3;
+}
+
+.tops {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 5;
+}
+
+.tops .t_item {
+    width: 50%;
+    text-align: center;
+    padding: 20rpx 0;
+    border-bottom: 2rpx solid #eee;
+}
+
+.tops .t_item.sel {
+    color: #EF4A50;
+    border-color: #EF4A50;
+}
+
+.no_more {
+    width: 100%;
+    text-align: center;
+    padding-top: 100rpx;
+}
+
+.no_more image {
+    width: 50%;
+    margin-bottom: 20rpx;
+}
+
+.status_one {
+    color: #F2A189;
+}
+
+.status_two {
+    color: #EF4A50;
+}
+
+.status_three {
+    color: #BCBCBC;
+}
+
+.list {
+    margin-top: 100rpx;
+}
+
+.item {
+    margin: 20rpx;
+    padding: 0 20rpx;
+    border-radius: 10rpx;
+    background: #fff;
+    position: relative;
+    box-shadow: 0 10rpx 10rpx #F0F0F0;
+}
+
+.item .img {
+    width: 150rpx;
+    height: 150rpx;
+    margin-right: 20rpx;
+}
+
+.item .img image {
+    border-radius: 50%;
+}
+
+.item .pingfen {
+    position: absolute;
+    right: 20rpx;
+    top: 88rpx;
+    color: #E52C2C;
+}
+
+.item .shenfen {
+    position: absolute;
+    right: 20rpx;
+    top: 30rpx;
+    color: #efb04a;
+    font-size: 26rpx;
+    border: 2rpx solid #efb04a;
+    padding: 0 10rpx;
+    border-radius: 7rpx;
+}
+
+.j_default {
+    color: #F35959;
+}
+
+.btn {
+    padding: 5rpx 30rpx;
+    margin-left: 20rpx;
+    border: 2rpx solid #EF4A50;
+    border-radius: 5rpx;
+}
+
+.no_more {
+    width: 100%;
+    text-align: center;
+    padding-top: 100rpx;
+}
+
+.no_more image {
+    width: 50%;
+    margin-bottom: 20rpx;
+}
+
+.status_one {
+    color: #F04B52;
+}
+
+.status_two {
+    color: #6EE3B9;
+}
+
+.status_three {
+    color: #999999;
+}
+
+.ditem {
+    margin: 20rpx;
+    padding: 0 20rpx;
+    border-radius: 20rpx;
+    background: #fff;
+    position: relative;
+}
+
+.ditem .dimg {
+    width: 150rpx;
+    height: 150rpx;
+    margin-right: 20rpx;
+}
+
+.ditem .dimg image {
+    border-radius: 20rpx;
+}
+
+.dbtn {
+    padding: 5rpx 30rpx;
+    margin-left: 20rpx;
+    border: 2rpx solid #6EE3B9;
+    color: #6EE3B9;
+    border-radius: 10rpx;
+}
+
+.djujue {
+    border-color: #F35959;
+    color: #F35959;
+}

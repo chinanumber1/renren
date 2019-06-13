@@ -1,0 +1,654 @@
+<view class="switch df">
+    <view bindtap="switch_cur" class="switch_item {{cur==index?'name_sel':''}}" data-index="{{index}}" wx:for="{{switch_name}}">{{item}}</view>
+</view>
+<view wx:if="{{cur==0}}">
+    <view class="top df border_bot_20">
+        <view bindtap="switch_tab" class="p20 to {{currentTab==index?'bb':''}}" data-index="{{index}}" style="width:{{100/top.length}}%" wx:for="{{top}}" wx:key="top">
+            <view class="fs28 top_item">
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="noadd" wx:if="{{order_list.length==0}}">
+        <image mode="widthFix" src="../resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无订单</view>
+    </view>
+    <view class="list" wx:if="{{currentTab==0}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text" wx:if="{{item.o_type!='已完成'&&item.o_fw_type=='0'}}">未服务</text>
+                <text class="right_text" wx:if="{{item.o_type!='已完成'&&item.o_fw_type=='1'}}">服务中</text>
+                <text class="right_text" wx:if="{{item.o_fw_type=='2'&&item.o_pay_types=='0'}}">待付款</text>
+                <text class="right_text" wx:if="{{item.o_type=='已完成'&&item.o_pingjia=='0'}}">待评价</text>
+                <text class="right_text" wx:if="{{item.o_type=='已完成'&&item.o_pingjia=='1'}}">已完成</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 <text>合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type!='定金支付'}}">{{item.o_count_money}}</text>
+                        <text class="fs28" style="color:#000" wx:else>{{item.o_sheng_money}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="tr" wx:if="{{item.o_fw_type=='0'}}">
+                    <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认服务</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_fw_type=='1'}}">
+                    <text bindtap="cuidan" class="bot_btn se" data-i="0" data-id="{{item.o_id}}">确认完成</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==1}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">待服务</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 <text>合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type!='定金支付'}}">{{item.o_count_money}}</text>
+                        <text class="fs28" style="color:#000" wx:else>{{item.o_sheng_money}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="tr">
+                    <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认服务</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==2}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">服务中</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">服务人员：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 <text>合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type!='定金支付'}}">{{item.o_count_money}}</text>
+                        <text class="fs28" style="color:#000" wx:else>{{item.o_sheng_money}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="tr">
+                    <text bindtap="cuidan" class="bot_btn se" data-i="0" data-id="{{item.o_id}}">确认完成</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==3}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">待付款</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 <text>合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type!='定金支付'}}">{{item.o_count_money}}</text>
+                        <text class="fs28" style="color:#000" wx:else>{{item.o_sheng_money}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="bot p20"></view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==4}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">待评价</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 <text>合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type!='定金支付'}}">{{item.o_count_money}}</text>
+                        <text class="fs28" style="color:#000" wx:else>{{item.o_sheng_money}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="bot p20"></view>
+        </view>
+    </view>
+</view>
+<view wx:else>
+    <view bindtap="close_modal" class="modal" wx:if="{{pay_status}}"></view>
+    <view class="pay_box" wx:if="{{pay_status}}">
+        <radio-group bindchange="radioChange" class="radio-group">
+            <label class="radio" wx:for="{{items}}">
+                <view class="pay_item">
+                    <radio value="{{item}}"></radio>{{item}}</view>
+            </label>
+        </radio-group>
+    </view>
+    <view class="top df border_bot_20">
+        <view bindtap="switch_tab" class="p20 to {{currentTab==index?'bb':''}}" data-index="{{index}}" style="width:{{100/top.length}}%" wx:for="{{top_2}}" wx:key="top">
+            <view class="fs28 top_item">
+                <view>{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="noadd" wx:if="{{order_list.length==0}}">
+        <image mode="widthFix" src="../resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无订单</view>
+    </view>
+    <view class="list" wx:if="{{currentTab==0}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text" wx:if="{{item.o_type=='已付款'&&item.o_fw_type=='0'}}">未服务</text>
+                <text class="right_text" wx:if="{{item.o_type=='已付款'&&item.o_fw_type=='1'}}">服务中</text>
+                <text class="right_text" wx:if="{{item.o_type=='未支付'&&item.o_fw_type=='2'&&(item.o_pay_types=='0'||item.o_pay_types=='1')}}">待付款</text>
+                <text class="right_text" wx:if="{{item.o_type=='已完成'&&item.o_pingjia=='0'}}">待评价</text>
+                <text class="right_text" wx:if="{{item.o_type=='已完成'&&item.o_pingjia=='1'}}">已完成</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money=='0'}}">
+                    <view class="color666">
+              上门费用
+            </view>
+                    <view class="color_pink">￥{{item.o_shangmen_money}}</view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计
+              <text style="color:#000">{{item.o_num}}项服务 合计：￥  </text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='全额付款'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">{{item.o_sheng_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money=='0'}}">{{item.o_shangmen_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money!='0'}}">{{item.o_count_money}}</text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="tr" wx:if="{{item.o_pay_type!='上门估价'&&item.o_fw_type=='0'&&item.o_type!='已完成'}}">
+                    <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认服务</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_fw_type=='0'&&item.o_type!='已完成'&&item.o_count_money=='0'}}">
+                    <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认上门</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_fw_type=='0'&&item.o_type!='已完成'&&item.o_count_money!='0'&&item.o_pay_types=='1'}}">
+                    <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认服务</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type!='上门估价'&&item.o_fw_type=='1'&&item.o_type!='已完成'}}">
+                    <text class="bot_btn se">等待用户确认完成</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_fw_type=='1'&&item.o_type!='已完成'&&item.o_count_money=='0'}}">
+                    <text bindtap="cuidan" class="bot_btn se" data-i="1" data-id="{{item.o_id}}">请求商家报价</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_type=='未支付'&&item.o_count_money!=0&&item.o_pay_types=='0'&&item.o_fw_type=='0'}}">
+                    <text class="bot_btn se">等待用户同意/不同意报价</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_fw_type=='1'&&item.o_type!='已完成'&&item.o_count_money!='0'}}">
+                    <text class="bot_btn se" data-id="{{item.o_id}}">等待用户确认完成</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_fw_type=='2'&&item.o_type=='已完成'&&item.o_count_money!='0'&&!item.o_pay_typess}}">
+                    <text bindtap="surepay" class="bot_btn se" data-id="{{item.o_id}}">确认用户付款</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_pay_type!='上门估价'&&item.o_fw_type=='2'&&item.o_type!='已完成'&&!item.o_pay_typess}}">
+                    <text bindtap="surepay" class="bot_btn se" data-id="{{item.o_id}}">确认用户付款</text>
+                </view>
+                <view class="tr" wx:if="{{item.o_type=='已完成'}}">
+                    <text bindtap="del_order" class="bot_btn se" data-id="{{item.o_id}}">删除</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==1}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">待服务</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="df pzy20 border_bot_2 fs28 jsb" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money=='0'}}">
+                    <view class="color666">
+              上门费用
+            </view>
+                    <view class="color_pink">￥{{item.o_shangmen_money}}</view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">{{item.o_sheng_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money=='0'}}">{{item.o_shangmen_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money!='0'}}">{{item.o_count_money}}
+              </text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='全额付款'}}">{{item.o_count_money}}</text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="tr">
+                    <view class="tr" wx:if="{{item.o_pay_type!='上门估价'&&item.o_fw_type=='0'&&item.o_type!='已完成'}}">
+                        <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认服务</text>
+                    </view>
+                    <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_fw_type=='0'&&item.o_type!='已完成'&&item.o_count_money=='0'}}">
+                        <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认上门</text>
+                    </view>
+                    <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_fw_type=='0'&&item.o_type!='已完成'&&item.o_count_money!='0'&&item.o_pay_types=='1'}}">
+                        <text bindtap="hx_order" class="bot_btn se" data-ordersn="{{item.ordersn}}">确认服务</text>
+                    </view>
+                    <view class="tr" wx:if="{{item.o_pay_type=='上门估价'&&item.o_type=='未支付'&&item.o_count_money!=0&&item.o_pay_types=='0'&&item.o_fw_type=='0'}}">
+                        <text class="bot_btn se">等待用户同意/不同意报价</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==2}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">服务中</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">{{item.o_sheng_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money=='0'}}">{{item.o_shangmen_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money!='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='全额付款'}}">{{item.o_count_money}}</text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="fr tr">
+                    <text bindtap="cuidan" class="bot_btn se" data-i="0" data-id="{{item.o_id}}">确认完成</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==3}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">待付款</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">{{item.o_sheng_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money=='0'}}">{{item.o_shangmen_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money!='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='全额付款'}}">{{item.o_count_money}}</text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="tr">
+                    <text bindtap="surepay" class="bot_btn se" data-id="{{item.o_id}}" wx:if="{{item.o_pay_type!='上门估价'}}">确认用户付款</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list" wx:if="{{currentTab==4}}">
+        <view class="list_item mb20 fs24" wx:for="{{order_list}}" wx:key="item">
+            <view class="title border_bot_2 df">
+                <view>
+                    <text class="color999" style="margin-right:20rpx;">订单：<text class="color333">{{item.ordersn}}</text>
+                    </text>
+                    <text class="color_pink">({{item.o_pay_type}})</text>
+                </view>
+                <text class="right_text">待评价</text>
+            </view>
+            <view class="">
+                <view catchtap="look_detail" class="mid border_bot_2 df pzy20" data-id="{{item.o_id}}">
+                    <view class="img">
+                        <image mode="aspectFit" src="{{item.o_xiangmu_thumb}}"></image>
+                    </view>
+                    <view class="m_r fs24" style="width:82%;">
+                        <view class="fs30 mb20 df jsb">
+                            <view class="line_one fw" style="width:55%;">{{item.o_xiangmu_name}} </view>
+                            <view class="fs30 color_pink" wx:if="{{item.o_pay_type=='全额付款'||item.o_pay_type=='定金支付'}}">￥{{item.o_count_money}}</view>
+                            <view class="fs30 color_pink" wx:else>上门估价</view>
+                        </view>
+                        <view class="fs24 df jsb color999 mb10">
+                            <view>预约时间：{{item.o_yy_riqi}}</view>
+                            <view>
+                                <text wx:if="{{item.o_pay_type=='定金支付'}}">定金￥{{item.o_ding_money}}</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">(未支付)</text>
+                                <text wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">(已支付)</text>
+                            </view>
+                        </view>
+                        <view class="fs24 df jsb color999">
+                            <view wx:if="{{item.o_xiangmu_guige!=''}}">规格：{{item.o_xiangmu_guige}}</view>
+                            <view wx:if="{{item.o_xiangmu_guige==''}}">规格：暂无</view>
+                            <view> × {{item.o_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="pzy20 fs26 color666 border_bot_2">
+                    <view class="">{{item.o_xdtime}}</view>
+                    <view catchtap="call" class="kehutels" data-tel="{{item.o_telphone}}" wx:if="{{item.o_name!=''}}">
+                        <text class="color666">客户：{{item.o_name}}</text>
+                        <text class="call_btn">联系电话</text>
+                    </view>
+                </view>
+                <view class="color_gray fs24 tr border_bot_2 p20" style="margin-right:20rpx;">共计<text style="color:#000">{{item.o_num}}</text>项服务 合计：￥  <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='定金支付'&&item.o_pay_types=='1'}}">{{item.o_sheng_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money=='0'}}">{{item.o_shangmen_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='上门估价'&&item.o_count_money!='0'}}">{{item.o_count_money}}</text>
+                    <text class="fs28" style="color:#000" wx:if="{{item.o_pay_type=='全额付款'}}">{{item.o_count_money}}</text>
+                </view>
+            </view>
+            <view class="bot p20">
+                <view class="tr" wx:if="{{item.o_type=='已完成'}}">
+                    <text bindtap="del_order" class="bot_btn se" data-id="{{item.o_id}}">删除</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

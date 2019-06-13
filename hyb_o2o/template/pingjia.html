@@ -1,0 +1,125 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+     /*个人自定义*/
+  .form-controls .img-thumbnail{
+      width:200px;
+      height:200px;
+  }
+</style>
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>评价者昵称</td>
+            <td>评价者头像</td>
+            <td>项目名</td>
+            <td>商家名</td>
+            <td>评价内容</td>
+            <td>回复内容</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['p_id']}
+            </td>
+            <td>
+                <img src="{media $item['p_thumb']}" style="width:50px;height:50px;" alt="">
+            </td>
+            <td>
+                {$item['p_name']}
+            </td>
+            <td>
+                {$item['p_xiangmu']}
+            </td>
+            <td>
+                {$item['p_sjname']}
+            </td>
+            
+            <td>
+                {$item['p_content']}
+            </td>
+            <td>
+                {$item['p_huifu']}
+            </td>
+            <td class="text-center">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('pingjia', array('p_id' => $item['p_id'], 'op' =>'post'))}" >回复</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('pingjia', array('p_id' => $item['p_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $op == 'post'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">回复留言</h3>
+        </div>
+        <td>评价者昵称</td>
+            <td>评价者头像</td>
+            <td>项目名</td>
+            <td>商家名</td>
+            <td>评价内容</td>
+            <td>回复内容</td>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >评价者昵称</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <div  class="form-control ng-pristine ng-untouched ng-valid ng-empty">{$items['p_name']}</div>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">评价者头像</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <img src="{$items['p_thumb']}" alt="" style="width:50px;height:50px;">
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >项目名</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                     <div  class="form-control ng-pristine ng-untouched ng-valid ng-empty">{$items['p_xiangmu']}</div>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >商家名</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                     <div  class="form-control ng-pristine ng-untouched ng-valid ng-empty">{$items['p_sjname']}</div>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >评价内容</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                     <div  class="form-control ng-pristine ng-untouched ng-valid ng-empty">{$items['p_content']}</div>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >回复评价</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                     <input type="text" id="p_huifu" name="p_huifu" class="form-control ng-pristine ng-untouched ng-valid ng-empty" value="{$items['p_huifu']}">
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+          
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}
+<!-- {template 'common/footer'} -->

@@ -1,0 +1,25 @@
+@import "../mine/mine.wxss";
+
+.goback {
+    width: 100%;
+    padding: 20rpx 0;
+    margin-top: 30rpx;
+    color: #EF4A51;
+    background: #fff;
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.status {
+    background: #f8f3f3;
+    color: #EF4A51;
+    font-size: 22rpx;
+    padding: 5rpx 10rpx;
+    border-radius: 5rpx;
+}
+
+.daoqi {
+    font-size: 22rpx;
+    color: #999;
+    margin-left: 20rpx;
+}

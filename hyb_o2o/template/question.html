@@ -1,0 +1,78 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+     /*个人自定义*/
+  .form-controls .img-thumbnail{
+      width:200px;
+      height:200px;
+  }
+</style>
+{if $op == 'display'}
+<div class="pull-right">
+    <a href="{php echo $this->createWeburl('question', array('op'=>'post'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加问题</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>常见问题</td>
+            <td>解决方案</td>
+            <td class="text-center">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['question']}
+            </td>
+            <td>
+                {$item['answer']}
+            </td>
+            <td class="text-center">
+                <a class="btn btn-default btn-sm" onclick="return false;" href="{php echo $this->createWeburl('question', array('id' => $item['id'], 'op' => 'post'))}">编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('question', array('id' => $item['id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}
+{if $op == 'post'}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加问题</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >常见问题</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="question" name="question" value="{$items['question']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">常见问题</div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >解决方式</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <textarea type="text" id="answer" name="answer" value="{$items['answer']}" rows='10' cols='100'></textarea> 
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">解决方式</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}

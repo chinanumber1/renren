@@ -1,0 +1,116 @@
+{template 'public/headers'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+        padding: 8px;
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li {if $op == 'display'} class="active" {/if}><a href="{php echo $this->createWebUrl2('dlyingxiao',array('op'=>'display','id'=>$storeid,'uid'=>$uniacid))}">满减活动</a></li>
+    <li {if $op == 'post'} class="active" {/if}><a href="{php echo $this->createWebUrl2('dlyingxiao',array('op'=>'post','id'=>$storeid,'uid'=>$uniacid))}">添加满减活动</a></li>
+</ul>
+{if $op == "display"}
+<div class="main">
+    <div class="panel panel-default">
+        <table class="yg5_tabel col-md-12">
+            <tr class="yg5_tr1" >
+                <td style="width:100px">排序</td>
+                <td>消费金额</td>
+                <td>减免金额</td>
+                <td>操作</td>
+            </tr>
+            {loop $products $item}
+            <tr class="yg5_tr2" >
+                <td>
+                    {$item['m_id']}
+                </td>
+                <td>
+                    {$item['m_money']}元
+                </td>
+                <td>
+                   {$item['j_money']}元
+                </td>
+                <td>
+                    <a href="{php echo $this->createWeburl2('dlyingxiao', array('m_id' => $item['m_id'],'id'=>$storeid,'uid'=>$uniacid, 'op' =>'post'))}" class="storespan btn btn-xs">
+                        <span class="fa fa-pencil"></span>
+                        <span class="bianji">编辑
+                            <span class="arrowdown"></span>
+                        </span>
+                    </a>
+                    <a href="{php echo $this->createWeburl2('dlyingxiao', array('m_id' => $item['m_id'],'id'=>$storeid,'uid'=>$uniacid, 'op' => 'delete'))}" class="storespan btn btn-xs">
+                        <span class="fa fa-trash-o"></span>
+                        <span class="bianji">删除
+                            <span class="arrowdown"></span>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            {/loop}
+        </table>
+    </div>
+    <div class="text-right we7-margin-top">
+         {$pager}
+    </div> 
+</div>   
+{/if}
+{if $op == "post"}
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                添加满减活动
+            </div>
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="" class="control-label col-sm-1" >消费金额</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="m_money" name="m_money" value="{$items['m_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">消费金额(减免的条件金额)</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >减免金额</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" id="j_money" name="j_money" value="{$items['j_money']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">减免金额(满足条件后减免的金额)</div>
+            </div>
+        <div class="form-group" style="margin-top: 20px;">
+            <input type="submit" name="submit" value="提交" class="btn col-lg-3" style="color: white;background-color: #44ABF7;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+{/if}
+<script type="text/javascript">
+    $(function(){
+        $("#frame-4").show();
+        $("#yframe-4").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

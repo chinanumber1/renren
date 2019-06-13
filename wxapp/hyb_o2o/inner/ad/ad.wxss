@@ -1,0 +1,11 @@
+page {
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 32rpx;
+    font-weight: bold;
+    padding: 30rpx 0;
+    text-align: center;
+}

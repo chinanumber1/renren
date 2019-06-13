@@ -1,0 +1,48 @@
+<view class="top tc mb20">
+    <view class="fs28 mb10">推荐人数(人)</view>
+</view>
+<view class="title df fs28 mb20">
+    <view bindtap="switch_tab" class="title_item {{current==index?'sel':''}}" data-index="{{index}}" wx:for="{{['一级','二级']}}" wx:key="item">{{item}}</view>
+</view>
+<view class="list" wx:if="{{current==0}}">
+    <view class="noadd" wx:if="{{Fxuser.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无数据</view>
+    </view>
+    <view class="list_item df border_bot_2 fs28" wx:for="{{Fxuser}}" wx:key="item">
+        <view class="df left">
+            <view class="img">
+                <image src="{{item.u_thumb}}"></image>
+            </view>
+            <view>
+                <view>{{item.u_name}}</view>
+                <view class="fs24 color_gray" wx:if="{{item.u_fenxiao==1}}">成为分销商时间：{{item.fenxiao.f_time}}</view>
+            </view>
+        </view>
+        <view class="right fs26" wx:if="{{item.u_fenxiao==1}}">
+            <view>+{{item.fenxiao.yj_money}}佣金</view>
+            <view>{{item.fenxiao.fx_num}}个成员</view>
+        </view>
+    </view>
+</view>
+<view class="list" wx:if="{{current==1}}">
+    <view class="noadd" wx:if="{{Fxuser.length==0}}">
+        <image mode="widthFix" src="/hyb_o2o/resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无数据</view>
+    </view>
+    <view class="list_item df border_bot_2 fs28" wx:for="{{Fxuser}}" wx:key="item">
+        <view class="df left">
+            <view class="img">
+                <image src="{{item.u_thumb}}"></image>
+            </view>
+            <view>
+                <view>{{item.u_name}}</view>
+                <view class="fs24 color_gray" wx:if="{{item.u_fenxiao==1}}">成为分销商时间：{{item.fenxiao.f_time}}</view>
+            </view>
+        </view>
+        <view class="right fs26" wx:if="{{item.u_fenxiao==1}}">
+            <view>+{{item.fenxiao.yj_money}}佣金</view>
+            <view>{{item.fenxiao.fx_num}}个成员</view>
+        </view>
+    </view>
+</view>

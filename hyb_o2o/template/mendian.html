@@ -1,0 +1,146 @@
+{template 'common/header_base'}
+{if $op == 'display'}
+<style>
+    /*个人自定义*/
+  .form-controls .img-thumbnail{
+      width:200px;
+      height:200px;
+  }
+</style>
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">门店信息设置</h3>
+        </div>
+            <div class="form-group" style="margin-top: 10px;">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px;">门店名称</label>
+                <div class="form-controls col-sm-5">
+                     <input type="text" name="md_name" id="md_name" value="{$item['md_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店宣传图</label>
+                <div class="form-controls col-sm-5">
+                     {php echo tpl_form_field_multi_image('md_thumb', $item['md_thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">（建议尺寸658x351）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店简介内容</label>
+                <div class="form-controls col-sm-5">
+                    <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  name="md_content" id="md_content">{$item['md_content']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店简介内容</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店地址</label>
+                <div class="form-controls col-sm-5">
+                    <input type="text" name="md_address" id="md_address" value="{$item['md_address']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店地址</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店地址经纬度 <span style="color: #c00">误填反</span></label>
+                <div class="form-controls col-sm-2">
+                    <input type="text" name="latitude" id="latitude" value="{$item['latitude']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="form-controls col-sm-2 help-block" style="padding-left: 15px">纬度:30.88888</div>
+                <div class="form-controls col-sm-2">
+                    <input type="text" name="longitude" id="longitude" value="{$item['longitude']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="form-controls col-sm-3 help-block" style="padding-left: 15px">经度:120.6666 <a href="http://lbs.qq.com/tool/getpoint/" target="_blank" style="color:#428BCA"> 经纬度查询</a></div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店联系电话</label>
+                <div class="form-controls col-sm-5">
+                     <input type="text" name="md_telphone" id="md_telphone" value="{$item['md_telphone']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店联系电话</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">首页默认地址</label>
+                <div class="form-controls col-sm-1"  style="float: left;" >
+                     <input type="text" name="md_index" id="md_index" value="{$item['md_index']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div><span class="col-sm-1 help-block">(市)</span>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">首页默认地址</div>
+            </div>
+            <!-- <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">首页模板选择背景图</label>
+                <div class="form-controls col-sm-5">
+                    {php echo tpl_form_field_image('mb_thumb', $item['mb_thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">首页模板选择背景图</div>
+            </div> 
+             -->
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">积分商品页的幻灯片</label>
+                <div class="form-controls col-sm-5">
+                     {php echo tpl_form_field_multi_image('md_jfthumbs', $item['md_jfthumbs'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">（建议尺寸658x351）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店提现手续费设置</label>
+                <div class="form-controls col-sm-1"  style="float: left;" >
+                     <input type="text" name="md_shouxufei" id="md_shouxufei" value="{$item['md_shouxufei']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div><span class="col-sm-1 help-block">%</span>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">门店提现手续费设置（输入整数）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店分销积分设置</label>
+                <div class="form-controls col-sm-5"  style="float: left;" >
+                     <input type="text" name="md_f_jifen" id="md_f_jifen" value="{$item['md_f_jifen']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">（分销成功一次所得积分）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">二级分销积分设置</label>
+                <div class="form-controls col-sm-5"  style="float: left;" >
+                     <input type="text" name="md_f_ejifen" id="md_f_ejifen" value="{$item['md_f_ejifen']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">（二级分销成功一级所得积分）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">门店分销佣金设置</label>
+                <div class="form-controls col-sm-5"  style="float: left;" >
+                     <input type="text" name="md_f_yongjin" id="md_f_yongjin" value="{$item['md_f_yongjin']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">（分销成功一次所得佣金）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">二级分销佣金设置</label>
+                <div class="form-controls col-sm-5"  style="float: left;" >
+                     <input type="text" name="md_f_eyongjin" id="md_f_eyongjin" value="{$item['md_f_eyongjin']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">（二级分销成功一级所得佣金）</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-2" style="margin-right:45px">分销佣金提现比例</label>
+                <div class="form-controls col-sm-5"  style="float: left;" >
+                     <input type="text" name="md_f_yjtx" id="md_f_yjtx" value="{$item['md_f_yjtx']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-3 help-block">现金与佣金兑换比例<text style="color: red">(1元=？佣金)</text>  </div>
+            </div>
+    <div class="form-group">
+        <div class="col-sm-12" style="margin-left: 200px;">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" style="height:auto" name="submit" value="提交" />
+        </div>
+    </div>
+</form>
+{/if}

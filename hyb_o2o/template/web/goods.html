@@ -1,0 +1,397 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcsslist.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+        padding: 8px;
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li {if $op=="display"} class="active" {/if}><a href="{php echo $this->createWebUrl('goods',array('op'=>'display'))}">商品列表</a></li>
+    <li {if $op=="post"} class="active" {/if}><a href="{php echo $this->createWebUrl('goods',array('op'=>'post'))}">添加商品</a></li>
+</ul>
+{if $op == "display"}
+<div class="main">
+    <div class="panel panel-default">
+        <div class="panel-body">
+        <form action="" method="post" class="col-md-4" style="display: flex;">
+            <input type="hidden" name="c" value="site" />
+            <input type="hidden" name="a" value="entry" />
+            <input type="hidden" name="m" value="hyb_o2o" />
+            <input type="hidden" name="do" value="goods" />
+            <input type="hidden" name="op" value="display" />
+            <div>
+                <div class="input-group" style="width: 300px">
+                    <input type="text" name="keywords" class="form-control" placeholder="请输入商品名称">
+                </div>
+            </div>
+            <span class="input-group-select" style="margin-left: 20px;">
+              <select name="type" class="form-control" style="width:300px;padding:0 5px;">
+                <option value="">所属分类</option>
+                {loop $fenlei $item}
+                <option value="{$item['id']}">{$item['title']}</option>
+                {/loop}
+              </select>
+            </span>
+            <span class="input-group-btn" style="margin-left: 20px;">
+                <input type="submit" class="btn btn-default" name="submit" value="搜索"/>
+            </span>
+            <input type="hidden" name="token" value="{$_W['token']}"/>
+        </form>
+    </div>
+</div>
+
+
+<div class="panel panel-default"  style="overflow: hidden;">
+<form  action="" method="post">
+    <table class="yg5_tabel col-md-12">
+        <tr class="yg5_tr1" >
+            <td class="store_td1 col-md-1">
+                <input class="allcheck" type="checkbox" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});" name=''>
+                <span class="store_inp">全选</span>
+            </td>
+             <td class="store_td1">排序</td>
+             <td class="col-xs-1">商品名称</td>
+            <td class="col-xs-1">商品图片</td>
+            <td class="col-xs-1">所属分类</td>
+             <td class="col-xs-1">所属城市</td>
+             <td class="col-xs-1">所属城市价格</td>
+            <td class="col-xs-2">是否推荐</td>
+             <td class="col-xs-2">是否上架</td>
+             <td class="col-xs-1">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr class="yg5_tr1">
+            <td><input class="allcheck" type="checkbox" name="all[]" value="{$item['g_id']}"></td>
+            <td>
+                {$item['g_ids']}
+            </td>
+            <td>
+                {$item['g_name']}
+            </td>
+            <td>
+                <img  class="store_list_img" src="{media $item['g_thumb']}"  alt="">
+            </td>
+            <td>
+                 <span class="btn btn-xs storewarning">{$item['title']}</span> 
+            </td>
+            <td>
+                <span class="btn btn-xs ygyouhui">{$item['name']}</span> 
+            </td>
+            <td>
+                {$item['g_jiage']}元
+            </td>
+            <td>
+                {if $item['g_tuijian'] == "1"}
+                    <a  href="{php echo $this->createWeburl('goods', array('g_id' => $item['g_id'],'g_tuijian'=>'0', 'op' =>'zhuang1'))}" class="storespan btn btn-xs">
+                        
+                         <span class="yglabel">推荐
+                        </span>
+                    </a>
+                {elseif  $item['g_tuijian']=="0"}
+                    <a  href="{php echo $this->createWeburl('goods', array('g_id' => $item['g_id'],'g_tuijian'=>'1', 'op' =>'zhuang1'))}" class="storespan btn btn-xs">
+                        <span class="yglabel">不推荐
+                           
+                        </span>
+                    </a>
+                {/if}
+            </td>
+            <td>
+                {if $item['g_status'] == "1"}
+                    <a  href="{php echo $this->createWeburl('goods', array('g_id' => $item['g_id'],'g_status'=>'0', 'op' =>'zhuang2'))}" class="storespan btn btn-xs">
+                         <span class="yglabel">点击下架
+                           
+                        </span>
+                    </a>
+                {elseif  $item['g_status']=="0"}
+                    <a  href="{php echo $this->createWeburl('goods', array('g_id' => $item['g_id'],'g_status'=>'1', 'op' =>'zhuang2'))}" class="storespan btn btn-xs">
+                         <span class="yglabel">点击上架
+                           
+                        </span>
+                    </a>
+                {/if}
+            </td>
+            <td >
+                <a href="{php echo $this->createWeburl('goods', array('g_id' => $item['g_id'], 'op' =>'post'))}" class="storespan btn btn-xs">
+                    <span class="fa fa-pencil"></span>
+                    <span class="bianji">编辑
+                        <span class="arrowdown"></span>
+                    </span>
+                </a>
+                <a href="{php echo $this->createWeburl('goods', array('g_id' => $item['g_id'], 'op' => 'delete'))}" class="storespan btn btn-xs">
+                    <span class="fa fa-trash-o"></span>
+                    <span class="bianji">删除
+                        <span class="arrowdown"></span>
+                    </span>
+                </a>
+            </td>
+        </tr>
+        {/loop}
+        <tr>
+            <td colspan="10" style="text-align: left;">
+                <input class="storespan btn btn-xs" type="submit" name="submit" value="批量上架">
+                <input class="storespan btn btn-xs" type="submit" name="submit" value="批量下架">
+                <input class="storespan btn btn-xs" type="submit" name="submit" value="批量推荐">
+                <input class="storespan btn btn-xs" type="submit" name="submit" value="批量不推荐">
+                <input class="storespan btn btn-xs" type="submit" name="submit" value="批量删除">
+            </td>
+        </tr>
+       
+    </table>
+</form>
+</div>
+<div class="text-right we7-margin-top">
+     {$pager}
+</div>
+{/if}
+
+{if $op=="post"}
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                添加商品
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+                <label for="" class="control-label col-sm-1">排序</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="g_ids" value="{$items['g_ids']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">排序</div>
+            </div>
+            <div class="form-group" style="margin-top: 20px">
+                <label for="" class="control-label col-sm-1">商品名称</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="g_name" value="{$items['g_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">所属分类</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="g_type" class="form-control">
+                        <option value="">--请选择--</option>
+                        {loop $type $item}
+                        <option value="{$item['id']}" {if $item['id']==$items["g_type"]}selected{/if} >{$item['title']}</option>
+                        {/loop}
+                    </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">所属分类</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" id="s_city" name="s_city">所属城市</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="g_city" id="g_city" class="form-control">
+                        <option value="">--请选择--</option>
+                        {loop $city $item}
+                        <option value="{$item['id']}" {if $items['g_city']==$item["id"]}selected{/if} >{$item['name']}</option>
+                        {/loop}
+                    </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">所属城市</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">所属城市价格</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="g_jiage" id="g_jiage" value="{$items['g_jiage']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">所属城市价格</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商品图片</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('g_thumb', $items['g_thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品图片</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商品宣传图</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_multi_image('g_thumbs', $items['g_thumbs'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品宣传图</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商品介绍</label>                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">                   
+                   {php echo tpl_ueditor('g_content', $items['g_content']);}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品介绍</div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0px">
+                <label for="" class="control-label col-sm-1">添加商品规格</label>                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">                   
+                   <div class="spec-item col-xs-12 col-sm-12 col-md-12" style="padding-left: 0;margin-bottom: 0px;">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="input-group" style="margin-bottom: 10px;">
+                                    <input name="spec" class="form-control spec_title" type="text" placeholder="规格名称 (比如: 颜色)" value="{$items['g_guigename']}" />
+                                    <div class="input-group-btn">
+                                        <a class="btn btn-info add-specitem" id="add-spec" href="javascript:;"><i class="fa fa-plus"></i> 添加规格项</a>
+                                    </div>
+                                </div>
+                                
+                                <style type="text/css">
+                                    .df{
+                                        display: flex;
+                                        
+                                    }
+                                    #spec-box{
+                                        margin-left: 0px;
+                                    }
+                                </style>
+                                <div class="form-group" id="spec-box" >
+                                   {if $items['g_guigenum']!=0}
+                                        {loop $items['g_guigecontent'] $item}
+                                        <div class="input-group col-sm-3 col-md-3 col-lg-3 df" style="margin-right:10px;margin-bottom:10px;">
+                                            <input name="spec_title[]"  class="form-control spec_title" type="text" placeholder="请输入规格项名称" value="{$item['spec_title']}" />
+                                            <input name="spec_money[]" class="form-control spec_title" type="text" placeholder="请输入该规格项价钱" value="{$item['spec_money']}" />
+                                            <div class="input-group-btn del">
+                                                <a class="btn btn-danger" href="javascript:void(0);" ><i class="fa fa-remove"></i></a>
+                                            </div> 
+                                        </div> 
+                                        {/loop}
+                                   {/if}
+                                </div>
+                                <script type="text/javascript">
+                                    $("#add-spec").click(function(){
+                                         $("#spec-box").append('<div class="input-group col-sm-3 col-md-3 col-lg-3 df" style="margin-right:10px;margin-bottom:10px;"><input name="spec_title[]" '+ 'class="form-control spec_title" type="text" placeholder="请输入规格项名称" value="" />'+
+                                             '<input name="spec_money[]" '+ 'class="form-control spec_title" type="text" placeholder="请输入该规格项价钱" value="" />'+
+                                           ' <div class="input-group-btn del">'+
+                                               ' <a class="btn btn-danger" href="javascript:void(0);" ><i class="fa fa-remove"></i></a>'+
+                                            '</div> '+'</div> ')+'';
+                                    });
+                                     
+                                    $("#spec-box").on("click","div.input-group-btn",function(){
+                                        $(this).parent().remove();
+                                     })
+                                    
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >是否包邮</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <label class="select_one" >
+                        <input type="radio" name="g_baoyou" id="y_baoyou"  value="1" {if $items['g_baoyou'] == '1'} checked{/if} />是
+                        <input type="radio" name="g_baoyou" id="x_baoyou"  value="0" {if $items['g_baoyou'] == '0'} checked{/if} />否
+                    </label>
+                    <script type="text/javascript">
+                        $("#x_baoyou").click(function(){
+                            $(".kuaidi_box").show();
+                        })
+                        $("#y_baoyou").click(function(){
+                            $(".kuaidi_box").hide();
+                        })
+                    </script>
+                </div>
+            </div>
+            <div class="form-group kuaidi_box" style="display: none">
+                <label for="" class="control-label col-sm-1">快递费</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="g_kuaidi"  value="{$items['g_kuaidi']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">快递费</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商品销量</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="g_xiaoliang" id="g_xiaoliang" value="{$items['g_xiaoliang']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品销量</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" style="color: red">一级分销比例</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fx_yi" id="fx_yi" value="{$items['fx_yi']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">一级分销比例 （请输入小数 如：0.01） [空/0 不参与分销]</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" style="color: red">二级分销比例</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="fx_er" id="fx_er" value="{$items['fx_er']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block" style="color: red">二级分销比例 请输入小数 如：0.01） [空/0 不参与分销]</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >是否上架</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <label class="select_one">
+                        <input type="radio" name="g_status"  value="1" {if $items['g_status'] == '1'} checked{/if} />是
+                        <input type="radio" name="g_status"  value="0" {if $items['g_status'] == '0'} checked{/if} />否
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >是否推荐</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <label class="select_one">
+                        <input type="radio" name="g_tuijian"  value="1" {if $items['g_tuijian'] == '1'} checked{/if} />是
+                        <input type="radio" name="g_tuijian"  value="0" {if $items['g_tuijian'] == '0'} checked{/if} />否
+                    </label>
+                </div>
+            </div>
+        <div class="form-group" style="margin-top: 20px;">
+            <input type="submit" name="submit" value="提交" class="btn col-lg-3" style="color: white;background-color: #44ABF7;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    {if $items['g_baoyou'] == '0'}
+         $(".kuaidi_box").show();
+    {/if}
+</script>
+{/if}
+<script type="text/javascript">
+    $(function(){
+        $("#frame-1").show();
+        $("#yframe-1").addClass("wyactive");
+    })
+</script>
+{template "common/footer"}

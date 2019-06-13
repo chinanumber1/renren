@@ -1,0 +1,55 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>用户昵称</td>
+            <td>用户头像</td>
+            <td>提现单号</td>
+            <td>提现金额</td>
+            <td>提现佣金</td>
+            <td>提现时间</td>
+            <td>提现状态</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['yj_id']}
+            </td>
+            <td>
+                {$item['user']['u_name']}
+            </td>         
+            <td>
+                <img src="{$item['user']['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {$item['yj_num']}
+            </td>
+            <td>
+                {$item['yj_money']}元
+            </td>
+            <td>
+                {$item['yj_yongjin']}
+            </td>
+            <td>
+                {$item['yj_time']}
+            </td>
+            <td>
+                {if $item['yj_statue']==1} <a class="btn btn-info btn-sm">提现完成</a>{/if}
+                {if $item['yj_statue']==0} <a class="btn btn-default btn-sm" onclick="return confirm('确认商家提现完成？'); return false;" href="{php echo $this->createWeburl('YjtiXian', array('yj_id' => $item['yj_id'], 'op' => 'post'))}">待提现</a>{/if}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('YjtiXian', array('yj_id' => $item['yj_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}

@@ -1,0 +1,544 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcsslist.css">
+<style type="text/css">
+    .page-header{display: block;height: 65px;line-height: 30px;font-size: 12px;position: relative;padding-left: 10px;margin: 0;border: none;overflow: hidden;padding-top: 25px;padding-bottom: 9px;}
+    .text-primary {color: #44abf7 !important;}
+    .text-danger {color: #eb6060 !important;}
+    .page-content {width: 100%;background: #fff;padding: 20px 30px;position: relative;height: auto;overflow: hidden;}
+    .page-toolbar {position: relative;width: 100%;padding: 0;height: 35px;line-height: 1;vertical-align: middle;margin-bottom: 15px;}
+    .input-group-select {display: table-cell;width: 1%;white-space: nowrap;vertical-align: middle;}
+    .input-group .form-control, .input-group .input-group-addon, .input-group .input-group-btn > .btn, .input-group select.form-control { border-radius: 1px;font-size: 12px;height: 30px;}
+    .input-group .form-control, .input-group-addon, .input-group-btn { display: table-cell;}
+    .input-group .form-control, .input-group .input-group-addon, .input-group .input-group-btn > .btn, .input-group select.form-control {border-radius: 1px;font-size: 12px;height: 30px !important;}
+    .tables{font-size:12px;line-height: 18px;border: 1px solid #e5e5e5; }
+    .table-header{background:#f8f8f8;height: 35px;line-height: 35px;padding: 0 20px;display: flex;}
+    .table-header .others {-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;text-align: center;}
+    .tables .table-row > div {padding: 14px 0 !important;}
+    .table-row .goods-des .title {width: 50%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .table-row.table-top{padding:0  20px;background: #f7f7f7;}
+    .table-row.table-top .times{font-weight: bold;margin-right: 10px;color: #2d2d31}
+    .table-row.middle_box{margin:0  20px;display: flex;align-content: space-around;}
+    .table-row .goods-des{width:400px;text-align: left;border-right: 1px solid #efefef;vertical-align: middle;}
+    .table-row .goods-des image{width:70px;height:70px;border:1px solid #efefef; padding:1px;}
+    .table-row .goods-des .goods_info{-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;margin-left: 10px;text-align: left;display: flex;align-items: center
+    }
+    .table-row .list-inner {-webkit-box-flex: 1;-webkit-flex: 1; -ms-flex: 1; flex: 1;text-align: center;display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;-webkit-flex-direction: column;flex-direction: column;border-right: 1px solid #efefef;vertical-align: middle;}
+    .saler > div { width: 130px;overflow: hidden; text-overflow: ellipsis;white-space: nowrap;}
+    .btn-primary{background: #3c9be1 !important;border-color: #3c9be1 !important;}
+    .order-container {display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;position: relative;
+overflow: hidden;border: 1px solid #efefef;margin: 0px;}
+    .order-container ul li {line-height: 26px;color: #999;font-size: 12px;}
+    .col-sm {float: left;padding-right: 10px;padding-left: 10px;position: relative;width: 80px;}
+    .text-default {color: #000 !important;}
+    .order-container-left {padding: 30px !important;padding-left: 15px !important;}
+    .order-container-static {-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;padding: 30px 50px 20px;}
+    .order-container .status {height: 70px;line-height: 22px;}
+    .font18 {font-size: 20px;font-weight: bold;}
+    .text-warning {color: #ffc000 !important;}
+    .order-container .ops {height: 40px;line-height: 20px;margin-bottom: 15px;}
+    .order-container .order-container-footer { padding: 0;border-top: none;line-height: 20px;display: -webkit-box;display:-webkit-flex;display: -ms-flexbox;display: flex;color:#999;font-size: 12px;}
+    .order-title {line-height: 62px;font-size: 16px;color: #000;font-weight: bold;}
+    .table {table-layout: fixed;position: relative;color: #666;font-size: 12px;}
+    .table .trorder, .table .trfooter {border: 1px solid #efefef;}
+
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {border-top: 1px solid #efefef;vertical-align: middle;}
+    .table .trorder th{border-bottom: none}
+    .table .trorder td { border-right: 1px solid #efefef;}
+    .pay_type{display: inline-block;padding: 30px 50px;background: #fff;position: fixed;left: 50%;top: 50%;transform: translate(-50%,-50%);z-index: 4;}
+    .mos{ width:100%;height: 100%;position: fixed;left: 0;top: 0;z-index: 3;background: rgba(0,0,0,0.5);display: none}
+</style>
+<input type="hidden" value="" id="o_ids" >
+{if $op=="display"}
+
+<div class="page-header">
+    当前位置：<span class="text-primary">订单管理</span>
+    <span>订单数:  <span class="text-danger">{$ordernum}</span> 
+</div>
+<div class="page-content">
+    <form action="" method="post" >
+        <input type="hidden" name="c" value="site" />
+        <input type="hidden" name="a" value="entry" />
+        <input type="hidden" name="m" value="hyb_o2o" />
+        <input type="hidden" name="do" value="ordermdfw" />
+        <input type="hidden" name="op" value="display" />
+        <div class="page-toolbar">
+            <div class="input-group">
+                <span class="input-group-select">
+                    <select name="paytypes" class="form-control" style="width:100px;padding:0 5px;">
+                        <option value="" selected="">支付方式</option>
+                        <option value="余额支付">余额支付</option>
+                        <option value="微信支付">微信支付</option>
+                        <option value="现金支付">现金支付</option>
+                    </select>
+                </span>
+                <span class="input-group-select">
+                    <select name="xiangmu_xingshi" class="form-control" style="width:100px;padding:0 5px;">
+                        <option value="" selected="">服务形式</option>
+                        <option value="上门服务">上门服务</option>
+                        <option value="到店服务">到店服务</option>
+                    </select>
+                </span>
+                <span class="input-group-select">
+                    <select name="paytype" class="form-control" style="width:100px;padding:0 5px;">
+                        <option value="" selected="">项目支付</option>
+                        <option value="全额付款">全额付款</option>
+                        <option value="免费预约">免费预约</option>
+                        <option value="定金支付">定金支付</option>
+                    </select>
+                </span>
+
+                <span class="input-group-select">
+                    <select name="type" class="form-control" style="width:110px;padding:0 5px;">
+                        <option value="">订单状态</option>
+                        <option value="未支付">未支付</option>
+                        <option value="已付款">已付款</option>
+                        <option value="已完成">已完成</option>
+                        <option value="已删除">已删除</option>
+                        <option value="申请退款">申请退款</option>
+                        <option value="已退款">已退款</option>
+                        <option value="已取消">已取消</option>
+                    </select>
+                </span>
+                <input class="form-control input-sm" name="keyword" value="" placeholder="请输入订单编号" type="text">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" name="submit" type="submit"> 搜索</button>
+                    <!-- <button type="submit" name="export" value="1" class="btn btn-success ">导出</button> -->
+                </span>
+                </div>
+
+            </div>
+            <div style="float: right;margin-bottom: 10px;">
+                <a class="btn btn-primary" href="{php echo $this->createWebUrl('ordermdfw',array('op'=>'daochu'));}">导出数据</a>
+            </div>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <!-- 头部状态 -->
+                <div class="table-header">
+                    <div style="border-left:1px solid #f2f2f2;width: 400px;text-align: left;">服务名称</div>
+                    <div class="others">买家</div>
+                    <div class="others">支付/服务方式</div>
+                    <div class="others">价格</div>
+                    <div class="others">服务员工</div>
+                    <div class="others">状态</div>
+                    <div class="others">操作</div>                  
+                </div>
+
+                <div class="table-row"><div style="height:20px;padding:0;border-top:none;">&nbsp;</div></div>
+                <!-- 循环体  -->
+                {loop $products $item}
+                <div class="tables">
+                    <!-- 订单编号以及下单时间 -->
+                    <div class="table-row table-top">
+                        <div style="text-align: left;color: #8f8e8e;padding: 14px 0">
+                            <span class="times">{$item['o_xdtime']}</span>订单编号:{$item['ordersn']}
+                        </div>
+                    </div>
+                    <!-- 中间内容 -->
+                    <div class="table-row middle_box">
+                        <div class="goods-des">
+                            <div style="display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;margin: 10px 0">
+                                <img src="{$item['o_xiangmu_thumb']}" style="width: 80px;height: 80px;">
+                                <div class="goods_info" style="">
+                                    <div class="title">
+                                       {$item['o_xiangmu_name']}<br>
+                                    </div>
+                                    <span style="float: right;text-align: right;display: inline-block;width:40%;">
+                                        ￥{$item['o_xiangmu_money']}<br>x{$item['o_num']} 
+                                    </span>
+                                </div>
+                            </div>
+                               
+                        </div>
+                        <div class="list-inner saler" style="text-align: center;">
+                            <div>
+                                <a href="">{$item['o_name']}</a><br>{$item['o_address']}<br>{$item['o_telphone']}
+                            </div>
+                        </div> 
+                        <div class="list-inner paystyle" style="text-align:center;">
+                            <span> 
+                                <i class="icow icow-yue text-warning" style="font-size: 17px;"></i>
+                                <span>{$item['o_pay_type']}</span>
+                            </span>
+                            <span style="margin-top:5px;display:block;">{$item['o_xiangmu_xingshi']}&nbsp;&nbsp;
+                                {if $item['o_fw_type']=='0' && $item['o_count_money']!='0' &&       $item['o_pay_type']!='上门估价' && $item['o_fw_type']=='0'}[未服务]
+                                {elseif $item['o_fw_type']=='0' && $item['o_count_money']!='0' &&       $item['o_pay_type']=='上门估价' && $item['o_fw_type']=='0' && $item['o_type']=='未支付'}[已报价待确认]
+                                {elseif $item['o_fw_type']=='0' && $item['o_count_money']=='0' && $item['o_pay_type']=='上门估价'}[未上门报价]
+                                {elseif $item['o_fw_type']=='1' && $item['o_count_money']=='0' && $item['o_pay_type']=='上门估价'}[已上门报价]
+                                {elseif $item['o_fw_type']=='1' && $item['o_count_money']!='0' && $item['o_pay_type']!='上门估价'}[服务中]
+                                {elseif $item['o_fw_type']=='2' && $item['o_count_money']!='0' && $item['o_pay_type']!='上门估价'}[服务完成]
+                                {elseif $item['o_fw_type']=='2' && $item['o_count_money']=='0' && $item['o_pay_type']=='上门估价'}[上门估价完成]
+                                {/if}
+                            </span>
+                        </div>
+                        <a class="list-inner" data-toggle="popover" data-html="true" data-placement="right" data-trigger="hover" data-original-title="" title=""> 
+                            <div style="text-align:center">￥{$item['o_count_money']}</div>
+                        </a>
+                        <div class="list-inner paystyle" style="text-align:center;">
+                            <span> 
+                                <i class="icow icow-yue text-warning" style="font-size: 17px;"></i>
+                                <span>{$item['o_fwry']}</span>
+                            </span>
+                            <span style="margin-top:5px;display:block;">
+                            {if $item['o_fw_type']=='0' }
+                                <a class="btn ygyouhui2 btn-xs open_detail1" data-o_id="{$item['o_id']}">是否指派其他员工服务</a>
+                           {/if}
+                            </span>
+                        </div>
+                        <div class="list-inner" style="text-align:center">
+                            
+                            {if $item['o_count_money']=='0' && $item['o_type']=="已完成" && $item['o_pay_type']=='上门估价'}
+                            上门估价已完成<span><a class="btn btn-primary btn-xs" id="baojiabtn" href="" data-o_id="{$item['o_id']}">服务报价</a></span>
+                            {else}
+                            <a class="btn btn-primary btn-xs" data-toggle="ajaxModal" href="">{$item['o_type']}</a>
+                            {/if}
+                            
+                        </div>                       
+                        <div class="ops list-inner" style="line-height:20px;text-align:center;border-right: none;">
+                            <div style="margin-bottom: 10px;">
+                                <a class="btn text-primary" style="border-color:#44abf7;margin-right: 5px; "   href="{php echo $this->createWebUrl('ordermdfw',array('o_id'=>$item['o_id'],'op'=>'post'))}">查看详情</a>
+                            {if $item['o_type']=="未支付" || $item['o_type']=="到店付款"}
+                               <a class="btn pay_btn" data-o_id="{$item['o_id']}" style="border-color: #FF7F50 ; color: #FF7F50" href="javascript:;">确认付款</a> 
+                            {else if $item['o_type']=="已付款"}
+                                <a class="btn"  style="color: #FF7F50;border-color: #FF7F50 ;"  href="{php echo $this->createWebUrl('ordermdfw',array('o_id'=>$item['o_id'],'op'=>'save'))}">确认完成</a>
+                            {else if $item['o_type']=="申请退款"}
+                                <a class="btn"  style="color: #FF7F50;border-color: #FF7F50 ;"  href="{php echo $this->createWebUrl('ordermdfw',array('o_id'=>$item['o_id'],'op'=>'refund'))}">确认退款</a>
+                            {/if}
+
+                            </div>
+                            <a class="btn"  style="color: red;border-color: red ;"  href="{php echo $this->createWebUrl('ordermdfw',array('o_id'=>$item['o_id'],'op'=>'delete'))}">删除</a>
+                        </div>
+                    </div>
+                    <!-- 备注 -->
+                    <div class="table-row">
+                        <div style="background:#fdeeee;color:red;flex: 1;padding: 14px !important;">买家备注: {$item['o_beizhu']}</div>
+                    </div>
+
+                </div>
+                {/loop}     
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="text-align:right;width:100%;">
+    {$pager}
+</div>
+<div class="pay_type" style="text-align: center;display: none">
+    <input id="first" type="radio" name="style" value="余额支付" checked="checked" style="margin-right:10px;margin-bottom: 10px"  /><label for="first">余额支付</label> <br/>  
+    <input id="second" type="radio" name="style" value="现金支付" style="margin-right:10px;margin-bottom: 10px" /><label for="second">现金支付</label> <br/>  
+    <input id="third" type="radio" name="style" value="微信支付" style="margin-right:10px;margin-bottom: 10px"  /><label for="third">微信支付</label> <br/>  
+    <button class="btn btn-success close_paybox" style="margin-top:10px;padding: 5px 50px;">确定</button>
+</div>
+<div class="mos"></div>
+<!-- 选择员工 -->
+
+<div class="modal fade" id="user-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog" style="width:800px;top:360px;">
+
+        <div class="modal-content">
+
+            <input type="hidden" name="m" value=""/>
+
+            <div class="modal-header"><h4>选择员工</h4> </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" name="keyword" value="" id="keyword_user" placeholder="请输入用户名称关键字">
+
+                        <span class="input-group-btn"><button type="button" class="btn btn-default" onclick="search_users();">选择</button></span>
+
+                    </div>
+
+                </div>
+
+                <div id="module-menus" style="padding-top:5px;"><div style="max-height:500px;overflow:auto;min-width:750px;">
+
+                    <table class="table table-hover" style="min-width:750px;">
+
+                        <tbody id="user_list">  
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<!-- 服务报价 -->
+
+<div class="modal fade" id="baojia-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:800px;top:360px;">
+
+        <div class="modal-content">
+
+            <input type="hidden" name="m" value=""/>
+
+            <div class="modal-header"><h4>服务报价</h4> </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="input-group">
+
+                        <input type="number" class="form-control" name="baojiamonery" value="" id="baojia_monery" placeholder="请输入报价">
+                        <input type="hidden" name="oid" id="baojiaid">
+                        <span class="input-group-btn"><button type="button" class="btn btn-default" onclick="postbtns();">提交</button></span>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{/if}
+{if $op =="post"}
+    <div class="order_detail">
+        <div class="page-header">
+            当前位置：<span class="text-primary">订单详情</span><span class="btn btn-primary btn-xs" style="margin-left: 30px;"><a href="{php echo $this->createWebUrl('ordermdfw',array('op'=>'display'))}">返回门店服务订单</a></span>
+        </div>
+        <div class="page-content">
+            <form class="form-horizontal form" action="" method="post">
+                <div class="row order-container">
+                    <!-- 左 -->
+                    <div class="order-container-left" style="border-right: 1px solid #efefef">
+                        <div class="row" style="margin-right: -10px;margin-left: -10px;">
+                            <div class="col-md-12">
+                                <ul class="" style="margin-bottom: 20px;">
+                                    <li class="text"><span class="col-sm">订单编号：</span><span class="text-default">{$info['ordersn']}</span></li>
+                                     <li class="text">
+                                        <span class="col-sm">付款方式：</span>
+                                        <span class="text-default"> {$info['o_pay_type']}</span>
+                                    </li>
+                                    <li class="text">
+                                        <span class="col-sm">买家：</span>
+                                        <span class="text-default">
+                                            <a href="" style="color: #44abf7 !important;">{$info['o_name']}</a> &nbsp;&nbsp;<a data-toggle="popover" data-html="true" data-trigger="hover" data-placement="right" data-original-title="" title=""><i class="icow icow-help" style="font-size: 13px;color: #2f3434;margin-left: -3px"></i></a>
+                                        </span>
+                                    </li>
+                                    <li class="text">
+                                        <span class="col-sm">服务时间：</span>
+                                        <span class="text-default">
+                                            <a href="" style="color: #44abf7 !important;">{$info['o_yy_riqi']}</a> &nbsp;&nbsp;<a data-toggle="popover" data-html="true" data-trigger="hover" data-placement="right" data-original-title="" title=""><i class="icow icow-help" style="font-size: 13px;color: #2f3434;margin-left: -3px"></i></a>
+                                        </span>
+                                    </li>
+                                   <li class="text">
+                                        <span class="col-sm">收货地址：</span>
+                                        <span class="text-default">{$info['o_address']} {$info['o_xxaddress']} {$info['o_telphone']}<a class="text-primary op js-clip" data-url="{$info['o_address']} {$info['o_xxaddress']} {$info['o_name']} {$info['o_telphone']}" style="cursor: pointer;">复制</a>
+                                        </span>
+                                    </li>
+
+                                    
+                                    <li class="text">
+                                        <span class="col-sm">买家备注：</span><span class="text-default">{$info['o_beizhu']}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 右 -->
+                    <div class=" order-container-static">
+                        <div class=" status">
+                           <span class="text"> 订单状态：</span>
+                           <span class="text-warning font18">{$info['o_type']}  {if $info['o_fw_type']=='0'}[未服务]{elseif $info['o_fw_type']=='1'}[服务中]{elseif $info['o_fw_type']=='2'}[服务完成]{/if}</span>
+                         </div>
+                        
+                        </div>
+                </div>
+                <h3 class="order-title">服务信息</h3>
+                <table class="table ">
+                    <thead>
+                        <tr class="trorder" style="background: #fff">
+                            <th class="" style="width: 75px;text-align: right;padding-right: 0">服务名称</th>
+                            <th style=""></th>
+                            <th style="padding-left: 20px">规格</th>
+                            <th style="text-align: center;width: 10%">单价</th>
+                            <th style="text-align: center;width: 10%">数量</th>
+                            <th style="text-align: center;width: 15%;">总计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="trorder" style="background: #fff">
+                            <td style="text-align: right;padding-right: 0;border-right: none">
+                                <img src="{$info['o_xiangmu_thumb']}" style="width:52px;height:52px;border:1px solid #efefef; padding:1px;" >
+                            </td>
+                            <td style="min-width: 300px">
+                               {$info['o_xiangmu_name']}
+                            </td>
+                            <td style="padding: 10px 20px">
+                                <p style="white-space:normal;">规格：{$info['o_xiangmu_guige']} </p>
+                            </td>
+                            <td style="text-align: center">
+                                <p>￥{$info['money']}</p>
+                            </td>
+                            <td style="text-align: center">
+                                <p>{$info['o_num']}</p>
+                            </td>
+                            <td style="text-align: center">
+                                <div class="price" style="float: right">
+                                    <p><span class="price-inner">实付款：</span><span style="font-size: 14px;font-weight: bold;color: #e4393c">￥{$info['o_count_money']}</span></p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+{/if}
+
+
+<script type="text/javascript">
+    $(function(){
+        $("#frame-5").show();
+        $("#yframe-5").addClass("wyactive");
+
+        // 结算方式
+        $(".pay_btn").click(function(){
+            $(".pay_type").show();
+            $(".mos").show();
+        })
+        $(".mos").click(function(){
+            $(this).hide();
+            $(".pay_type").hide();
+        })
+        $(".close_paybox").click(function(){
+            var o_id = $(".pay_btn").data("o_id");
+            var o_pay_typess = $("input:radio[name='style']:checked").val(); 
+            $.ajax({
+                type:"post",
+                url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=zhifu&do=ordermdfw&m=hyb_o2o",
+                dataType:"json",
+                data:{o_id:o_id,o_pay_typess:o_pay_typess},
+                success:function(data){
+                    $(".pay_type").hide();
+                    $(".mos").hide();
+                   location.reload() 
+                    
+                }
+            })
+           
+        })
+
+
+        $(".open_detail1").click(function(){
+          var o_id = $(this).data("o_id");
+          $('#o_ids').val(o_id);
+
+          $('#user-info').modal('show'); 
+        })
+
+
+        $("#baojiabtn").click(function(e){
+            e.preventDefault();
+            $("#baojiaid").val($(this).data("o_id"));
+            $("#baojia-form").modal("show");
+        })
+    })
+    function search_users(){
+
+    var keyword_user=$("#keyword_user").val();
+
+    $("#user_list").empty();
+    $.ajax({
+          type:"post",
+          url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=zhipai&do=ordermdfw&m=hyb_o2o",
+          dataType:"json",
+          data:{},
+          success:function(data){
+          var data = data.d;
+          var html=getuserRows(data);
+          $("#user_list").append(html);
+          }
+      })
+}
+function postbtns(){
+    var monery = $("#baojia_monery").val();
+    var id =  $("#baojiaid").val();
+    console.log(monery);
+    if (monery=='0' || monery=='') {
+        alert("请输入报价");
+    }else{
+        console.log("Aaaa");
+        $.ajax({
+            type:"post",
+            url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=baojia&do=ordermdfw&m=hyb_o2o",
+            dataType:"json",
+            data:{monery:monery,o_id:id},
+            success:function(data){
+              $("#baojia-form").modal("hide");
+              location.reload(); 
+            }
+        })
+    }
+    
+}
+
+function getuserRows(data){
+
+    var html='';
+
+    for(i=0;i<data.length;i++){
+
+        html+='<tr>';
+
+        html+='<td><img src="'+data[i].y_thumb+'" style="width:30px;height:30px;padding:1px;border:1px solid #ccc"> '+data[i].y_name+'</td>';
+
+        html+='<td></td>';
+
+        html+='<td></td>';
+
+        html+='<td style="width:80px;"><a href="javascript:;" onclick="select_user(this)"  data-user_uid='+data[i].y_id+'>选择</a></td>';
+
+        html+='</tr>';
+
+    }
+
+    return html;
+
+}
+
+
+
+
+function select_user(obj){
+   var boj = $(obj).data("user_uid");
+   var o_ids = $('#o_ids').val();
+   console.log(o_ids);
+   console.log(boj);
+   $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=paidan&do=ordermdfw&m=hyb_o2o",
+            data: {q_pdname:boj,o_ids:o_ids},
+            success:function(data){
+               console.log(data);
+            // location.reload() 
+        }
+        });
+
+
+   $('#user-info').modal('hide');
+   $('#baojia-form').modal('hide');
+
+}
+</script>
+{template "common/footer"}

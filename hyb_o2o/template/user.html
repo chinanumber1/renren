@@ -1,0 +1,85 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+</style>
+{if $op == 'display'}
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>用户名称</td>
+            <td>用户openid</td>
+            <td>用户头像</td>
+            <td>用户等级</td>
+            <td>用户余额</td>
+            <td>充值记录</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['u_id']}
+            </td>
+            <td>
+                {$item['u_name']}
+            </td>  
+            <td>
+                {$item['openid']}
+            </td>        
+            <td>
+                <img src="{media $item['u_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <td>
+                {if $item['u_type']==0}普通用户{/if}
+                {if $item['u_type']!=0}{/if}
+            </td>
+            <td>
+                {$item['u_money']}元
+            </td>
+            <td>
+                <a class="btn btn-default btn-sm"  href="{php echo $this->createWeburl('user', array('openid' => $item['openid'], 'op' => 'post'))}">查看</a>
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('user', array('u_id' => $item['u_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{$pager}
+{/if}
+{if $op == 'post'}
+<!-- 查看充值记录 -->
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td style="width:100px">排序</td>
+            <td>充值金额</td>
+            <td>充值时间</td>
+            <td>支付方式</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                {$item['id']}
+            </td>
+            <td>
+                {$item['money']}
+            </td>  
+            <td>
+                {$item['time']}
+            </td>        
+            <td>
+                微信支付
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('user', array('id' => $item['id'], 'op' => 'deletes'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+</form>
+{/if}

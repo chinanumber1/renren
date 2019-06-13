@@ -1,0 +1,160 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+     /*个人自定义*/
+  .form-controls .img-thumbnail{
+      width:200px;
+      height:200px;
+  }
+</style>
+{if $op=="display"}
+<div class="pull-right" >
+	<a href="{php echo $this->createWeburl('jfgoods', array('op'=>'post'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加项目</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td>选择</td>
+            <td>排序</td>
+            <td>商品名称</td>
+            <td>商品图片</td>
+            <!-- <td>商品介绍</td> -->
+            <td>兑换所需积分</td>
+            <!-- <td>兑换所需金额</td> -->
+            <td>商品已兑换数</td>
+            <td>是否上架</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                <input type="checkbox" name="del[]" value="{$item['j_id']}">
+            </td>
+            <td>
+                {$item['j_id']}
+            </td>
+            <td>
+                {$item['j_name']}
+            </td>
+            <td>
+                <img src="{media $item['j_thumb']}" style="width: 100px;height: 100px;" alt="">
+            </td>
+            <!-- <td>
+                {$item['j_content']}
+            </td> -->
+            <td>
+                {$item['j_jifen']}
+            </td>
+            <!-- <td>
+                {$item['j_jiage']}
+            </td> -->
+             <td>
+                {$item['j_xiaoliang']}
+            </td>
+            <td>
+               {if $item['j_status'] == "1"}上架{elseif  $item['x_status']=="0"}下架{/if}
+            </td>
+            <td class="text-right">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('jfgoods', array('j_id' => $item['j_id'], 'op' =>'post'))}" >编辑</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('jfgoods', array('j_id' => $item['j_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+    <div class="pull-right" >
+        <!-- <a href="{php echo $this->createWeburl('jfgoods', array('op'=>'del'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">批量删除</a> -->
+        <input type="submit" class="btn btn-primary we7-padding-horizontal" value="批量删除">
+    </div>
+</form>
+{/if}
+{if $op=="post"}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加积分商品</h3>
+        </div>
+        <div class="panel-body">
+            <!-- <div class="form-group">
+                <label for="" class="control-label col-sm-1">ID</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="x_ids" id="x_ids" value="{$items['x_ids']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">排序越大越靠前</div>
+            </div> -->
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商品名称</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="j_name" id="j_name" value="{$items['j_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商品缩略图</label>
+                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('j_thumb', $items['j_thumb'])}
+                    <!-- <img src="{$items['j_thumb']}" width="300px" alt="">  -->
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品缩略图</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">商品详情图</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                     {php echo tpl_form_field_multi_image('j_thumbs', $items['j_thumbs'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">商品详情图</div>
+            </div>
+           
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">简述</label>
+                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">                   
+                   <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  name="j_content" id="j_content">{$items['j_content']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">简述</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">兑换所需积分</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="j_jifen" id="j_jifen" value="{$items['j_jifen']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">兑换所需积分</div>
+            </div>
+            <!-- <div class="form-group">
+                <label for="" class="control-label col-sm-1">兑换所需金额</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="j_jiage" id="j_jiage" value="{$items['j_jiage']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">兑换所需金额</div>
+            </div> -->
+            
+        </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >是否上架</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                     <label class="select_one">
+                        <input type="radio" name="j_status"  value="1" {if $items['x_status'] == '1'} checked{/if} />上架
+                        <input type="radio" name="j_status"  value="0" {if $items['x_status'] == '0'} checked{/if} />下架
+                    </label>
+                </div>
+            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}
+<!-- {template 'common/footer'} -->

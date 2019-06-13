@@ -1,0 +1,160 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+    .detail_box{width: 400px;padding: 20px 100px;position: fixed;left: 50%;top: 50%;transform: translate(-50%,-50%);background: #fff;font-size: 14px;text-align: center;z-index: 5;display: none}
+    .detail_box>div>div{
+        margin-bottom: 20px;
+    }
+    .detail_box .left{width: 70px;}
+    .modals{width: 100%;height: 100%;position: fixed;left: 0;top: 0;background: rgba(0,0,0,0.3);display: none}
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li{if $op == "display"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'display','fa_style'=>'待审核'))}">待审核</a></li>
+    <li{if $op == "daijiedan"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'daijiedan','fa_style'=>'派单中'))}">待接单</a></li>
+    <li{if $op == "yijiedan"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'yijiedan','fa_style'=>'已接单'))}">已接单</a></li>
+    <li{if $op == "yiwancheng"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'yiwancheng','fa_style'=>'已完成'))}">已完成</a></li>
+    <li{if $op == "all"} class="active"{/if}><a href="{php echo $this->createWebUrl('qiangdan',array('op' =>'all','fa_style'=>'全部'))}">全部</a></li>
+</ul>
+<div class="main">
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+
+            派单中心
+
+        </div>
+
+        <div class="panel-body" style="padding: 0px 15px;">
+
+            <div class="row">
+
+                <table class="yg5_tabel col-md-12">
+
+                    <tr class="yg5_tr1">
+                        <td class="store_td1">排序</td>
+                        <td>发单者昵称</td>
+                        <td>发单者头像</td>
+                        <td>服务名称</td>
+                        <td>支付形式</td>
+                        <td>服务金额</td>
+                        <td>上门估价费用</td>
+                        <td>服务地址</td>
+                        <td>服务备注</td>
+                        <td>服务时间</td>
+                        <td>发单时间</td>
+                        <td >操作</td>
+                    </tr>
+                    {loop $products $item}
+                    <tr class="yg5_tr2">
+                     <td class="store_td1">{$item['fa_id']}</td>
+                     <td>{$item['u_name']}</td>
+                     <td> <img src="{$item['u_thumb']}" style="width: 100px;height: 100px;" alt=""></td>
+                     <td>{$item['fa_fwname']}</td>
+                     <td>{$item['fa_fwpay_type']}</td>
+                     <td>{$item['fa_fwmoney']}</td>
+                     <td>{$item['fa_fwshagneng']}</td>
+                     <td>
+                        <span style="display: block;">服务地址：{$item['fa_fwaddress']}</span>
+                        <span style="display: block;">详细地址：{$item['fa_fwaddresss']}</span>
+                        <span style="display: block;">联系人：{$item['fa_name']}</span>
+                        <span style="display: block;">联系电话：{$item['fa_fwtelphone']}</span>
+                    </td>
+                     <td>{$item['fa_fwcontent']}</td>
+                     <td>{$item['fa_fwtime']}</td>
+                     <td>{$item['fa_time']}</td>
+                   <td>
+                      {if $item['fa_style']=="待审核"}
+                      <a class="btn ygyouhui2 btn-xs" href="{php echo $this->createWebUrl('qiangdan',array('fa_id'=>$item['fa_id'],'fa_style'=>'派单中','op'=>'shenhesave'))}" >审核通过</a>
+                      <!-- <a class="btn  btn-xs" style="color:red; border-color:red" href="{php echo $this->createWebUrl('qiangdan', array('fa_id' => $item['fa_id'],'fa_style'=>'已取消','op'=>'shenhesave'))}" >取消派单</a> -->
+                      {/if}
+                      {if $item['fa_style']=='派单中'}
+                      <!-- <a  class="btn  btn-xs" style="color:red; border-color:red" href="{php echo $this->createWebUrl('qiangdan', array('fa_id' => $item['fa_id'],'fa_style'=>'已取消','op'=>'shenhesave'))}" >取消派单</a> -->
+                      <a  class="btn  btn-xs" style="color:green; border-color:green" href="{php echo $this->createWebUrl('qiangdan', array('fa_id' => $item['fa_id'],'fa_style'=>'已接单','op'=>'shenhesave'))}" >确定接单</a>
+                      {/if}
+                      {if $item['fa_style']!="待审核" && $item['fa_style']!='派单中'}
+                      <a class="btn ygyouhui2 btn-xs open_detail" data-fid="{$item['fa_id']}">查看接单信息</a>
+                      {/if}
+                      <a href="{php echo $this->createWebUrl('qiangdan', array('fa_id' => $item['fa_id'],'op'=>'delete'))}" class="storespan btn btn-xs" onclick="return confirm('确认删除吗？');return false;">
+                          <span class="fa fa-trash-o"></span>
+                          <span class="bianji">删除
+                              <span class="arrowdown"></span>
+                          </span>
+                      </a>
+                  </td>
+
+              </td>
+
+          </tr>
+
+          {/loop}        
+
+
+
+  </table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="text-right we7-margin-top">
+   {$pager}
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $("#frame-7").show();
+        $("#yframe-7").addClass("wyactive");
+        
+        /*接单信息*/
+        $(".open_detail").click(function(){
+          $.ajax({
+                type:"post",
+                url:"{$_W['siteroot']}web/index.php?c=site&a=entry&op=jieinfo&do=qiangdan&m=hyb_o2o",
+                dataType:"json",
+                data:{fa_id:$(this).data("fid")},
+                success:function(data){
+                    $("body").append(data.d)
+                    $(".detail_box").fadeIn();
+                    $(".modals").show();
+                    $(".close_box").click(function(){
+                        $(".detail_box").fadeOut();
+                        $(".modals").hide();
+                    })
+                }
+            })
+            
+        })
+    })
+</script>
+{template "common/footer"}

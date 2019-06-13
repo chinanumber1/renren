@@ -1,0 +1,213 @@
+{template 'common/header-base'}
+<style type="text/css">
+    .we7-table td{
+      text-align: center;
+    }
+     /*个人自定义*/
+  .form-controls .img-thumbnail{
+      width:200px;
+      height:200px;
+  }
+</style>
+{if $op=="display"}
+<div class="pull-right" >
+	<a href="{php echo $this->createWeburl('xiangmu', array('op'=>'save'))}"  class="btn btn-primary we7-padding-horizontal" style="margin-bottom: 20px">添加项目</a>
+</div>
+<form class="form-horizontal" action="" method="post">
+    <table class="table we7-table table-hover article-list vertical-middle">
+        <tr>
+            <td>选择</td>
+            <td>排序</td>
+            <td>服务项目名称</td>
+            <td>项目图片</td>
+            <td>所属分类</td>
+            <td>所属商家</td>
+            <td>项目形式</td>
+            <td>项目属性</td>           
+            <td>服务项目价格</td>
+            <td>项目销量</td>
+            <td>是否上架</td>
+            <td class="text-right">操作</td>
+        </tr>
+        {loop $products $item}
+        <tr>
+            <td>
+                <input type="checkbox" name="del[]" value="{$item['x_id']}">
+            </td>
+            <td>
+                {$item['x_id']}
+            </td>
+            <td>
+                {$item['x_name']}
+            </td>
+            <td>
+            {if strpos($item['x_thumb'],"https")===false}
+            <img src="{media $item['x_thumb']}" style="width: 100px;height: 100px;" alt="">
+            {else}
+            <img src="{$item['x_thumb']}" style="width: 100px;height: 100px;" alt="">
+            {/if}
+            </td>
+            <td>
+                {$item['xt_name']}
+            </td>
+            <td>
+                {$item['s_name']}
+            </td>
+            <td>
+                {$item['x_xingshi']}
+            </td>
+            <td>
+                {$item['label']}
+            </td>
+            <td>
+                {$item['x_jiage']}元
+            </td>
+            <td>
+                {$item['x_xiaoliang']}
+            </td>
+            <td>
+               {if $item['x_status'] == "1"}是{elseif  $item['x_status']=="0"}否{/if}
+            </td>
+            <td class="text-right">
+                <!-- <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('xiangmu', array('x_id' => $item['x_id'], 'op' =>'post'))}" >查看</a> -->
+                <a class="btn btn-default btn-sm" href="{php echo $this->createWeburl('xiangmu', array('x_id' => $item['x_id'], 'op' =>'save'))}" >编辑查看</a>
+                <a class="btn btn-default btn-sm" onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWeburl('xiangmu', array('x_id' => $item['x_id'], 'op' => 'delete'))}">删除</a>
+            </td>
+        </tr>
+        {/loop}
+    </table>
+    <div class="pull-right" >
+        <input type="submit" class="btn btn-primary we7-padding-horizontal" value="批量删除">
+    </div>
+</form>
+{$pager}
+{/if}
+{if $op=="save"}
+<form class="form-horizontal" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加项目</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">服务项目名称</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="x_name" id="x_name" value="{$items['x_name']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">服务项目名称</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" id="x_type" name="x_type">所属分类</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="x_type" id="x_type" class="form-control">
+                        <option value="">--请选择--</option>
+                        {loop $type $item}
+                        <option value="{$item['xt_id']}" {if $item['xt_id']==$items["x_type"]}selected{/if} >{$item['xt_name']}</option>
+                        {/loop}
+                    </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">所属分类</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" id="x_type" name="x_type">所属商家</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="x_sjname" id="x_sjname" class="form-control">
+                        <option value="">--请选择--</option>
+                        {loop $shangjia $item}
+                        <option value="{$item['s_id']}" {if $items['x_sjname']==$item["s_id"]}selected{/if} >{$item['s_name']}</option>
+                        {/loop}
+                    </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">所属商家</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" id="x_type" name="x_type">项目属性</label>
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <select name="label" id="label" class="form-control">
+                        <option value="">--请选择--</option>
+                        <option value="服务"" {if $items['label']=="服务"}selected{/if} >服务</option>
+                        <option value="商品"" {if $items['label']=="商品"}selected{/if} >商品</option>
+                    </select>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">项目属性</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">项目形式</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <label class="select_one">
+                        <input type="radio" name="x_xingshi"  value="上门服务" {if $items['x_xingshi'] == '上门服务'} checked{/if} />上门服务
+                        <input type="radio" name="x_xingshi"  value="到店服务" {if $items['x_xingshi'] == '到店服务'} checked{/if} />到店服务
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">项目形式</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">服务项目缩略图</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_image('x_thumb', $items['x_thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">服务项目缩略图</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">服务项目幻灯片</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    {php echo tpl_form_field_multi_image('x_hdp_thumb', $items['x_hdp_thumb'])}
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">服务项目幻灯片</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">简述</label>
+                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">                   
+                   <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  name="x_content" id="x_content">{$items['x_content']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">简述</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">预约须知</label>
+                
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">                   
+                   <textarea rows="6" cols="20" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  name="x_yuyue" id="x_content">{$items['x_yuyue']}</textarea>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">预约须知</div>
+            </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1">项目价格</label>
+                <!-- <div class="col-sm-1"></div> -->
+                <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <input type="text" name="x_jiage" id="x_jiage" value="{$items['x_jiage']}" class="form-control ng-pristine ng-untouched ng-valid ng-empty"  placeholder="" autocomplete="off">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="form-controls col-sm-4 help-block">项目价格</div>
+            </div>
+            
+        </div>
+            <div class="form-group">
+                <label for="" class="control-label col-sm-1" >是否上架</label>
+                 <div class="form-controls col-sm-5" style="margin-left: 75px;">
+                    <label class="select_one">
+                        <input type="radio" name="x_status"  value="1" {if $items['x_status'] == '1'} checked{/if} />是
+                        <input type="radio" name="x_status"  value="0" {if $items['x_status'] == '0'} checked{/if} />否
+                    </label>
+                </div>
+            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" style="margin-left: 45%;" />
+        </div>
+    </div>
+</form>
+{/if}

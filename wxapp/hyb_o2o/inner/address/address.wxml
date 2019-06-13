@@ -1,0 +1,22 @@
+<view>
+    <view class="noadd" wx:if="{{address.length==0}}">
+        <image mode="widthFix" src="../../resource/images/no_dd.png"></image>
+        <view class="color_gray fs28">暂无数据</view>
+    </view>
+    <view catchtap="change_add" class="item fs28 mb20" data-id="{{item.d_id}}" wx:for="{{address}}" wx:key="item">
+        <view class="border_bot_2" style="padding-bottom:20rpx">
+            <view class="mb20">{{item.d_uname}} <text class="tel">{{item.d_phone}}</text>
+            </view>
+            <view>{{item.d_address}}{{item.d_xxaddress}}</view>
+        </view>
+        <view class="df item_bot" style="color:#5B5B5B">
+            <view class="df fs26">
+                <image catchtap="checked_icon" class="icon_box" data-index="{{index}}" size="20" src="{{item.d_checked==1?'/hyb_o2o/resource/images/icon_yes.png':'/hyb_o2o/resource/images/icon_no.png'}}"></image>设为默认 </view>
+            <view class="df fs26">
+                <view catchtap="change_add" data-id="{{item.d_id}}" data-index="{{index}}">编辑</view>
+                <view catchtap="del_add" data-d_id="{{item.d_id}}" style="margin-left:30rpx;">删除</view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="add_address" class="btn fs30">添加新地址</view>
+</view>

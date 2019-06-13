@@ -1,0 +1,179 @@
+{template 'public/headers'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../hyb_o2o/template/public/ygcss.css">
+<style type="text/css">
+    .yg5_key>div{float: left;line-height: 34px;}
+
+    .store_td1{height: 45px;}
+
+    .store_list_img{width: 60px;height: 60px;}
+
+    .yg5_tabel{border-color: #e5e5e5;outline: 1px solid #e5e5e5;text-align: center;}
+
+    .yg5_tr2>td{padding: 15px;border: 1px solid #e5e5e5;}
+
+    .yg5_tr1>td{
+
+        border: 1px solid #e5e5e5;
+        background-color: #FAFAFA;
+
+        font-weight: bold;
+
+    }
+
+    .yg5_btn{background-color: #EEEEEE;color: #333;border: 1px solid #E4E4E4;border-radius: 6px;width: 100px;height: 34px;}
+    .check_img{width: 45px;height: 45px;}
+    .ygrow{margin-top: 20px;}
+    .yghuise{background-color: grey;color: white;}
+    .yghuise:hover{background-color: grey;color: white;}
+    .detail_box{width: 400px;padding: 20px 100px;position: fixed;left: 50%;top: 50%;transform: translate(-50%,-50%);background: #fff;font-size: 14px;text-align: center;z-index: 5;display: none}
+    .detail_box>div>div{
+        margin-bottom: 20px;
+    }
+    .detail_box .left{width: 70px;}
+    .modals{width: 100%;height: 100%;position: fixed;left: 0;top: 0;background: rgba(0,0,0,0.3);display: none}
+    
+</style>
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>    
+    <li class="active"><a href="{php echo $this->createWebUrl2('dlpingjia',array('op'=>'display','id'=>$storeid,'uid'=>$uniacid))}">全部</a></li>
+</ul>
+<div class="main">
+
+    <div class="panel panel-default">
+<input type="hidden" value="" id="pd_ids" >
+
+        <div class="panel-heading">
+
+            全部评价
+
+        </div>
+
+        <div class="panel-body" style="padding: 0px 15px;">
+
+            <div class="row">
+
+                <table class="yg5_tabel col-md-12">
+
+                    <tr class="yg5_tr1">
+                        <td class="store_td1">排序</td>
+                        <td>评价者昵称</td>
+                        <td>评价者头像</td>
+                        <td>服务名称</td>
+                        <td>评价内容</td>
+                        <td>评价分数[满分5分]</td>
+                        <td>评价时间</td>
+                        <td>商家回复</td>
+                        <td >操作</td>
+                    </tr>
+                    {loop $products $item}
+                    <tr class="yg5_tr2">
+                     <td class="store_td1">{$item['p_id']}</td>
+                     <td>{$item['p_name']}</td>
+                     <td> <img src="{$item['p_thumb']}" style="width: 100px;height: 100px;" alt=""></td>
+                     <td>{$item['x_name']}</td>
+                     <td>
+                       {$item['p_content']}
+                       {loop $item['p_pic'] $i}
+                        <img src="{$i}" style="width: 50px;height: 100px;" alt="">
+                       {/loop}
+                     </td>
+                     <td>{$item['p_fenshu']}</td>
+                     <td>{$item['p_time']}</td>
+                     <td>{$item['p_huifu']}</td>
+                   <td>
+                      <a  class="btn  btn-xs replay" style="color:green; border-color:green" data-id="{$item['p_id']}" href="javascript:;" >回复</a>
+                      <a href="{php echo $this->createWebUrl2('dlpingjia', array('p_id' => $item['p_id'],'id'=>$storeid,'uid'=>$uniacid,'op'=>'delete'))}" class="storespan btn btn-xs" onclick="return confirm('确认删除吗？');return false;">
+                          <span class="fa fa-trash-o"></span>
+                          <span class="bianji">删除
+                              <span class="arrowdown"></span>
+                          </span>
+                      </a>
+                  </td>
+
+              </td>
+
+          </tr>
+
+          {/loop}  
+
+  </table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="text-right we7-margin-top">
+   {$pager}
+</div>
+<div class="modal_box">
+  <div class="inner_box">
+    <div class="input"><input id="content" type="text" name="" placeholder="请输入回复内容" style="width: 100%;padding: 10px;"></div>
+    <div class="btn btn_lg btn-danger replay_sure" style="width:30%">确定</div>
+  </div>
+</div>
+<style type="text/css">
+  .modal_box{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+    display: none
+  }
+  .inner_box{
+    width: 50%;
+    padding: 50px 100px;
+    background: #fff;
+    z-index: 2;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+  }
+  .inner_box .input{
+    margin-bottom: 30px;
+    width: 100%;
+    
+  }
+</style>
+<script type="text/javascript">
+$(function(){
+        $("#frame-6").show();
+        $("#yframe-6").addClass("wyactive");
+
+        var r_id="";
+        $(".replay").click(function(){
+          console.log($(this).data("id"))
+          r_id=$(this).data("id");
+          $(".modal_box").show();
+        })
+        $(".replay_sure").click(function(){
+
+          console.log(r_id);
+          console.log($("#content").val())
+          $.ajax({
+                type:"post",
+                url:"{$_W['siteroot']}addons/hyb_o2o/o2ostore.php?c=site&a=entry&op=huifu&do=dlpingjia&m=hyb_o2o&id={$storeid}&uid={$uniacid}",
+                dataType:"json",
+                data:{p_id:r_id,content:$("#content").val()},
+                success:function(data){
+                  console.log(data);
+                    $(".modal_box").hide();
+                    $("#content").val("");
+                    location.reload() 
+                }
+          })
+           
+        })
+    })
+
+</script>
+{template "common/footer"}
